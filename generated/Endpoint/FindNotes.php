@@ -1,0 +1,108 @@
+<?php
+
+namespace Varspool\JobAdder\V2\Endpoint;
+
+class FindNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+{
+    /**
+    * 
+    *
+    * @param array $queryParameters {
+    *     @var array $noteId Note Id
+    *     @var array $type Note type
+    *     @var array $reference Reference value used to identify a note or group of notes
+    *     @var array $createdAt Search for notes created at a specific date and time 
+    (UTC assumed, [ISO date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#rfc.section.5.6)). 
+    Prefix with <code>&lt;</code> or <code>&gt;</code> to search dates before or after (inclusive) the specified date and time.
+    Specify multiple times to search for a range.
+    *     @var array $updatedAt Search for notes updated at a specific date and time 
+    (UTC assumed, [ISO date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#rfc.section.5.6)). 
+    Prefix with <code>&lt;</code> or <code>&gt;</code> to search dates before or after (inclusive) the specified date and time.
+    Specify multiple times to search for a range.
+    *     @var array $candidateId Candidate Id
+    *     @var array $companyId Company Id
+    *     @var array $contactId Contact Id
+    *     @var array $jobId Job Id
+    *     @var array $requisitionId Requisition Id
+    *     @var array $applicationId Job Application Id
+    *     @var array $placementId Placement Id
+    *     @var string $entityType Filter notes by Entity Type.<br />
+    Entity Type must be any of: candidate, contact, company, job, placement, requisition
+    *     @var array $embed Embed related resources.<br />
+    Resources available to embed are: self, candidates, contacts, placements, jobs, jobapplications, companies, requisitions
+    Note: embed=self everything is embeded by default
+    *     @var int $offset The index of the first entry to return from the resource collection
+    *     @var int $limit The maximum number of entries to return.<br />
+    Setting to 0 will return only the total count of matching resources.
+    *     @var array $sort Sort the results by one or multiple fields, prefix with "-" to sort descending.<br />
+    Fields available for sorting are: type, createdAt, updatedAt
+    *     @var array $fields Additional fields to include with the results.<br />
+    Fields available to include are: text
+    * }
+    */
+    public function __construct(array $queryParameters = array())
+    {
+        $this->queryParameters = $queryParameters;
+    }
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
+    {
+        return 'GET';
+    }
+    public function getUri() : string
+    {
+        return '/notes';
+    }
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    {
+        return array(array(), null);
+    }
+    public function getExtraHeaders() : array
+    {
+        return array('Accept' => array('application/json'));
+    }
+    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(array('noteId', 'type', 'reference', 'createdAt', 'updatedAt', 'candidateId', 'companyId', 'contactId', 'jobId', 'requisitionId', 'applicationId', 'placementId', 'entityType', 'embed', 'offset', 'limit', 'sort', 'fields'));
+        $optionsResolver->setRequired(array());
+        $optionsResolver->setDefaults(array());
+        $optionsResolver->addAllowedTypes('noteId', array('array'));
+        $optionsResolver->addAllowedTypes('type', array('array'));
+        $optionsResolver->addAllowedTypes('reference', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('candidateId', array('array'));
+        $optionsResolver->addAllowedTypes('companyId', array('array'));
+        $optionsResolver->addAllowedTypes('contactId', array('array'));
+        $optionsResolver->addAllowedTypes('jobId', array('array'));
+        $optionsResolver->addAllowedTypes('requisitionId', array('array'));
+        $optionsResolver->addAllowedTypes('applicationId', array('array'));
+        $optionsResolver->addAllowedTypes('placementId', array('array'));
+        $optionsResolver->addAllowedTypes('entityType', array('string'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('sort', array('array'));
+        $optionsResolver->addAllowedTypes('fields', array('array'));
+        return $optionsResolver;
+    }
+    /**
+     * {@inheritdoc}
+     *
+     *
+     * @return null|\Varspool\JobAdder\V2\Model\NoteListRepresentation
+     */
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\NoteListRepresentation', 'json');
+        }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
+    }
+}

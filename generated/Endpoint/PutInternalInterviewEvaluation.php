@@ -1,0 +1,60 @@
+<?php
+
+namespace Varspool\JobAdder\V2\Endpoint;
+
+class PutInternalInterviewEvaluation extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+{
+    protected $interviewId;
+    protected $applicationId;
+    protected $userId;
+    /**
+     * 
+     *
+     * @param int $interviewId 
+     * @param int $applicationId 
+     * @param int $userId 
+     * @param \Varspool\JobAdder\V2\Model\SubmitInterviewEvaluationCommand $command 
+     */
+    public function __construct(int $interviewId, int $applicationId, int $userId, \Varspool\JobAdder\V2\Model\SubmitInterviewEvaluationCommand $command)
+    {
+        $this->interviewId = $interviewId;
+        $this->applicationId = $applicationId;
+        $this->userId = $userId;
+        $this->body = $command;
+    }
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
+    {
+        return 'PUT';
+    }
+    public function getUri() : string
+    {
+        return str_replace(array('{interviewId}', '{applicationId}', '{userId}'), array($this->interviewId, $this->applicationId, $this->userId), '/interviews/{interviewId}/{applicationId}/evaluations/internal/{userId}');
+    }
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    {
+        return $this->getSerializedBody($serializer);
+    }
+    public function getExtraHeaders() : array
+    {
+        return array('Accept' => array('application/json'));
+    }
+    /**
+     * {@inheritdoc}
+     *
+     *
+     * @return null|\Varspool\JobAdder\V2\Model\InterviewEvaluationRepresentation
+     */
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (200 === $status) {
+            return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\InterviewEvaluationRepresentation', 'json');
+        }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
+    }
+}
