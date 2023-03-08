@@ -2,16 +2,14 @@
 
 namespace Varspool\JobAdder;
 
-use Http\Client\HttpClient;
 use PHPUnit\Framework\TestCase;
+use Varspool\JobAdder\V2\Client as JobAdderClient;
 
 class ClientTest extends TestCase
 {
     public function testConstructor()
     {
-        $http = $this->createMock(HttpClient::class);
-
-        $client = new Client($http);
-        $this->assertInstanceOf(Client::class, $client);
+        $client = JobAdderClient::create();
+        $this->assertInstanceOf(JobAdderClient::class, $client);
     }
 }

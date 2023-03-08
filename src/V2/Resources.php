@@ -2,7 +2,6 @@
 
 namespace Varspool\JobAdder\V2;
 
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
 use Varspool\JobAdder\V2\Resource\CandidateFloatsResource;
 use Varspool\JobAdder\V2\Resource\CandidatesResource;
 use Varspool\JobAdder\V2\Resource\CandidateSubmissionsResource;
