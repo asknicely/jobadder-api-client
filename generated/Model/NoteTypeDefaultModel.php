@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteTypeDefaultModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var bool
@@ -48,7 +40,6 @@ class NoteTypeDefaultModel
      */
     public function setNote(bool $note) : self
     {
-        $this->initialized['note'] = true;
         $this->note = $note;
         return $this;
     }
@@ -70,7 +61,6 @@ class NoteTypeDefaultModel
      */
     public function setEmail(bool $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -92,7 +82,6 @@ class NoteTypeDefaultModel
      */
     public function setSms(bool $sms) : self
     {
-        $this->initialized['sms'] = true;
         $this->sms = $sms;
         return $this;
     }

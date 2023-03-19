@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class FolderRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -114,7 +106,6 @@ class FolderRepresentation
      */
     public function setFolderId(int $folderId) : self
     {
-        $this->initialized['folderId'] = true;
         $this->folderId = $folderId;
         return $this;
     }
@@ -136,7 +127,6 @@ class FolderRepresentation
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -158,7 +148,6 @@ class FolderRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -180,7 +169,6 @@ class FolderRepresentation
      */
     public function setSharedWith(array $sharedWith) : self
     {
-        $this->initialized['sharedWith'] = true;
         $this->sharedWith = $sharedWith;
         return $this;
     }
@@ -189,7 +177,7 @@ class FolderRepresentation
      *
      * @return int[][]
      */
-    public function getEntityIDs() : iterable
+    public function getEntityIDs() : \ArrayObject
     {
         return $this->entityIDs;
     }
@@ -200,9 +188,8 @@ class FolderRepresentation
      *
      * @return self
      */
-    public function setEntityIDs(iterable $entityIDs) : self
+    public function setEntityIDs(\ArrayObject $entityIDs) : self
     {
-        $this->initialized['entityIDs'] = true;
         $this->entityIDs = $entityIDs;
         return $this;
     }
@@ -224,7 +211,6 @@ class FolderRepresentation
      */
     public function setJobs(array $jobs) : self
     {
-        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -246,7 +232,6 @@ class FolderRepresentation
      */
     public function setCandidates(array $candidates) : self
     {
-        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -268,7 +253,6 @@ class FolderRepresentation
      */
     public function setApplications(array $applications) : self
     {
-        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }
@@ -290,7 +274,6 @@ class FolderRepresentation
      */
     public function setPlacements(array $placements) : self
     {
-        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -312,7 +295,6 @@ class FolderRepresentation
      */
     public function setCompanies(array $companies) : self
     {
-        $this->initialized['companies'] = true;
         $this->companies = $companies;
         return $this;
     }
@@ -334,7 +316,6 @@ class FolderRepresentation
      */
     public function setContacts(array $contacts) : self
     {
-        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -356,7 +337,6 @@ class FolderRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -378,7 +358,6 @@ class FolderRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -400,7 +379,6 @@ class FolderRepresentation
      */
     public function setLinks(FolderLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

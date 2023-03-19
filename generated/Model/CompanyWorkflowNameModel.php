@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyWorkflowNameModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -48,7 +40,6 @@ class CompanyWorkflowNameModel
      */
     public function setWorkflowId(int $workflowId) : self
     {
-        $this->initialized['workflowId'] = true;
         $this->workflowId = $workflowId;
         return $this;
     }
@@ -70,7 +61,6 @@ class CompanyWorkflowNameModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -92,7 +82,6 @@ class CompanyWorkflowNameModel
      */
     public function setArchived(bool $archived) : self
     {
-        $this->initialized['archived'] = true;
         $this->archived = $archived;
         return $this;
     }

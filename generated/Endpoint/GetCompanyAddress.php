@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetCompanyAddress extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class GetCompanyAddress extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $companyId;
     protected $addressId;
@@ -17,7 +17,7 @@ class GetCompanyAddress extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
         $this->companyId = $companyId;
         $this->addressId = $addressId;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -41,19 +41,13 @@ class GetCompanyAddress extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
      *
      * @return null|\Varspool\JobAdder\V2\Model\CompanyAddressRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CompanyAddressRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetCompanyAddressNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\GetCompanyAddressNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

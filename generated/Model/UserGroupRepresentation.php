@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserGroupRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -54,7 +46,6 @@ class UserGroupRepresentation
      */
     public function setGroupId(int $groupId) : self
     {
-        $this->initialized['groupId'] = true;
         $this->groupId = $groupId;
         return $this;
     }
@@ -76,7 +67,6 @@ class UserGroupRepresentation
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -98,7 +88,6 @@ class UserGroupRepresentation
      */
     public function setUsers(array $users) : self
     {
-        $this->initialized['users'] = true;
         $this->users = $users;
         return $this;
     }
@@ -120,7 +109,6 @@ class UserGroupRepresentation
      */
     public function setLinks(UserGroupLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

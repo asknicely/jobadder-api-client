@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdatePlacementAttachmentCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Attachment type
      *
      * @var string
@@ -48,7 +40,6 @@ class UpdatePlacementAttachmentCommand
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -70,7 +61,6 @@ class UpdatePlacementAttachmentCommand
      */
     public function setCategory(string $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -92,7 +82,6 @@ class UpdatePlacementAttachmentCommand
      */
     public function setExpiry(\DateTime $expiry) : self
     {
-        $this->initialized['expiry'] = true;
         $this->expiry = $expiry;
         return $this;
     }

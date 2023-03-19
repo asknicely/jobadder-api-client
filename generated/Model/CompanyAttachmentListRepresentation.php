@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyAttachmentListRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var CompanyAttachmentModel[]
@@ -48,7 +40,6 @@ class CompanyAttachmentListRepresentation
      */
     public function setItems(array $items) : self
     {
-        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }
@@ -70,7 +61,6 @@ class CompanyAttachmentListRepresentation
      */
     public function setTotalCount(int $totalCount) : self
     {
-        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
         return $this;
     }
@@ -92,7 +82,6 @@ class CompanyAttachmentListRepresentation
      */
     public function setLinks(PageLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

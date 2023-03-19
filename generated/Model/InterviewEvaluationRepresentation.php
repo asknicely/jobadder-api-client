@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class InterviewEvaluationRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var UserNameModel
@@ -72,7 +64,6 @@ class InterviewEvaluationRepresentation
      */
     public function setUser(UserNameModel $user) : self
     {
-        $this->initialized['user'] = true;
         $this->user = $user;
         return $this;
     }
@@ -94,7 +85,6 @@ class InterviewEvaluationRepresentation
      */
     public function setContact(ContactNameModel $contact) : self
     {
-        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -116,7 +106,6 @@ class InterviewEvaluationRepresentation
      */
     public function setExpiresAt(\DateTime $expiresAt) : self
     {
-        $this->initialized['expiresAt'] = true;
         $this->expiresAt = $expiresAt;
         return $this;
     }
@@ -138,7 +127,6 @@ class InterviewEvaluationRepresentation
      */
     public function setHasReplied(bool $hasReplied) : self
     {
-        $this->initialized['hasReplied'] = true;
         $this->hasReplied = $hasReplied;
         return $this;
     }
@@ -160,7 +148,6 @@ class InterviewEvaluationRepresentation
      */
     public function setComments(string $comments) : self
     {
-        $this->initialized['comments'] = true;
         $this->comments = $comments;
         return $this;
     }
@@ -182,7 +169,6 @@ class InterviewEvaluationRepresentation
      */
     public function setRating(array $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -204,7 +190,6 @@ class InterviewEvaluationRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

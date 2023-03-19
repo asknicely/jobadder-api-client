@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -234,7 +226,6 @@ class JobOrderRepresentation
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -256,7 +247,6 @@ class JobOrderRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -278,7 +268,6 @@ class JobOrderRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -300,7 +289,6 @@ class JobOrderRepresentation
      */
     public function setContact(ContactNameModel $contact) : self
     {
-        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -322,7 +310,6 @@ class JobOrderRepresentation
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -344,7 +331,6 @@ class JobOrderRepresentation
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -366,7 +352,6 @@ class JobOrderRepresentation
      */
     public function setUserFavourite(bool $userFavourite) : self
     {
-        $this->initialized['userFavourite'] = true;
         $this->userFavourite = $userFavourite;
         return $this;
     }
@@ -388,7 +373,6 @@ class JobOrderRepresentation
      */
     public function setJobDescription(string $jobDescription) : self
     {
-        $this->initialized['jobDescription'] = true;
         $this->jobDescription = $jobDescription;
         return $this;
     }
@@ -410,7 +394,6 @@ class JobOrderRepresentation
      */
     public function setNumberOfJobs(int $numberOfJobs) : self
     {
-        $this->initialized['numberOfJobs'] = true;
         $this->numberOfJobs = $numberOfJobs;
         return $this;
     }
@@ -432,7 +415,6 @@ class JobOrderRepresentation
      */
     public function setWorkplaceAddress(CompanyAddressModel $workplaceAddress) : self
     {
-        $this->initialized['workplaceAddress'] = true;
         $this->workplaceAddress = $workplaceAddress;
         return $this;
     }
@@ -454,7 +436,6 @@ class JobOrderRepresentation
      */
     public function setCategory(JobOrderCategoryModel $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -476,7 +457,6 @@ class JobOrderRepresentation
      */
     public function setLocation(JobOrderLocationModel $location) : self
     {
-        $this->initialized['location'] = true;
         $this->location = $location;
         return $this;
     }
@@ -498,7 +478,6 @@ class JobOrderRepresentation
      */
     public function setStart(JobOrderStartModel $start) : self
     {
-        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -520,7 +499,6 @@ class JobOrderRepresentation
      */
     public function setEndDate(\DateTime $endDate) : self
     {
-        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }
@@ -542,7 +520,6 @@ class JobOrderRepresentation
      */
     public function setWorkShift(JobOrderWorkShiftModel $workShift) : self
     {
-        $this->initialized['workShift'] = true;
         $this->workShift = $workShift;
         return $this;
     }
@@ -564,7 +541,6 @@ class JobOrderRepresentation
      */
     public function setDuration(DurationModel $duration) : self
     {
-        $this->initialized['duration'] = true;
         $this->duration = $duration;
         return $this;
     }
@@ -586,7 +562,6 @@ class JobOrderRepresentation
      */
     public function setWorkType(WorkTypeModel $workType) : self
     {
-        $this->initialized['workType'] = true;
         $this->workType = $workType;
         return $this;
     }
@@ -608,7 +583,6 @@ class JobOrderRepresentation
      */
     public function setJobType(string $jobType) : self
     {
-        $this->initialized['jobType'] = true;
         $this->jobType = $jobType;
         return $this;
     }
@@ -630,7 +604,6 @@ class JobOrderRepresentation
      */
     public function setSalary(JobOrderSalaryRangeModel $salary) : self
     {
-        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -652,7 +625,6 @@ class JobOrderRepresentation
      */
     public function setFee(JobOrderFeeModel $fee) : self
     {
-        $this->initialized['fee'] = true;
         $this->fee = $fee;
         return $this;
     }
@@ -674,7 +646,6 @@ class JobOrderRepresentation
      */
     public function setOtherContacts(array $otherContacts) : self
     {
-        $this->initialized['otherContacts'] = true;
         $this->otherContacts = $otherContacts;
         return $this;
     }
@@ -696,7 +667,6 @@ class JobOrderRepresentation
      */
     public function setSkillTags(JobOrderSkillTags $skillTags) : self
     {
-        $this->initialized['skillTags'] = true;
         $this->skillTags = $skillTags;
         return $this;
     }
@@ -718,7 +688,6 @@ class JobOrderRepresentation
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -740,7 +709,6 @@ class JobOrderRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -762,7 +730,6 @@ class JobOrderRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
-        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -784,7 +751,6 @@ class JobOrderRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
-        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -806,7 +772,6 @@ class JobOrderRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -828,7 +793,6 @@ class JobOrderRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -850,7 +814,6 @@ class JobOrderRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -872,7 +835,6 @@ class JobOrderRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -894,7 +856,6 @@ class JobOrderRepresentation
      */
     public function setClosedBy(UserNameModel $closedBy) : self
     {
-        $this->initialized['closedBy'] = true;
         $this->closedBy = $closedBy;
         return $this;
     }
@@ -916,7 +877,6 @@ class JobOrderRepresentation
      */
     public function setClosedAt(\DateTime $closedAt) : self
     {
-        $this->initialized['closedAt'] = true;
         $this->closedAt = $closedAt;
         return $this;
     }
@@ -938,7 +898,6 @@ class JobOrderRepresentation
      */
     public function setStatistics(JobOrderStatisticsSummaryModel $statistics) : self
     {
-        $this->initialized['statistics'] = true;
         $this->statistics = $statistics;
         return $this;
     }
@@ -960,7 +919,6 @@ class JobOrderRepresentation
      */
     public function setLinks(JobOrderLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

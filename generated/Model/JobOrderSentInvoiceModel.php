@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderSentInvoiceModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -72,7 +64,6 @@ class JobOrderSentInvoiceModel
      */
     public function setBillingContactNames(string $billingContactNames) : self
     {
-        $this->initialized['billingContactNames'] = true;
         $this->billingContactNames = $billingContactNames;
         return $this;
     }
@@ -94,7 +85,6 @@ class JobOrderSentInvoiceModel
      */
     public function setBillingContactEmails(string $billingContactEmails) : self
     {
-        $this->initialized['billingContactEmails'] = true;
         $this->billingContactEmails = $billingContactEmails;
         return $this;
     }
@@ -116,7 +106,6 @@ class JobOrderSentInvoiceModel
      */
     public function setPoNumber(string $poNumber) : self
     {
-        $this->initialized['poNumber'] = true;
         $this->poNumber = $poNumber;
         return $this;
     }
@@ -138,7 +127,6 @@ class JobOrderSentInvoiceModel
      */
     public function setPaymentTermsDays(int $paymentTermsDays) : self
     {
-        $this->initialized['paymentTermsDays'] = true;
         $this->paymentTermsDays = $paymentTermsDays;
         return $this;
     }
@@ -160,7 +148,6 @@ class JobOrderSentInvoiceModel
      */
     public function setDueDate(\DateTime $dueDate) : self
     {
-        $this->initialized['dueDate'] = true;
         $this->dueDate = $dueDate;
         return $this;
     }
@@ -182,7 +169,6 @@ class JobOrderSentInvoiceModel
      */
     public function setSentAt(\DateTime $sentAt) : self
     {
-        $this->initialized['sentAt'] = true;
         $this->sentAt = $sentAt;
         return $this;
     }
@@ -204,7 +190,6 @@ class JobOrderSentInvoiceModel
      */
     public function setSentBy(UserNameModel $sentBy) : self
     {
-        $this->initialized['sentBy'] = true;
         $this->sentBy = $sentBy;
         return $this;
     }

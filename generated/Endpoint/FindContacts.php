@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindContacts extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindContacts extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
     * 
@@ -46,7 +46,7 @@ class FindContacts extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -69,26 +69,26 @@ class FindContacts extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
         $optionsResolver->setDefined(array('contactId', 'name', 'email', 'phone', 'companyId', 'hiringManager', 'statusId', 'partnerAction.actionId', 'partnerAction.reference', 'partnerAction.stage', 'partnerAction.submittedAt', 'folderId', 'createdBy', 'createdAt', 'updatedBy', 'updatedAt', 'fields', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('contactId', array('array'));
-        $optionsResolver->addAllowedTypes('name', array('string'));
-        $optionsResolver->addAllowedTypes('email', array('string'));
-        $optionsResolver->addAllowedTypes('phone', array('string'));
-        $optionsResolver->addAllowedTypes('companyId', array('array'));
-        $optionsResolver->addAllowedTypes('hiringManager', array('bool'));
-        $optionsResolver->addAllowedTypes('statusId', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.actionId', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.reference', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.stage', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.submittedAt', array('array'));
-        $optionsResolver->addAllowedTypes('folderId', array('array'));
-        $optionsResolver->addAllowedTypes('createdBy', array('array'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedBy', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('fields', array('array'));
-        $optionsResolver->addAllowedTypes('embed', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('contactId', array('array'));
+        $optionsResolver->setAllowedTypes('name', array('string'));
+        $optionsResolver->setAllowedTypes('email', array('string'));
+        $optionsResolver->setAllowedTypes('phone', array('string'));
+        $optionsResolver->setAllowedTypes('companyId', array('array'));
+        $optionsResolver->setAllowedTypes('hiringManager', array('bool'));
+        $optionsResolver->setAllowedTypes('statusId', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.actionId', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.reference', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.stage', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.submittedAt', array('array'));
+        $optionsResolver->setAllowedTypes('folderId', array('array'));
+        $optionsResolver->setAllowedTypes('createdBy', array('array'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedBy', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('fields', array('array'));
+        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -97,16 +97,10 @@ class FindContacts extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
      *
      * @return null|\Varspool\JobAdder\V2\Model\ContactListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ContactListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

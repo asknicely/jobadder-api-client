@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindFolders extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindFolders extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
     * 
@@ -42,7 +42,7 @@ class FindFolders extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint impl
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -65,24 +65,24 @@ class FindFolders extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint impl
         $optionsResolver->setDefined(array('folderId', 'jobId', 'candidateId', 'applicationId', 'placementId', 'companyId', 'contactId', 'userId', 'ownerUserId', 'sharedWithUserId', 'ownerStatus', 'createdAt', 'updatedAt', 'fields', 'embed', 'embedMode', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('folderId', array('array'));
-        $optionsResolver->addAllowedTypes('jobId', array('array'));
-        $optionsResolver->addAllowedTypes('candidateId', array('array'));
-        $optionsResolver->addAllowedTypes('applicationId', array('array'));
-        $optionsResolver->addAllowedTypes('placementId', array('array'));
-        $optionsResolver->addAllowedTypes('companyId', array('array'));
-        $optionsResolver->addAllowedTypes('contactId', array('array'));
-        $optionsResolver->addAllowedTypes('userId', array('array'));
-        $optionsResolver->addAllowedTypes('ownerUserId', array('array'));
-        $optionsResolver->addAllowedTypes('sharedWithUserId', array('array'));
-        $optionsResolver->addAllowedTypes('ownerStatus', array('string'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('fields', array('array'));
-        $optionsResolver->addAllowedTypes('embed', array('array'));
-        $optionsResolver->addAllowedTypes('embedMode', array('string'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('folderId', array('array'));
+        $optionsResolver->setAllowedTypes('jobId', array('array'));
+        $optionsResolver->setAllowedTypes('candidateId', array('array'));
+        $optionsResolver->setAllowedTypes('applicationId', array('array'));
+        $optionsResolver->setAllowedTypes('placementId', array('array'));
+        $optionsResolver->setAllowedTypes('companyId', array('array'));
+        $optionsResolver->setAllowedTypes('contactId', array('array'));
+        $optionsResolver->setAllowedTypes('userId', array('array'));
+        $optionsResolver->setAllowedTypes('ownerUserId', array('array'));
+        $optionsResolver->setAllowedTypes('sharedWithUserId', array('array'));
+        $optionsResolver->setAllowedTypes('ownerStatus', array('string'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('fields', array('array'));
+        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->setAllowedTypes('embedMode', array('string'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -91,16 +91,10 @@ class FindFolders extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint impl
      *
      * @return null|\Varspool\JobAdder\V2\Model\FolderListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\FolderListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

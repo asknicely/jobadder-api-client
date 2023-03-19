@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationActivityRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -96,7 +88,6 @@ class JobApplicationActivityRepresentation
      */
     public function setActivityId(int $activityId) : self
     {
-        $this->initialized['activityId'] = true;
         $this->activityId = $activityId;
         return $this;
     }
@@ -118,7 +109,6 @@ class JobApplicationActivityRepresentation
      */
     public function setActivityName(string $activityName) : self
     {
-        $this->initialized['activityName'] = true;
         $this->activityName = $activityName;
         return $this;
     }
@@ -140,7 +130,6 @@ class JobApplicationActivityRepresentation
      */
     public function setActivityType(string $activityType) : self
     {
-        $this->initialized['activityType'] = true;
         $this->activityType = $activityType;
         return $this;
     }
@@ -162,7 +151,6 @@ class JobApplicationActivityRepresentation
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -184,7 +172,6 @@ class JobApplicationActivityRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -206,7 +193,6 @@ class JobApplicationActivityRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -228,7 +214,6 @@ class JobApplicationActivityRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -250,7 +235,6 @@ class JobApplicationActivityRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -272,7 +256,6 @@ class JobApplicationActivityRepresentation
      */
     public function setDetails(ActivityDetailListModel $details) : self
     {
-        $this->initialized['details'] = true;
         $this->details = $details;
         return $this;
     }
@@ -294,7 +277,6 @@ class JobApplicationActivityRepresentation
      */
     public function setApplicationId(int $applicationId) : self
     {
-        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -316,7 +298,6 @@ class JobApplicationActivityRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

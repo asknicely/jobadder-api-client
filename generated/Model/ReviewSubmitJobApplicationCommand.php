@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ReviewSubmitJobApplicationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Optionally specify the user submitting the job application for review (if not the authenticated user)
      *
      * @var int
@@ -36,7 +28,6 @@ class ReviewSubmitJobApplicationCommand
      */
     public function setSubmittedByUserId(int $submittedByUserId) : self
     {
-        $this->initialized['submittedByUserId'] = true;
         $this->submittedByUserId = $submittedByUserId;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class StatusModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -54,7 +46,6 @@ class StatusModel
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -76,7 +67,6 @@ class StatusModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -98,7 +88,6 @@ class StatusModel
      */
     public function setActive(bool $active) : self
     {
-        $this->initialized['active'] = true;
         $this->active = $active;
         return $this;
     }
@@ -120,7 +109,6 @@ class StatusModel
      */
     public function setDefault(bool $default) : self
     {
-        $this->initialized['default'] = true;
         $this->default = $default;
         return $this;
     }

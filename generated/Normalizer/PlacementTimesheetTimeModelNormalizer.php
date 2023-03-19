@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,68 +14,60 @@ class PlacementTimesheetTimeModelNormalizer implements DenormalizerInterface, No
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PlacementTimesheetTimeModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PlacementTimesheetTimeModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PlacementTimesheetTimeModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'date')) {
+            $object->setDate(\DateTime::createFromFormat('Y-m-d', $data->{'date'})->setTime(0, 0, 0));
         }
-        if (\array_key_exists('date', $data)) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d', $data['date'])->setTime(0, 0, 0));
+        if (property_exists($data, 'type')) {
+            $object->setType($data->{'type'});
         }
-        if (\array_key_exists('type', $data)) {
-            $object->setType($data['type']);
+        if (property_exists($data, 'start')) {
+            $object->setStart($data->{'start'});
         }
-        if (\array_key_exists('start', $data)) {
-            $object->setStart($data['start']);
+        if (property_exists($data, 'end')) {
+            $object->setEnd($data->{'end'});
         }
-        if (\array_key_exists('end', $data)) {
-            $object->setEnd($data['end']);
-        }
-        if (\array_key_exists('break', $data)) {
-            $object->setBreak($data['break']);
+        if (property_exists($data, 'break')) {
+            $object->setBreak($data->{'break'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('date') && null !== $object->getDate()) {
-            $data['date'] = $object->getDate()->format('Y-m-d');
+        $data = new \stdClass();
+        if (null !== $object->getDate()) {
+            $data->{'date'} = $object->getDate()->format('Y-m-d');
         }
-        if ($object->isInitialized('type') && null !== $object->getType()) {
-            $data['type'] = $object->getType();
+        if (null !== $object->getType()) {
+            $data->{'type'} = $object->getType();
         }
-        if ($object->isInitialized('start') && null !== $object->getStart()) {
-            $data['start'] = $object->getStart();
+        if (null !== $object->getStart()) {
+            $data->{'start'} = $object->getStart();
         }
-        if ($object->isInitialized('end') && null !== $object->getEnd()) {
-            $data['end'] = $object->getEnd();
+        if (null !== $object->getEnd()) {
+            $data->{'end'} = $object->getEnd();
         }
-        if ($object->isInitialized('break') && null !== $object->getBreak()) {
-            $data['break'] = $object->getBreak();
+        if (null !== $object->getBreak()) {
+            $data->{'break'} = $object->getBreak();
         }
         return $data;
     }

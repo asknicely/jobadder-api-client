@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateAttachmentModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -90,7 +82,6 @@ class CandidateAttachmentModel
      */
     public function setAttachmentId(int $attachmentId) : self
     {
-        $this->initialized['attachmentId'] = true;
         $this->attachmentId = $attachmentId;
         return $this;
     }
@@ -112,7 +103,6 @@ class CandidateAttachmentModel
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -134,7 +124,6 @@ class CandidateAttachmentModel
      */
     public function setCategory(string $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -156,7 +145,6 @@ class CandidateAttachmentModel
      */
     public function setFileName(string $fileName) : self
     {
-        $this->initialized['fileName'] = true;
         $this->fileName = $fileName;
         return $this;
     }
@@ -178,7 +166,6 @@ class CandidateAttachmentModel
      */
     public function setFileType(string $fileType) : self
     {
-        $this->initialized['fileType'] = true;
         $this->fileType = $fileType;
         return $this;
     }
@@ -200,7 +187,6 @@ class CandidateAttachmentModel
      */
     public function setExpiry(\DateTime $expiry) : self
     {
-        $this->initialized['expiry'] = true;
         $this->expiry = $expiry;
         return $this;
     }
@@ -222,7 +208,6 @@ class CandidateAttachmentModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -244,7 +229,6 @@ class CandidateAttachmentModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -266,7 +250,6 @@ class CandidateAttachmentModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -288,7 +271,6 @@ class CandidateAttachmentModel
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }

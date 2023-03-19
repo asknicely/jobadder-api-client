@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindJobBoardJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindJobBoardJobAds extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $boardId;
     /**
@@ -40,7 +40,7 @@ class FindJobBoardJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
         $this->boardId = $boardId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -63,18 +63,18 @@ class FindJobBoardJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(array('adId', 'reference', 'portal.hotJob', 'portal.value', 'portal.valueId', 'portal.template', 'postedAt', 'updatedAt', 'expiresAt', 'fields', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('adId', array('array'));
-        $optionsResolver->addAllowedTypes('reference', array('array'));
-        $optionsResolver->addAllowedTypes('portal.hotJob', array('bool'));
-        $optionsResolver->addAllowedTypes('portal.value', array('array'));
-        $optionsResolver->addAllowedTypes('portal.valueId', array('array'));
-        $optionsResolver->addAllowedTypes('portal.template', array('array'));
-        $optionsResolver->addAllowedTypes('postedAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('expiresAt', array('array'));
-        $optionsResolver->addAllowedTypes('fields', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('adId', array('array'));
+        $optionsResolver->setAllowedTypes('reference', array('array'));
+        $optionsResolver->setAllowedTypes('portal.hotJob', array('bool'));
+        $optionsResolver->setAllowedTypes('portal.value', array('array'));
+        $optionsResolver->setAllowedTypes('portal.valueId', array('array'));
+        $optionsResolver->setAllowedTypes('portal.template', array('array'));
+        $optionsResolver->setAllowedTypes('postedAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('expiresAt', array('array'));
+        $optionsResolver->setAllowedTypes('fields', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -83,16 +83,10 @@ class FindJobBoardJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
      *
      * @return null|\Varspool\JobAdder\V2\Model\JobBoardJobAdListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

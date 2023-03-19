@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class DeleteCandidateAvailabilityWeek extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class DeleteCandidateAvailabilityWeek extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $candidateId;
     /**
@@ -20,7 +20,7 @@ class DeleteCandidateAvailabilityWeek extends \Varspool\JobAdder\V2\Runtime\Clie
         $this->candidateId = $candidateId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'DELETE';
@@ -43,9 +43,9 @@ class DeleteCandidateAvailabilityWeek extends \Varspool\JobAdder\V2\Runtime\Clie
         $optionsResolver->setDefined(array('weekOf', 'recurring', 'until'));
         $optionsResolver->setRequired(array('weekOf'));
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('weekOf', array('string'));
-        $optionsResolver->addAllowedTypes('recurring', array('bool'));
-        $optionsResolver->addAllowedTypes('until', array('string'));
+        $optionsResolver->setAllowedTypes('weekOf', array('string'));
+        $optionsResolver->setAllowedTypes('recurring', array('bool'));
+        $optionsResolver->setAllowedTypes('until', array('string'));
         return $optionsResolver;
     }
     /**
@@ -55,19 +55,13 @@ class DeleteCandidateAvailabilityWeek extends \Varspool\JobAdder\V2\Runtime\Clie
      *
      * @return null
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\DeleteCandidateAvailabilityWeekNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\DeleteCandidateAvailabilityWeekNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

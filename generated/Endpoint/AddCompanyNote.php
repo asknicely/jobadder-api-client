@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddCompanyNote extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class AddCompanyNote extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $companyId;
     /**
@@ -16,7 +16,7 @@ class AddCompanyNote extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint i
         $this->companyId = $companyId;
         $this->body = $body;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -40,19 +40,13 @@ class AddCompanyNote extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint i
      *
      * @return null|\Varspool\JobAdder\V2\Model\NoteModel
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (201 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\NoteModel', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddCompanyNoteNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\AddCompanyNoteNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

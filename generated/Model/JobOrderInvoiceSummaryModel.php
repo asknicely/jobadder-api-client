@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderInvoiceSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -60,7 +52,6 @@ class JobOrderInvoiceSummaryModel
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -82,7 +73,6 @@ class JobOrderInvoiceSummaryModel
      */
     public function setInvoiceId(int $invoiceId) : self
     {
-        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
         return $this;
     }
@@ -104,7 +94,6 @@ class JobOrderInvoiceSummaryModel
      */
     public function setInvoiceNumber(string $invoiceNumber) : self
     {
-        $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
         return $this;
     }
@@ -126,7 +115,6 @@ class JobOrderInvoiceSummaryModel
      */
     public function setStage(JobOrderInvoiceStageModel $stage) : self
     {
-        $this->initialized['stage'] = true;
         $this->stage = $stage;
         return $this;
     }
@@ -148,7 +136,6 @@ class JobOrderInvoiceSummaryModel
      */
     public function setAmount(float $amount) : self
     {
-        $this->initialized['amount'] = true;
         $this->amount = $amount;
         return $this;
     }

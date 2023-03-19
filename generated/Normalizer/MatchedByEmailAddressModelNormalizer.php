@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,80 +14,72 @@ class MatchedByEmailAddressModelNormalizer implements DenormalizerInterface, Nor
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\MatchedByEmailAddressModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\MatchedByEmailAddressModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\MatchedByEmailAddressModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
-        }
-        if (\array_key_exists('candidates', $data)) {
+        if (property_exists($data, 'candidates')) {
             $values = array();
-            foreach ($data['candidates'] as $value) {
+            foreach ($data->{'candidates'} as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\CandidateMatchedByEmailModel', 'json', $context);
             }
             $object->setCandidates($values);
         }
-        if (\array_key_exists('contacts', $data)) {
+        if (property_exists($data, 'contacts')) {
             $values_1 = array();
-            foreach ($data['contacts'] as $value_1) {
+            foreach ($data->{'contacts'} as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, 'Varspool\\JobAdder\\V2\\Model\\ContactMatchedByEmailModel', 'json', $context);
             }
             $object->setContacts($values_1);
         }
-        if (\array_key_exists('users', $data)) {
+        if (property_exists($data, 'users')) {
             $values_2 = array();
-            foreach ($data['users'] as $value_2) {
+            foreach ($data->{'users'} as $value_2) {
                 $values_2[] = $this->denormalizer->denormalize($value_2, 'Varspool\\JobAdder\\V2\\Model\\UserMatchedByEmailModel', 'json', $context);
             }
             $object->setUsers($values_2);
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('candidates') && null !== $object->getCandidates()) {
+        $data = new \stdClass();
+        if (null !== $object->getCandidates()) {
             $values = array();
             foreach ($object->getCandidates() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data['candidates'] = $values;
+            $data->{'candidates'} = $values;
         }
-        if ($object->isInitialized('contacts') && null !== $object->getContacts()) {
+        if (null !== $object->getContacts()) {
             $values_1 = array();
             foreach ($object->getContacts() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data['contacts'] = $values_1;
+            $data->{'contacts'} = $values_1;
         }
-        if ($object->isInitialized('users') && null !== $object->getUsers()) {
+        if (null !== $object->getUsers()) {
             $values_2 = array();
             foreach ($object->getUsers() as $value_2) {
                 $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $data['users'] = $values_2;
+            $data->{'users'} = $values_2;
         }
         return $data;
     }

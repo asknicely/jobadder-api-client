@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,56 +14,48 @@ class JobOrderActivitySettingSummaryModelNormalizer implements DenormalizerInter
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderActivitySettingSummaryModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderActivitySettingSummaryModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderActivitySettingSummaryModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'settingId')) {
+            $object->setSettingId($data->{'settingId'});
         }
-        if (\array_key_exists('settingId', $data)) {
-            $object->setSettingId($data['settingId']);
+        if (property_exists($data, 'activityType')) {
+            $object->setActivityType($data->{'activityType'});
         }
-        if (\array_key_exists('activityType', $data)) {
-            $object->setActivityType($data['activityType']);
-        }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
+        if (property_exists($data, 'name')) {
+            $object->setName($data->{'name'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('settingId') && null !== $object->getSettingId()) {
-            $data['settingId'] = $object->getSettingId();
+        $data = new \stdClass();
+        if (null !== $object->getSettingId()) {
+            $data->{'settingId'} = $object->getSettingId();
         }
-        if ($object->isInitialized('activityType') && null !== $object->getActivityType()) {
-            $data['activityType'] = $object->getActivityType();
+        if (null !== $object->getActivityType()) {
+            $data->{'activityType'} = $object->getActivityType();
         }
-        if ($object->isInitialized('name') && null !== $object->getName()) {
-            $data['name'] = $object->getName();
+        if (null !== $object->getName()) {
+            $data->{'name'} = $object->getName();
         }
         return $data;
     }

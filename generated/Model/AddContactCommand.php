@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddContactCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -132,7 +124,6 @@ class AddContactCommand
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -154,7 +145,6 @@ class AddContactCommand
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -176,7 +166,6 @@ class AddContactCommand
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -198,7 +187,6 @@ class AddContactCommand
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -220,7 +208,6 @@ class AddContactCommand
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -242,7 +229,6 @@ class AddContactCommand
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -264,7 +250,6 @@ class AddContactCommand
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
-        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -286,7 +271,6 @@ class AddContactCommand
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -295,7 +279,7 @@ class AddContactCommand
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -306,9 +290,8 @@ class AddContactCommand
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -330,7 +313,6 @@ class AddContactCommand
      */
     public function setPosition(string $position) : self
     {
-        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -352,7 +334,6 @@ class AddContactCommand
      */
     public function setCompanyId(int $companyId) : self
     {
-        $this->initialized['companyId'] = true;
         $this->companyId = $companyId;
         return $this;
     }
@@ -374,7 +355,6 @@ class AddContactCommand
      */
     public function setReportsToContactId(int $reportsToContactId) : self
     {
-        $this->initialized['reportsToContactId'] = true;
         $this->reportsToContactId = $reportsToContactId;
         return $this;
     }
@@ -396,7 +376,6 @@ class AddContactCommand
      */
     public function setOfficeAddressId(string $officeAddressId) : self
     {
-        $this->initialized['officeAddressId'] = true;
         $this->officeAddressId = $officeAddressId;
         return $this;
     }
@@ -418,7 +397,6 @@ class AddContactCommand
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -440,7 +418,6 @@ class AddContactCommand
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -462,7 +439,6 @@ class AddContactCommand
      */
     public function setOwnerUserId(int $ownerUserId) : self
     {
-        $this->initialized['ownerUserId'] = true;
         $this->ownerUserId = $ownerUserId;
         return $this;
     }
@@ -484,7 +460,6 @@ class AddContactCommand
      */
     public function setRecruiterUserId(array $recruiterUserId) : self
     {
-        $this->initialized['recruiterUserId'] = true;
         $this->recruiterUserId = $recruiterUserId;
         return $this;
     }

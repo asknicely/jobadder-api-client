@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class UpdateJobOrderPayrollBilling extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class UpdateJobOrderPayrollBilling extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $jobOrderId;
     protected $rateCardId;
@@ -17,7 +17,7 @@ class UpdateJobOrderPayrollBilling extends \Varspool\JobAdder\V2\Runtime\Client\
         $this->jobOrderId = $jobOrderId;
         $this->rateCardId = $rateCardId;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'PUT';
@@ -41,19 +41,13 @@ class UpdateJobOrderPayrollBilling extends \Varspool\JobAdder\V2\Runtime\Client\
      *
      * @return null|\Varspool\JobAdder\V2\Model\JobOrderRateCardModel
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\JobOrderRateCardModel', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\UpdateJobOrderPayrollBillingNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\UpdateJobOrderPayrollBillingNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class FolderNameModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -60,7 +52,6 @@ class FolderNameModel
      */
     public function setFolderId(int $folderId) : self
     {
-        $this->initialized['folderId'] = true;
         $this->folderId = $folderId;
         return $this;
     }
@@ -82,7 +73,6 @@ class FolderNameModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -104,7 +94,6 @@ class FolderNameModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -126,7 +115,6 @@ class FolderNameModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -148,7 +136,6 @@ class FolderNameModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

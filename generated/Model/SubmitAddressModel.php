@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitAddressModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string[]
@@ -60,7 +52,6 @@ class SubmitAddressModel
      */
     public function setStreet(array $street) : self
     {
-        $this->initialized['street'] = true;
         $this->street = $street;
         return $this;
     }
@@ -82,7 +73,6 @@ class SubmitAddressModel
      */
     public function setCity(string $city) : self
     {
-        $this->initialized['city'] = true;
         $this->city = $city;
         return $this;
     }
@@ -104,7 +94,6 @@ class SubmitAddressModel
      */
     public function setState(string $state) : self
     {
-        $this->initialized['state'] = true;
         $this->state = $state;
         return $this;
     }
@@ -126,7 +115,6 @@ class SubmitAddressModel
      */
     public function setPostalCode(string $postalCode) : self
     {
-        $this->initialized['postalCode'] = true;
         $this->postalCode = $postalCode;
         return $this;
     }
@@ -148,7 +136,6 @@ class SubmitAddressModel
      */
     public function setCountryCode(string $countryCode) : self
     {
-        $this->initialized['countryCode'] = true;
         $this->countryCode = $countryCode;
         return $this;
     }

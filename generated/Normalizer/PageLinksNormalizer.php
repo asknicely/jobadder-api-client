@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,62 +14,54 @@ class PageLinksNormalizer implements DenormalizerInterface, NormalizerInterface,
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PageLinks';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PageLinks';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PageLinks();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'first')) {
+            $object->setFirst($data->{'first'});
         }
-        if (\array_key_exists('first', $data)) {
-            $object->setFirst($data['first']);
+        if (property_exists($data, 'prev')) {
+            $object->setPrev($data->{'prev'});
         }
-        if (\array_key_exists('prev', $data)) {
-            $object->setPrev($data['prev']);
+        if (property_exists($data, 'next')) {
+            $object->setNext($data->{'next'});
         }
-        if (\array_key_exists('next', $data)) {
-            $object->setNext($data['next']);
-        }
-        if (\array_key_exists('last', $data)) {
-            $object->setLast($data['last']);
+        if (property_exists($data, 'last')) {
+            $object->setLast($data->{'last'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('first') && null !== $object->getFirst()) {
-            $data['first'] = $object->getFirst();
+        $data = new \stdClass();
+        if (null !== $object->getFirst()) {
+            $data->{'first'} = $object->getFirst();
         }
-        if ($object->isInitialized('prev') && null !== $object->getPrev()) {
-            $data['prev'] = $object->getPrev();
+        if (null !== $object->getPrev()) {
+            $data->{'prev'} = $object->getPrev();
         }
-        if ($object->isInitialized('next') && null !== $object->getNext()) {
-            $data['next'] = $object->getNext();
+        if (null !== $object->getNext()) {
+            $data->{'next'} = $object->getNext();
         }
-        if ($object->isInitialized('last') && null !== $object->getLast()) {
-            $data['last'] = $object->getLast();
+        if (null !== $object->getLast()) {
+            $data->{'last'} = $object->getLast();
         }
         return $data;
     }

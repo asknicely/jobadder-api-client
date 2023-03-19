@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class RemoveCategoriesModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
     * Category to remove.<br />
     Specify a categoryId without subCategories to remove the category and all previously
     linked sub-categories associated with the category.
@@ -48,7 +40,6 @@ class RemoveCategoriesModel
     */
     public function setCategoryId(int $categoryId) : self
     {
-        $this->initialized['categoryId'] = true;
         $this->categoryId = $categoryId;
         return $this;
     }
@@ -70,7 +61,6 @@ class RemoveCategoriesModel
      */
     public function setSubCategories(array $subCategories) : self
     {
-        $this->initialized['subCategories'] = true;
         $this->subCategories = $subCategories;
         return $this;
     }

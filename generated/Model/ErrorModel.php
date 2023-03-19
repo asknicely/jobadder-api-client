@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ErrorModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -42,7 +34,6 @@ class ErrorModel
      */
     public function setMessage(string $message) : self
     {
-        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }
@@ -64,7 +55,6 @@ class ErrorModel
      */
     public function setErrors(array $errors) : self
     {
-        $this->initialized['errors'] = true;
         $this->errors = $errors;
         return $this;
     }

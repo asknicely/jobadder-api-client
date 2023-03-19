@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SetCandidateAvailabilityByWeekCommandAvailability
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var TimeRangeModel[]
@@ -72,7 +64,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setSunday(array $sunday) : self
     {
-        $this->initialized['sunday'] = true;
         $this->sunday = $sunday;
         return $this;
     }
@@ -94,7 +85,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setMonday(array $monday) : self
     {
-        $this->initialized['monday'] = true;
         $this->monday = $monday;
         return $this;
     }
@@ -116,7 +106,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setTuesday(array $tuesday) : self
     {
-        $this->initialized['tuesday'] = true;
         $this->tuesday = $tuesday;
         return $this;
     }
@@ -138,7 +127,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setWednesday(array $wednesday) : self
     {
-        $this->initialized['wednesday'] = true;
         $this->wednesday = $wednesday;
         return $this;
     }
@@ -160,7 +148,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setThursday(array $thursday) : self
     {
-        $this->initialized['thursday'] = true;
         $this->thursday = $thursday;
         return $this;
     }
@@ -182,7 +169,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setFriday(array $friday) : self
     {
-        $this->initialized['friday'] = true;
         $this->friday = $friday;
         return $this;
     }
@@ -204,7 +190,6 @@ class SetCandidateAvailabilityByWeekCommandAvailability
      */
     public function setSaturday(array $saturday) : self
     {
-        $this->initialized['saturday'] = true;
         $this->saturday = $saturday;
         return $this;
     }

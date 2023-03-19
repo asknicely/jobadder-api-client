@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementRecruiterModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var float
@@ -90,7 +82,6 @@ class PlacementRecruiterModel
      */
     public function setFeeSplit(float $feeSplit) : self
     {
-        $this->initialized['feeSplit'] = true;
         $this->feeSplit = $feeSplit;
         return $this;
     }
@@ -112,7 +103,6 @@ class PlacementRecruiterModel
      */
     public function setUserId(int $userId) : self
     {
-        $this->initialized['userId'] = true;
         $this->userId = $userId;
         return $this;
     }
@@ -134,7 +124,6 @@ class PlacementRecruiterModel
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -156,7 +145,6 @@ class PlacementRecruiterModel
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -178,7 +166,6 @@ class PlacementRecruiterModel
      */
     public function setPosition(string $position) : self
     {
-        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -200,7 +187,6 @@ class PlacementRecruiterModel
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -222,7 +208,6 @@ class PlacementRecruiterModel
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -244,7 +229,6 @@ class PlacementRecruiterModel
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -266,7 +250,6 @@ class PlacementRecruiterModel
      */
     public function setInactive(bool $inactive) : self
     {
-        $this->initialized['inactive'] = true;
         $this->inactive = $inactive;
         return $this;
     }
@@ -288,7 +271,6 @@ class PlacementRecruiterModel
      */
     public function setDeleted(bool $deleted) : self
     {
-        $this->initialized['deleted'] = true;
         $this->deleted = $deleted;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CustomFieldModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -78,7 +70,6 @@ class CustomFieldModel
      */
     public function setFieldId(int $fieldId) : self
     {
-        $this->initialized['fieldId'] = true;
         $this->fieldId = $fieldId;
         return $this;
     }
@@ -100,7 +91,6 @@ class CustomFieldModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -122,7 +112,6 @@ class CustomFieldModel
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -144,7 +133,6 @@ class CustomFieldModel
      */
     public function setMandatory(bool $mandatory) : self
     {
-        $this->initialized['mandatory'] = true;
         $this->mandatory = $mandatory;
         return $this;
     }
@@ -166,7 +154,6 @@ class CustomFieldModel
      */
     public function setMaxLength(int $maxLength) : self
     {
-        $this->initialized['maxLength'] = true;
         $this->maxLength = $maxLength;
         return $this;
     }
@@ -188,7 +175,6 @@ class CustomFieldModel
      */
     public function setMultiLine(bool $multiLine) : self
     {
-        $this->initialized['multiLine'] = true;
         $this->multiLine = $multiLine;
         return $this;
     }
@@ -210,7 +196,6 @@ class CustomFieldModel
      */
     public function setMultiSelect(bool $multiSelect) : self
     {
-        $this->initialized['multiSelect'] = true;
         $this->multiSelect = $multiSelect;
         return $this;
     }
@@ -232,7 +217,6 @@ class CustomFieldModel
      */
     public function setValues(array $values) : self
     {
-        $this->initialized['values'] = true;
         $this->values = $values;
         return $this;
     }

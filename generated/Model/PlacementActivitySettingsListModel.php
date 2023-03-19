@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementActivitySettingsListModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var PlacementActivitySettingSummaryModel[]
@@ -36,7 +28,6 @@ class PlacementActivitySettingsListModel
      */
     public function setItems(array $items) : self
     {
-        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }

@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetPartnerActionJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class GetPartnerActionJobAds extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $actionId;
     /**
@@ -25,7 +25,7 @@ class GetPartnerActionJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEn
         $this->actionId = $actionId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -48,10 +48,10 @@ class GetPartnerActionJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEn
         $optionsResolver->setDefined(array('stage', 'submittedAt', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('stage', array('array'));
-        $optionsResolver->addAllowedTypes('submittedAt', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('stage', array('array'));
+        $optionsResolver->setAllowedTypes('submittedAt', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -60,16 +60,10 @@ class GetPartnerActionJobAds extends \Varspool\JobAdder\V2\Runtime\Client\BaseEn
      *
      * @return null|\Varspool\JobAdder\V2\Model\JobAdListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\JobAdListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

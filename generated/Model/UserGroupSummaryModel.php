@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserGroupSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class UserGroupSummaryModel
      */
     public function setGroupId(int $groupId) : self
     {
-        $this->initialized['groupId'] = true;
         $this->groupId = $groupId;
         return $this;
     }
@@ -64,7 +55,6 @@ class UserGroupSummaryModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }

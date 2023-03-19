@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindCandidatesPayrollBillings extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindCandidatesPayrollBillings extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
      * Applicable to FT360 enabled accounts only
@@ -15,7 +15,7 @@ class FindCandidatesPayrollBillings extends \Varspool\JobAdder\V2\Runtime\Client
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,7 +38,7 @@ class FindCandidatesPayrollBillings extends \Varspool\JobAdder\V2\Runtime\Client
         $optionsResolver->setDefined(array('candidateId'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('candidateId', array('array'));
+        $optionsResolver->setAllowedTypes('candidateId', array('array'));
         return $optionsResolver;
     }
     /**
@@ -48,19 +48,13 @@ class FindCandidatesPayrollBillings extends \Varspool\JobAdder\V2\Runtime\Client
      *
      * @return null|\Varspool\JobAdder\V2\Model\CandidatePayrollBillingListModel
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CandidatePayrollBillingListModel', 'json');
         }
         if (400 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\FindCandidatesPayrollBillingsBadRequestException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
+            throw new \Varspool\JobAdder\V2\Exception\FindCandidatesPayrollBillingsBadRequestException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

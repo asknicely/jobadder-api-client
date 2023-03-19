@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindJobApplications extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindJobApplications extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
     * 
@@ -60,7 +60,7 @@ class FindJobApplications extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpo
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -83,33 +83,33 @@ class FindJobApplications extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpo
         $optionsResolver->setDefined(array('applicationId', 'candidateId', 'jobId', 'adId', 'statusId', 'jobTitle', 'active', 'rejected', 'review.stage', 'review.userId', 'review.contactId', 'review.submittedAt', 'review.reviewedAt', 'keywords', 'partnerAction.actionId', 'partnerAction.reference', 'partnerAction.stage', 'partnerAction.submittedAt', 'folderId', 'createdAt', 'updatedBy', 'updatedAt', 'sort', 'fields', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('applicationId', array('array'));
-        $optionsResolver->addAllowedTypes('candidateId', array('array'));
-        $optionsResolver->addAllowedTypes('jobId', array('array'));
-        $optionsResolver->addAllowedTypes('adId', array('array'));
-        $optionsResolver->addAllowedTypes('statusId', array('array'));
-        $optionsResolver->addAllowedTypes('jobTitle', array('string'));
-        $optionsResolver->addAllowedTypes('active', array('bool'));
-        $optionsResolver->addAllowedTypes('rejected', array('bool'));
-        $optionsResolver->addAllowedTypes('review.stage', array('array'));
-        $optionsResolver->addAllowedTypes('review.userId', array('array'));
-        $optionsResolver->addAllowedTypes('review.contactId', array('array'));
-        $optionsResolver->addAllowedTypes('review.submittedAt', array('array'));
-        $optionsResolver->addAllowedTypes('review.reviewedAt', array('array'));
-        $optionsResolver->addAllowedTypes('keywords', array('string'));
-        $optionsResolver->addAllowedTypes('partnerAction.actionId', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.reference', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.stage', array('array'));
-        $optionsResolver->addAllowedTypes('partnerAction.submittedAt', array('array'));
-        $optionsResolver->addAllowedTypes('folderId', array('array'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedBy', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('sort', array('array'));
-        $optionsResolver->addAllowedTypes('fields', array('array'));
-        $optionsResolver->addAllowedTypes('embed', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('applicationId', array('array'));
+        $optionsResolver->setAllowedTypes('candidateId', array('array'));
+        $optionsResolver->setAllowedTypes('jobId', array('array'));
+        $optionsResolver->setAllowedTypes('adId', array('array'));
+        $optionsResolver->setAllowedTypes('statusId', array('array'));
+        $optionsResolver->setAllowedTypes('jobTitle', array('string'));
+        $optionsResolver->setAllowedTypes('active', array('bool'));
+        $optionsResolver->setAllowedTypes('rejected', array('bool'));
+        $optionsResolver->setAllowedTypes('review.stage', array('array'));
+        $optionsResolver->setAllowedTypes('review.userId', array('array'));
+        $optionsResolver->setAllowedTypes('review.contactId', array('array'));
+        $optionsResolver->setAllowedTypes('review.submittedAt', array('array'));
+        $optionsResolver->setAllowedTypes('review.reviewedAt', array('array'));
+        $optionsResolver->setAllowedTypes('keywords', array('string'));
+        $optionsResolver->setAllowedTypes('partnerAction.actionId', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.reference', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.stage', array('array'));
+        $optionsResolver->setAllowedTypes('partnerAction.submittedAt', array('array'));
+        $optionsResolver->setAllowedTypes('folderId', array('array'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedBy', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('sort', array('array'));
+        $optionsResolver->setAllowedTypes('fields', array('array'));
+        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -118,16 +118,10 @@ class FindJobApplications extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpo
      *
      * @return null|\Varspool\JobAdder\V2\Model\JobApplicationListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\JobApplicationListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

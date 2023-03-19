@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitPlacementRecruiterModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Recruiter to be associated with the placement, must also be associated with the related job.
      *
      * @var int
@@ -42,7 +34,6 @@ class SubmitPlacementRecruiterModel
      */
     public function setUserId(int $userId) : self
     {
-        $this->initialized['userId'] = true;
         $this->userId = $userId;
         return $this;
     }
@@ -64,7 +55,6 @@ class SubmitPlacementRecruiterModel
      */
     public function setFeeSplit(float $feeSplit) : self
     {
-        $this->initialized['feeSplit'] = true;
         $this->feeSplit = $feeSplit;
         return $this;
     }

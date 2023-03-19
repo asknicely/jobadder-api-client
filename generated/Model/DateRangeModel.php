@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class DateRangeModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var \DateTime
@@ -42,7 +34,6 @@ class DateRangeModel
      */
     public function setStart(\DateTime $start) : self
     {
-        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -64,7 +55,6 @@ class DateRangeModel
      */
     public function setEnd(\DateTime $end) : self
     {
-        $this->initialized['end'] = true;
         $this->end = $end;
         return $this;
     }

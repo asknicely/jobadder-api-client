@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyAddressModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -96,7 +88,6 @@ class CompanyAddressModel
      */
     public function setAddressId(string $addressId) : self
     {
-        $this->initialized['addressId'] = true;
         $this->addressId = $addressId;
         return $this;
     }
@@ -118,7 +109,6 @@ class CompanyAddressModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -140,7 +130,6 @@ class CompanyAddressModel
      */
     public function setStreet(array $street) : self
     {
-        $this->initialized['street'] = true;
         $this->street = $street;
         return $this;
     }
@@ -162,7 +151,6 @@ class CompanyAddressModel
      */
     public function setCity(string $city) : self
     {
-        $this->initialized['city'] = true;
         $this->city = $city;
         return $this;
     }
@@ -184,7 +172,6 @@ class CompanyAddressModel
      */
     public function setState(string $state) : self
     {
-        $this->initialized['state'] = true;
         $this->state = $state;
         return $this;
     }
@@ -206,7 +193,6 @@ class CompanyAddressModel
      */
     public function setPostalCode(string $postalCode) : self
     {
-        $this->initialized['postalCode'] = true;
         $this->postalCode = $postalCode;
         return $this;
     }
@@ -228,7 +214,6 @@ class CompanyAddressModel
      */
     public function setCountry(string $country) : self
     {
-        $this->initialized['country'] = true;
         $this->country = $country;
         return $this;
     }
@@ -250,7 +235,6 @@ class CompanyAddressModel
      */
     public function setCountryCode(string $countryCode) : self
     {
-        $this->initialized['countryCode'] = true;
         $this->countryCode = $countryCode;
         return $this;
     }
@@ -272,7 +256,6 @@ class CompanyAddressModel
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -294,7 +277,6 @@ class CompanyAddressModel
      */
     public function setFax(string $fax) : self
     {
-        $this->initialized['fax'] = true;
         $this->fax = $fax;
         return $this;
     }
@@ -316,7 +298,6 @@ class CompanyAddressModel
      */
     public function setUrl(string $url) : self
     {
-        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }

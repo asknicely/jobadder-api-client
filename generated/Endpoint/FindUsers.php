@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindUsers extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindUsers extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
     * 
@@ -30,7 +30,7 @@ class FindUsers extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implem
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -53,15 +53,15 @@ class FindUsers extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implem
         $optionsResolver->setDefined(array('userId', 'officeId', 'groupId', 'createdAt', 'updatedBy', 'updatedAt', 'include', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('userId', array('array'));
-        $optionsResolver->addAllowedTypes('officeId', array('array'));
-        $optionsResolver->addAllowedTypes('groupId', array('array'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedBy', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('include', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('userId', array('array'));
+        $optionsResolver->setAllowedTypes('officeId', array('array'));
+        $optionsResolver->setAllowedTypes('groupId', array('array'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedBy', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('include', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -70,16 +70,10 @@ class FindUsers extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implem
      *
      * @return null|\Varspool\JobAdder\V2\Model\UserListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\UserListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

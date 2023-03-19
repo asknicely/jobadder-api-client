@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -138,7 +130,6 @@ class UserRepresentation
      */
     public function setUserId(int $userId) : self
     {
-        $this->initialized['userId'] = true;
         $this->userId = $userId;
         return $this;
     }
@@ -160,7 +151,6 @@ class UserRepresentation
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -182,7 +172,6 @@ class UserRepresentation
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -204,7 +193,6 @@ class UserRepresentation
      */
     public function setPosition(string $position) : self
     {
-        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -226,7 +214,6 @@ class UserRepresentation
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -248,7 +235,6 @@ class UserRepresentation
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -270,7 +256,6 @@ class UserRepresentation
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -292,7 +277,6 @@ class UserRepresentation
      */
     public function setInactive(bool $inactive) : self
     {
-        $this->initialized['inactive'] = true;
         $this->inactive = $inactive;
         return $this;
     }
@@ -314,7 +298,6 @@ class UserRepresentation
      */
     public function setDeleted(bool $deleted) : self
     {
-        $this->initialized['deleted'] = true;
         $this->deleted = $deleted;
         return $this;
     }
@@ -336,7 +319,6 @@ class UserRepresentation
      */
     public function setMentionName(string $mentionName) : self
     {
-        $this->initialized['mentionName'] = true;
         $this->mentionName = $mentionName;
         return $this;
     }
@@ -358,7 +340,6 @@ class UserRepresentation
      */
     public function setOffice(UserOfficeSummaryModel $office) : self
     {
-        $this->initialized['office'] = true;
         $this->office = $office;
         return $this;
     }
@@ -380,7 +361,6 @@ class UserRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -402,7 +382,6 @@ class UserRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -424,7 +403,6 @@ class UserRepresentation
      */
     public function setTimeZone(string $timeZone) : self
     {
-        $this->initialized['timeZone'] = true;
         $this->timeZone = $timeZone;
         return $this;
     }
@@ -446,7 +424,6 @@ class UserRepresentation
      */
     public function setCulture(string $culture) : self
     {
-        $this->initialized['culture'] = true;
         $this->culture = $culture;
         return $this;
     }
@@ -468,7 +445,6 @@ class UserRepresentation
      */
     public function setAdmin(bool $admin) : self
     {
-        $this->initialized['admin'] = true;
         $this->admin = $admin;
         return $this;
     }
@@ -490,7 +466,6 @@ class UserRepresentation
      */
     public function setUserGroups(array $userGroups) : self
     {
-        $this->initialized['userGroups'] = true;
         $this->userGroups = $userGroups;
         return $this;
     }
@@ -512,7 +487,6 @@ class UserRepresentation
      */
     public function setLinks(UserLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

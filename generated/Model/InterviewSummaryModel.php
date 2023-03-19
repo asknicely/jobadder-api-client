@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class InterviewSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -84,7 +76,6 @@ class InterviewSummaryModel
      */
     public function setInterviewId(int $interviewId) : self
     {
-        $this->initialized['interviewId'] = true;
         $this->interviewId = $interviewId;
         return $this;
     }
@@ -106,7 +97,6 @@ class InterviewSummaryModel
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -128,7 +118,6 @@ class InterviewSummaryModel
      */
     public function setStartAt(\DateTime $startAt) : self
     {
-        $this->initialized['startAt'] = true;
         $this->startAt = $startAt;
         return $this;
     }
@@ -150,7 +139,6 @@ class InterviewSummaryModel
      */
     public function setEndAt(\DateTime $endAt) : self
     {
-        $this->initialized['endAt'] = true;
         $this->endAt = $endAt;
         return $this;
     }
@@ -172,7 +160,6 @@ class InterviewSummaryModel
      */
     public function setLocation(string $location) : self
     {
-        $this->initialized['location'] = true;
         $this->location = $location;
         return $this;
     }
@@ -194,7 +181,6 @@ class InterviewSummaryModel
      */
     public function setInterviewee(JobApplicationSummaryModel $interviewee) : self
     {
-        $this->initialized['interviewee'] = true;
         $this->interviewee = $interviewee;
         return $this;
     }
@@ -216,7 +202,6 @@ class InterviewSummaryModel
      */
     public function setInterviewers(InterviewInterviewersModel $interviewers) : self
     {
-        $this->initialized['interviewers'] = true;
         $this->interviewers = $interviewers;
         return $this;
     }
@@ -238,7 +223,6 @@ class InterviewSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -260,7 +244,6 @@ class InterviewSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }

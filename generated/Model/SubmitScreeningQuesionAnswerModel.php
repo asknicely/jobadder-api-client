@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitScreeningQuesionAnswerModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -48,7 +40,6 @@ class SubmitScreeningQuesionAnswerModel
      */
     public function setQuestion(string $question) : self
     {
-        $this->initialized['question'] = true;
         $this->question = $question;
         return $this;
     }
@@ -70,7 +61,6 @@ class SubmitScreeningQuesionAnswerModel
      */
     public function setAnswer($answer) : self
     {
-        $this->initialized['answer'] = true;
         $this->answer = $answer;
         return $this;
     }
@@ -92,7 +82,6 @@ class SubmitScreeningQuesionAnswerModel
      */
     public function setScore(int $score) : self
     {
-        $this->initialized['score'] = true;
         $this->score = $score;
         return $this;
     }

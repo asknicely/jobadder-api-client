@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,57 +14,51 @@ class AddCompanyWorkflowCommandNormalizer implements DenormalizerInterface, Norm
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\AddCompanyWorkflowCommand';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\AddCompanyWorkflowCommand';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\AddCompanyWorkflowCommand();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
-        }
-        if (\array_key_exists('approvers', $data)) {
+        if (property_exists($data, 'approvers')) {
             $values = array();
-            foreach ($data['approvers'] as $value) {
+            foreach ($data->{'approvers'} as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\SubmitCompanyWorkflowApproverModel', 'json', $context);
             }
             $object->setApprovers($values);
         }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
+        if (property_exists($data, 'name')) {
+            $object->setName($data->{'name'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('approvers') && null !== $object->getApprovers()) {
+        $data = new \stdClass();
+        if (null !== $object->getApprovers()) {
             $values = array();
             foreach ($object->getApprovers() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data['approvers'] = $values;
+            $data->{'approvers'} = $values;
         }
-        $data['name'] = $object->getName();
+        if (null !== $object->getName()) {
+            $data->{'name'} = $object->getName();
+        }
         return $data;
     }
 }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddJobAdDraftCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -72,7 +64,6 @@ class AddJobAdDraftCommand
      */
     public function setTitle(string $title) : self
     {
-        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -94,7 +85,6 @@ class AddJobAdDraftCommand
      */
     public function setReference(string $reference) : self
     {
-        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -116,7 +106,6 @@ class AddJobAdDraftCommand
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -138,7 +127,6 @@ class AddJobAdDraftCommand
      */
     public function setBulletPoints(array $bulletPoints) : self
     {
-        $this->initialized['bulletPoints'] = true;
         $this->bulletPoints = $bulletPoints;
         return $this;
     }
@@ -160,7 +148,6 @@ class AddJobAdDraftCommand
      */
     public function setDescription(string $description) : self
     {
-        $this->initialized['description'] = true;
         $this->description = $description;
         return $this;
     }
@@ -182,7 +169,6 @@ class AddJobAdDraftCommand
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -204,7 +190,6 @@ class AddJobAdDraftCommand
      */
     public function setOwnerUserId(int $ownerUserId) : self
     {
-        $this->initialized['ownerUserId'] = true;
         $this->ownerUserId = $ownerUserId;
         return $this;
     }

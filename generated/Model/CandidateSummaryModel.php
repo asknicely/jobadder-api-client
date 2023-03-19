@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Candidate Id
      *
      * @var int
@@ -138,7 +130,6 @@ class CandidateSummaryModel
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -160,7 +151,6 @@ class CandidateSummaryModel
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -182,7 +172,6 @@ class CandidateSummaryModel
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -204,7 +193,6 @@ class CandidateSummaryModel
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -226,7 +214,6 @@ class CandidateSummaryModel
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -248,7 +235,6 @@ class CandidateSummaryModel
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -270,7 +256,6 @@ class CandidateSummaryModel
      */
     public function setContactMethod(string $contactMethod) : self
     {
-        $this->initialized['contactMethod'] = true;
         $this->contactMethod = $contactMethod;
         return $this;
     }
@@ -292,7 +277,6 @@ class CandidateSummaryModel
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -314,7 +298,6 @@ class CandidateSummaryModel
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
-        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -336,7 +319,6 @@ class CandidateSummaryModel
      */
     public function setAddress(AddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -358,7 +340,6 @@ class CandidateSummaryModel
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -380,7 +361,6 @@ class CandidateSummaryModel
      */
     public function setRating(string $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -402,7 +382,6 @@ class CandidateSummaryModel
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -424,7 +403,6 @@ class CandidateSummaryModel
      */
     public function setSeeking(string $seeking) : self
     {
-        $this->initialized['seeking'] = true;
         $this->seeking = $seeking;
         return $this;
     }
@@ -446,7 +424,6 @@ class CandidateSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -468,7 +445,6 @@ class CandidateSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -490,7 +466,6 @@ class CandidateSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -512,7 +487,6 @@ class CandidateSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

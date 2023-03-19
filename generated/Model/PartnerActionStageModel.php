@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PartnerActionStageModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -90,7 +82,6 @@ class PartnerActionStageModel
      */
     public function setActionId(string $actionId) : self
     {
-        $this->initialized['actionId'] = true;
         $this->actionId = $actionId;
         return $this;
     }
@@ -112,7 +103,6 @@ class PartnerActionStageModel
      */
     public function setActionName(string $actionName) : self
     {
-        $this->initialized['actionName'] = true;
         $this->actionName = $actionName;
         return $this;
     }
@@ -134,7 +124,6 @@ class PartnerActionStageModel
      */
     public function setReference(string $reference) : self
     {
-        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -156,7 +145,6 @@ class PartnerActionStageModel
      */
     public function setStage(string $stage) : self
     {
-        $this->initialized['stage'] = true;
         $this->stage = $stage;
         return $this;
     }
@@ -178,7 +166,6 @@ class PartnerActionStageModel
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -200,7 +187,6 @@ class PartnerActionStageModel
      */
     public function setResult(PartnerActionResultModel $result) : self
     {
-        $this->initialized['result'] = true;
         $this->result = $result;
         return $this;
     }
@@ -222,7 +208,6 @@ class PartnerActionStageModel
      */
     public function setSubmittedAt(\DateTime $submittedAt) : self
     {
-        $this->initialized['submittedAt'] = true;
         $this->submittedAt = $submittedAt;
         return $this;
     }
@@ -244,7 +229,6 @@ class PartnerActionStageModel
      */
     public function setSubmittedBy(UserNameModel $submittedBy) : self
     {
-        $this->initialized['submittedBy'] = true;
         $this->submittedBy = $submittedBy;
         return $this;
     }
@@ -266,7 +250,6 @@ class PartnerActionStageModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -288,7 +271,6 @@ class PartnerActionStageModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderInvoiceExpenseListModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var float
@@ -42,7 +34,6 @@ class JobOrderInvoiceExpenseListModel
      */
     public function setTotal(float $total) : self
     {
-        $this->initialized['total'] = true;
         $this->total = $total;
         return $this;
     }
@@ -64,7 +55,6 @@ class JobOrderInvoiceExpenseListModel
      */
     public function setItems(array $items) : self
     {
-        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderAttachmentCategoryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -42,7 +34,6 @@ class JobOrderAttachmentCategoryModel
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -64,7 +55,6 @@ class JobOrderAttachmentCategoryModel
      */
     public function setCategory(string $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }

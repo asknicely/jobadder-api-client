@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class RequisitionRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -174,7 +166,6 @@ class RequisitionRepresentation
      */
     public function setRequisitionId(int $requisitionId) : self
     {
-        $this->initialized['requisitionId'] = true;
         $this->requisitionId = $requisitionId;
         return $this;
     }
@@ -196,7 +187,6 @@ class RequisitionRepresentation
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -218,7 +208,6 @@ class RequisitionRepresentation
      */
     public function setWorkflowStageIndex(int $workflowStageIndex) : self
     {
-        $this->initialized['workflowStageIndex'] = true;
         $this->workflowStageIndex = $workflowStageIndex;
         return $this;
     }
@@ -240,7 +229,6 @@ class RequisitionRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -262,7 +250,6 @@ class RequisitionRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -284,7 +271,6 @@ class RequisitionRepresentation
      */
     public function setHiringManager(ContactNameModel $hiringManager) : self
     {
-        $this->initialized['hiringManager'] = true;
         $this->hiringManager = $hiringManager;
         return $this;
     }
@@ -306,7 +292,6 @@ class RequisitionRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -328,7 +313,6 @@ class RequisitionRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -350,7 +334,6 @@ class RequisitionRepresentation
      */
     public function setWorkflow(CompanyWorkflowModel $workflow) : self
     {
-        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
         return $this;
     }
@@ -372,7 +355,6 @@ class RequisitionRepresentation
      */
     public function setJobDescription(string $jobDescription) : self
     {
-        $this->initialized['jobDescription'] = true;
         $this->jobDescription = $jobDescription;
         return $this;
     }
@@ -394,7 +376,6 @@ class RequisitionRepresentation
      */
     public function setNumberOfJobs(int $numberOfJobs) : self
     {
-        $this->initialized['numberOfJobs'] = true;
         $this->numberOfJobs = $numberOfJobs;
         return $this;
     }
@@ -416,7 +397,6 @@ class RequisitionRepresentation
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -438,7 +418,6 @@ class RequisitionRepresentation
      */
     public function setWorkplaceAddress(CompanyAddressModel $workplaceAddress) : self
     {
-        $this->initialized['workplaceAddress'] = true;
         $this->workplaceAddress = $workplaceAddress;
         return $this;
     }
@@ -460,7 +439,6 @@ class RequisitionRepresentation
      */
     public function setCategory(JobOrderCategoryModel $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -482,7 +460,6 @@ class RequisitionRepresentation
      */
     public function setLocation(JobOrderLocationModel $location) : self
     {
-        $this->initialized['location'] = true;
         $this->location = $location;
         return $this;
     }
@@ -504,7 +481,6 @@ class RequisitionRepresentation
      */
     public function setStart(JobOrderStartModel $start) : self
     {
-        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -526,7 +502,6 @@ class RequisitionRepresentation
      */
     public function setDuration(DurationModel $duration) : self
     {
-        $this->initialized['duration'] = true;
         $this->duration = $duration;
         return $this;
     }
@@ -548,7 +523,6 @@ class RequisitionRepresentation
      */
     public function setWorkType(WorkTypeModel $workType) : self
     {
-        $this->initialized['workType'] = true;
         $this->workType = $workType;
         return $this;
     }
@@ -570,7 +544,6 @@ class RequisitionRepresentation
      */
     public function setSalary(JobOrderSalaryRangeModel $salary) : self
     {
-        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -592,7 +565,6 @@ class RequisitionRepresentation
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -614,7 +586,6 @@ class RequisitionRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -636,7 +607,6 @@ class RequisitionRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
-        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -658,7 +628,6 @@ class RequisitionRepresentation
      */
     public function setFormID(int $formID) : self
     {
-        $this->initialized['formID'] = true;
         $this->formID = $formID;
         return $this;
     }
@@ -680,7 +649,6 @@ class RequisitionRepresentation
      */
     public function setLinks(RequisitionLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

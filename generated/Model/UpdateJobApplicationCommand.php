@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateJobApplicationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Job application status
      *
      * @var int
@@ -48,7 +40,6 @@ class UpdateJobApplicationCommand
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -70,7 +61,6 @@ class UpdateJobApplicationCommand
      */
     public function setRating(int $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -92,7 +82,6 @@ class UpdateJobApplicationCommand
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }

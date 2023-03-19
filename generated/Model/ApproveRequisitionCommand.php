@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ApproveRequisitionCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class ApproveRequisitionCommand
      */
     public function setApproverId(int $approverId) : self
     {
-        $this->initialized['approverId'] = true;
         $this->approverId = $approverId;
         return $this;
     }
@@ -64,7 +55,6 @@ class ApproveRequisitionCommand
      */
     public function setMessage(string $message) : self
     {
-        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }

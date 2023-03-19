@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyLinks
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -114,7 +106,6 @@ class CompanyLinks
      */
     public function setSelf(string $self) : self
     {
-        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -136,7 +127,6 @@ class CompanyLinks
      */
     public function setLogo(string $logo) : self
     {
-        $this->initialized['logo'] = true;
         $this->logo = $logo;
         return $this;
     }
@@ -158,7 +148,6 @@ class CompanyLinks
      */
     public function setContacts(string $contacts) : self
     {
-        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -180,7 +169,6 @@ class CompanyLinks
      */
     public function setSubsidiaries(string $subsidiaries) : self
     {
-        $this->initialized['subsidiaries'] = true;
         $this->subsidiaries = $subsidiaries;
         return $this;
     }
@@ -202,7 +190,6 @@ class CompanyLinks
      */
     public function setAddresses(string $addresses) : self
     {
-        $this->initialized['addresses'] = true;
         $this->addresses = $addresses;
         return $this;
     }
@@ -224,7 +211,6 @@ class CompanyLinks
      */
     public function setSkills(string $skills) : self
     {
-        $this->initialized['skills'] = true;
         $this->skills = $skills;
         return $this;
     }
@@ -246,7 +232,6 @@ class CompanyLinks
      */
     public function setNotes(string $notes) : self
     {
-        $this->initialized['notes'] = true;
         $this->notes = $notes;
         return $this;
     }
@@ -268,7 +253,6 @@ class CompanyLinks
      */
     public function setAttachments(string $attachments) : self
     {
-        $this->initialized['attachments'] = true;
         $this->attachments = $attachments;
         return $this;
     }
@@ -290,7 +274,6 @@ class CompanyLinks
      */
     public function setJobs(string $jobs) : self
     {
-        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -312,7 +295,6 @@ class CompanyLinks
      */
     public function setRequisitions(string $requisitions) : self
     {
-        $this->initialized['requisitions'] = true;
         $this->requisitions = $requisitions;
         return $this;
     }
@@ -334,7 +316,6 @@ class CompanyLinks
      */
     public function setFloats(string $floats) : self
     {
-        $this->initialized['floats'] = true;
         $this->floats = $floats;
         return $this;
     }
@@ -356,7 +337,6 @@ class CompanyLinks
      */
     public function setSubmissions(string $submissions) : self
     {
-        $this->initialized['submissions'] = true;
         $this->submissions = $submissions;
         return $this;
     }
@@ -378,7 +358,6 @@ class CompanyLinks
      */
     public function setPlacements(string $placements) : self
     {
-        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -400,7 +379,6 @@ class CompanyLinks
      */
     public function setWorkflows(CompanyWorkflowLinks $workflows) : self
     {
-        $this->initialized['workflows'] = true;
         $this->workflows = $workflows;
         return $this;
     }

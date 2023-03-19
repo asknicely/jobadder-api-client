@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Candidate Id
      *
      * @var int
@@ -228,7 +220,6 @@ class CandidateRepresentation
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -250,7 +241,6 @@ class CandidateRepresentation
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -272,7 +262,6 @@ class CandidateRepresentation
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -294,7 +283,6 @@ class CandidateRepresentation
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -316,7 +304,6 @@ class CandidateRepresentation
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -338,7 +325,6 @@ class CandidateRepresentation
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -360,7 +346,6 @@ class CandidateRepresentation
      */
     public function setContactMethod(string $contactMethod) : self
     {
-        $this->initialized['contactMethod'] = true;
         $this->contactMethod = $contactMethod;
         return $this;
     }
@@ -382,7 +367,6 @@ class CandidateRepresentation
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -404,7 +388,6 @@ class CandidateRepresentation
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
-        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -426,7 +409,6 @@ class CandidateRepresentation
      */
     public function setAddress(AddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -448,7 +430,6 @@ class CandidateRepresentation
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -470,7 +451,6 @@ class CandidateRepresentation
      */
     public function setRating(string $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -492,7 +472,6 @@ class CandidateRepresentation
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -514,7 +493,6 @@ class CandidateRepresentation
      */
     public function setSeeking(string $seeking) : self
     {
-        $this->initialized['seeking'] = true;
         $this->seeking = $seeking;
         return $this;
     }
@@ -536,7 +514,6 @@ class CandidateRepresentation
      */
     public function setDateOfBirth(\DateTime $dateOfBirth) : self
     {
-        $this->initialized['dateOfBirth'] = true;
         $this->dateOfBirth = $dateOfBirth;
         return $this;
     }
@@ -558,7 +535,6 @@ class CandidateRepresentation
      */
     public function setEmergencyContact(string $emergencyContact) : self
     {
-        $this->initialized['emergencyContact'] = true;
         $this->emergencyContact = $emergencyContact;
         return $this;
     }
@@ -580,7 +556,6 @@ class CandidateRepresentation
      */
     public function setEmergencyPhone(string $emergencyPhone) : self
     {
-        $this->initialized['emergencyPhone'] = true;
         $this->emergencyPhone = $emergencyPhone;
         return $this;
     }
@@ -602,7 +577,6 @@ class CandidateRepresentation
      */
     public function setOtherEmail(array $otherEmail) : self
     {
-        $this->initialized['otherEmail'] = true;
         $this->otherEmail = $otherEmail;
         return $this;
     }
@@ -611,7 +585,7 @@ class CandidateRepresentation
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -622,9 +596,8 @@ class CandidateRepresentation
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -646,7 +619,6 @@ class CandidateRepresentation
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -668,7 +640,6 @@ class CandidateRepresentation
      */
     public function setEmployment(CandidateEmploymentModel $employment) : self
     {
-        $this->initialized['employment'] = true;
         $this->employment = $employment;
         return $this;
     }
@@ -690,7 +661,6 @@ class CandidateRepresentation
      */
     public function setAvailability(CandidateStartModel $availability) : self
     {
-        $this->initialized['availability'] = true;
         $this->availability = $availability;
         return $this;
     }
@@ -712,7 +682,6 @@ class CandidateRepresentation
      */
     public function setEducation(array $education) : self
     {
-        $this->initialized['education'] = true;
         $this->education = $education;
         return $this;
     }
@@ -734,7 +703,6 @@ class CandidateRepresentation
      */
     public function setSkillTags(array $skillTags) : self
     {
-        $this->initialized['skillTags'] = true;
         $this->skillTags = $skillTags;
         return $this;
     }
@@ -756,7 +724,6 @@ class CandidateRepresentation
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -778,7 +745,6 @@ class CandidateRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
-        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -800,7 +766,6 @@ class CandidateRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -822,7 +787,6 @@ class CandidateRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -844,7 +808,6 @@ class CandidateRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -866,7 +829,6 @@ class CandidateRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -888,7 +850,6 @@ class CandidateRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
-        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -910,7 +871,6 @@ class CandidateRepresentation
      */
     public function setStatistics(CandidateStatisticsModel $statistics) : self
     {
-        $this->initialized['statistics'] = true;
         $this->statistics = $statistics;
         return $this;
     }
@@ -932,7 +892,6 @@ class CandidateRepresentation
      */
     public function setLinks(CandidateLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

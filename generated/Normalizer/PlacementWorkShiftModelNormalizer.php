@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,64 +14,56 @@ class PlacementWorkShiftModelNormalizer implements DenormalizerInterface, Normal
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PlacementWorkShiftModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PlacementWorkShiftModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PlacementWorkShiftModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'startTime')) {
+            $object->setStartTime($data->{'startTime'});
         }
-        if (\array_key_exists('startTime', $data)) {
-            $object->setStartTime($data['startTime']);
+        if (property_exists($data, 'endTime')) {
+            $object->setEndTime($data->{'endTime'});
         }
-        if (\array_key_exists('endTime', $data)) {
-            $object->setEndTime($data['endTime']);
-        }
-        if (\array_key_exists('workDays', $data)) {
+        if (property_exists($data, 'workDays')) {
             $values = array();
-            foreach ($data['workDays'] as $value) {
+            foreach ($data->{'workDays'} as $value) {
                 $values[] = $value;
             }
             $object->setWorkDays($values);
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('startTime') && null !== $object->getStartTime()) {
-            $data['startTime'] = $object->getStartTime();
+        $data = new \stdClass();
+        if (null !== $object->getStartTime()) {
+            $data->{'startTime'} = $object->getStartTime();
         }
-        if ($object->isInitialized('endTime') && null !== $object->getEndTime()) {
-            $data['endTime'] = $object->getEndTime();
+        if (null !== $object->getEndTime()) {
+            $data->{'endTime'} = $object->getEndTime();
         }
-        if ($object->isInitialized('workDays') && null !== $object->getWorkDays()) {
+        if (null !== $object->getWorkDays()) {
             $values = array();
             foreach ($object->getWorkDays() as $value) {
                 $values[] = $value;
             }
-            $data['workDays'] = $values;
+            $data->{'workDays'} = $values;
         }
         return $data;
     }

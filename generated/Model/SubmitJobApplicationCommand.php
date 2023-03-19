@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitJobApplicationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -114,7 +106,6 @@ class SubmitJobApplicationCommand
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -136,7 +127,6 @@ class SubmitJobApplicationCommand
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -158,7 +148,6 @@ class SubmitJobApplicationCommand
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -180,7 +169,6 @@ class SubmitJobApplicationCommand
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -202,7 +190,6 @@ class SubmitJobApplicationCommand
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -224,7 +211,6 @@ class SubmitJobApplicationCommand
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -246,7 +232,6 @@ class SubmitJobApplicationCommand
      */
     public function setAddress(SubmitAddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -255,7 +240,7 @@ class SubmitJobApplicationCommand
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -266,9 +251,8 @@ class SubmitJobApplicationCommand
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -290,7 +274,6 @@ class SubmitJobApplicationCommand
      */
     public function setEmployment(SubmitEmploymentModel $employment) : self
     {
-        $this->initialized['employment'] = true;
         $this->employment = $employment;
         return $this;
     }
@@ -312,7 +295,6 @@ class SubmitJobApplicationCommand
      */
     public function setAvailability(SubmitCandidateAvailabilityModel $availability) : self
     {
-        $this->initialized['availability'] = true;
         $this->availability = $availability;
         return $this;
     }
@@ -334,7 +316,6 @@ class SubmitJobApplicationCommand
      */
     public function setEducation(array $education) : self
     {
-        $this->initialized['education'] = true;
         $this->education = $education;
         return $this;
     }
@@ -356,7 +337,6 @@ class SubmitJobApplicationCommand
      */
     public function setSkillTags(array $skillTags) : self
     {
-        $this->initialized['skillTags'] = true;
         $this->skillTags = $skillTags;
         return $this;
     }
@@ -378,7 +358,6 @@ class SubmitJobApplicationCommand
      */
     public function setScreening(SubmitScreeningQuesionResultsModel $screening) : self
     {
-        $this->initialized['screening'] = true;
         $this->screening = $screening;
         return $this;
     }
@@ -400,7 +379,6 @@ class SubmitJobApplicationCommand
      */
     public function setCustom(SubmitJobApplicationCustomFieldsModel $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }

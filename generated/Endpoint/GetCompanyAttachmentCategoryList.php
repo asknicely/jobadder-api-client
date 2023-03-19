@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetCompanyAttachmentCategoryList extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class GetCompanyAttachmentCategoryList extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
      * 
@@ -15,7 +15,7 @@ class GetCompanyAttachmentCategoryList extends \Varspool\JobAdder\V2\Runtime\Cli
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,7 +38,7 @@ class GetCompanyAttachmentCategoryList extends \Varspool\JobAdder\V2\Runtime\Cli
         $optionsResolver->setDefined(array('type'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('type', array('array'));
+        $optionsResolver->setAllowedTypes('type', array('array'));
         return $optionsResolver;
     }
     /**
@@ -47,16 +47,10 @@ class GetCompanyAttachmentCategoryList extends \Varspool\JobAdder\V2\Runtime\Cli
      *
      * @return null|\Varspool\JobAdder\V2\Model\CompanyAttachmentCategoryListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CompanyAttachmentCategoryListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

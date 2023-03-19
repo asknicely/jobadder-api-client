@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetCandidateNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class GetCandidateNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $candidateId;
     /**
@@ -35,7 +35,7 @@ class GetCandidateNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
         $this->candidateId = $candidateId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -58,15 +58,15 @@ class GetCandidateNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
         $optionsResolver->setDefined(array('noteId', 'type', 'reference', 'createdAt', 'updatedAt', 'offset', 'limit', 'sort', 'fields'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('noteId', array('array'));
-        $optionsResolver->addAllowedTypes('type', array('array'));
-        $optionsResolver->addAllowedTypes('reference', array('array'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
-        $optionsResolver->addAllowedTypes('sort', array('array'));
-        $optionsResolver->addAllowedTypes('fields', array('array'));
+        $optionsResolver->setAllowedTypes('noteId', array('array'));
+        $optionsResolver->setAllowedTypes('type', array('array'));
+        $optionsResolver->setAllowedTypes('reference', array('array'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('sort', array('array'));
+        $optionsResolver->setAllowedTypes('fields', array('array'));
         return $optionsResolver;
     }
     /**
@@ -75,16 +75,10 @@ class GetCandidateNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
      *
      * @return null|\Varspool\JobAdder\V2\Model\NoteListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\NoteListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

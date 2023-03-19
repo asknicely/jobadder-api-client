@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class RequisitionSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -78,7 +70,6 @@ class RequisitionSummaryModel
      */
     public function setRequisitionId(int $requisitionId) : self
     {
-        $this->initialized['requisitionId'] = true;
         $this->requisitionId = $requisitionId;
         return $this;
     }
@@ -100,7 +91,6 @@ class RequisitionSummaryModel
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -122,7 +112,6 @@ class RequisitionSummaryModel
      */
     public function setWorkflowStageIndex(int $workflowStageIndex) : self
     {
-        $this->initialized['workflowStageIndex'] = true;
         $this->workflowStageIndex = $workflowStageIndex;
         return $this;
     }
@@ -144,7 +133,6 @@ class RequisitionSummaryModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -166,7 +154,6 @@ class RequisitionSummaryModel
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -188,7 +175,6 @@ class RequisitionSummaryModel
      */
     public function setHiringManager(ContactNameModel $hiringManager) : self
     {
-        $this->initialized['hiringManager'] = true;
         $this->hiringManager = $hiringManager;
         return $this;
     }
@@ -210,7 +196,6 @@ class RequisitionSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -232,7 +217,6 @@ class RequisitionSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

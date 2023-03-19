@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityTextAnswerModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class ActivityTextAnswerModel
      */
     public function setQuestionId(int $questionId) : self
     {
-        $this->initialized['questionId'] = true;
         $this->questionId = $questionId;
         return $this;
     }
@@ -64,7 +55,6 @@ class ActivityTextAnswerModel
      */
     public function setText(string $text) : self
     {
-        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }

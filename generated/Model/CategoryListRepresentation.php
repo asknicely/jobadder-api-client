@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CategoryListRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var CategoryModel[]
@@ -42,7 +34,6 @@ class CategoryListRepresentation
      */
     public function setItems(array $items) : self
     {
-        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }
@@ -64,7 +55,6 @@ class CategoryListRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

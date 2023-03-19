@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateNoteCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Note type
      *
      * @var string
@@ -42,7 +34,6 @@ class UpdateNoteCommand
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -64,7 +55,6 @@ class UpdateNoteCommand
      */
     public function setText(string $text) : self
     {
-        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }

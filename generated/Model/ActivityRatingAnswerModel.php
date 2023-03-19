@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityRatingAnswerModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class ActivityRatingAnswerModel
      */
     public function setQuestionId(int $questionId) : self
     {
-        $this->initialized['questionId'] = true;
         $this->questionId = $questionId;
         return $this;
     }
@@ -64,7 +55,6 @@ class ActivityRatingAnswerModel
      */
     public function setRating(int $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }

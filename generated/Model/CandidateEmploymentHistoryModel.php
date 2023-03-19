@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateEmploymentHistoryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Name of the employer
      *
      * @var string
@@ -66,7 +58,6 @@ class CandidateEmploymentHistoryModel
      */
     public function setEmployer(string $employer) : self
     {
-        $this->initialized['employer'] = true;
         $this->employer = $employer;
         return $this;
     }
@@ -88,7 +79,6 @@ class CandidateEmploymentHistoryModel
      */
     public function setPosition(string $position) : self
     {
-        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -116,7 +106,6 @@ class CandidateEmploymentHistoryModel
     */
     public function setStart(string $start) : self
     {
-        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -144,7 +133,6 @@ class CandidateEmploymentHistoryModel
     */
     public function setEnd(string $end) : self
     {
-        $this->initialized['end'] = true;
         $this->end = $end;
         return $this;
     }
@@ -166,7 +154,6 @@ class CandidateEmploymentHistoryModel
      */
     public function setDescription(string $description) : self
     {
-        $this->initialized['description'] = true;
         $this->description = $description;
         return $this;
     }

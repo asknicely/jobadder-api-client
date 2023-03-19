@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class InterviewInterviewersModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Internal/user interviewers
      *
      * @var UserNameModel[]
@@ -42,7 +34,6 @@ class InterviewInterviewersModel
      */
     public function setUsers(array $users) : self
     {
-        $this->initialized['users'] = true;
         $this->users = $users;
         return $this;
     }
@@ -64,7 +55,6 @@ class InterviewInterviewersModel
      */
     public function setContacts(array $contacts) : self
     {
-        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }

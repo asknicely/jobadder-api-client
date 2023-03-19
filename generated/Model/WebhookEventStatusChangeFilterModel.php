@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class WebhookEventStatusChangeFilterModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Limit events to a specific status
      *
      * @var int[]
@@ -42,7 +34,6 @@ class WebhookEventStatusChangeFilterModel
      */
     public function setStatusId(array $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -64,7 +55,6 @@ class WebhookEventStatusChangeFilterModel
      */
     public function setStatusActive(bool $statusActive) : self
     {
-        $this->initialized['statusActive'] = true;
         $this->statusActive = $statusActive;
         return $this;
     }

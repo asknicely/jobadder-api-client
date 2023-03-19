@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateCandidateCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -162,7 +154,6 @@ class UpdateCandidateCommand
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -184,7 +175,6 @@ class UpdateCandidateCommand
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -206,7 +196,6 @@ class UpdateCandidateCommand
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -228,7 +217,6 @@ class UpdateCandidateCommand
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -250,7 +238,6 @@ class UpdateCandidateCommand
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -272,7 +259,6 @@ class UpdateCandidateCommand
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -294,7 +280,6 @@ class UpdateCandidateCommand
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -316,7 +301,6 @@ class UpdateCandidateCommand
      */
     public function setRating(string $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -338,7 +322,6 @@ class UpdateCandidateCommand
      */
     public function setSeeking(string $seeking) : self
     {
-        $this->initialized['seeking'] = true;
         $this->seeking = $seeking;
         return $this;
     }
@@ -360,7 +343,6 @@ class UpdateCandidateCommand
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
-        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -382,7 +364,6 @@ class UpdateCandidateCommand
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -404,7 +385,6 @@ class UpdateCandidateCommand
      */
     public function setDateOfBirth(\DateTime $dateOfBirth) : self
     {
-        $this->initialized['dateOfBirth'] = true;
         $this->dateOfBirth = $dateOfBirth;
         return $this;
     }
@@ -426,7 +406,6 @@ class UpdateCandidateCommand
      */
     public function setEmergencyContact(string $emergencyContact) : self
     {
-        $this->initialized['emergencyContact'] = true;
         $this->emergencyContact = $emergencyContact;
         return $this;
     }
@@ -448,7 +427,6 @@ class UpdateCandidateCommand
      */
     public function setEmergencyPhone(string $emergencyPhone) : self
     {
-        $this->initialized['emergencyPhone'] = true;
         $this->emergencyPhone = $emergencyPhone;
         return $this;
     }
@@ -457,7 +435,7 @@ class UpdateCandidateCommand
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -468,9 +446,8 @@ class UpdateCandidateCommand
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -492,7 +469,6 @@ class UpdateCandidateCommand
      */
     public function setAddress(SubmitAddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -514,7 +490,6 @@ class UpdateCandidateCommand
      */
     public function setSkillTags(array $skillTags) : self
     {
-        $this->initialized['skillTags'] = true;
         $this->skillTags = $skillTags;
         return $this;
     }
@@ -536,7 +511,6 @@ class UpdateCandidateCommand
      */
     public function setEmployment(SubmitEmploymentModel $employment) : self
     {
-        $this->initialized['employment'] = true;
         $this->employment = $employment;
         return $this;
     }
@@ -558,7 +532,6 @@ class UpdateCandidateCommand
      */
     public function setAvailability(SubmitCandidateAvailabilityModel $availability) : self
     {
-        $this->initialized['availability'] = true;
         $this->availability = $availability;
         return $this;
     }
@@ -580,7 +553,6 @@ class UpdateCandidateCommand
      */
     public function setEducation(array $education) : self
     {
-        $this->initialized['education'] = true;
         $this->education = $education;
         return $this;
     }
@@ -602,7 +574,6 @@ class UpdateCandidateCommand
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -624,7 +595,6 @@ class UpdateCandidateCommand
      */
     public function setRecruiterUserId(array $recruiterUserId) : self
     {
-        $this->initialized['recruiterUserId'] = true;
         $this->recruiterUserId = $recruiterUserId;
         return $this;
     }

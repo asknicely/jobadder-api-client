@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderInvoiceModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -132,7 +124,6 @@ class JobOrderInvoiceModel
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -154,7 +145,6 @@ class JobOrderInvoiceModel
      */
     public function setInvoiceId(int $invoiceId) : self
     {
-        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
         return $this;
     }
@@ -176,7 +166,6 @@ class JobOrderInvoiceModel
      */
     public function setInvoiceNumber(string $invoiceNumber) : self
     {
-        $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
         return $this;
     }
@@ -198,7 +187,6 @@ class JobOrderInvoiceModel
      */
     public function setStage(JobOrderInvoiceStageModel $stage) : self
     {
-        $this->initialized['stage'] = true;
         $this->stage = $stage;
         return $this;
     }
@@ -220,7 +208,6 @@ class JobOrderInvoiceModel
      */
     public function setAmount(float $amount) : self
     {
-        $this->initialized['amount'] = true;
         $this->amount = $amount;
         return $this;
     }
@@ -242,7 +229,6 @@ class JobOrderInvoiceModel
      */
     public function setTriggerType(string $triggerType) : self
     {
-        $this->initialized['triggerType'] = true;
         $this->triggerType = $triggerType;
         return $this;
     }
@@ -264,7 +250,6 @@ class JobOrderInvoiceModel
      */
     public function setTriggerJobOrderStatus(StatusModel $triggerJobOrderStatus) : self
     {
-        $this->initialized['triggerJobOrderStatus'] = true;
         $this->triggerJobOrderStatus = $triggerJobOrderStatus;
         return $this;
     }
@@ -286,7 +271,6 @@ class JobOrderInvoiceModel
      */
     public function setTriggerAt(\DateTime $triggerAt) : self
     {
-        $this->initialized['triggerAt'] = true;
         $this->triggerAt = $triggerAt;
         return $this;
     }
@@ -308,7 +292,6 @@ class JobOrderInvoiceModel
      */
     public function setForecastedDate(\DateTime $forecastedDate) : self
     {
-        $this->initialized['forecastedDate'] = true;
         $this->forecastedDate = $forecastedDate;
         return $this;
     }
@@ -330,7 +313,6 @@ class JobOrderInvoiceModel
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -352,7 +334,6 @@ class JobOrderInvoiceModel
      */
     public function setExpenses(JobOrderInvoiceExpenseListModel $expenses) : self
     {
-        $this->initialized['expenses'] = true;
         $this->expenses = $expenses;
         return $this;
     }
@@ -374,7 +355,6 @@ class JobOrderInvoiceModel
      */
     public function setSentDetails(JobOrderSentInvoiceModel $sentDetails) : self
     {
-        $this->initialized['sentDetails'] = true;
         $this->sentDetails = $sentDetails;
         return $this;
     }
@@ -396,7 +376,6 @@ class JobOrderInvoiceModel
      */
     public function setPlacements(JobOrderInvoicePlacementListModel $placements) : self
     {
-        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -418,7 +397,6 @@ class JobOrderInvoiceModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -440,7 +418,6 @@ class JobOrderInvoiceModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -462,7 +439,6 @@ class JobOrderInvoiceModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -484,7 +460,6 @@ class JobOrderInvoiceModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,78 +14,74 @@ class AddUserTaskCommandNormalizer implements DenormalizerInterface, NormalizerI
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\AddUserTaskCommand';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\AddUserTaskCommand';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\AddUserTaskCommand();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'title')) {
+            $object->setTitle($data->{'title'});
         }
-        if (\array_key_exists('title', $data)) {
-            $object->setTitle($data['title']);
+        if (property_exists($data, 'startAt')) {
+            $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'startAt'}));
         }
-        if (\array_key_exists('startAt', $data)) {
-            $object->setStartAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['startAt']));
+        if (property_exists($data, 'endAt')) {
+            $object->setEndAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'endAt'}));
         }
-        if (\array_key_exists('endAt', $data)) {
-            $object->setEndAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['endAt']));
+        if (property_exists($data, 'allDay')) {
+            $object->setAllDay($data->{'allDay'});
         }
-        if (\array_key_exists('allDay', $data)) {
-            $object->setAllDay($data['allDay']);
-        }
-        if (\array_key_exists('assignees', $data)) {
+        if (property_exists($data, 'assignees')) {
             $values = array();
-            foreach ($data['assignees'] as $value) {
+            foreach ($data->{'assignees'} as $value) {
                 $values[] = $value;
             }
             $object->setAssignees($values);
         }
-        if (\array_key_exists('priority', $data)) {
-            $object->setPriority($data['priority']);
+        if (property_exists($data, 'priority')) {
+            $object->setPriority($data->{'priority'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        $data['title'] = $object->getTitle();
-        if ($object->isInitialized('startAt') && null !== $object->getStartAt()) {
-            $data['startAt'] = $object->getStartAt()->format('Y-m-d\\TH:i:s');
+        $data = new \stdClass();
+        if (null !== $object->getTitle()) {
+            $data->{'title'} = $object->getTitle();
         }
-        if ($object->isInitialized('endAt') && null !== $object->getEndAt()) {
-            $data['endAt'] = $object->getEndAt()->format('Y-m-d\\TH:i:s');
+        if (null !== $object->getStartAt()) {
+            $data->{'startAt'} = $object->getStartAt()->format('Y-m-d\\TH:i:s');
         }
-        if ($object->isInitialized('allDay') && null !== $object->getAllDay()) {
-            $data['allDay'] = $object->getAllDay();
+        if (null !== $object->getEndAt()) {
+            $data->{'endAt'} = $object->getEndAt()->format('Y-m-d\\TH:i:s');
         }
-        $values = array();
-        foreach ($object->getAssignees() as $value) {
-            $values[] = $value;
+        if (null !== $object->getAllDay()) {
+            $data->{'allDay'} = $object->getAllDay();
         }
-        $data['assignees'] = $values;
-        if ($object->isInitialized('priority') && null !== $object->getPriority()) {
-            $data['priority'] = $object->getPriority();
+        if (null !== $object->getAssignees()) {
+            $values = array();
+            foreach ($object->getAssignees() as $value) {
+                $values[] = $value;
+            }
+            $data->{'assignees'} = $values;
+        }
+        if (null !== $object->getPriority()) {
+            $data->{'priority'} = $object->getPriority();
         }
         return $data;
     }

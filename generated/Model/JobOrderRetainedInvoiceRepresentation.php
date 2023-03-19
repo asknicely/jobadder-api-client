@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderRetainedInvoiceRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var JobOrderRetainedModel
@@ -48,7 +40,6 @@ class JobOrderRetainedInvoiceRepresentation
      */
     public function setJob(JobOrderRetainedModel $job) : self
     {
-        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -70,7 +61,6 @@ class JobOrderRetainedInvoiceRepresentation
      */
     public function setInvoice(JobOrderInvoiceModel $invoice) : self
     {
-        $this->initialized['invoice'] = true;
         $this->invoice = $invoice;
         return $this;
     }
@@ -92,7 +82,6 @@ class JobOrderRetainedInvoiceRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

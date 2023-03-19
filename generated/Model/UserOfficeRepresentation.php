@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserOfficeRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -108,7 +100,6 @@ class UserOfficeRepresentation
      */
     public function setOfficeId(int $officeId) : self
     {
-        $this->initialized['officeId'] = true;
         $this->officeId = $officeId;
         return $this;
     }
@@ -130,7 +121,6 @@ class UserOfficeRepresentation
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -152,7 +142,6 @@ class UserOfficeRepresentation
      */
     public function setStreet(array $street) : self
     {
-        $this->initialized['street'] = true;
         $this->street = $street;
         return $this;
     }
@@ -174,7 +163,6 @@ class UserOfficeRepresentation
      */
     public function setCity(string $city) : self
     {
-        $this->initialized['city'] = true;
         $this->city = $city;
         return $this;
     }
@@ -196,7 +184,6 @@ class UserOfficeRepresentation
      */
     public function setState(string $state) : self
     {
-        $this->initialized['state'] = true;
         $this->state = $state;
         return $this;
     }
@@ -218,7 +205,6 @@ class UserOfficeRepresentation
      */
     public function setPostalCode(string $postalCode) : self
     {
-        $this->initialized['postalCode'] = true;
         $this->postalCode = $postalCode;
         return $this;
     }
@@ -240,7 +226,6 @@ class UserOfficeRepresentation
      */
     public function setCountry(string $country) : self
     {
-        $this->initialized['country'] = true;
         $this->country = $country;
         return $this;
     }
@@ -262,7 +247,6 @@ class UserOfficeRepresentation
      */
     public function setCountryCode(string $countryCode) : self
     {
-        $this->initialized['countryCode'] = true;
         $this->countryCode = $countryCode;
         return $this;
     }
@@ -284,7 +268,6 @@ class UserOfficeRepresentation
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -306,7 +289,6 @@ class UserOfficeRepresentation
      */
     public function setFax(string $fax) : self
     {
-        $this->initialized['fax'] = true;
         $this->fax = $fax;
         return $this;
     }
@@ -328,7 +310,6 @@ class UserOfficeRepresentation
      */
     public function setUrl(string $url) : self
     {
-        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -350,7 +331,6 @@ class UserOfficeRepresentation
      */
     public function setUsers(array $users) : self
     {
-        $this->initialized['users'] = true;
         $this->users = $users;
         return $this;
     }
@@ -372,7 +352,6 @@ class UserOfficeRepresentation
      */
     public function setLinks(UserOfficeLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

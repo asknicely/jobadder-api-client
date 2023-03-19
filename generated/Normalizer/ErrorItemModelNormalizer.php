@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,64 +14,56 @@ class ErrorItemModelNormalizer implements DenormalizerInterface, NormalizerInter
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\ErrorItemModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\ErrorItemModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\ErrorItemModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'code')) {
+            $object->setCode($data->{'code'});
         }
-        if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
+        if (property_exists($data, 'message')) {
+            $object->setMessage($data->{'message'});
         }
-        if (\array_key_exists('message', $data)) {
-            $object->setMessage($data['message']);
-        }
-        if (\array_key_exists('fields', $data)) {
+        if (property_exists($data, 'fields')) {
             $values = array();
-            foreach ($data['fields'] as $value) {
+            foreach ($data->{'fields'} as $value) {
                 $values[] = $value;
             }
             $object->setFields($values);
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('code') && null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
+        $data = new \stdClass();
+        if (null !== $object->getCode()) {
+            $data->{'code'} = $object->getCode();
         }
-        if ($object->isInitialized('message') && null !== $object->getMessage()) {
-            $data['message'] = $object->getMessage();
+        if (null !== $object->getMessage()) {
+            $data->{'message'} = $object->getMessage();
         }
-        if ($object->isInitialized('fields') && null !== $object->getFields()) {
+        if (null !== $object->getFields()) {
             $values = array();
             foreach ($object->getFields() as $value) {
                 $values[] = $value;
             }
-            $data['fields'] = $values;
+            $data->{'fields'} = $values;
         }
         return $data;
     }

@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindSubmissions extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindSubmissions extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
     * 
@@ -31,7 +31,7 @@ class FindSubmissions extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint 
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -54,15 +54,15 @@ class FindSubmissions extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(array('submissionId', 'candidateId', 'companyId', 'jobId', 'createdAt', 'updatedAt', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('submissionId', array('array'));
-        $optionsResolver->addAllowedTypes('candidateId', array('array'));
-        $optionsResolver->addAllowedTypes('companyId', array('array'));
-        $optionsResolver->addAllowedTypes('jobId', array('array'));
-        $optionsResolver->addAllowedTypes('createdAt', array('array'));
-        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->addAllowedTypes('embed', array('array'));
-        $optionsResolver->addAllowedTypes('offset', array('int'));
-        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->setAllowedTypes('submissionId', array('array'));
+        $optionsResolver->setAllowedTypes('candidateId', array('array'));
+        $optionsResolver->setAllowedTypes('companyId', array('array'));
+        $optionsResolver->setAllowedTypes('jobId', array('array'));
+        $optionsResolver->setAllowedTypes('createdAt', array('array'));
+        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->setAllowedTypes('offset', array('int'));
+        $optionsResolver->setAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -71,16 +71,10 @@ class FindSubmissions extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint 
      *
      * @return null|\Varspool\JobAdder\V2\Model\SubmissionListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\SubmissionListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

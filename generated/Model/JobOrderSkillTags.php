@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderSkillTags
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var bool
@@ -42,7 +34,6 @@ class JobOrderSkillTags
      */
     public function setMatchAll(bool $matchAll) : self
     {
-        $this->initialized['matchAll'] = true;
         $this->matchAll = $matchAll;
         return $this;
     }
@@ -64,7 +55,6 @@ class JobOrderSkillTags
      */
     public function setTags(array $tags) : self
     {
-        $this->initialized['tags'] = true;
         $this->tags = $tags;
         return $this;
     }

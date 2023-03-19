@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SetCandidateAvailabilityByWeekCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Update availability for the week (beginning Sunday) containing the specified date
      *
      * @var \DateTime
@@ -54,7 +46,6 @@ class SetCandidateAvailabilityByWeekCommand
      */
     public function setWeekOf(\DateTime $weekOf) : self
     {
-        $this->initialized['weekOf'] = true;
         $this->weekOf = $weekOf;
         return $this;
     }
@@ -76,7 +67,6 @@ class SetCandidateAvailabilityByWeekCommand
      */
     public function setAvailability(SetCandidateAvailabilityByWeekCommandAvailability $availability) : self
     {
-        $this->initialized['availability'] = true;
         $this->availability = $availability;
         return $this;
     }
@@ -98,7 +88,6 @@ class SetCandidateAvailabilityByWeekCommand
      */
     public function setRecurring(bool $recurring) : self
     {
-        $this->initialized['recurring'] = true;
         $this->recurring = $recurring;
         return $this;
     }
@@ -120,7 +109,6 @@ class SetCandidateAvailabilityByWeekCommand
      */
     public function setUntil(\DateTime $until) : self
     {
-        $this->initialized['until'] = true;
         $this->until = $until;
         return $this;
     }

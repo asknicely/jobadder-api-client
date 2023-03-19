@@ -2,19 +2,10 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class ReviewViewJobApplicationNotFoundException extends NotFoundException
+class ReviewViewJobApplicationNotFoundException extends \RuntimeException implements ClientException
 {
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    private $response;
-    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
+    public function __construct()
     {
-        parent::__construct('Job application was not found');
-        $this->response = $response;
-    }
-    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
-    {
-        return $this->response;
+        parent::__construct('Job application was not found', 404);
     }
 }

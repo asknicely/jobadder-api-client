@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetContact extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class GetContact extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $contactId;
     /**
@@ -19,7 +19,7 @@ class GetContact extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imple
         $this->contactId = $contactId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -42,7 +42,7 @@ class GetContact extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imple
         $optionsResolver->setDefined(array('embed'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->setAllowedTypes('embed', array('array'));
         return $optionsResolver;
     }
     /**
@@ -52,19 +52,13 @@ class GetContact extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imple
      *
      * @return null|\Varspool\JobAdder\V2\Model\ContactRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ContactRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetContactNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\GetContactNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

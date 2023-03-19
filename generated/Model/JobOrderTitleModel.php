@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderTitleModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -72,7 +64,6 @@ class JobOrderTitleModel
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -94,7 +85,6 @@ class JobOrderTitleModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -116,7 +106,6 @@ class JobOrderTitleModel
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -138,7 +127,6 @@ class JobOrderTitleModel
      */
     public function setContact(ContactNameModel $contact) : self
     {
-        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -160,7 +148,6 @@ class JobOrderTitleModel
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -182,7 +169,6 @@ class JobOrderTitleModel
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -204,7 +190,6 @@ class JobOrderTitleModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }

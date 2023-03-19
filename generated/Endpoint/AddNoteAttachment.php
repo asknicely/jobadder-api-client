@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddNoteAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class AddNoteAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $noteId;
     /**
@@ -18,7 +18,7 @@ class AddNoteAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
         $this->noteId = $noteId;
         $this->formParameters = $formParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -41,7 +41,7 @@ class AddNoteAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
         $optionsResolver->setDefined(array('fileData'));
         $optionsResolver->setRequired(array('fileData'));
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('fileData', array('string', 'resource', '\\Psr\\Http\\Message\\StreamInterface'));
+        $optionsResolver->setAllowedTypes('fileData', array('string', 'resource', '\\Psr\\Http\\Message\\StreamInterface'));
         return $optionsResolver;
     }
     /**
@@ -51,19 +51,13 @@ class AddNoteAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoin
      *
      * @return null
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (201 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddNoteAttachmentNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\AddNoteAttachmentNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array();
     }
 }

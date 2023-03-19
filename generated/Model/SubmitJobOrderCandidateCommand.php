@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitJobOrderCandidateCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -120,7 +112,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -142,7 +133,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -164,7 +154,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -186,7 +175,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -208,7 +196,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -230,7 +217,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -252,7 +238,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -274,7 +259,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setAddress(SubmitAddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -283,7 +267,7 @@ class SubmitJobOrderCandidateCommand
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -294,9 +278,8 @@ class SubmitJobOrderCandidateCommand
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -318,7 +301,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setEmployment(SubmitEmploymentModel $employment) : self
     {
-        $this->initialized['employment'] = true;
         $this->employment = $employment;
         return $this;
     }
@@ -340,7 +322,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setAvailability(SubmitCandidateAvailabilityModel $availability) : self
     {
-        $this->initialized['availability'] = true;
         $this->availability = $availability;
         return $this;
     }
@@ -362,7 +343,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setEducation(array $education) : self
     {
-        $this->initialized['education'] = true;
         $this->education = $education;
         return $this;
     }
@@ -384,7 +364,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setSkillTags(array $skillTags) : self
     {
-        $this->initialized['skillTags'] = true;
         $this->skillTags = $skillTags;
         return $this;
     }
@@ -406,7 +385,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setScreening(SubmitScreeningQuesionResultsModel $screening) : self
     {
-        $this->initialized['screening'] = true;
         $this->screening = $screening;
         return $this;
     }
@@ -428,7 +406,6 @@ class SubmitJobOrderCandidateCommand
      */
     public function setCustom(SubmitJobApplicationCustomFieldsModel $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }

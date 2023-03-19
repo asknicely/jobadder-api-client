@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitUserModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class SubmitUserModel
      */
     public function setUserId(int $userId) : self
     {
-        $this->initialized['userId'] = true;
         $this->userId = $userId;
         return $this;
     }
@@ -64,7 +55,6 @@ class SubmitUserModel
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }

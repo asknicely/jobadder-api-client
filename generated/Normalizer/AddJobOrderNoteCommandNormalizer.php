@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,74 +14,68 @@ class AddJobOrderNoteCommandNormalizer implements DenormalizerInterface, Normali
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\AddJobOrderNoteCommand';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\AddJobOrderNoteCommand';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\AddJobOrderNoteCommand();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'type')) {
+            $object->setType($data->{'type'});
         }
-        if (\array_key_exists('type', $data)) {
-            $object->setType($data['type']);
+        if (property_exists($data, 'text')) {
+            $object->setText($data->{'text'});
         }
-        if (\array_key_exists('text', $data)) {
-            $object->setText($data['text']);
-        }
-        if (\array_key_exists('applicationId', $data)) {
+        if (property_exists($data, 'applicationId')) {
             $values = array();
-            foreach ($data['applicationId'] as $value) {
+            foreach ($data->{'applicationId'} as $value) {
                 $values[] = $value;
             }
             $object->setApplicationId($values);
         }
-        if (\array_key_exists('reference', $data)) {
-            $object->setReference($data['reference']);
+        if (property_exists($data, 'reference')) {
+            $object->setReference($data->{'reference'});
         }
-        if (\array_key_exists('createdBy', $data)) {
-            $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], 'Varspool\\JobAdder\\V2\\Model\\SubmitUserModel', 'json', $context));
+        if (property_exists($data, 'createdBy')) {
+            $object->setCreatedBy($this->denormalizer->denormalize($data->{'createdBy'}, 'Varspool\\JobAdder\\V2\\Model\\SubmitUserModel', 'json', $context));
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('type') && null !== $object->getType()) {
-            $data['type'] = $object->getType();
+        $data = new \stdClass();
+        if (null !== $object->getType()) {
+            $data->{'type'} = $object->getType();
         }
-        $data['text'] = $object->getText();
-        if ($object->isInitialized('applicationId') && null !== $object->getApplicationId()) {
+        if (null !== $object->getText()) {
+            $data->{'text'} = $object->getText();
+        }
+        if (null !== $object->getApplicationId()) {
             $values = array();
             foreach ($object->getApplicationId() as $value) {
                 $values[] = $value;
             }
-            $data['applicationId'] = $values;
+            $data->{'applicationId'} = $values;
         }
-        if ($object->isInitialized('reference') && null !== $object->getReference()) {
-            $data['reference'] = $object->getReference();
+        if (null !== $object->getReference()) {
+            $data->{'reference'} = $object->getReference();
         }
-        if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
-            $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
+        if (null !== $object->getCreatedBy()) {
+            $data->{'createdBy'} = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
         }
         return $data;
     }

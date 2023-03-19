@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class InterviewEvaluationModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var UserNameModel
@@ -66,7 +58,6 @@ class InterviewEvaluationModel
      */
     public function setUser(UserNameModel $user) : self
     {
-        $this->initialized['user'] = true;
         $this->user = $user;
         return $this;
     }
@@ -88,7 +79,6 @@ class InterviewEvaluationModel
      */
     public function setContact(ContactNameModel $contact) : self
     {
-        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -110,7 +100,6 @@ class InterviewEvaluationModel
      */
     public function setExpiresAt(\DateTime $expiresAt) : self
     {
-        $this->initialized['expiresAt'] = true;
         $this->expiresAt = $expiresAt;
         return $this;
     }
@@ -132,7 +121,6 @@ class InterviewEvaluationModel
      */
     public function setHasReplied(bool $hasReplied) : self
     {
-        $this->initialized['hasReplied'] = true;
         $this->hasReplied = $hasReplied;
         return $this;
     }
@@ -154,7 +142,6 @@ class InterviewEvaluationModel
      */
     public function setComments(string $comments) : self
     {
-        $this->initialized['comments'] = true;
         $this->comments = $comments;
         return $this;
     }
@@ -176,7 +163,6 @@ class InterviewEvaluationModel
      */
     public function setRating(array $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }

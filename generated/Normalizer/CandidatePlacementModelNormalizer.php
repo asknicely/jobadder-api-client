@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,126 +14,120 @@ class CandidatePlacementModelNormalizer implements DenormalizerInterface, Normal
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\CandidatePlacementModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\CandidatePlacementModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\CandidatePlacementModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'candidateId')) {
+            $object->setCandidateId($data->{'candidateId'});
         }
-        if (\array_key_exists('candidateId', $data)) {
-            $object->setCandidateId($data['candidateId']);
+        if (property_exists($data, 'firstName')) {
+            $object->setFirstName($data->{'firstName'});
         }
-        if (\array_key_exists('firstName', $data)) {
-            $object->setFirstName($data['firstName']);
+        if (property_exists($data, 'lastName')) {
+            $object->setLastName($data->{'lastName'});
         }
-        if (\array_key_exists('lastName', $data)) {
-            $object->setLastName($data['lastName']);
+        if (property_exists($data, 'email')) {
+            $object->setEmail($data->{'email'});
         }
-        if (\array_key_exists('email', $data)) {
-            $object->setEmail($data['email']);
+        if (property_exists($data, 'phone')) {
+            $object->setPhone($data->{'phone'});
         }
-        if (\array_key_exists('phone', $data)) {
-            $object->setPhone($data['phone']);
+        if (property_exists($data, 'mobile')) {
+            $object->setMobile($data->{'mobile'});
         }
-        if (\array_key_exists('mobile', $data)) {
-            $object->setMobile($data['mobile']);
+        if (property_exists($data, 'contactMethod')) {
+            $object->setContactMethod($data->{'contactMethod'});
         }
-        if (\array_key_exists('contactMethod', $data)) {
-            $object->setContactMethod($data['contactMethod']);
+        if (property_exists($data, 'salutation')) {
+            $object->setSalutation($data->{'salutation'});
         }
-        if (\array_key_exists('salutation', $data)) {
-            $object->setSalutation($data['salutation']);
+        if (property_exists($data, 'unsubscribed')) {
+            $object->setUnsubscribed($data->{'unsubscribed'});
         }
-        if (\array_key_exists('unsubscribed', $data)) {
-            $object->setUnsubscribed($data['unsubscribed']);
+        if (property_exists($data, 'address')) {
+            $object->setAddress($this->denormalizer->denormalize($data->{'address'}, 'Varspool\\JobAdder\\V2\\Model\\AddressModel', 'json', $context));
         }
-        if (\array_key_exists('address', $data)) {
-            $object->setAddress($this->denormalizer->denormalize($data['address'], 'Varspool\\JobAdder\\V2\\Model\\AddressModel', 'json', $context));
+        if (property_exists($data, 'status')) {
+            $object->setStatus($this->denormalizer->denormalize($data->{'status'}, 'Varspool\\JobAdder\\V2\\Model\\StatusModel', 'json', $context));
         }
-        if (\array_key_exists('status', $data)) {
-            $object->setStatus($this->denormalizer->denormalize($data['status'], 'Varspool\\JobAdder\\V2\\Model\\StatusModel', 'json', $context));
+        if (property_exists($data, 'rating')) {
+            $object->setRating($data->{'rating'});
         }
-        if (\array_key_exists('rating', $data)) {
-            $object->setRating($data['rating']);
+        if (property_exists($data, 'source')) {
+            $object->setSource($data->{'source'});
         }
-        if (\array_key_exists('source', $data)) {
-            $object->setSource($data['source']);
+        if (property_exists($data, 'seeking')) {
+            $object->setSeeking($data->{'seeking'});
         }
-        if (\array_key_exists('seeking', $data)) {
-            $object->setSeeking($data['seeking']);
-        }
-        if (\array_key_exists('dateOfBirth', $data)) {
-            $object->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', $data['dateOfBirth'])->setTime(0, 0, 0));
+        if (property_exists($data, 'dateOfBirth')) {
+            $object->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', $data->{'dateOfBirth'})->setTime(0, 0, 0));
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        $data['candidateId'] = $object->getCandidateId();
-        if ($object->isInitialized('firstName') && null !== $object->getFirstName()) {
-            $data['firstName'] = $object->getFirstName();
+        $data = new \stdClass();
+        if (null !== $object->getCandidateId()) {
+            $data->{'candidateId'} = $object->getCandidateId();
         }
-        if ($object->isInitialized('lastName') && null !== $object->getLastName()) {
-            $data['lastName'] = $object->getLastName();
+        if (null !== $object->getFirstName()) {
+            $data->{'firstName'} = $object->getFirstName();
         }
-        if ($object->isInitialized('email') && null !== $object->getEmail()) {
-            $data['email'] = $object->getEmail();
+        if (null !== $object->getLastName()) {
+            $data->{'lastName'} = $object->getLastName();
         }
-        if ($object->isInitialized('phone') && null !== $object->getPhone()) {
-            $data['phone'] = $object->getPhone();
+        if (null !== $object->getEmail()) {
+            $data->{'email'} = $object->getEmail();
         }
-        if ($object->isInitialized('mobile') && null !== $object->getMobile()) {
-            $data['mobile'] = $object->getMobile();
+        if (null !== $object->getPhone()) {
+            $data->{'phone'} = $object->getPhone();
         }
-        if ($object->isInitialized('contactMethod') && null !== $object->getContactMethod()) {
-            $data['contactMethod'] = $object->getContactMethod();
+        if (null !== $object->getMobile()) {
+            $data->{'mobile'} = $object->getMobile();
         }
-        if ($object->isInitialized('salutation') && null !== $object->getSalutation()) {
-            $data['salutation'] = $object->getSalutation();
+        if (null !== $object->getContactMethod()) {
+            $data->{'contactMethod'} = $object->getContactMethod();
         }
-        if ($object->isInitialized('unsubscribed') && null !== $object->getUnsubscribed()) {
-            $data['unsubscribed'] = $object->getUnsubscribed();
+        if (null !== $object->getSalutation()) {
+            $data->{'salutation'} = $object->getSalutation();
         }
-        if ($object->isInitialized('address') && null !== $object->getAddress()) {
-            $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
+        if (null !== $object->getUnsubscribed()) {
+            $data->{'unsubscribed'} = $object->getUnsubscribed();
         }
-        if ($object->isInitialized('status') && null !== $object->getStatus()) {
-            $data['status'] = $this->normalizer->normalize($object->getStatus(), 'json', $context);
+        if (null !== $object->getAddress()) {
+            $data->{'address'} = $this->normalizer->normalize($object->getAddress(), 'json', $context);
         }
-        if ($object->isInitialized('rating') && null !== $object->getRating()) {
-            $data['rating'] = $object->getRating();
+        if (null !== $object->getStatus()) {
+            $data->{'status'} = $this->normalizer->normalize($object->getStatus(), 'json', $context);
         }
-        if ($object->isInitialized('source') && null !== $object->getSource()) {
-            $data['source'] = $object->getSource();
+        if (null !== $object->getRating()) {
+            $data->{'rating'} = $object->getRating();
         }
-        if ($object->isInitialized('seeking') && null !== $object->getSeeking()) {
-            $data['seeking'] = $object->getSeeking();
+        if (null !== $object->getSource()) {
+            $data->{'source'} = $object->getSource();
         }
-        if ($object->isInitialized('dateOfBirth') && null !== $object->getDateOfBirth()) {
-            $data['dateOfBirth'] = $object->getDateOfBirth()->format('Y-m-d');
+        if (null !== $object->getSeeking()) {
+            $data->{'seeking'} = $object->getSeeking();
+        }
+        if (null !== $object->getDateOfBirth()) {
+            $data->{'dateOfBirth'} = $object->getDateOfBirth()->format('Y-m-d');
         }
         return $data;
     }

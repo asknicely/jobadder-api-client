@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddNoteCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -97,7 +89,6 @@ class AddNoteCommand
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -119,7 +110,6 @@ class AddNoteCommand
      */
     public function setText(string $text) : self
     {
-        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -141,7 +131,6 @@ class AddNoteCommand
      */
     public function setJobId(array $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -163,7 +152,6 @@ class AddNoteCommand
      */
     public function setRequisitionId(array $requisitionId) : self
     {
-        $this->initialized['requisitionId'] = true;
         $this->requisitionId = $requisitionId;
         return $this;
     }
@@ -185,7 +173,6 @@ class AddNoteCommand
      */
     public function setCandidateId(array $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -207,7 +194,6 @@ class AddNoteCommand
      */
     public function setApplicationId(array $applicationId) : self
     {
-        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -229,7 +215,6 @@ class AddNoteCommand
      */
     public function setPlacementId(array $placementId) : self
     {
-        $this->initialized['placementId'] = true;
         $this->placementId = $placementId;
         return $this;
     }
@@ -251,7 +236,6 @@ class AddNoteCommand
      */
     public function setCompanyId(array $companyId) : self
     {
-        $this->initialized['companyId'] = true;
         $this->companyId = $companyId;
         return $this;
     }
@@ -273,7 +257,6 @@ class AddNoteCommand
      */
     public function setContactId(array $contactId) : self
     {
-        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -295,7 +278,6 @@ class AddNoteCommand
      */
     public function setReference(string $reference) : self
     {
-        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -319,7 +301,6 @@ class AddNoteCommand
     */
     public function setCreatedBy(SubmitUserModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }

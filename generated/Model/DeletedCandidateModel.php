@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class DeletedCandidateModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class DeletedCandidateModel
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -64,7 +55,6 @@ class DeletedCandidateModel
      */
     public function setDeletedAt(\DateTime $deletedAt) : self
     {
-        $this->initialized['deletedAt'] = true;
         $this->deletedAt = $deletedAt;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdPortalFieldModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -66,7 +58,6 @@ class JobAdPortalFieldModel
      */
     public function setFieldId(int $fieldId) : self
     {
-        $this->initialized['fieldId'] = true;
         $this->fieldId = $fieldId;
         return $this;
     }
@@ -88,7 +79,6 @@ class JobAdPortalFieldModel
      */
     public function setFieldName(string $fieldName) : self
     {
-        $this->initialized['fieldName'] = true;
         $this->fieldName = $fieldName;
         return $this;
     }
@@ -110,7 +100,6 @@ class JobAdPortalFieldModel
      */
     public function setValueId(int $valueId) : self
     {
-        $this->initialized['valueId'] = true;
         $this->valueId = $valueId;
         return $this;
     }
@@ -132,7 +121,6 @@ class JobAdPortalFieldModel
      */
     public function setValue(string $value) : self
     {
-        $this->initialized['value'] = true;
         $this->value = $value;
         return $this;
     }
@@ -154,7 +142,6 @@ class JobAdPortalFieldModel
      */
     public function setExternalValue(string $externalValue) : self
     {
-        $this->initialized['externalValue'] = true;
         $this->externalValue = $externalValue;
         return $this;
     }
@@ -176,7 +163,6 @@ class JobAdPortalFieldModel
      */
     public function setFields(array $fields) : self
     {
-        $this->initialized['fields'] = true;
         $this->fields = $fields;
         return $this;
     }

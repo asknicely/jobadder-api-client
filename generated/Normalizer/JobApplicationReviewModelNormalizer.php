@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,66 +14,60 @@ class JobApplicationReviewModelNormalizer implements DenormalizerInterface, Norm
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobApplicationReviewModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobApplicationReviewModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobApplicationReviewModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'stage')) {
+            $object->setStage($data->{'stage'});
         }
-        if (\array_key_exists('stage', $data)) {
-            $object->setStage($data['stage']);
+        if (property_exists($data, 'submittedAt')) {
+            $object->setSubmittedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'submittedAt'}));
         }
-        if (\array_key_exists('submittedAt', $data)) {
-            $object->setSubmittedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['submittedAt']));
+        if (property_exists($data, 'submittedBy')) {
+            $object->setSubmittedBy($this->denormalizer->denormalize($data->{'submittedBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (\array_key_exists('submittedBy', $data)) {
-            $object->setSubmittedBy($this->denormalizer->denormalize($data['submittedBy'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (property_exists($data, 'reviewedAt')) {
+            $object->setReviewedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'reviewedAt'}));
         }
-        if (\array_key_exists('reviewedAt', $data)) {
-            $object->setReviewedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['reviewedAt']));
-        }
-        if (\array_key_exists('reviewedBy', $data)) {
-            $object->setReviewedBy($this->denormalizer->denormalize($data['reviewedBy'], 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
+        if (property_exists($data, 'reviewedBy')) {
+            $object->setReviewedBy($this->denormalizer->denormalize($data->{'reviewedBy'}, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        $data['stage'] = $object->getStage();
-        if ($object->isInitialized('submittedAt') && null !== $object->getSubmittedAt()) {
-            $data['submittedAt'] = $object->getSubmittedAt()->format('Y-m-d\\TH:i:s');
+        $data = new \stdClass();
+        if (null !== $object->getStage()) {
+            $data->{'stage'} = $object->getStage();
         }
-        if ($object->isInitialized('submittedBy') && null !== $object->getSubmittedBy()) {
-            $data['submittedBy'] = $this->normalizer->normalize($object->getSubmittedBy(), 'json', $context);
+        if (null !== $object->getSubmittedAt()) {
+            $data->{'submittedAt'} = $object->getSubmittedAt()->format('Y-m-d\\TH:i:s');
         }
-        if ($object->isInitialized('reviewedAt') && null !== $object->getReviewedAt()) {
-            $data['reviewedAt'] = $object->getReviewedAt()->format('Y-m-d\\TH:i:s');
+        if (null !== $object->getSubmittedBy()) {
+            $data->{'submittedBy'} = $this->normalizer->normalize($object->getSubmittedBy(), 'json', $context);
         }
-        if ($object->isInitialized('reviewedBy') && null !== $object->getReviewedBy()) {
-            $data['reviewedBy'] = $this->normalizer->normalize($object->getReviewedBy(), 'json', $context);
+        if (null !== $object->getReviewedAt()) {
+            $data->{'reviewedAt'} = $object->getReviewedAt()->format('Y-m-d\\TH:i:s');
+        }
+        if (null !== $object->getReviewedBy()) {
+            $data->{'reviewedBy'} = $this->normalizer->normalize($object->getReviewedBy(), 'json', $context);
         }
         return $data;
     }

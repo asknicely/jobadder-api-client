@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class HeadCandidatePhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class HeadCandidatePhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $candidateId;
     /**
@@ -19,7 +19,7 @@ class HeadCandidatePhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
         $this->candidateId = $candidateId;
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'HEAD';
@@ -42,8 +42,8 @@ class HeadCandidatePhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(array('w', 'h'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('w', array('int'));
-        $optionsResolver->addAllowedTypes('h', array('int'));
+        $optionsResolver->setAllowedTypes('w', array('int'));
+        $optionsResolver->setAllowedTypes('h', array('int'));
         return $optionsResolver;
     }
     /**
@@ -53,19 +53,13 @@ class HeadCandidatePhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoi
      *
      * @return null
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\HeadCandidatePhotoNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\HeadCandidatePhotoNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

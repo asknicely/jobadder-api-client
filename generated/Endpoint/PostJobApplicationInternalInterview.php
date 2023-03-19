@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class PostJobApplicationInternalInterview extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class PostJobApplicationInternalInterview extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $applicationId;
     /**
@@ -16,7 +16,7 @@ class PostJobApplicationInternalInterview extends \Varspool\JobAdder\V2\Runtime\
         $this->applicationId = $applicationId;
         $this->body = $command;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -41,22 +41,16 @@ class PostJobApplicationInternalInterview extends \Varspool\JobAdder\V2\Runtime\
      *
      * @return null|\Varspool\JobAdder\V2\Model\InterviewModel
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (201 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\InterviewModel', 'json');
         }
         if (400 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\PostJobApplicationInternalInterviewBadRequestException($response);
+            throw new \Varspool\JobAdder\V2\Exception\PostJobApplicationInternalInterviewBadRequestException();
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\PostJobApplicationInternalInterviewNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\PostJobApplicationInternalInterviewNotFoundException();
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

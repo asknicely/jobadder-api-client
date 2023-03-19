@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderSalaryRangeModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -60,7 +52,6 @@ class JobOrderSalaryRangeModel
      */
     public function setRatePer(string $ratePer) : self
     {
-        $this->initialized['ratePer'] = true;
         $this->ratePer = $ratePer;
         return $this;
     }
@@ -82,7 +73,6 @@ class JobOrderSalaryRangeModel
      */
     public function setRateLow(float $rateLow) : self
     {
-        $this->initialized['rateLow'] = true;
         $this->rateLow = $rateLow;
         return $this;
     }
@@ -104,7 +94,6 @@ class JobOrderSalaryRangeModel
      */
     public function setRateHigh(float $rateHigh) : self
     {
-        $this->initialized['rateHigh'] = true;
         $this->rateHigh = $rateHigh;
         return $this;
     }
@@ -126,7 +115,6 @@ class JobOrderSalaryRangeModel
      */
     public function setCurrency(string $currency) : self
     {
-        $this->initialized['currency'] = true;
         $this->currency = $currency;
         return $this;
     }
@@ -148,7 +136,6 @@ class JobOrderSalaryRangeModel
      */
     public function setTimePerWeek(float $timePerWeek) : self
     {
-        $this->initialized['timePerWeek'] = true;
         $this->timePerWeek = $timePerWeek;
         return $this;
     }

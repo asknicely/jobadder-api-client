@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateCompanyCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -96,7 +88,6 @@ class UpdateCompanyCommand
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -118,7 +109,6 @@ class UpdateCompanyCommand
      */
     public function setMainContactId(int $mainContactId) : self
     {
-        $this->initialized['mainContactId'] = true;
         $this->mainContactId = $mainContactId;
         return $this;
     }
@@ -140,7 +130,6 @@ class UpdateCompanyCommand
      */
     public function setPrimaryAddressId(string $primaryAddressId) : self
     {
-        $this->initialized['primaryAddressId'] = true;
         $this->primaryAddressId = $primaryAddressId;
         return $this;
     }
@@ -162,7 +151,6 @@ class UpdateCompanyCommand
      */
     public function setParentCompanyId(int $parentCompanyId) : self
     {
-        $this->initialized['parentCompanyId'] = true;
         $this->parentCompanyId = $parentCompanyId;
         return $this;
     }
@@ -184,7 +172,6 @@ class UpdateCompanyCommand
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -206,7 +193,6 @@ class UpdateCompanyCommand
      */
     public function setLegalName(string $legalName) : self
     {
-        $this->initialized['legalName'] = true;
         $this->legalName = $legalName;
         return $this;
     }
@@ -215,7 +201,7 @@ class UpdateCompanyCommand
      *
      * @return string[]
      */
-    public function getSocial() : iterable
+    public function getSocial() : \ArrayObject
     {
         return $this->social;
     }
@@ -226,9 +212,8 @@ class UpdateCompanyCommand
      *
      * @return self
      */
-    public function setSocial(iterable $social) : self
+    public function setSocial(\ArrayObject $social) : self
     {
-        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -250,7 +235,6 @@ class UpdateCompanyCommand
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -272,7 +256,6 @@ class UpdateCompanyCommand
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -294,7 +277,6 @@ class UpdateCompanyCommand
      */
     public function setOwnerUserId(int $ownerUserId) : self
     {
-        $this->initialized['ownerUserId'] = true;
         $this->ownerUserId = $ownerUserId;
         return $this;
     }
@@ -316,7 +298,6 @@ class UpdateCompanyCommand
      */
     public function setRecruiterUserId(array $recruiterUserId) : self
     {
-        $this->initialized['recruiterUserId'] = true;
         $this->recruiterUserId = $recruiterUserId;
         return $this;
     }

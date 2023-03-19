@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationStatusByWorkflowModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Name of the workflow stage
      *
      * @var string
@@ -60,7 +52,6 @@ class JobApplicationStatusByWorkflowModel
      */
     public function setStage(string $stage) : self
     {
-        $this->initialized['stage'] = true;
         $this->stage = $stage;
         return $this;
     }
@@ -82,7 +73,6 @@ class JobApplicationStatusByWorkflowModel
      */
     public function setStageIndex(int $stageIndex) : self
     {
-        $this->initialized['stageIndex'] = true;
         $this->stageIndex = $stageIndex;
         return $this;
     }
@@ -104,7 +94,6 @@ class JobApplicationStatusByWorkflowModel
      */
     public function setStep(int $step) : self
     {
-        $this->initialized['step'] = true;
         $this->step = $step;
         return $this;
     }
@@ -126,7 +115,6 @@ class JobApplicationStatusByWorkflowModel
      */
     public function setProgress(string $progress) : self
     {
-        $this->initialized['progress'] = true;
         $this->progress = $progress;
         return $this;
     }
@@ -148,7 +136,6 @@ class JobApplicationStatusByWorkflowModel
      */
     public function setStatus(array $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }

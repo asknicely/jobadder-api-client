@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityDateValueDetailModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -48,7 +40,6 @@ class ActivityDateValueDetailModel
      */
     public function setQuestion(string $question) : self
     {
-        $this->initialized['question'] = true;
         $this->question = $question;
         return $this;
     }
@@ -70,7 +61,6 @@ class ActivityDateValueDetailModel
      */
     public function setStartDate(\DateTime $startDate) : self
     {
-        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }
@@ -92,7 +82,6 @@ class ActivityDateValueDetailModel
      */
     public function setEndDate(\DateTime $endDate) : self
     {
-        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }

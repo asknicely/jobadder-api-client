@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class WebhookRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -108,7 +100,6 @@ class WebhookRepresentation
      */
     public function setWebhookId(string $webhookId) : self
     {
-        $this->initialized['webhookId'] = true;
         $this->webhookId = $webhookId;
         return $this;
     }
@@ -130,7 +121,6 @@ class WebhookRepresentation
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -152,7 +142,6 @@ class WebhookRepresentation
      */
     public function setStatus(string $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -174,7 +163,6 @@ class WebhookRepresentation
      */
     public function setUrl(string $url) : self
     {
-        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -196,7 +184,6 @@ class WebhookRepresentation
      */
     public function setEvents(array $events) : self
     {
-        $this->initialized['events'] = true;
         $this->events = $events;
         return $this;
     }
@@ -218,7 +205,6 @@ class WebhookRepresentation
      */
     public function setEventFilters(WebhookEventFilterModel $eventFilters) : self
     {
-        $this->initialized['eventFilters'] = true;
         $this->eventFilters = $eventFilters;
         return $this;
     }
@@ -240,7 +226,6 @@ class WebhookRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -262,7 +247,6 @@ class WebhookRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -284,7 +268,6 @@ class WebhookRepresentation
      */
     public function setEnabledAt(\DateTime $enabledAt) : self
     {
-        $this->initialized['enabledAt'] = true;
         $this->enabledAt = $enabledAt;
         return $this;
     }
@@ -306,7 +289,6 @@ class WebhookRepresentation
      */
     public function setDisabledAt(\DateTime $disabledAt) : self
     {
-        $this->initialized['disabledAt'] = true;
         $this->disabledAt = $disabledAt;
         return $this;
     }
@@ -328,7 +310,6 @@ class WebhookRepresentation
      */
     public function setSuspendedAt(\DateTime $suspendedAt) : self
     {
-        $this->initialized['suspendedAt'] = true;
         $this->suspendedAt = $suspendedAt;
         return $this;
     }
@@ -350,7 +331,6 @@ class WebhookRepresentation
      */
     public function setFailedAt(\DateTime $failedAt) : self
     {
-        $this->initialized['failedAt'] = true;
         $this->failedAt = $failedAt;
         return $this;
     }
@@ -372,7 +352,6 @@ class WebhookRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

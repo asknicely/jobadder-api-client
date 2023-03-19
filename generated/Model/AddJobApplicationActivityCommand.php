@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddJobApplicationActivityCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -48,7 +40,6 @@ class AddJobApplicationActivityCommand
      */
     public function setActivitySettingId(int $activitySettingId) : self
     {
-        $this->initialized['activitySettingId'] = true;
         $this->activitySettingId = $activitySettingId;
         return $this;
     }
@@ -70,7 +61,6 @@ class AddJobApplicationActivityCommand
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -92,7 +82,6 @@ class AddJobApplicationActivityCommand
      */
     public function setAnswers(ActivityAnswerListModel $answers) : self
     {
-        $this->initialized['answers'] = true;
         $this->answers = $answers;
         return $this;
     }

@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,62 +14,54 @@ class JobOrderLinksNormalizer implements DenormalizerInterface, NormalizerInterf
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderLinks';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderLinks';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderLinks();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'self')) {
+            $object->setSelf($data->{'self'});
         }
-        if (\array_key_exists('self', $data)) {
-            $object->setSelf($data['self']);
+        if (property_exists($data, 'attachments')) {
+            $object->setAttachments($data->{'attachments'});
         }
-        if (\array_key_exists('attachments', $data)) {
-            $object->setAttachments($data['attachments']);
+        if (property_exists($data, 'applications')) {
+            $object->setApplications($data->{'applications'});
         }
-        if (\array_key_exists('applications', $data)) {
-            $object->setApplications($data['applications']);
-        }
-        if (\array_key_exists('notes', $data)) {
-            $object->setNotes($data['notes']);
+        if (property_exists($data, 'notes')) {
+            $object->setNotes($data->{'notes'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('self') && null !== $object->getSelf()) {
-            $data['self'] = $object->getSelf();
+        $data = new \stdClass();
+        if (null !== $object->getSelf()) {
+            $data->{'self'} = $object->getSelf();
         }
-        if ($object->isInitialized('attachments') && null !== $object->getAttachments()) {
-            $data['attachments'] = $object->getAttachments();
+        if (null !== $object->getAttachments()) {
+            $data->{'attachments'} = $object->getAttachments();
         }
-        if ($object->isInitialized('applications') && null !== $object->getApplications()) {
-            $data['applications'] = $object->getApplications();
+        if (null !== $object->getApplications()) {
+            $data->{'applications'} = $object->getApplications();
         }
-        if ($object->isInitialized('notes') && null !== $object->getNotes()) {
-            $data['notes'] = $object->getNotes();
+        if (null !== $object->getNotes()) {
+            $data->{'notes'} = $object->getNotes();
         }
         return $data;
     }

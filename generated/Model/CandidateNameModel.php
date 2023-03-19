@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateNameModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Candidate Id
      *
      * @var int
@@ -114,7 +106,6 @@ class CandidateNameModel
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -136,7 +127,6 @@ class CandidateNameModel
      */
     public function setFirstName(string $firstName) : self
     {
-        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -158,7 +148,6 @@ class CandidateNameModel
      */
     public function setLastName(string $lastName) : self
     {
-        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -180,7 +169,6 @@ class CandidateNameModel
      */
     public function setEmail(string $email) : self
     {
-        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -202,7 +190,6 @@ class CandidateNameModel
      */
     public function setPhone(string $phone) : self
     {
-        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -224,7 +211,6 @@ class CandidateNameModel
      */
     public function setMobile(string $mobile) : self
     {
-        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -246,7 +232,6 @@ class CandidateNameModel
      */
     public function setContactMethod(string $contactMethod) : self
     {
-        $this->initialized['contactMethod'] = true;
         $this->contactMethod = $contactMethod;
         return $this;
     }
@@ -268,7 +253,6 @@ class CandidateNameModel
      */
     public function setSalutation(string $salutation) : self
     {
-        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -290,7 +274,6 @@ class CandidateNameModel
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
-        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -312,7 +295,6 @@ class CandidateNameModel
      */
     public function setAddress(AddressModel $address) : self
     {
-        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -334,7 +316,6 @@ class CandidateNameModel
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -356,7 +337,6 @@ class CandidateNameModel
      */
     public function setRating(string $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -378,7 +358,6 @@ class CandidateNameModel
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -400,7 +379,6 @@ class CandidateNameModel
      */
     public function setSeeking(string $seeking) : self
     {
-        $this->initialized['seeking'] = true;
         $this->seeking = $seeking;
         return $this;
     }

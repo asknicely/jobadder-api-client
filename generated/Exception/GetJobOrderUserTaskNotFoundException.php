@@ -2,28 +2,16 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class GetJobOrderUserTaskNotFoundException extends NotFoundException
+class GetJobOrderUserTaskNotFoundException extends \RuntimeException implements ClientException
 {
-    /**
-     * @var \Varspool\JobAdder\V2\Model\ErrorModel
-     */
     private $errorModel;
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    private $response;
-    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel, \Psr\Http\Message\ResponseInterface $response)
+    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel)
     {
-        parent::__construct('Requested job user task was not found');
+        parent::__construct('Requested job user task was not found', 404);
         $this->errorModel = $errorModel;
-        $this->response = $response;
     }
-    public function getErrorModel() : \Varspool\JobAdder\V2\Model\ErrorModel
+    public function getErrorModel()
     {
         return $this->errorModel;
-    }
-    public function getResponse() : \Psr\Http\Message\ResponseInterface
-    {
-        return $this->response;
     }
 }

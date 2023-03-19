@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementRateModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -72,7 +64,6 @@ class PlacementRateModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -94,7 +85,6 @@ class PlacementRateModel
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -116,7 +106,6 @@ class PlacementRateModel
      */
     public function setDefault(bool $default) : self
     {
-        $this->initialized['default'] = true;
         $this->default = $default;
         return $this;
     }
@@ -138,7 +127,6 @@ class PlacementRateModel
      */
     public function setDisplayIndex(int $displayIndex) : self
     {
-        $this->initialized['displayIndex'] = true;
         $this->displayIndex = $displayIndex;
         return $this;
     }
@@ -160,7 +148,6 @@ class PlacementRateModel
      */
     public function setPayRate(float $payRate) : self
     {
-        $this->initialized['payRate'] = true;
         $this->payRate = $payRate;
         return $this;
     }
@@ -182,7 +169,6 @@ class PlacementRateModel
      */
     public function setChargeRate(float $chargeRate) : self
     {
-        $this->initialized['chargeRate'] = true;
         $this->chargeRate = $chargeRate;
         return $this;
     }
@@ -204,7 +190,6 @@ class PlacementRateModel
      */
     public function setChargeCurrency(string $chargeCurrency) : self
     {
-        $this->initialized['chargeCurrency'] = true;
         $this->chargeCurrency = $chargeCurrency;
         return $this;
     }

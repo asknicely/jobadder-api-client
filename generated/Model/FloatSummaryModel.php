@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class FloatSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -78,7 +70,6 @@ class FloatSummaryModel
      */
     public function setFloatId(int $floatId) : self
     {
-        $this->initialized['floatId'] = true;
         $this->floatId = $floatId;
         return $this;
     }
@@ -100,7 +91,6 @@ class FloatSummaryModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -122,7 +112,6 @@ class FloatSummaryModel
      */
     public function setCandidate(CandidateSummaryModel $candidate) : self
     {
-        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -144,7 +133,6 @@ class FloatSummaryModel
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -166,7 +154,6 @@ class FloatSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -188,7 +175,6 @@ class FloatSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -210,7 +196,6 @@ class FloatSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -232,7 +217,6 @@ class FloatSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

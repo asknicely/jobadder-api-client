@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ReviewRejectJobApplicationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Hiring manager contact rejecting the applicant
      *
      * @var int
@@ -42,7 +34,6 @@ class ReviewRejectJobApplicationCommand
      */
     public function setContactId(int $contactId) : self
     {
-        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -64,7 +55,6 @@ class ReviewRejectJobApplicationCommand
      */
     public function setReason(string $reason) : self
     {
-        $this->initialized['reason'] = true;
         $this->reason = $reason;
         return $this;
     }

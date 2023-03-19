@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitInterviewEvaluationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -42,7 +34,6 @@ class SubmitInterviewEvaluationCommand
      */
     public function setComments(string $comments) : self
     {
-        $this->initialized['comments'] = true;
         $this->comments = $comments;
         return $this;
     }
@@ -64,7 +55,6 @@ class SubmitInterviewEvaluationCommand
      */
     public function setRating(array $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }

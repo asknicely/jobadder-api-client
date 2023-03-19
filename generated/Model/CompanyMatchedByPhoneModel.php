@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyMatchedByPhoneModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var MatchedPhoneNumberModel
@@ -60,7 +52,6 @@ class CompanyMatchedByPhoneModel
      */
     public function setMatch(MatchedPhoneNumberModel $match) : self
     {
-        $this->initialized['match'] = true;
         $this->match = $match;
         return $this;
     }
@@ -82,7 +73,6 @@ class CompanyMatchedByPhoneModel
      */
     public function setCompanyId(int $companyId) : self
     {
-        $this->initialized['companyId'] = true;
         $this->companyId = $companyId;
         return $this;
     }
@@ -104,7 +94,6 @@ class CompanyMatchedByPhoneModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -126,7 +115,6 @@ class CompanyMatchedByPhoneModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -148,7 +136,6 @@ class CompanyMatchedByPhoneModel
      */
     public function setLastNoteAt(\DateTime $lastNoteAt) : self
     {
-        $this->initialized['lastNoteAt'] = true;
         $this->lastNoteAt = $lastNoteAt;
         return $this;
     }

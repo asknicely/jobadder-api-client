@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderWorkShiftModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -48,7 +40,6 @@ class JobOrderWorkShiftModel
      */
     public function setStartTime(string $startTime) : self
     {
-        $this->initialized['startTime'] = true;
         $this->startTime = $startTime;
         return $this;
     }
@@ -70,7 +61,6 @@ class JobOrderWorkShiftModel
      */
     public function setEndTime(string $endTime) : self
     {
-        $this->initialized['endTime'] = true;
         $this->endTime = $endTime;
         return $this;
     }
@@ -92,7 +82,6 @@ class JobOrderWorkShiftModel
      */
     public function setWorkDays(array $workDays) : self
     {
-        $this->initialized['workDays'] = true;
         $this->workDays = $workDays;
         return $this;
     }

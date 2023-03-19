@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddCompanyWorkflowCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Approvers for this workflow. Only the specified workflow stages will be updated, each stageIndex can be specified once.
      *
      * @var SubmitCompanyWorkflowApproverModel[]
@@ -42,7 +34,6 @@ class AddCompanyWorkflowCommand
      */
     public function setApprovers(array $approvers) : self
     {
-        $this->initialized['approvers'] = true;
         $this->approvers = $approvers;
         return $this;
     }
@@ -64,7 +55,6 @@ class AddCompanyWorkflowCommand
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }

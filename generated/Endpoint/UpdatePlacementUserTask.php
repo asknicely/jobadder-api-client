@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class UpdatePlacementUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class UpdatePlacementUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     protected $placementId;
     protected $taskId;
@@ -19,7 +19,7 @@ class UpdatePlacementUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseE
         $this->taskId = $taskId;
         $this->body = $command;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'PUT';
@@ -44,10 +44,8 @@ class UpdatePlacementUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseE
      *
      * @return null|\Varspool\JobAdder\V2\Model\PlacementUserTaskModel
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return null;
         }
@@ -55,14 +53,10 @@ class UpdatePlacementUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseE
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\PlacementUserTaskModel', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\UpdatePlacementUserTaskNotFoundException($response);
+            throw new \Varspool\JobAdder\V2\Exception\UpdatePlacementUserTaskNotFoundException();
         }
         if (422 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\UpdatePlacementUserTaskUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
+            throw new \Varspool\JobAdder\V2\Exception\UpdatePlacementUserTaskUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

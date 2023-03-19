@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationLinks
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -54,7 +46,6 @@ class JobApplicationLinks
      */
     public function setSelf(string $self) : self
     {
-        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -76,7 +67,6 @@ class JobApplicationLinks
      */
     public function setAttachments(string $attachments) : self
     {
-        $this->initialized['attachments'] = true;
         $this->attachments = $attachments;
         return $this;
     }
@@ -98,7 +88,6 @@ class JobApplicationLinks
      */
     public function setResume(string $resume) : self
     {
-        $this->initialized['resume'] = true;
         $this->resume = $resume;
         return $this;
     }
@@ -120,7 +109,6 @@ class JobApplicationLinks
      */
     public function setCoverLetter(string $coverLetter) : self
     {
-        $this->initialized['coverLetter'] = true;
         $this->coverLetter = $coverLetter;
         return $this;
     }

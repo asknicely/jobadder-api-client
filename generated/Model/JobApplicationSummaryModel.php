@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -126,7 +118,6 @@ class JobApplicationSummaryModel
      */
     public function setApplicationId(int $applicationId) : self
     {
-        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -148,7 +139,6 @@ class JobApplicationSummaryModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -170,7 +160,6 @@ class JobApplicationSummaryModel
      */
     public function setJobReference(string $jobReference) : self
     {
-        $this->initialized['jobReference'] = true;
         $this->jobReference = $jobReference;
         return $this;
     }
@@ -192,7 +181,6 @@ class JobApplicationSummaryModel
      */
     public function setManual(bool $manual) : self
     {
-        $this->initialized['manual'] = true;
         $this->manual = $manual;
         return $this;
     }
@@ -214,7 +202,6 @@ class JobApplicationSummaryModel
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -236,7 +223,6 @@ class JobApplicationSummaryModel
      */
     public function setRating(int $rating) : self
     {
-        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -258,7 +244,6 @@ class JobApplicationSummaryModel
      */
     public function setStatus(JobApplicationStatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -280,7 +265,6 @@ class JobApplicationSummaryModel
      */
     public function setReview(JobApplicationReviewModel $review) : self
     {
-        $this->initialized['review'] = true;
         $this->review = $review;
         return $this;
     }
@@ -302,7 +286,6 @@ class JobApplicationSummaryModel
      */
     public function setCandidate(CandidateNameModel $candidate) : self
     {
-        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -324,7 +307,6 @@ class JobApplicationSummaryModel
      */
     public function setJob(JobOrderTitleModel $job) : self
     {
-        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -346,7 +328,6 @@ class JobApplicationSummaryModel
      */
     public function setJobAd(JobAdSummaryModel $jobAd) : self
     {
-        $this->initialized['jobAd'] = true;
         $this->jobAd = $jobAd;
         return $this;
     }
@@ -368,7 +349,6 @@ class JobApplicationSummaryModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -390,7 +370,6 @@ class JobApplicationSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -412,7 +391,6 @@ class JobApplicationSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -434,7 +412,6 @@ class JobApplicationSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -456,7 +433,6 @@ class JobApplicationSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

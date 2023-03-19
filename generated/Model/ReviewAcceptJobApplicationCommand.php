@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ReviewAcceptJobApplicationCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Hiring manager contact accepting the applicant
      *
      * @var int
@@ -42,7 +34,6 @@ class ReviewAcceptJobApplicationCommand
      */
     public function setContactId(int $contactId) : self
     {
-        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -64,7 +55,6 @@ class ReviewAcceptJobApplicationCommand
      */
     public function setMessage(string $message) : self
     {
-        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }

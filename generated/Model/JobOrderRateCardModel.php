@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderRateCardModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class JobOrderRateCardModel
      */
     public function setJobOrderId(int $jobOrderId) : self
     {
-        $this->initialized['jobOrderId'] = true;
         $this->jobOrderId = $jobOrderId;
         return $this;
     }
@@ -64,7 +55,6 @@ class JobOrderRateCardModel
      */
     public function setRateCard(string $rateCard) : self
     {
-        $this->initialized['rateCard'] = true;
         $this->rateCard = $rateCard;
         return $this;
     }

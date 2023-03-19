@@ -2,28 +2,16 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class FindCandidatesPayrollBillingsBadRequestException extends BadRequestException
+class FindCandidatesPayrollBillingsBadRequestException extends \RuntimeException implements ClientException
 {
-    /**
-     * @var \Varspool\JobAdder\V2\Model\ErrorModel
-     */
     private $errorModel;
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    private $response;
-    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel, \Psr\Http\Message\ResponseInterface $response)
+    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel)
     {
-        parent::__construct('Requested list of candidates payroll billing exceeds the limit of 500 records');
+        parent::__construct('Requested list of candidates payroll billing exceeds the limit of 500 records', 400);
         $this->errorModel = $errorModel;
-        $this->response = $response;
     }
-    public function getErrorModel() : \Varspool\JobAdder\V2\Model\ErrorModel
+    public function getErrorModel()
     {
         return $this->errorModel;
-    }
-    public function getResponse() : \Psr\Http\Message\ResponseInterface
-    {
-        return $this->response;
     }
 }

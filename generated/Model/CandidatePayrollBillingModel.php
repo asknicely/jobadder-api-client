@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidatePayrollBillingModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Candidate Id
      *
      * @var int
@@ -60,7 +52,6 @@ class CandidatePayrollBillingModel
      */
     public function setCandidateId(int $candidateId) : self
     {
-        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -82,7 +73,6 @@ class CandidatePayrollBillingModel
      */
     public function setExternalCandidateId(string $externalCandidateId) : self
     {
-        $this->initialized['externalCandidateId'] = true;
         $this->externalCandidateId = $externalCandidateId;
         return $this;
     }
@@ -104,7 +94,6 @@ class CandidatePayrollBillingModel
      */
     public function setOffice(string $office) : self
     {
-        $this->initialized['office'] = true;
         $this->office = $office;
         return $this;
     }
@@ -126,7 +115,6 @@ class CandidatePayrollBillingModel
      */
     public function setPosition(string $position) : self
     {
-        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -148,7 +136,6 @@ class CandidatePayrollBillingModel
      */
     public function setSkillGroup(string $skillGroup) : self
     {
-        $this->initialized['skillGroup'] = true;
         $this->skillGroup = $skillGroup;
         return $this;
     }

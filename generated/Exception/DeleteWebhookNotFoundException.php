@@ -2,19 +2,10 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class DeleteWebhookNotFoundException extends NotFoundException
+class DeleteWebhookNotFoundException extends \RuntimeException implements ClientException
 {
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    private $response;
-    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
+    public function __construct()
     {
-        parent::__construct('Webhook was not found');
-        $this->response = $response;
-    }
-    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
-    {
-        return $this->response;
+        parent::__construct('Webhook was not found', 404);
     }
 }

@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,56 +14,48 @@ class NoteTypeDefaultModelNormalizer implements DenormalizerInterface, Normalize
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\NoteTypeDefaultModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\NoteTypeDefaultModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\NoteTypeDefaultModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'note')) {
+            $object->setNote($data->{'note'});
         }
-        if (\array_key_exists('note', $data)) {
-            $object->setNote($data['note']);
+        if (property_exists($data, 'email')) {
+            $object->setEmail($data->{'email'});
         }
-        if (\array_key_exists('email', $data)) {
-            $object->setEmail($data['email']);
-        }
-        if (\array_key_exists('sms', $data)) {
-            $object->setSms($data['sms']);
+        if (property_exists($data, 'sms')) {
+            $object->setSms($data->{'sms'});
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        if ($object->isInitialized('note') && null !== $object->getNote()) {
-            $data['note'] = $object->getNote();
+        $data = new \stdClass();
+        if (null !== $object->getNote()) {
+            $data->{'note'} = $object->getNote();
         }
-        if ($object->isInitialized('email') && null !== $object->getEmail()) {
-            $data['email'] = $object->getEmail();
+        if (null !== $object->getEmail()) {
+            $data->{'email'} = $object->getEmail();
         }
-        if ($object->isInitialized('sms') && null !== $object->getSms()) {
-            $data['sms'] = $object->getSms();
+        if (null !== $object->getSms()) {
+            $data->{'sms'} = $object->getSms();
         }
         return $data;
     }

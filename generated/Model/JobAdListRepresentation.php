@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdListRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var JobAdSummaryModel[]
@@ -48,7 +40,6 @@ class JobAdListRepresentation
      */
     public function setItems(array $items) : self
     {
-        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }
@@ -70,7 +61,6 @@ class JobAdListRepresentation
      */
     public function setTotalCount(int $totalCount) : self
     {
-        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
         return $this;
     }
@@ -92,7 +82,6 @@ class JobAdListRepresentation
      */
     public function setLinks(PageLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

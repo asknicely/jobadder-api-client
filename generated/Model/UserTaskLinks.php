@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserTaskLinks
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -42,7 +34,6 @@ class UserTaskLinks
      */
     public function setSelf(string $self) : self
     {
-        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -64,7 +55,6 @@ class UserTaskLinks
      */
     public function setNote(string $note) : self
     {
-        $this->initialized['note'] = true;
         $this->note = $note;
         return $this;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationStatusModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -72,7 +64,6 @@ class JobApplicationStatusModel
      */
     public function setStatusId(int $statusId) : self
     {
-        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -94,7 +85,6 @@ class JobApplicationStatusModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -116,7 +106,6 @@ class JobApplicationStatusModel
      */
     public function setActive(bool $active) : self
     {
-        $this->initialized['active'] = true;
         $this->active = $active;
         return $this;
     }
@@ -138,7 +127,6 @@ class JobApplicationStatusModel
      */
     public function setRejected(bool $rejected) : self
     {
-        $this->initialized['rejected'] = true;
         $this->rejected = $rejected;
         return $this;
     }
@@ -160,7 +148,6 @@ class JobApplicationStatusModel
      */
     public function setDefault(bool $default) : self
     {
-        $this->initialized['default'] = true;
         $this->default = $default;
         return $this;
     }
@@ -182,7 +169,6 @@ class JobApplicationStatusModel
      */
     public function setDefaultRejected(bool $defaultRejected) : self
     {
-        $this->initialized['defaultRejected'] = true;
         $this->defaultRejected = $defaultRejected;
         return $this;
     }
@@ -204,7 +190,6 @@ class JobApplicationStatusModel
      */
     public function setWorkflow(JobApplicationWorkflowModel $workflow) : self
     {
-        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
         return $this;
     }

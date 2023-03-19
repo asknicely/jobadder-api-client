@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class FloatRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -102,7 +94,6 @@ class FloatRepresentation
      */
     public function setFloatId(int $floatId) : self
     {
-        $this->initialized['floatId'] = true;
         $this->floatId = $floatId;
         return $this;
     }
@@ -124,7 +115,6 @@ class FloatRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -146,7 +136,6 @@ class FloatRepresentation
      */
     public function setCandidate(CandidateSummaryModel $candidate) : self
     {
-        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -168,7 +157,6 @@ class FloatRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -190,7 +178,6 @@ class FloatRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -212,7 +199,6 @@ class FloatRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -234,7 +220,6 @@ class FloatRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -256,7 +241,6 @@ class FloatRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -278,7 +262,6 @@ class FloatRepresentation
      */
     public function setCandidateSummary(string $candidateSummary) : self
     {
-        $this->initialized['candidateSummary'] = true;
         $this->candidateSummary = $candidateSummary;
         return $this;
     }
@@ -300,7 +283,6 @@ class FloatRepresentation
      */
     public function setContacts(array $contacts) : self
     {
-        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -322,7 +304,6 @@ class FloatRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -344,7 +325,6 @@ class FloatRepresentation
      */
     public function setLinks(FloatLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

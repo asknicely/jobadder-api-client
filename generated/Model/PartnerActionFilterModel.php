@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PartnerActionFilterModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Action is available to admin users only
      *
      * @var bool
@@ -48,7 +40,6 @@ class PartnerActionFilterModel
      */
     public function setAdminOnly(bool $adminOnly) : self
     {
-        $this->initialized['adminOnly'] = true;
         $this->adminOnly = $adminOnly;
         return $this;
     }
@@ -70,7 +61,6 @@ class PartnerActionFilterModel
      */
     public function setApprovedOnly(bool $approvedOnly) : self
     {
-        $this->initialized['approvedOnly'] = true;
         $this->approvedOnly = $approvedOnly;
         return $this;
     }
@@ -92,7 +82,6 @@ class PartnerActionFilterModel
      */
     public function setStatus(PartnerActionStatusFilterModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }

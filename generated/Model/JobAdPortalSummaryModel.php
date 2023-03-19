@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdPortalSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Classed as a hot job
      *
      * @var bool
@@ -48,7 +40,6 @@ class JobAdPortalSummaryModel
      */
     public function setHotJob(bool $hotJob) : self
     {
-        $this->initialized['hotJob'] = true;
         $this->hotJob = $hotJob;
         return $this;
     }
@@ -70,7 +61,6 @@ class JobAdPortalSummaryModel
      */
     public function setSalary(JobAdPortalSalaryModel $salary) : self
     {
-        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -92,7 +82,6 @@ class JobAdPortalSummaryModel
      */
     public function setTemplate(string $template) : self
     {
-        $this->initialized['template'] = true;
         $this->template = $template;
         return $this;
     }

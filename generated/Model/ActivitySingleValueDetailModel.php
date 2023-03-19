@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivitySingleValueDetailModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -42,7 +34,6 @@ class ActivitySingleValueDetailModel
      */
     public function setQuestion(string $question) : self
     {
-        $this->initialized['question'] = true;
         $this->question = $question;
         return $this;
     }
@@ -64,7 +55,6 @@ class ActivitySingleValueDetailModel
      */
     public function setAnswer(string $answer) : self
     {
-        $this->initialized['answer'] = true;
         $this->answer = $answer;
         return $this;
     }

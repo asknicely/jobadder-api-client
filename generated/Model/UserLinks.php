@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UserLinks
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -54,7 +46,6 @@ class UserLinks
      */
     public function setSelf(string $self) : self
     {
-        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -76,7 +67,6 @@ class UserLinks
      */
     public function setPhoto(string $photo) : self
     {
-        $this->initialized['photo'] = true;
         $this->photo = $photo;
         return $this;
     }
@@ -98,7 +88,6 @@ class UserLinks
      */
     public function setOffice(string $office) : self
     {
-        $this->initialized['office'] = true;
         $this->office = $office;
         return $this;
     }
@@ -120,7 +109,6 @@ class UserLinks
      */
     public function setUserGroups(string $userGroups) : self
     {
-        $this->initialized['userGroups'] = true;
         $this->userGroups = $userGroups;
         return $this;
     }

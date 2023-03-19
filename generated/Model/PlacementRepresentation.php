@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -240,7 +232,6 @@ class PlacementRepresentation
      */
     public function setPlacementId(int $placementId) : self
     {
-        $this->initialized['placementId'] = true;
         $this->placementId = $placementId;
         return $this;
     }
@@ -262,7 +253,6 @@ class PlacementRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -284,7 +274,6 @@ class PlacementRepresentation
      */
     public function setJob(JobOrderTitleModel $job) : self
     {
-        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -306,7 +295,6 @@ class PlacementRepresentation
      */
     public function setCandidate(CandidatePlacementModel $candidate) : self
     {
-        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -328,7 +316,6 @@ class PlacementRepresentation
      */
     public function setApproved(bool $approved) : self
     {
-        $this->initialized['approved'] = true;
         $this->approved = $approved;
         return $this;
     }
@@ -350,7 +337,6 @@ class PlacementRepresentation
      */
     public function setApprovedAt(\DateTime $approvedAt) : self
     {
-        $this->initialized['approvedAt'] = true;
         $this->approvedAt = $approvedAt;
         return $this;
     }
@@ -372,7 +358,6 @@ class PlacementRepresentation
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -394,7 +379,6 @@ class PlacementRepresentation
      */
     public function setStatus(StatusModel $status) : self
     {
-        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -416,7 +400,6 @@ class PlacementRepresentation
      */
     public function setStartDate(\DateTime $startDate) : self
     {
-        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }
@@ -438,7 +421,6 @@ class PlacementRepresentation
      */
     public function setEndDate(\DateTime $endDate) : self
     {
-        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }
@@ -460,7 +442,6 @@ class PlacementRepresentation
      */
     public function setWorkShift(PlacementWorkShiftModel $workShift) : self
     {
-        $this->initialized['workShift'] = true;
         $this->workShift = $workShift;
         return $this;
     }
@@ -482,7 +463,6 @@ class PlacementRepresentation
      */
     public function setSummary(string $summary) : self
     {
-        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -504,7 +484,6 @@ class PlacementRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
-        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -526,7 +505,6 @@ class PlacementRepresentation
      */
     public function setContact(ContactNameModel $contact) : self
     {
-        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -548,7 +526,6 @@ class PlacementRepresentation
      */
     public function setSource(PlacementSourceModel $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -570,7 +547,6 @@ class PlacementRepresentation
      */
     public function setWorkplaceAddress(CompanyAddressModel $workplaceAddress) : self
     {
-        $this->initialized['workplaceAddress'] = true;
         $this->workplaceAddress = $workplaceAddress;
         return $this;
     }
@@ -592,7 +568,6 @@ class PlacementRepresentation
      */
     public function setPaymentType(string $paymentType) : self
     {
-        $this->initialized['paymentType'] = true;
         $this->paymentType = $paymentType;
         return $this;
     }
@@ -614,7 +589,6 @@ class PlacementRepresentation
      */
     public function setSalary(PlacementSalaryModel $salary) : self
     {
-        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -636,7 +610,6 @@ class PlacementRepresentation
      */
     public function setContractRate(PlacementContractRateModel $contractRate) : self
     {
-        $this->initialized['contractRate'] = true;
         $this->contractRate = $contractRate;
         return $this;
     }
@@ -658,7 +631,6 @@ class PlacementRepresentation
      */
     public function setRates(array $rates) : self
     {
-        $this->initialized['rates'] = true;
         $this->rates = $rates;
         return $this;
     }
@@ -680,7 +652,6 @@ class PlacementRepresentation
      */
     public function setAward(string $award) : self
     {
-        $this->initialized['award'] = true;
         $this->award = $award;
         return $this;
     }
@@ -702,7 +673,6 @@ class PlacementRepresentation
      */
     public function setIndustryCode(string $industryCode) : self
     {
-        $this->initialized['industryCode'] = true;
         $this->industryCode = $industryCode;
         return $this;
     }
@@ -724,7 +694,6 @@ class PlacementRepresentation
      */
     public function setChargeCurrency(string $chargeCurrency) : self
     {
-        $this->initialized['chargeCurrency'] = true;
         $this->chargeCurrency = $chargeCurrency;
         return $this;
     }
@@ -746,7 +715,6 @@ class PlacementRepresentation
      */
     public function setFeeSplit(string $feeSplit) : self
     {
-        $this->initialized['feeSplit'] = true;
         $this->feeSplit = $feeSplit;
         return $this;
     }
@@ -768,7 +736,6 @@ class PlacementRepresentation
      */
     public function setBilling(PlacementBillingModel $billing) : self
     {
-        $this->initialized['billing'] = true;
         $this->billing = $billing;
         return $this;
     }
@@ -790,7 +757,6 @@ class PlacementRepresentation
      */
     public function setExport(PlacementExportModel $export) : self
     {
-        $this->initialized['export'] = true;
         $this->export = $export;
         return $this;
     }
@@ -812,7 +778,6 @@ class PlacementRepresentation
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -834,7 +799,6 @@ class PlacementRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -856,7 +820,6 @@ class PlacementRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
-        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -878,7 +841,6 @@ class PlacementRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
-        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -900,7 +862,6 @@ class PlacementRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -922,7 +883,6 @@ class PlacementRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -944,7 +904,6 @@ class PlacementRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -966,7 +925,6 @@ class PlacementRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -988,7 +946,6 @@ class PlacementRepresentation
      */
     public function setLinks(PlacementLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

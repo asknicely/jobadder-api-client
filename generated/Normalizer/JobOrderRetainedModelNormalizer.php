@@ -2,9 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\Component\JsonSchemaRuntime\Reference;
-use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
-use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,78 +14,72 @@ class JobOrderRetainedModelNormalizer implements DenormalizerInterface, Normaliz
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderRetainedModel';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null)
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderRetainedModel';
     }
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+        if (isset($data->{'$ref'})) {
+            return new Reference($data->{'$ref'}, $context['document-origin']);
+        }
+        if (isset($data->{'$recursiveRef'})) {
+            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderRetainedModel();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (property_exists($data, 'jobId')) {
+            $object->setJobId($data->{'jobId'});
         }
-        if (\array_key_exists('jobId', $data)) {
-            $object->setJobId($data['jobId']);
+        if (property_exists($data, 'jobType')) {
+            $object->setJobType($data->{'jobType'});
         }
-        if (\array_key_exists('jobType', $data)) {
-            $object->setJobType($data['jobType']);
+        if (property_exists($data, 'jobTitle')) {
+            $object->setJobTitle($data->{'jobTitle'});
         }
-        if (\array_key_exists('jobTitle', $data)) {
-            $object->setJobTitle($data['jobTitle']);
+        if (property_exists($data, 'company')) {
+            $object->setCompany($this->denormalizer->denormalize($data->{'company'}, 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
         }
-        if (\array_key_exists('company', $data)) {
-            $object->setCompany($this->denormalizer->denormalize($data['company'], 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
+        if (property_exists($data, 'contact')) {
+            $object->setContact($this->denormalizer->denormalize($data->{'contact'}, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
         }
-        if (\array_key_exists('contact', $data)) {
-            $object->setContact($this->denormalizer->denormalize($data['contact'], 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
+        if (property_exists($data, 'feeCurrencyCode')) {
+            $object->setFeeCurrencyCode($data->{'feeCurrencyCode'});
         }
-        if (\array_key_exists('feeCurrencyCode', $data)) {
-            $object->setFeeCurrencyCode($data['feeCurrencyCode']);
-        }
-        if (\array_key_exists('owner', $data)) {
-            $object->setOwner($this->denormalizer->denormalize($data['owner'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (property_exists($data, 'owner')) {
+            $object->setOwner($this->denormalizer->denormalize($data->{'owner'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = array();
-        $data['jobId'] = $object->getJobId();
-        if ($object->isInitialized('jobType') && null !== $object->getJobType()) {
-            $data['jobType'] = $object->getJobType();
+        $data = new \stdClass();
+        if (null !== $object->getJobId()) {
+            $data->{'jobId'} = $object->getJobId();
         }
-        if ($object->isInitialized('jobTitle') && null !== $object->getJobTitle()) {
-            $data['jobTitle'] = $object->getJobTitle();
+        if (null !== $object->getJobType()) {
+            $data->{'jobType'} = $object->getJobType();
         }
-        if ($object->isInitialized('company') && null !== $object->getCompany()) {
-            $data['company'] = $this->normalizer->normalize($object->getCompany(), 'json', $context);
+        if (null !== $object->getJobTitle()) {
+            $data->{'jobTitle'} = $object->getJobTitle();
         }
-        if ($object->isInitialized('contact') && null !== $object->getContact()) {
-            $data['contact'] = $this->normalizer->normalize($object->getContact(), 'json', $context);
+        if (null !== $object->getCompany()) {
+            $data->{'company'} = $this->normalizer->normalize($object->getCompany(), 'json', $context);
         }
-        if ($object->isInitialized('feeCurrencyCode') && null !== $object->getFeeCurrencyCode()) {
-            $data['feeCurrencyCode'] = $object->getFeeCurrencyCode();
+        if (null !== $object->getContact()) {
+            $data->{'contact'} = $this->normalizer->normalize($object->getContact(), 'json', $context);
         }
-        if ($object->isInitialized('owner') && null !== $object->getOwner()) {
-            $data['owner'] = $this->normalizer->normalize($object->getOwner(), 'json', $context);
+        if (null !== $object->getFeeCurrencyCode()) {
+            $data->{'feeCurrencyCode'} = $object->getFeeCurrencyCode();
+        }
+        if (null !== $object->getOwner()) {
+            $data->{'owner'} = $this->normalizer->normalize($object->getOwner(), 'json', $context);
         }
         return $data;
     }

@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class AddCandidateNoteCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Note type
      *
      * @var string
@@ -61,7 +53,6 @@ class AddCandidateNoteCommand
      */
     public function setType(string $type) : self
     {
-        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -83,7 +74,6 @@ class AddCandidateNoteCommand
      */
     public function setText(string $text) : self
     {
-        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -105,7 +95,6 @@ class AddCandidateNoteCommand
      */
     public function setApplicationId(array $applicationId) : self
     {
-        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -127,7 +116,6 @@ class AddCandidateNoteCommand
      */
     public function setReference(string $reference) : self
     {
-        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -151,7 +139,6 @@ class AddCandidateNoteCommand
     */
     public function setCreatedBy(SubmitUserModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }

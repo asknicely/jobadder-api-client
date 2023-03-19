@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitPlacementContractRateModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -78,7 +70,6 @@ class SubmitPlacementContractRateModel
      */
     public function setRatePer(string $ratePer) : self
     {
-        $this->initialized['ratePer'] = true;
         $this->ratePer = $ratePer;
         return $this;
     }
@@ -100,7 +91,6 @@ class SubmitPlacementContractRateModel
      */
     public function setHoursPerWeek(float $hoursPerWeek) : self
     {
-        $this->initialized['hoursPerWeek'] = true;
         $this->hoursPerWeek = $hoursPerWeek;
         return $this;
     }
@@ -122,7 +112,6 @@ class SubmitPlacementContractRateModel
      */
     public function setDaysPerWeek(float $daysPerWeek) : self
     {
-        $this->initialized['daysPerWeek'] = true;
         $this->daysPerWeek = $daysPerWeek;
         return $this;
     }
@@ -144,7 +133,6 @@ class SubmitPlacementContractRateModel
      */
     public function setClientRate(float $clientRate) : self
     {
-        $this->initialized['clientRate'] = true;
         $this->clientRate = $clientRate;
         return $this;
     }
@@ -166,7 +154,6 @@ class SubmitPlacementContractRateModel
      */
     public function setCandidateRate(float $candidateRate) : self
     {
-        $this->initialized['candidateRate'] = true;
         $this->candidateRate = $candidateRate;
         return $this;
     }
@@ -188,7 +175,6 @@ class SubmitPlacementContractRateModel
      */
     public function setOnCostsType(string $onCostsType) : self
     {
-        $this->initialized['onCostsType'] = true;
         $this->onCostsType = $onCostsType;
         return $this;
     }
@@ -210,7 +196,6 @@ class SubmitPlacementContractRateModel
      */
     public function setOnCosts(float $onCosts) : self
     {
-        $this->initialized['onCosts'] = true;
         $this->onCosts = $onCosts;
         return $this;
     }
@@ -232,7 +217,6 @@ class SubmitPlacementContractRateModel
      */
     public function setNetMargin(float $netMargin) : self
     {
-        $this->initialized['netMargin'] = true;
         $this->netMargin = $netMargin;
         return $this;
     }

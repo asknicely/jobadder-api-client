@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderUserTaskRepresentation
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -168,7 +160,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setTaskId(int $taskId) : self
     {
-        $this->initialized['taskId'] = true;
         $this->taskId = $taskId;
         return $this;
     }
@@ -190,7 +181,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setText(string $text) : self
     {
-        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -212,7 +202,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setStartAt(\DateTime $startAt) : self
     {
-        $this->initialized['startAt'] = true;
         $this->startAt = $startAt;
         return $this;
     }
@@ -234,7 +223,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setEndAt(\DateTime $endAt) : self
     {
-        $this->initialized['endAt'] = true;
         $this->endAt = $endAt;
         return $this;
     }
@@ -256,7 +244,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setAllDay(bool $allDay) : self
     {
-        $this->initialized['allDay'] = true;
         $this->allDay = $allDay;
         return $this;
     }
@@ -278,7 +265,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setReminderMinutes(int $reminderMinutes) : self
     {
-        $this->initialized['reminderMinutes'] = true;
         $this->reminderMinutes = $reminderMinutes;
         return $this;
     }
@@ -300,7 +286,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setComplete(bool $complete) : self
     {
-        $this->initialized['complete'] = true;
         $this->complete = $complete;
         return $this;
     }
@@ -322,7 +307,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
-        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -344,7 +328,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setAssignedTo(UserNameModel $assignedTo) : self
     {
-        $this->initialized['assignedTo'] = true;
         $this->assignedTo = $assignedTo;
         return $this;
     }
@@ -366,7 +349,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setAssignees(array $assignees) : self
     {
-        $this->initialized['assignees'] = true;
         $this->assignees = $assignees;
         return $this;
     }
@@ -388,7 +370,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setJobs(array $jobs) : self
     {
-        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -410,7 +391,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setRequisitions(array $requisitions) : self
     {
-        $this->initialized['requisitions'] = true;
         $this->requisitions = $requisitions;
         return $this;
     }
@@ -432,7 +412,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setCandidates(array $candidates) : self
     {
-        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -454,7 +433,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setApplications(array $applications) : self
     {
-        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }
@@ -476,7 +454,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setPlacements(array $placements) : self
     {
-        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -498,7 +475,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setCompanies(array $companies) : self
     {
-        $this->initialized['companies'] = true;
         $this->companies = $companies;
         return $this;
     }
@@ -520,7 +496,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setContacts(array $contacts) : self
     {
-        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -542,7 +517,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setJobId(int $jobId) : self
     {
-        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -564,7 +538,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
-        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -586,7 +559,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
-        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -608,7 +580,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
-        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -630,7 +601,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
-        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -652,7 +622,6 @@ class JobOrderUserTaskRepresentation
      */
     public function setLinks(UserTaskLinks $links) : self
     {
-        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

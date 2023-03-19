@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindWebhooks extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
+class FindWebhooks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
 {
     /**
      * 
@@ -16,7 +16,7 @@ class FindWebhooks extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -39,8 +39,8 @@ class FindWebhooks extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
         $optionsResolver->setDefined(array('status', 'events'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->addAllowedTypes('status', array('array'));
-        $optionsResolver->addAllowedTypes('events', array('array'));
+        $optionsResolver->setAllowedTypes('status', array('array'));
+        $optionsResolver->setAllowedTypes('events', array('array'));
         return $optionsResolver;
     }
     /**
@@ -49,16 +49,10 @@ class FindWebhooks extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint imp
      *
      * @return null|\Varspool\JobAdder\V2\Model\WebhookListRepresentation
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
-        $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\WebhookListRepresentation', 'json');
         }
-    }
-    public function getAuthenticationScopes() : array
-    {
-        return array('jobadder_identity');
     }
 }

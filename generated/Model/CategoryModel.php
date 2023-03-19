@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class CategoryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -48,7 +40,6 @@ class CategoryModel
      */
     public function setCategoryId(int $categoryId) : self
     {
-        $this->initialized['categoryId'] = true;
         $this->categoryId = $categoryId;
         return $this;
     }
@@ -70,7 +61,6 @@ class CategoryModel
      */
     public function setName(string $name) : self
     {
-        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -92,7 +82,6 @@ class CategoryModel
      */
     public function setSubCategories(array $subCategories) : self
     {
-        $this->initialized['subCategories'] = true;
         $this->subCategories = $subCategories;
         return $this;
     }

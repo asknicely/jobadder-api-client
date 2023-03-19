@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementLinks
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -78,7 +70,6 @@ class PlacementLinks
      */
     public function setSelf(string $self) : self
     {
-        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -100,7 +91,6 @@ class PlacementLinks
      */
     public function setExtendsPlacement(string $extendsPlacement) : self
     {
-        $this->initialized['extendsPlacement'] = true;
         $this->extendsPlacement = $extendsPlacement;
         return $this;
     }
@@ -122,7 +112,6 @@ class PlacementLinks
      */
     public function setExtendedByPlacement(string $extendedByPlacement) : self
     {
-        $this->initialized['extendedByPlacement'] = true;
         $this->extendedByPlacement = $extendedByPlacement;
         return $this;
     }
@@ -144,7 +133,6 @@ class PlacementLinks
      */
     public function setCreditsPlacement(string $creditsPlacement) : self
     {
-        $this->initialized['creditsPlacement'] = true;
         $this->creditsPlacement = $creditsPlacement;
         return $this;
     }
@@ -166,7 +154,6 @@ class PlacementLinks
      */
     public function setCreditedByPlacement(string $creditedByPlacement) : self
     {
-        $this->initialized['creditedByPlacement'] = true;
         $this->creditedByPlacement = $creditedByPlacement;
         return $this;
     }
@@ -188,7 +175,6 @@ class PlacementLinks
      */
     public function setApplication(string $application) : self
     {
-        $this->initialized['application'] = true;
         $this->application = $application;
         return $this;
     }
@@ -210,7 +196,6 @@ class PlacementLinks
      */
     public function setAttachments(string $attachments) : self
     {
-        $this->initialized['attachments'] = true;
         $this->attachments = $attachments;
         return $this;
     }
@@ -232,7 +217,6 @@ class PlacementLinks
      */
     public function setNotes(string $notes) : self
     {
-        $this->initialized['notes'] = true;
         $this->notes = $notes;
         return $this;
     }

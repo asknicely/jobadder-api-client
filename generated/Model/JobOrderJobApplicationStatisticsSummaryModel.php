@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderJobApplicationStatisticsSummaryModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -48,7 +40,6 @@ class JobOrderJobApplicationStatisticsSummaryModel
      */
     public function setNew(int $new) : self
     {
-        $this->initialized['new'] = true;
         $this->new = $new;
         return $this;
     }
@@ -70,7 +61,6 @@ class JobOrderJobApplicationStatisticsSummaryModel
      */
     public function setActive(int $active) : self
     {
-        $this->initialized['active'] = true;
         $this->active = $active;
         return $this;
     }
@@ -92,7 +82,6 @@ class JobOrderJobApplicationStatisticsSummaryModel
      */
     public function setTotal(int $total) : self
     {
-        $this->initialized['total'] = true;
         $this->total = $total;
         return $this;
     }

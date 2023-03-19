@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdScreeningQuestionModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var string
@@ -68,7 +60,6 @@ class JobAdScreeningQuestionModel
      */
     public function setQuestion(string $question) : self
     {
-        $this->initialized['question'] = true;
         $this->question = $question;
         return $this;
     }
@@ -94,7 +85,6 @@ class JobAdScreeningQuestionModel
     */
     public function setAnswerType(string $answerType) : self
     {
-        $this->initialized['answerType'] = true;
         $this->answerType = $answerType;
         return $this;
     }
@@ -116,7 +106,6 @@ class JobAdScreeningQuestionModel
      */
     public function setMandatory(bool $mandatory) : self
     {
-        $this->initialized['mandatory'] = true;
         $this->mandatory = $mandatory;
         return $this;
     }
@@ -138,7 +127,6 @@ class JobAdScreeningQuestionModel
      */
     public function setMaxLength(int $maxLength) : self
     {
-        $this->initialized['maxLength'] = true;
         $this->maxLength = $maxLength;
         return $this;
     }
@@ -160,7 +148,6 @@ class JobAdScreeningQuestionModel
      */
     public function setMultiSelect(bool $multiSelect) : self
     {
-        $this->initialized['multiSelect'] = true;
         $this->multiSelect = $multiSelect;
         return $this;
     }
@@ -182,7 +169,6 @@ class JobAdScreeningQuestionModel
      */
     public function setValues(array $values) : self
     {
-        $this->initialized['values'] = true;
         $this->values = $values;
         return $this;
     }

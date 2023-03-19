@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitLocationModel
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * 
      *
      * @var int
@@ -42,7 +34,6 @@ class SubmitLocationModel
      */
     public function setLocationId(int $locationId) : self
     {
-        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
         return $this;
     }
@@ -64,7 +55,6 @@ class SubmitLocationModel
      */
     public function setAreaId(int $areaId) : self
     {
-        $this->initialized['areaId'] = true;
         $this->areaId = $areaId;
         return $this;
     }

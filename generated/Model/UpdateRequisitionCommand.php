@@ -5,14 +5,6 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateRequisitionCommand
 {
     /**
-     * @var array
-     */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
-    /**
      * Optional contact associated with the change, must be associated with the same company as the requisition.
      *
      * @var int
@@ -126,7 +118,6 @@ class UpdateRequisitionCommand
      */
     public function setContactId(int $contactId) : self
     {
-        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -148,7 +139,6 @@ class UpdateRequisitionCommand
      */
     public function setJobTitle(string $jobTitle) : self
     {
-        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -170,7 +160,6 @@ class UpdateRequisitionCommand
      */
     public function setJobDescription(string $jobDescription) : self
     {
-        $this->initialized['jobDescription'] = true;
         $this->jobDescription = $jobDescription;
         return $this;
     }
@@ -192,7 +181,6 @@ class UpdateRequisitionCommand
      */
     public function setCategory(SubmitCategoryModel $category) : self
     {
-        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -214,7 +202,6 @@ class UpdateRequisitionCommand
      */
     public function setLocation(SubmitLocationModel $location) : self
     {
-        $this->initialized['location'] = true;
         $this->location = $location;
         return $this;
     }
@@ -236,7 +223,6 @@ class UpdateRequisitionCommand
      */
     public function setWorkplaceAddressId(string $workplaceAddressId) : self
     {
-        $this->initialized['workplaceAddressId'] = true;
         $this->workplaceAddressId = $workplaceAddressId;
         return $this;
     }
@@ -258,7 +244,6 @@ class UpdateRequisitionCommand
      */
     public function setStart(SubmitJobOrderStartModel $start) : self
     {
-        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -280,7 +265,6 @@ class UpdateRequisitionCommand
      */
     public function setDuration(SubmitDurationModel $duration) : self
     {
-        $this->initialized['duration'] = true;
         $this->duration = $duration;
         return $this;
     }
@@ -302,7 +286,6 @@ class UpdateRequisitionCommand
      */
     public function setWorkTypeId(int $workTypeId) : self
     {
-        $this->initialized['workTypeId'] = true;
         $this->workTypeId = $workTypeId;
         return $this;
     }
@@ -324,7 +307,6 @@ class UpdateRequisitionCommand
      */
     public function setSalary(SubmitJobOrderSalaryRangeModel $salary) : self
     {
-        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -346,7 +328,6 @@ class UpdateRequisitionCommand
      */
     public function setNumberOfJobs(int $numberOfJobs) : self
     {
-        $this->initialized['numberOfJobs'] = true;
         $this->numberOfJobs = $numberOfJobs;
         return $this;
     }
@@ -368,7 +349,6 @@ class UpdateRequisitionCommand
      */
     public function setSource(string $source) : self
     {
-        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -390,7 +370,6 @@ class UpdateRequisitionCommand
      */
     public function setCustom(array $custom) : self
     {
-        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -412,7 +391,6 @@ class UpdateRequisitionCommand
      */
     public function setWorkflowId(int $workflowId) : self
     {
-        $this->initialized['workflowId'] = true;
         $this->workflowId = $workflowId;
         return $this;
     }
@@ -434,7 +412,6 @@ class UpdateRequisitionCommand
      */
     public function setRecruiterUserId(array $recruiterUserId) : self
     {
-        $this->initialized['recruiterUserId'] = true;
         $this->recruiterUserId = $recruiterUserId;
         return $this;
     }
@@ -456,7 +433,6 @@ class UpdateRequisitionCommand
      */
     public function setFormID(int $formID) : self
     {
-        $this->initialized['formID'] = true;
         $this->formID = $formID;
         return $this;
     }
