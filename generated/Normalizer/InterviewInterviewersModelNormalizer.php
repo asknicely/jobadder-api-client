@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,58 +16,66 @@ class InterviewInterviewersModelNormalizer implements DenormalizerInterface, Nor
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\InterviewInterviewersModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\InterviewInterviewersModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\InterviewInterviewersModel();
-        if (property_exists($data, 'users')) {
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (\array_key_exists('users', $data)) {
             $values = array();
-            foreach ($data->{'users'} as $value) {
+            foreach ($data['users'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context);
             }
             $object->setUsers($values);
         }
-        if (property_exists($data, 'contacts')) {
+        if (\array_key_exists('contacts', $data)) {
             $values_1 = array();
-            foreach ($data->{'contacts'} as $value_1) {
+            foreach ($data['contacts'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context);
             }
             $object->setContacts($values_1);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getUsers()) {
+        $data = array();
+        if ($object->isInitialized('users') && null !== $object->getUsers()) {
             $values = array();
             foreach ($object->getUsers() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'users'} = $values;
+            $data['users'] = $values;
         }
-        if (null !== $object->getContacts()) {
+        if ($object->isInitialized('contacts') && null !== $object->getContacts()) {
             $values_1 = array();
             foreach ($object->getContacts() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data->{'contacts'} = $values_1;
+            $data['contacts'] = $values_1;
         }
         return $data;
     }

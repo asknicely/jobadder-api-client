@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class AddUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
      * 
@@ -13,7 +13,7 @@ class AddUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
     {
         $this->body = $command;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -36,10 +36,16 @@ class AddUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *
      * @return null|\Varspool\JobAdder\V2\Model\UserTaskModel
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (201 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\UserTaskModel', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

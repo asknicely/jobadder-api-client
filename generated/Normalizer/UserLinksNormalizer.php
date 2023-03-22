@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,54 +16,62 @@ class UserLinksNormalizer implements DenormalizerInterface, NormalizerInterface,
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\UserLinks';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\UserLinks';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\UserLinks();
-        if (property_exists($data, 'self')) {
-            $object->setSelf($data->{'self'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'photo')) {
-            $object->setPhoto($data->{'photo'});
+        if (\array_key_exists('self', $data)) {
+            $object->setSelf($data['self']);
         }
-        if (property_exists($data, 'office')) {
-            $object->setOffice($data->{'office'});
+        if (\array_key_exists('photo', $data)) {
+            $object->setPhoto($data['photo']);
         }
-        if (property_exists($data, 'userGroups')) {
-            $object->setUserGroups($data->{'userGroups'});
+        if (\array_key_exists('office', $data)) {
+            $object->setOffice($data['office']);
+        }
+        if (\array_key_exists('userGroups', $data)) {
+            $object->setUserGroups($data['userGroups']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getSelf()) {
-            $data->{'self'} = $object->getSelf();
+        $data = array();
+        if ($object->isInitialized('self') && null !== $object->getSelf()) {
+            $data['self'] = $object->getSelf();
         }
-        if (null !== $object->getPhoto()) {
-            $data->{'photo'} = $object->getPhoto();
+        if ($object->isInitialized('photo') && null !== $object->getPhoto()) {
+            $data['photo'] = $object->getPhoto();
         }
-        if (null !== $object->getOffice()) {
-            $data->{'office'} = $object->getOffice();
+        if ($object->isInitialized('office') && null !== $object->getOffice()) {
+            $data['office'] = $object->getOffice();
         }
-        if (null !== $object->getUserGroups()) {
-            $data->{'userGroups'} = $object->getUserGroups();
+        if ($object->isInitialized('userGroups') && null !== $object->getUserGroups()) {
+            $data['userGroups'] = $object->getUserGroups();
         }
         return $data;
     }

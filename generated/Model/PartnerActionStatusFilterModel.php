@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PartnerActionStatusFilterModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Action is available to entities with an active status
      *
      * @var bool
@@ -34,6 +42,7 @@ class PartnerActionStatusFilterModel
      */
     public function setActiveOnly(bool $activeOnly) : self
     {
+        $this->initialized['activeOnly'] = true;
         $this->activeOnly = $activeOnly;
         return $this;
     }
@@ -55,6 +64,7 @@ class PartnerActionStatusFilterModel
      */
     public function setStatusId(array $statusId) : self
     {
+        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }

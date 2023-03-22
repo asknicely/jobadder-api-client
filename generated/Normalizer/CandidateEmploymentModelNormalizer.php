@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,56 +16,64 @@ class CandidateEmploymentModelNormalizer implements DenormalizerInterface, Norma
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\CandidateEmploymentModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\CandidateEmploymentModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\CandidateEmploymentModel();
-        if (property_exists($data, 'current')) {
-            $object->setCurrent($this->denormalizer->denormalize($data->{'current'}, 'Varspool\\JobAdder\\V2\\Model\\CurrentEmploymentModel', 'json', $context));
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'ideal')) {
-            $object->setIdeal($this->denormalizer->denormalize($data->{'ideal'}, 'Varspool\\JobAdder\\V2\\Model\\CandidateIdealEmploymentModel', 'json', $context));
+        if (\array_key_exists('current', $data)) {
+            $object->setCurrent($this->denormalizer->denormalize($data['current'], 'Varspool\\JobAdder\\V2\\Model\\CurrentEmploymentModel', 'json', $context));
         }
-        if (property_exists($data, 'history')) {
+        if (\array_key_exists('ideal', $data)) {
+            $object->setIdeal($this->denormalizer->denormalize($data['ideal'], 'Varspool\\JobAdder\\V2\\Model\\CandidateIdealEmploymentModel', 'json', $context));
+        }
+        if (\array_key_exists('history', $data)) {
             $values = array();
-            foreach ($data->{'history'} as $value) {
+            foreach ($data['history'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\CandidateEmploymentHistoryModel', 'json', $context);
             }
             $object->setHistory($values);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getCurrent()) {
-            $data->{'current'} = $this->normalizer->normalize($object->getCurrent(), 'json', $context);
+        $data = array();
+        if ($object->isInitialized('current') && null !== $object->getCurrent()) {
+            $data['current'] = $this->normalizer->normalize($object->getCurrent(), 'json', $context);
         }
-        if (null !== $object->getIdeal()) {
-            $data->{'ideal'} = $this->normalizer->normalize($object->getIdeal(), 'json', $context);
+        if ($object->isInitialized('ideal') && null !== $object->getIdeal()) {
+            $data['ideal'] = $this->normalizer->normalize($object->getIdeal(), 'json', $context);
         }
-        if (null !== $object->getHistory()) {
+        if ($object->isInitialized('history') && null !== $object->getHistory()) {
             $values = array();
             foreach ($object->getHistory() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'history'} = $values;
+            $data['history'] = $values;
         }
         return $data;
     }

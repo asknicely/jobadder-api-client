@@ -2,10 +2,19 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class UpdatePlacementAttachmentNotFoundException extends \RuntimeException implements ClientException
+class UpdatePlacementAttachmentNotFoundException extends NotFoundException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('Attachment was not found', 404);
+        parent::__construct('Attachment was not found');
+        $this->response = $response;
+    }
+    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

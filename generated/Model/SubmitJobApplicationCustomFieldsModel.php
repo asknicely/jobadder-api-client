@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitJobApplicationCustomFieldsModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Candidate custom field values
      *
      * @var SubmitCustomFieldValueModel[]
@@ -34,6 +42,7 @@ class SubmitJobApplicationCustomFieldsModel
      */
     public function setCandidate(array $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmitJobApplicationCustomFieldsModel
      */
     public function setApplication(array $application) : self
     {
+        $this->initialized['application'] = true;
         $this->application = $application;
         return $this;
     }

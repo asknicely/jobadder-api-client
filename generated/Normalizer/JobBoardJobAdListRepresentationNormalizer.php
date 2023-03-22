@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,56 +16,62 @@ class JobBoardJobAdListRepresentationNormalizer implements DenormalizerInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdListRepresentation';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdListRepresentation';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobBoardJobAdListRepresentation();
-        if (property_exists($data, 'items')) {
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (\array_key_exists('items', $data)) {
             $values = array();
-            foreach ($data->{'items'} as $value) {
+            foreach ($data['items'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdSummaryModel', 'json', $context);
             }
             $object->setItems($values);
         }
-        if (property_exists($data, 'totalCount')) {
-            $object->setTotalCount($data->{'totalCount'});
+        if (\array_key_exists('totalCount', $data)) {
+            $object->setTotalCount($data['totalCount']);
         }
-        if (property_exists($data, 'links')) {
-            $object->setLinks($this->denormalizer->denormalize($data->{'links'}, 'Varspool\\JobAdder\\V2\\Model\\ModelLinks', 'json', $context));
+        if (\array_key_exists('links', $data)) {
+            $object->setLinks($this->denormalizer->denormalize($data['links'], 'Varspool\\JobAdder\\V2\\Model\\ModelLinks', 'json', $context));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getItems()) {
+        $data = array();
+        if ($object->isInitialized('items') && null !== $object->getItems()) {
             $values = array();
             foreach ($object->getItems() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'items'} = $values;
+            $data['items'] = $values;
         }
-        if (null !== $object->getTotalCount()) {
-            $data->{'totalCount'} = $object->getTotalCount();
-        }
-        if (null !== $object->getLinks()) {
-            $data->{'links'} = $this->normalizer->normalize($object->getLinks(), 'json', $context);
+        $data['totalCount'] = $object->getTotalCount();
+        if ($object->isInitialized('links') && null !== $object->getLinks()) {
+            $data['links'] = $this->normalizer->normalize($object->getLinks(), 'json', $context);
         }
         return $data;
     }

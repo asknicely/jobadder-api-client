@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitDurationModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -34,6 +42,7 @@ class SubmitDurationModel
      */
     public function setPeriod(int $period) : self
     {
+        $this->initialized['period'] = true;
         $this->period = $period;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmitDurationModel
      */
     public function setUnit(string $unit) : self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
         return $this;
     }

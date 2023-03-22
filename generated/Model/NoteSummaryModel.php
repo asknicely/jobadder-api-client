@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -76,6 +84,7 @@ class NoteSummaryModel
      */
     public function setNoteId(string $noteId) : self
     {
+        $this->initialized['noteId'] = true;
         $this->noteId = $noteId;
         return $this;
     }
@@ -97,6 +106,7 @@ class NoteSummaryModel
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -118,6 +128,7 @@ class NoteSummaryModel
      */
     public function setTextPartial(string $textPartial) : self
     {
+        $this->initialized['textPartial'] = true;
         $this->textPartial = $textPartial;
         return $this;
     }
@@ -139,6 +150,7 @@ class NoteSummaryModel
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -160,6 +172,7 @@ class NoteSummaryModel
      */
     public function setReadonly(bool $readonly) : self
     {
+        $this->initialized['readonly'] = true;
         $this->readonly = $readonly;
         return $this;
     }
@@ -181,6 +194,7 @@ class NoteSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -202,6 +216,7 @@ class NoteSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -223,6 +238,7 @@ class NoteSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -244,6 +260,7 @@ class NoteSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

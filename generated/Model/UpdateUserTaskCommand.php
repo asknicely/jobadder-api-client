@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateUserTaskCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -58,6 +66,7 @@ class UpdateUserTaskCommand
      */
     public function setTitle(string $title) : self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -79,6 +88,7 @@ class UpdateUserTaskCommand
      */
     public function setStartAt(\DateTime $startAt) : self
     {
+        $this->initialized['startAt'] = true;
         $this->startAt = $startAt;
         return $this;
     }
@@ -100,6 +110,7 @@ class UpdateUserTaskCommand
      */
     public function setEndAt(\DateTime $endAt) : self
     {
+        $this->initialized['endAt'] = true;
         $this->endAt = $endAt;
         return $this;
     }
@@ -121,6 +132,7 @@ class UpdateUserTaskCommand
      */
     public function setAllDay(bool $allDay) : self
     {
+        $this->initialized['allDay'] = true;
         $this->allDay = $allDay;
         return $this;
     }
@@ -142,6 +154,7 @@ class UpdateUserTaskCommand
      */
     public function setAssignees(array $assignees) : self
     {
+        $this->initialized['assignees'] = true;
         $this->assignees = $assignees;
         return $this;
     }
@@ -163,6 +176,7 @@ class UpdateUserTaskCommand
      */
     public function setPriority(int $priority) : self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
         return $this;
     }

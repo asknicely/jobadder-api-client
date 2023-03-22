@@ -2,16 +2,28 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class AddCompanyConflictException extends \RuntimeException implements ClientException
+class AddCompanyConflictException extends ConflictException
 {
+    /**
+     * @var \Varspool\JobAdder\V2\Model\ErrorModel
+     */
     private $errorModel;
-    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel)
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Company with this name already exists', 409);
+        parent::__construct('Company with this name already exists');
         $this->errorModel = $errorModel;
+        $this->response = $response;
     }
-    public function getErrorModel()
+    public function getErrorModel() : \Varspool\JobAdder\V2\Model\ErrorModel
     {
         return $this->errorModel;
+    }
+    public function getResponse() : \Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

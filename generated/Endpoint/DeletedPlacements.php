@@ -2,9 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class DeletedPlacements extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class DeletedPlacements extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -27,10 +27,16 @@ class DeletedPlacements extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *
      * @return null|\Varspool\JobAdder\V2\Model\DeletedPlacementListModel
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\DeletedPlacementListModel', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

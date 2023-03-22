@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,78 +16,82 @@ class RequisitionSummaryModelNormalizer implements DenormalizerInterface, Normal
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\RequisitionSummaryModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\RequisitionSummaryModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\RequisitionSummaryModel();
-        if (property_exists($data, 'requisitionId')) {
-            $object->setRequisitionId($data->{'requisitionId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'status')) {
-            $object->setStatus($data->{'status'});
+        if (\array_key_exists('requisitionId', $data)) {
+            $object->setRequisitionId($data['requisitionId']);
         }
-        if (property_exists($data, 'workflowStageIndex')) {
-            $object->setWorkflowStageIndex($data->{'workflowStageIndex'});
+        if (\array_key_exists('status', $data)) {
+            $object->setStatus($data['status']);
         }
-        if (property_exists($data, 'jobTitle')) {
-            $object->setJobTitle($data->{'jobTitle'});
+        if (\array_key_exists('workflowStageIndex', $data)) {
+            $object->setWorkflowStageIndex($data['workflowStageIndex']);
         }
-        if (property_exists($data, 'company')) {
-            $object->setCompany($this->denormalizer->denormalize($data->{'company'}, 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
+        if (\array_key_exists('jobTitle', $data)) {
+            $object->setJobTitle($data['jobTitle']);
         }
-        if (property_exists($data, 'hiringManager')) {
-            $object->setHiringManager($this->denormalizer->denormalize($data->{'hiringManager'}, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
+        if (\array_key_exists('company', $data)) {
+            $object->setCompany($this->denormalizer->denormalize($data['company'], 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
         }
-        if (property_exists($data, 'createdAt')) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'createdAt'}));
+        if (\array_key_exists('hiringManager', $data)) {
+            $object->setHiringManager($this->denormalizer->denormalize($data['hiringManager'], 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('createdAt', $data)) {
+            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['createdAt']));
+        }
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getRequisitionId()) {
-            $data->{'requisitionId'} = $object->getRequisitionId();
+        $data = array();
+        $data['requisitionId'] = $object->getRequisitionId();
+        if ($object->isInitialized('status') && null !== $object->getStatus()) {
+            $data['status'] = $object->getStatus();
         }
-        if (null !== $object->getStatus()) {
-            $data->{'status'} = $object->getStatus();
+        if ($object->isInitialized('workflowStageIndex') && null !== $object->getWorkflowStageIndex()) {
+            $data['workflowStageIndex'] = $object->getWorkflowStageIndex();
         }
-        if (null !== $object->getWorkflowStageIndex()) {
-            $data->{'workflowStageIndex'} = $object->getWorkflowStageIndex();
+        $data['jobTitle'] = $object->getJobTitle();
+        if ($object->isInitialized('company') && null !== $object->getCompany()) {
+            $data['company'] = $this->normalizer->normalize($object->getCompany(), 'json', $context);
         }
-        if (null !== $object->getJobTitle()) {
-            $data->{'jobTitle'} = $object->getJobTitle();
+        if ($object->isInitialized('hiringManager') && null !== $object->getHiringManager()) {
+            $data['hiringManager'] = $this->normalizer->normalize($object->getHiringManager(), 'json', $context);
         }
-        if (null !== $object->getCompany()) {
-            $data->{'company'} = $this->normalizer->normalize($object->getCompany(), 'json', $context);
+        if ($object->isInitialized('createdAt') && null !== $object->getCreatedAt()) {
+            $data['createdAt'] = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getHiringManager()) {
-            $data->{'hiringManager'} = $this->normalizer->normalize($object->getHiringManager(), 'json', $context);
-        }
-        if (null !== $object->getCreatedAt()) {
-            $data->{'createdAt'} = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
-        }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

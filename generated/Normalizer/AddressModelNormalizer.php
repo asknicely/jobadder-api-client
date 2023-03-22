@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,74 +16,82 @@ class AddressModelNormalizer implements DenormalizerInterface, NormalizerInterfa
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\AddressModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\AddressModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\AddressModel();
-        if (property_exists($data, 'street')) {
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (\array_key_exists('street', $data)) {
             $values = array();
-            foreach ($data->{'street'} as $value) {
+            foreach ($data['street'] as $value) {
                 $values[] = $value;
             }
             $object->setStreet($values);
         }
-        if (property_exists($data, 'city')) {
-            $object->setCity($data->{'city'});
+        if (\array_key_exists('city', $data)) {
+            $object->setCity($data['city']);
         }
-        if (property_exists($data, 'state')) {
-            $object->setState($data->{'state'});
+        if (\array_key_exists('state', $data)) {
+            $object->setState($data['state']);
         }
-        if (property_exists($data, 'postalCode')) {
-            $object->setPostalCode($data->{'postalCode'});
+        if (\array_key_exists('postalCode', $data)) {
+            $object->setPostalCode($data['postalCode']);
         }
-        if (property_exists($data, 'country')) {
-            $object->setCountry($data->{'country'});
+        if (\array_key_exists('country', $data)) {
+            $object->setCountry($data['country']);
         }
-        if (property_exists($data, 'countryCode')) {
-            $object->setCountryCode($data->{'countryCode'});
+        if (\array_key_exists('countryCode', $data)) {
+            $object->setCountryCode($data['countryCode']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getStreet()) {
+        $data = array();
+        if ($object->isInitialized('street') && null !== $object->getStreet()) {
             $values = array();
             foreach ($object->getStreet() as $value) {
                 $values[] = $value;
             }
-            $data->{'street'} = $values;
+            $data['street'] = $values;
         }
-        if (null !== $object->getCity()) {
-            $data->{'city'} = $object->getCity();
+        if ($object->isInitialized('city') && null !== $object->getCity()) {
+            $data['city'] = $object->getCity();
         }
-        if (null !== $object->getState()) {
-            $data->{'state'} = $object->getState();
+        if ($object->isInitialized('state') && null !== $object->getState()) {
+            $data['state'] = $object->getState();
         }
-        if (null !== $object->getPostalCode()) {
-            $data->{'postalCode'} = $object->getPostalCode();
+        if ($object->isInitialized('postalCode') && null !== $object->getPostalCode()) {
+            $data['postalCode'] = $object->getPostalCode();
         }
-        if (null !== $object->getCountry()) {
-            $data->{'country'} = $object->getCountry();
+        if ($object->isInitialized('country') && null !== $object->getCountry()) {
+            $data['country'] = $object->getCountry();
         }
-        if (null !== $object->getCountryCode()) {
-            $data->{'countryCode'} = $object->getCountryCode();
+        if ($object->isInitialized('countryCode') && null !== $object->getCountryCode()) {
+            $data['countryCode'] = $object->getCountryCode();
         }
         return $data;
     }

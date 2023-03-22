@@ -2,10 +2,19 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class PutCandidateCustomFieldListItemNotFoundException extends \RuntimeException implements ClientException
+class PutCandidateCustomFieldListItemNotFoundException extends NotFoundException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('Requested candidate custom field definition was not found', 404);
+        parent::__construct('Requested candidate custom field definition was not found');
+        $this->response = $response;
+    }
+    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

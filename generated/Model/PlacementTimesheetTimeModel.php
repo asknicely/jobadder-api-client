@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementTimesheetTimeModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var \DateTime
@@ -52,6 +60,7 @@ class PlacementTimesheetTimeModel
      */
     public function setDate(\DateTime $date) : self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
         return $this;
     }
@@ -73,6 +82,7 @@ class PlacementTimesheetTimeModel
      */
     public function setType($type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -94,6 +104,7 @@ class PlacementTimesheetTimeModel
      */
     public function setStart(string $start) : self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -115,6 +126,7 @@ class PlacementTimesheetTimeModel
      */
     public function setEnd(string $end) : self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
         return $this;
     }
@@ -136,6 +148,7 @@ class PlacementTimesheetTimeModel
      */
     public function setBreak(string $break) : self
     {
+        $this->initialized['break'] = true;
         $this->break = $break;
         return $this;
     }

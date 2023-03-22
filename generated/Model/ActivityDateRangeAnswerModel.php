@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityDateRangeAnswerModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -40,6 +48,7 @@ class ActivityDateRangeAnswerModel
      */
     public function setQuestionId(int $questionId) : self
     {
+        $this->initialized['questionId'] = true;
         $this->questionId = $questionId;
         return $this;
     }
@@ -61,6 +70,7 @@ class ActivityDateRangeAnswerModel
      */
     public function setStartDate(\DateTime $startDate) : self
     {
+        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }
@@ -82,6 +92,7 @@ class ActivityDateRangeAnswerModel
      */
     public function setEndDate(\DateTime $endDate) : self
     {
+        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }

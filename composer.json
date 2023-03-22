@@ -5,7 +5,7 @@
     "require": {
         "php": ">=7.4.0",
         "guzzlehttp/guzzle": "^7.0",
-        "jane-php/open-api-runtime": "^5.3",
+        "jane-php/open-api-runtime": "^7.4",
         "psr/log": "^1.0",
         "psr/http-message": "^1.0",
         "symfony/serializer": "^3.4|^4.4|^5.4",
@@ -13,7 +13,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
-        "jane-php/open-api-2": "^5.3",
+        "jane-php/open-api-2": "^7.4",
         "phpunit/phpunit": "^9.5",
         "phpunit/php-invoker": "^3.1"
     },

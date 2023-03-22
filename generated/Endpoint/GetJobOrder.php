@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetJobOrder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetJobOrder extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $jobId;
     /**
@@ -19,7 +19,7 @@ class GetJobOrder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
         $this->jobId = $jobId;
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -42,7 +42,7 @@ class GetJobOrder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
         $optionsResolver->setDefined(array('embed'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
         return $optionsResolver;
     }
     /**
@@ -52,13 +52,19 @@ class GetJobOrder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *
      * @return null|\Varspool\JobAdder\V2\Model\JobOrderRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\JobOrderRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetJobOrderNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetJobOrderNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

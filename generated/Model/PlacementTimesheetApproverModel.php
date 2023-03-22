@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementTimesheetApproverModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * First name
      *
      * @var string
@@ -58,6 +66,7 @@ class PlacementTimesheetApproverModel
      */
     public function setFirstName(string $firstName) : self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -79,6 +88,7 @@ class PlacementTimesheetApproverModel
      */
     public function setLastName(string $lastName) : self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -100,6 +110,7 @@ class PlacementTimesheetApproverModel
      */
     public function setPosition(string $position) : self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -121,6 +132,7 @@ class PlacementTimesheetApproverModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -142,6 +154,7 @@ class PlacementTimesheetApproverModel
      */
     public function setPhone(string $phone) : self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -163,6 +176,7 @@ class PlacementTimesheetApproverModel
      */
     public function setMobile(string $mobile) : self
     {
+        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }

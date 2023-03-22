@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique identifier for the company
      *
      * @var int
@@ -130,6 +138,7 @@ class CompanyRepresentation
      */
     public function setCompanyId(int $companyId) : self
     {
+        $this->initialized['companyId'] = true;
         $this->companyId = $companyId;
         return $this;
     }
@@ -151,6 +160,7 @@ class CompanyRepresentation
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -172,6 +182,7 @@ class CompanyRepresentation
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -193,6 +204,7 @@ class CompanyRepresentation
      */
     public function setMainContact(ContactNameModel $mainContact) : self
     {
+        $this->initialized['mainContact'] = true;
         $this->mainContact = $mainContact;
         return $this;
     }
@@ -214,6 +226,7 @@ class CompanyRepresentation
      */
     public function setPrimaryAddress(CompanyAddressModel $primaryAddress) : self
     {
+        $this->initialized['primaryAddress'] = true;
         $this->primaryAddress = $primaryAddress;
         return $this;
     }
@@ -235,6 +248,7 @@ class CompanyRepresentation
      */
     public function setLegalName(string $legalName) : self
     {
+        $this->initialized['legalName'] = true;
         $this->legalName = $legalName;
         return $this;
     }
@@ -243,7 +257,7 @@ class CompanyRepresentation
      *
      * @return string[]
      */
-    public function getSocial() : \ArrayObject
+    public function getSocial() : iterable
     {
         return $this->social;
     }
@@ -254,8 +268,9 @@ class CompanyRepresentation
      *
      * @return self
      */
-    public function setSocial(\ArrayObject $social) : self
+    public function setSocial(iterable $social) : self
     {
+        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -277,6 +292,7 @@ class CompanyRepresentation
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -298,6 +314,7 @@ class CompanyRepresentation
      */
     public function setParent(CompanyNameModel $parent) : self
     {
+        $this->initialized['parent'] = true;
         $this->parent = $parent;
         return $this;
     }
@@ -319,6 +336,7 @@ class CompanyRepresentation
      */
     public function setCustom(array $custom) : self
     {
+        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -340,6 +358,7 @@ class CompanyRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -361,6 +380,7 @@ class CompanyRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
+        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -382,6 +402,7 @@ class CompanyRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
+        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -403,6 +424,7 @@ class CompanyRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -424,6 +446,7 @@ class CompanyRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -445,6 +468,7 @@ class CompanyRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -466,6 +490,7 @@ class CompanyRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -487,6 +512,7 @@ class CompanyRepresentation
      */
     public function setLinks(CompanyLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

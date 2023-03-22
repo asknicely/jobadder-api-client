@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ContactLinks
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -88,6 +96,7 @@ class ContactLinks
      */
     public function setSelf(string $self) : self
     {
+        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -109,6 +118,7 @@ class ContactLinks
      */
     public function setCandidate(string $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -130,6 +140,7 @@ class ContactLinks
      */
     public function setPhoto(string $photo) : self
     {
+        $this->initialized['photo'] = true;
         $this->photo = $photo;
         return $this;
     }
@@ -151,6 +162,7 @@ class ContactLinks
      */
     public function setCompany(string $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -172,6 +184,7 @@ class ContactLinks
      */
     public function setOfficeAddress(string $officeAddress) : self
     {
+        $this->initialized['officeAddress'] = true;
         $this->officeAddress = $officeAddress;
         return $this;
     }
@@ -193,6 +206,7 @@ class ContactLinks
      */
     public function setSkills(string $skills) : self
     {
+        $this->initialized['skills'] = true;
         $this->skills = $skills;
         return $this;
     }
@@ -214,6 +228,7 @@ class ContactLinks
      */
     public function setNotes(string $notes) : self
     {
+        $this->initialized['notes'] = true;
         $this->notes = $notes;
         return $this;
     }
@@ -235,6 +250,7 @@ class ContactLinks
      */
     public function setAttachments(string $attachments) : self
     {
+        $this->initialized['attachments'] = true;
         $this->attachments = $attachments;
         return $this;
     }
@@ -256,6 +272,7 @@ class ContactLinks
      */
     public function setJobs(string $jobs) : self
     {
+        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -277,6 +294,7 @@ class ContactLinks
      */
     public function setFloats(string $floats) : self
     {
+        $this->initialized['floats'] = true;
         $this->floats = $floats;
         return $this;
     }
@@ -298,6 +316,7 @@ class ContactLinks
      */
     public function setSubmissions(string $submissions) : self
     {
+        $this->initialized['submissions'] = true;
         $this->submissions = $submissions;
         return $this;
     }

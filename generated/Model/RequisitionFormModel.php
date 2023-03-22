@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class RequisitionFormModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class RequisitionFormModel
      */
     public function setFormName(string $formName) : self
     {
+        $this->initialized['formName'] = true;
         $this->formName = $formName;
         return $this;
     }
@@ -73,6 +82,7 @@ class RequisitionFormModel
      */
     public function setFormID(int $formID) : self
     {
+        $this->initialized['formID'] = true;
         $this->formID = $formID;
         return $this;
     }
@@ -94,6 +104,7 @@ class RequisitionFormModel
      */
     public function setDefault(bool $default) : self
     {
+        $this->initialized['default'] = true;
         $this->default = $default;
         return $this;
     }
@@ -115,6 +126,7 @@ class RequisitionFormModel
      */
     public function setDeleted(bool $deleted) : self
     {
+        $this->initialized['deleted'] = true;
         $this->deleted = $deleted;
         return $this;
     }
@@ -136,6 +148,7 @@ class RequisitionFormModel
      */
     public function setFormFields(array $formFields) : self
     {
+        $this->initialized['formFields'] = true;
         $this->formFields = $formFields;
         return $this;
     }

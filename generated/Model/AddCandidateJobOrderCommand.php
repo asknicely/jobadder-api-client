@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class AddCandidateJobOrderCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int[]
@@ -34,6 +42,7 @@ class AddCandidateJobOrderCommand
      */
     public function setJobId(array $jobId) : self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -55,6 +64,7 @@ class AddCandidateJobOrderCommand
      */
     public function setSource(string $source) : self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }

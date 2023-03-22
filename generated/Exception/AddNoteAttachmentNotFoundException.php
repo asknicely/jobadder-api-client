@@ -2,10 +2,19 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class AddNoteAttachmentNotFoundException extends \RuntimeException implements ClientException
+class AddNoteAttachmentNotFoundException extends NotFoundException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('Note was not found', 404);
+        parent::__construct('Note was not found');
+        $this->response = $response;
+    }
+    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

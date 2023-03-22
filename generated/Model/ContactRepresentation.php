@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ContactRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique identifier for the contact
      *
      * @var int
@@ -196,6 +204,7 @@ class ContactRepresentation
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -217,6 +226,7 @@ class ContactRepresentation
      */
     public function setFirstName(string $firstName) : self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -238,6 +248,7 @@ class ContactRepresentation
      */
     public function setLastName(string $lastName) : self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -259,6 +270,7 @@ class ContactRepresentation
      */
     public function setPosition(string $position) : self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -280,6 +292,7 @@ class ContactRepresentation
      */
     public function setSalutation(string $salutation) : self
     {
+        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -301,6 +314,7 @@ class ContactRepresentation
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
+        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -322,6 +336,7 @@ class ContactRepresentation
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -343,6 +358,7 @@ class ContactRepresentation
      */
     public function setPhone(string $phone) : self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -364,6 +380,7 @@ class ContactRepresentation
      */
     public function setMobile(string $mobile) : self
     {
+        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -385,6 +402,7 @@ class ContactRepresentation
      */
     public function setInactive(bool $inactive) : self
     {
+        $this->initialized['inactive'] = true;
         $this->inactive = $inactive;
         return $this;
     }
@@ -406,6 +424,7 @@ class ContactRepresentation
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -427,6 +446,7 @@ class ContactRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -448,6 +468,7 @@ class ContactRepresentation
      */
     public function setOfficeAddress(CompanyAddressModel $officeAddress) : self
     {
+        $this->initialized['officeAddress'] = true;
         $this->officeAddress = $officeAddress;
         return $this;
     }
@@ -469,6 +490,7 @@ class ContactRepresentation
      */
     public function setPreviousContactId(int $previousContactId) : self
     {
+        $this->initialized['previousContactId'] = true;
         $this->previousContactId = $previousContactId;
         return $this;
     }
@@ -490,6 +512,7 @@ class ContactRepresentation
      */
     public function setOriginalContactId(int $originalContactId) : self
     {
+        $this->initialized['originalContactId'] = true;
         $this->originalContactId = $originalContactId;
         return $this;
     }
@@ -511,6 +534,7 @@ class ContactRepresentation
      */
     public function setOtherEmail(array $otherEmail) : self
     {
+        $this->initialized['otherEmail'] = true;
         $this->otherEmail = $otherEmail;
         return $this;
     }
@@ -519,7 +543,7 @@ class ContactRepresentation
      *
      * @return string[]
      */
-    public function getSocial() : \ArrayObject
+    public function getSocial() : iterable
     {
         return $this->social;
     }
@@ -530,8 +554,9 @@ class ContactRepresentation
      *
      * @return self
      */
-    public function setSocial(\ArrayObject $social) : self
+    public function setSocial(iterable $social) : self
     {
+        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -553,6 +578,7 @@ class ContactRepresentation
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -574,6 +600,7 @@ class ContactRepresentation
      */
     public function setReportsTo(ContactNameModel $reportsTo) : self
     {
+        $this->initialized['reportsTo'] = true;
         $this->reportsTo = $reportsTo;
         return $this;
     }
@@ -595,6 +622,7 @@ class ContactRepresentation
      */
     public function setHiringManager(bool $hiringManager) : self
     {
+        $this->initialized['hiringManager'] = true;
         $this->hiringManager = $hiringManager;
         return $this;
     }
@@ -616,6 +644,7 @@ class ContactRepresentation
      */
     public function setCustom(array $custom) : self
     {
+        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -637,6 +666,7 @@ class ContactRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -658,6 +688,7 @@ class ContactRepresentation
      */
     public function setRecruiters(array $recruiters) : self
     {
+        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -679,6 +710,7 @@ class ContactRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
+        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -700,6 +732,7 @@ class ContactRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -721,6 +754,7 @@ class ContactRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -742,6 +776,7 @@ class ContactRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -763,6 +798,7 @@ class ContactRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -784,6 +820,7 @@ class ContactRepresentation
      */
     public function setLinks(ContactLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class WorkTypeModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -40,6 +48,7 @@ class WorkTypeModel
      */
     public function setWorkTypeId(int $workTypeId) : self
     {
+        $this->initialized['workTypeId'] = true;
         $this->workTypeId = $workTypeId;
         return $this;
     }
@@ -61,6 +70,7 @@ class WorkTypeModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -82,6 +92,7 @@ class WorkTypeModel
      */
     public function setRatePer(string $ratePer) : self
     {
+        $this->initialized['ratePer'] = true;
         $this->ratePer = $ratePer;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class InterviewEvaluationRatingModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Criteria being rated
      *
      * @var string
@@ -34,6 +42,7 @@ class InterviewEvaluationRatingModel
      */
     public function setCriteria(string $criteria) : self
     {
+        $this->initialized['criteria'] = true;
         $this->criteria = $criteria;
         return $this;
     }
@@ -55,6 +64,7 @@ class InterviewEvaluationRatingModel
      */
     public function setRating(int $rating) : self
     {
+        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }

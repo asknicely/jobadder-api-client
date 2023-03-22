@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,68 +16,76 @@ class RequisitionFormModelNormalizer implements DenormalizerInterface, Normalize
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\RequisitionFormModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\RequisitionFormModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\RequisitionFormModel();
-        if (property_exists($data, 'formName')) {
-            $object->setFormName($data->{'formName'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'formID')) {
-            $object->setFormID($data->{'formID'});
+        if (\array_key_exists('formName', $data)) {
+            $object->setFormName($data['formName']);
         }
-        if (property_exists($data, 'default')) {
-            $object->setDefault($data->{'default'});
+        if (\array_key_exists('formID', $data)) {
+            $object->setFormID($data['formID']);
         }
-        if (property_exists($data, 'deleted')) {
-            $object->setDeleted($data->{'deleted'});
+        if (\array_key_exists('default', $data)) {
+            $object->setDefault($data['default']);
         }
-        if (property_exists($data, 'formFields')) {
+        if (\array_key_exists('deleted', $data)) {
+            $object->setDeleted($data['deleted']);
+        }
+        if (\array_key_exists('formFields', $data)) {
             $values = array();
-            foreach ($data->{'formFields'} as $value) {
+            foreach ($data['formFields'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\RequisitionFormFieldModel', 'json', $context);
             }
             $object->setFormFields($values);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getFormName()) {
-            $data->{'formName'} = $object->getFormName();
+        $data = array();
+        if ($object->isInitialized('formName') && null !== $object->getFormName()) {
+            $data['formName'] = $object->getFormName();
         }
-        if (null !== $object->getFormID()) {
-            $data->{'formID'} = $object->getFormID();
+        if ($object->isInitialized('formID') && null !== $object->getFormID()) {
+            $data['formID'] = $object->getFormID();
         }
-        if (null !== $object->getDefault()) {
-            $data->{'default'} = $object->getDefault();
+        if ($object->isInitialized('default') && null !== $object->getDefault()) {
+            $data['default'] = $object->getDefault();
         }
-        if (null !== $object->getDeleted()) {
-            $data->{'deleted'} = $object->getDeleted();
+        if ($object->isInitialized('deleted') && null !== $object->getDeleted()) {
+            $data['deleted'] = $object->getDeleted();
         }
-        if (null !== $object->getFormFields()) {
+        if ($object->isInitialized('formFields') && null !== $object->getFormFields()) {
             $values = array();
             foreach ($object->getFormFields() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'formFields'} = $values;
+            $data['formFields'] = $values;
         }
         return $data;
     }

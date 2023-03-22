@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PartnerActionRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique identifier for the partner action
      *
      * @var string
@@ -94,6 +102,7 @@ class PartnerActionRepresentation
      */
     public function setActionId(string $actionId) : self
     {
+        $this->initialized['actionId'] = true;
         $this->actionId = $actionId;
         return $this;
     }
@@ -115,6 +124,7 @@ class PartnerActionRepresentation
      */
     public function setActionType(string $actionType) : self
     {
+        $this->initialized['actionType'] = true;
         $this->actionType = $actionType;
         return $this;
     }
@@ -136,6 +146,7 @@ class PartnerActionRepresentation
      */
     public function setActionName(string $actionName) : self
     {
+        $this->initialized['actionName'] = true;
         $this->actionName = $actionName;
         return $this;
     }
@@ -157,6 +168,7 @@ class PartnerActionRepresentation
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -178,6 +190,7 @@ class PartnerActionRepresentation
      */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -199,6 +212,7 @@ class PartnerActionRepresentation
      */
     public function setUrlType(string $urlType) : self
     {
+        $this->initialized['urlType'] = true;
         $this->urlType = $urlType;
         return $this;
     }
@@ -220,6 +234,7 @@ class PartnerActionRepresentation
      */
     public function setAllowResubmit(bool $allowResubmit) : self
     {
+        $this->initialized['allowResubmit'] = true;
         $this->allowResubmit = $allowResubmit;
         return $this;
     }
@@ -241,6 +256,7 @@ class PartnerActionRepresentation
      */
     public function setActionFilter(PartnerActionFilterModel $actionFilter) : self
     {
+        $this->initialized['actionFilter'] = true;
         $this->actionFilter = $actionFilter;
         return $this;
     }
@@ -262,6 +278,7 @@ class PartnerActionRepresentation
      */
     public function setWebhookData($webhookData) : self
     {
+        $this->initialized['webhookData'] = true;
         $this->webhookData = $webhookData;
         return $this;
     }
@@ -283,6 +300,7 @@ class PartnerActionRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -304,6 +322,7 @@ class PartnerActionRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -325,6 +344,7 @@ class PartnerActionRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

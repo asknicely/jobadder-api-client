@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ContactAttachmentCategoryListRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var ContactAttachmentCategoryModel[]
@@ -34,6 +42,7 @@ class ContactAttachmentCategoryListRepresentation
      */
     public function setItems(array $items) : self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }
@@ -55,6 +64,7 @@ class ContactAttachmentCategoryListRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

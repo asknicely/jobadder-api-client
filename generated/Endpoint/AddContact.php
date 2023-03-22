@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddContact extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class AddContact extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
      * 
@@ -17,7 +17,7 @@ class AddContact extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
         $this->body = $body;
         $this->headerParameters = $headerParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -40,7 +40,7 @@ class AddContact extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
         $optionsResolver->setDefined(array('X-Allow-Duplicates'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('X-Allow-Duplicates', array('string'));
+        $optionsResolver->addAllowedTypes('X-Allow-Duplicates', array('string'));
         return $optionsResolver;
     }
     /**
@@ -51,16 +51,22 @@ class AddContact extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
      *
      * @return null|\Varspool\JobAdder\V2\Model\ContactRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (201 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ContactRepresentation', 'json');
         }
         if (409 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddContactConflictException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
+            throw new \Varspool\JobAdder\V2\Exception\AddContactConflictException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
         }
         if (422 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddContactUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
+            throw new \Varspool\JobAdder\V2\Exception\AddContactUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PartnerActionResultCommandModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Optional partner score for the action result
      *
      * @var int
@@ -40,6 +48,7 @@ class PartnerActionResultCommandModel
      */
     public function setScore(int $score) : self
     {
+        $this->initialized['score'] = true;
         $this->score = $score;
         return $this;
     }
@@ -61,6 +70,7 @@ class PartnerActionResultCommandModel
      */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -82,6 +92,7 @@ class PartnerActionResultCommandModel
      */
     public function setUrlType(string $urlType) : self
     {
+        $this->initialized['urlType'] = true;
         $this->urlType = $urlType;
         return $this;
     }

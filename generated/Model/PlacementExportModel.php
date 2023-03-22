@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementExportModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Placement has been selected for export to a payroll service
      *
      * @var bool
@@ -52,6 +60,7 @@ class PlacementExportModel
      */
     public function setPayroll(bool $payroll) : self
     {
+        $this->initialized['payroll'] = true;
         $this->payroll = $payroll;
         return $this;
     }
@@ -73,6 +82,7 @@ class PlacementExportModel
      */
     public function setTimesheets(bool $timesheets) : self
     {
+        $this->initialized['timesheets'] = true;
         $this->timesheets = $timesheets;
         return $this;
     }
@@ -94,6 +104,7 @@ class PlacementExportModel
      */
     public function setApprovers(array $approvers) : self
     {
+        $this->initialized['approvers'] = true;
         $this->approvers = $approvers;
         return $this;
     }
@@ -115,6 +126,7 @@ class PlacementExportModel
      */
     public function setOnboarding(bool $onboarding) : self
     {
+        $this->initialized['onboarding'] = true;
         $this->onboarding = $onboarding;
         return $this;
     }
@@ -136,6 +148,7 @@ class PlacementExportModel
      */
     public function setOnboardingManagers(array $onboardingManagers) : self
     {
+        $this->initialized['onboardingManagers'] = true;
         $this->onboardingManagers = $onboardingManagers;
         return $this;
     }

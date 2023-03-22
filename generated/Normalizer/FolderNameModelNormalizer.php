@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,60 +16,66 @@ class FolderNameModelNormalizer implements DenormalizerInterface, NormalizerInte
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\FolderNameModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\FolderNameModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\FolderNameModel();
-        if (property_exists($data, 'folderId')) {
-            $object->setFolderId($data->{'folderId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'name')) {
-            $object->setName($data->{'name'});
+        if (\array_key_exists('folderId', $data)) {
+            $object->setFolderId($data['folderId']);
         }
-        if (property_exists($data, 'owner')) {
-            $object->setOwner($this->denormalizer->denormalize($data->{'owner'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('name', $data)) {
+            $object->setName($data['name']);
         }
-        if (property_exists($data, 'createdAt')) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'createdAt'}));
+        if (\array_key_exists('owner', $data)) {
+            $object->setOwner($this->denormalizer->denormalize($data['owner'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('createdAt', $data)) {
+            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['createdAt']));
+        }
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getFolderId()) {
-            $data->{'folderId'} = $object->getFolderId();
+        $data = array();
+        $data['folderId'] = $object->getFolderId();
+        if ($object->isInitialized('name') && null !== $object->getName()) {
+            $data['name'] = $object->getName();
         }
-        if (null !== $object->getName()) {
-            $data->{'name'} = $object->getName();
+        if ($object->isInitialized('owner') && null !== $object->getOwner()) {
+            $data['owner'] = $this->normalizer->normalize($object->getOwner(), 'json', $context);
         }
-        if (null !== $object->getOwner()) {
-            $data->{'owner'} = $this->normalizer->normalize($object->getOwner(), 'json', $context);
+        if ($object->isInitialized('createdAt') && null !== $object->getCreatedAt()) {
+            $data['createdAt'] = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getCreatedAt()) {
-            $data->{'createdAt'} = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
-        }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

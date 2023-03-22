@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementAttachmentCategoryListRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var PlacementAttachmentCategoryModel[]
@@ -34,6 +42,7 @@ class PlacementAttachmentCategoryListRepresentation
      */
     public function setItems(array $items) : self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }
@@ -55,6 +64,7 @@ class PlacementAttachmentCategoryListRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

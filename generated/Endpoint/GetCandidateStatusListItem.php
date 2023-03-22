@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetCandidateStatusListItem extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetCandidateStatusListItem extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $statusId;
     /**
@@ -14,7 +14,7 @@ class GetCandidateStatusListItem extends \Jane\OpenApiRuntime\Client\BaseEndpoin
     {
         $this->statusId = $statusId;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,13 +38,19 @@ class GetCandidateStatusListItem extends \Jane\OpenApiRuntime\Client\BaseEndpoin
      *
      * @return null|\Varspool\JobAdder\V2\Model\StatusRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\StatusRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetCandidateStatusListItemNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetCandidateStatusListItemNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateWebhookCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -58,6 +66,7 @@ class UpdateWebhookCommand
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -79,6 +88,7 @@ class UpdateWebhookCommand
      */
     public function setEvents(array $events) : self
     {
+        $this->initialized['events'] = true;
         $this->events = $events;
         return $this;
     }
@@ -100,6 +110,7 @@ class UpdateWebhookCommand
      */
     public function setEventFilters(SubmitWebhookEventFilterModel $eventFilters) : self
     {
+        $this->initialized['eventFilters'] = true;
         $this->eventFilters = $eventFilters;
         return $this;
     }
@@ -121,6 +132,7 @@ class UpdateWebhookCommand
      */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -142,6 +154,7 @@ class UpdateWebhookCommand
      */
     public function setAuthorization(string $authorization) : self
     {
+        $this->initialized['authorization'] = true;
         $this->authorization = $authorization;
         return $this;
     }
@@ -163,6 +176,7 @@ class UpdateWebhookCommand
      */
     public function setStatus(string $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }

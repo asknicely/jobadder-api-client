@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateVideoRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class CandidateVideoRepresentation
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -73,6 +82,7 @@ class CandidateVideoRepresentation
      */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -94,6 +104,7 @@ class CandidateVideoRepresentation
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -115,6 +126,7 @@ class CandidateVideoRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -136,6 +148,7 @@ class CandidateVideoRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

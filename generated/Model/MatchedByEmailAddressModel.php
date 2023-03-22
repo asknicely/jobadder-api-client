@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class MatchedByEmailAddressModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Top 5 most recently updated matching candidates
      *
      * @var CandidateMatchedByEmailModel[]
@@ -40,6 +48,7 @@ class MatchedByEmailAddressModel
      */
     public function setCandidates(array $candidates) : self
     {
+        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -61,6 +70,7 @@ class MatchedByEmailAddressModel
      */
     public function setContacts(array $contacts) : self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -82,6 +92,7 @@ class MatchedByEmailAddressModel
      */
     public function setUsers(array $users) : self
     {
+        $this->initialized['users'] = true;
         $this->users = $users;
         return $this;
     }

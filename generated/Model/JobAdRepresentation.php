@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -142,6 +150,7 @@ class JobAdRepresentation
      */
     public function setAdId(int $adId) : self
     {
+        $this->initialized['adId'] = true;
         $this->adId = $adId;
         return $this;
     }
@@ -163,6 +172,7 @@ class JobAdRepresentation
      */
     public function setState(string $state) : self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
         return $this;
     }
@@ -184,6 +194,7 @@ class JobAdRepresentation
      */
     public function setTitle(string $title) : self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -205,6 +216,7 @@ class JobAdRepresentation
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -226,6 +238,7 @@ class JobAdRepresentation
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -247,6 +260,7 @@ class JobAdRepresentation
      */
     public function setBulletPoints(array $bulletPoints) : self
     {
+        $this->initialized['bulletPoints'] = true;
         $this->bulletPoints = $bulletPoints;
         return $this;
     }
@@ -268,6 +282,7 @@ class JobAdRepresentation
      */
     public function setDescription(string $description) : self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
         return $this;
     }
@@ -289,6 +304,7 @@ class JobAdRepresentation
      */
     public function setJob(JobOrderTitleModel $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -310,6 +326,7 @@ class JobAdRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -331,6 +348,7 @@ class JobAdRepresentation
      */
     public function setContact(ContactNameModel $contact) : self
     {
+        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -352,6 +370,7 @@ class JobAdRepresentation
      */
     public function setScreening(array $screening) : self
     {
+        $this->initialized['screening'] = true;
         $this->screening = $screening;
         return $this;
     }
@@ -373,6 +392,7 @@ class JobAdRepresentation
      */
     public function setJobBoards(array $jobBoards) : self
     {
+        $this->initialized['jobBoards'] = true;
         $this->jobBoards = $jobBoards;
         return $this;
     }
@@ -394,6 +414,7 @@ class JobAdRepresentation
      */
     public function setOtherApplyUrls(array $otherApplyUrls) : self
     {
+        $this->initialized['otherApplyUrls'] = true;
         $this->otherApplyUrls = $otherApplyUrls;
         return $this;
     }
@@ -415,6 +436,7 @@ class JobAdRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -436,6 +458,7 @@ class JobAdRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -457,6 +480,7 @@ class JobAdRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -478,6 +502,7 @@ class JobAdRepresentation
      */
     public function setPostAt(\DateTime $postAt) : self
     {
+        $this->initialized['postAt'] = true;
         $this->postAt = $postAt;
         return $this;
     }
@@ -499,6 +524,7 @@ class JobAdRepresentation
      */
     public function setExpireAt(\DateTime $expireAt) : self
     {
+        $this->initialized['expireAt'] = true;
         $this->expireAt = $expireAt;
         return $this;
     }
@@ -520,6 +546,7 @@ class JobAdRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
+        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -541,6 +568,7 @@ class JobAdRepresentation
      */
     public function setLinks(JobAdLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

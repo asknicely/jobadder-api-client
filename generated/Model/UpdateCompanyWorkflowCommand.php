@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdateCompanyWorkflowCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -34,6 +42,7 @@ class UpdateCompanyWorkflowCommand
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -55,6 +64,7 @@ class UpdateCompanyWorkflowCommand
      */
     public function setApprovers(array $approvers) : self
     {
+        $this->initialized['approvers'] = true;
         $this->approvers = $approvers;
         return $this;
     }

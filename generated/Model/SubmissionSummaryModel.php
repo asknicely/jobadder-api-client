@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmissionSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -76,6 +84,7 @@ class SubmissionSummaryModel
      */
     public function setSubmissionId(int $submissionId) : self
     {
+        $this->initialized['submissionId'] = true;
         $this->submissionId = $submissionId;
         return $this;
     }
@@ -97,6 +106,7 @@ class SubmissionSummaryModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -118,6 +128,7 @@ class SubmissionSummaryModel
      */
     public function setCandidate(CandidateSummaryModel $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -139,6 +150,7 @@ class SubmissionSummaryModel
      */
     public function setCompany(CompanyNameModel $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -160,6 +172,7 @@ class SubmissionSummaryModel
      */
     public function setJob(JobOrderSummaryModel $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -181,6 +194,7 @@ class SubmissionSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -202,6 +216,7 @@ class SubmissionSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -223,6 +238,7 @@ class SubmissionSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -244,6 +260,7 @@ class SubmissionSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

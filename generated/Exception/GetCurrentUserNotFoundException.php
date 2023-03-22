@@ -2,10 +2,19 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class GetCurrentUserNotFoundException extends \RuntimeException implements ClientException
+class GetCurrentUserNotFoundException extends NotFoundException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('Current user was not found (huh?)', 404);
+        parent::__construct('Current user was not found (huh?)');
+        $this->response = $response;
+    }
+    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

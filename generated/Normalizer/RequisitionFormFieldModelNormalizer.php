@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,60 +16,68 @@ class RequisitionFormFieldModelNormalizer implements DenormalizerInterface, Norm
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\RequisitionFormFieldModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\RequisitionFormFieldModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\RequisitionFormFieldModel();
-        if (property_exists($data, 'fieldID')) {
-            $object->setFieldID($data->{'fieldID'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'formID')) {
-            $object->setFormID($data->{'formID'});
+        if (\array_key_exists('fieldID', $data)) {
+            $object->setFieldID($data['fieldID']);
         }
-        if (property_exists($data, 'fieldName')) {
-            $object->setFieldName($data->{'fieldName'});
+        if (\array_key_exists('formID', $data)) {
+            $object->setFormID($data['formID']);
         }
-        if (property_exists($data, 'visible')) {
-            $object->setVisible($data->{'visible'});
+        if (\array_key_exists('fieldName', $data)) {
+            $object->setFieldName($data['fieldName']);
         }
-        if (property_exists($data, 'required')) {
-            $object->setRequired($data->{'required'});
+        if (\array_key_exists('visible', $data)) {
+            $object->setVisible($data['visible']);
+        }
+        if (\array_key_exists('required', $data)) {
+            $object->setRequired($data['required']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getFieldID()) {
-            $data->{'fieldID'} = $object->getFieldID();
+        $data = array();
+        if ($object->isInitialized('fieldID') && null !== $object->getFieldID()) {
+            $data['fieldID'] = $object->getFieldID();
         }
-        if (null !== $object->getFormID()) {
-            $data->{'formID'} = $object->getFormID();
+        if ($object->isInitialized('formID') && null !== $object->getFormID()) {
+            $data['formID'] = $object->getFormID();
         }
-        if (null !== $object->getFieldName()) {
-            $data->{'fieldName'} = $object->getFieldName();
+        if ($object->isInitialized('fieldName') && null !== $object->getFieldName()) {
+            $data['fieldName'] = $object->getFieldName();
         }
-        if (null !== $object->getVisible()) {
-            $data->{'visible'} = $object->getVisible();
+        if ($object->isInitialized('visible') && null !== $object->getVisible()) {
+            $data['visible'] = $object->getVisible();
         }
-        if (null !== $object->getRequired()) {
-            $data->{'required'} = $object->getRequired();
+        if ($object->isInitialized('required') && null !== $object->getRequired()) {
+            $data['required'] = $object->getRequired();
         }
         return $data;
     }

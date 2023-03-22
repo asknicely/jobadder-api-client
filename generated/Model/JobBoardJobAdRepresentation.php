@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobBoardJobAdRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -94,6 +102,7 @@ class JobBoardJobAdRepresentation
      */
     public function setAdId(int $adId) : self
     {
+        $this->initialized['adId'] = true;
         $this->adId = $adId;
         return $this;
     }
@@ -115,6 +124,7 @@ class JobBoardJobAdRepresentation
      */
     public function setTitle(string $title) : self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -136,6 +146,7 @@ class JobBoardJobAdRepresentation
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -157,6 +168,7 @@ class JobBoardJobAdRepresentation
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -178,6 +190,7 @@ class JobBoardJobAdRepresentation
      */
     public function setBulletPoints(array $bulletPoints) : self
     {
+        $this->initialized['bulletPoints'] = true;
         $this->bulletPoints = $bulletPoints;
         return $this;
     }
@@ -199,6 +212,7 @@ class JobBoardJobAdRepresentation
      */
     public function setDescription(string $description) : self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
         return $this;
     }
@@ -220,6 +234,7 @@ class JobBoardJobAdRepresentation
      */
     public function setScreening(array $screening) : self
     {
+        $this->initialized['screening'] = true;
         $this->screening = $screening;
         return $this;
     }
@@ -241,6 +256,7 @@ class JobBoardJobAdRepresentation
      */
     public function setPortal(JobAdPortalModel $portal) : self
     {
+        $this->initialized['portal'] = true;
         $this->portal = $portal;
         return $this;
     }
@@ -262,6 +278,7 @@ class JobBoardJobAdRepresentation
      */
     public function setPostedAt(\DateTime $postedAt) : self
     {
+        $this->initialized['postedAt'] = true;
         $this->postedAt = $postedAt;
         return $this;
     }
@@ -283,6 +300,7 @@ class JobBoardJobAdRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -304,6 +322,7 @@ class JobBoardJobAdRepresentation
      */
     public function setExpiresAt(\DateTime $expiresAt) : self
     {
+        $this->initialized['expiresAt'] = true;
         $this->expiresAt = $expiresAt;
         return $this;
     }
@@ -325,6 +344,7 @@ class JobBoardJobAdRepresentation
      */
     public function setLinks(JobBoardJobAdLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

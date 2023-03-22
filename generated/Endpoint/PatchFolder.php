@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class PatchFolder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class PatchFolder extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $folderId;
     /**
@@ -16,7 +16,7 @@ class PatchFolder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
         $this->folderId = $folderId;
         $this->body = $operations;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'PATCH';
@@ -41,16 +41,22 @@ class PatchFolder extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\PatchFolderNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\PatchFolderNotFoundException($response);
         }
         if (422 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\PatchFolderUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
+            throw new \Varspool\JobAdder\V2\Exception\PatchFolderUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

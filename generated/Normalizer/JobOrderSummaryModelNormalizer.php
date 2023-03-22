@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,114 +16,120 @@ class JobOrderSummaryModelNormalizer implements DenormalizerInterface, Normalize
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderSummaryModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderSummaryModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderSummaryModel();
-        if (property_exists($data, 'jobId')) {
-            $object->setJobId($data->{'jobId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'jobTitle')) {
-            $object->setJobTitle($data->{'jobTitle'});
+        if (\array_key_exists('jobId', $data)) {
+            $object->setJobId($data['jobId']);
         }
-        if (property_exists($data, 'company')) {
-            $object->setCompany($this->denormalizer->denormalize($data->{'company'}, 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
+        if (\array_key_exists('jobTitle', $data)) {
+            $object->setJobTitle($data['jobTitle']);
         }
-        if (property_exists($data, 'contact')) {
-            $object->setContact($this->denormalizer->denormalize($data->{'contact'}, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
+        if (\array_key_exists('company', $data)) {
+            $object->setCompany($this->denormalizer->denormalize($data['company'], 'Varspool\\JobAdder\\V2\\Model\\CompanyNameModel', 'json', $context));
         }
-        if (property_exists($data, 'status')) {
-            $object->setStatus($this->denormalizer->denormalize($data->{'status'}, 'Varspool\\JobAdder\\V2\\Model\\StatusModel', 'json', $context));
+        if (\array_key_exists('contact', $data)) {
+            $object->setContact($this->denormalizer->denormalize($data['contact'], 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
         }
-        if (property_exists($data, 'source')) {
-            $object->setSource($data->{'source'});
+        if (\array_key_exists('status', $data)) {
+            $object->setStatus($this->denormalizer->denormalize($data['status'], 'Varspool\\JobAdder\\V2\\Model\\StatusModel', 'json', $context));
         }
-        if (property_exists($data, 'userFavourite')) {
-            $object->setUserFavourite($data->{'userFavourite'});
+        if (\array_key_exists('source', $data)) {
+            $object->setSource($data['source']);
         }
-        if (property_exists($data, 'owner')) {
-            $object->setOwner($this->denormalizer->denormalize($data->{'owner'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('userFavourite', $data)) {
+            $object->setUserFavourite($data['userFavourite']);
         }
-        if (property_exists($data, 'createdBy')) {
-            $object->setCreatedBy($this->denormalizer->denormalize($data->{'createdBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('owner', $data)) {
+            $object->setOwner($this->denormalizer->denormalize($data['owner'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (property_exists($data, 'createdAt')) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'createdAt'}));
+        if (\array_key_exists('createdBy', $data)) {
+            $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (property_exists($data, 'updatedBy')) {
-            $object->setUpdatedBy($this->denormalizer->denormalize($data->{'updatedBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('createdAt', $data)) {
+            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['createdAt']));
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('updatedBy', $data)) {
+            $object->setUpdatedBy($this->denormalizer->denormalize($data['updatedBy'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (property_exists($data, 'closedBy')) {
-            $object->setClosedBy($this->denormalizer->denormalize($data->{'closedBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
         }
-        if (property_exists($data, 'closedAt')) {
-            $object->setClosedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'closedAt'}));
+        if (\array_key_exists('closedBy', $data)) {
+            $object->setClosedBy($this->denormalizer->denormalize($data['closedBy'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        }
+        if (\array_key_exists('closedAt', $data)) {
+            $object->setClosedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['closedAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getJobId()) {
-            $data->{'jobId'} = $object->getJobId();
+        $data = array();
+        $data['jobId'] = $object->getJobId();
+        if ($object->isInitialized('jobTitle') && null !== $object->getJobTitle()) {
+            $data['jobTitle'] = $object->getJobTitle();
         }
-        if (null !== $object->getJobTitle()) {
-            $data->{'jobTitle'} = $object->getJobTitle();
+        if ($object->isInitialized('company') && null !== $object->getCompany()) {
+            $data['company'] = $this->normalizer->normalize($object->getCompany(), 'json', $context);
         }
-        if (null !== $object->getCompany()) {
-            $data->{'company'} = $this->normalizer->normalize($object->getCompany(), 'json', $context);
+        if ($object->isInitialized('contact') && null !== $object->getContact()) {
+            $data['contact'] = $this->normalizer->normalize($object->getContact(), 'json', $context);
         }
-        if (null !== $object->getContact()) {
-            $data->{'contact'} = $this->normalizer->normalize($object->getContact(), 'json', $context);
+        if ($object->isInitialized('status') && null !== $object->getStatus()) {
+            $data['status'] = $this->normalizer->normalize($object->getStatus(), 'json', $context);
         }
-        if (null !== $object->getStatus()) {
-            $data->{'status'} = $this->normalizer->normalize($object->getStatus(), 'json', $context);
+        if ($object->isInitialized('source') && null !== $object->getSource()) {
+            $data['source'] = $object->getSource();
         }
-        if (null !== $object->getSource()) {
-            $data->{'source'} = $object->getSource();
+        if ($object->isInitialized('userFavourite') && null !== $object->getUserFavourite()) {
+            $data['userFavourite'] = $object->getUserFavourite();
         }
-        if (null !== $object->getUserFavourite()) {
-            $data->{'userFavourite'} = $object->getUserFavourite();
+        if ($object->isInitialized('owner') && null !== $object->getOwner()) {
+            $data['owner'] = $this->normalizer->normalize($object->getOwner(), 'json', $context);
         }
-        if (null !== $object->getOwner()) {
-            $data->{'owner'} = $this->normalizer->normalize($object->getOwner(), 'json', $context);
+        if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+            $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
         }
-        if (null !== $object->getCreatedBy()) {
-            $data->{'createdBy'} = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
+        if ($object->isInitialized('createdAt') && null !== $object->getCreatedAt()) {
+            $data['createdAt'] = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getCreatedAt()) {
-            $data->{'createdAt'} = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedBy') && null !== $object->getUpdatedBy()) {
+            $data['updatedBy'] = $this->normalizer->normalize($object->getUpdatedBy(), 'json', $context);
         }
-        if (null !== $object->getUpdatedBy()) {
-            $data->{'updatedBy'} = $this->normalizer->normalize($object->getUpdatedBy(), 'json', $context);
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('closedBy') && null !== $object->getClosedBy()) {
+            $data['closedBy'] = $this->normalizer->normalize($object->getClosedBy(), 'json', $context);
         }
-        if (null !== $object->getClosedBy()) {
-            $data->{'closedBy'} = $this->normalizer->normalize($object->getClosedBy(), 'json', $context);
-        }
-        if (null !== $object->getClosedAt()) {
-            $data->{'closedAt'} = $object->getClosedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('closedAt') && null !== $object->getClosedAt()) {
+            $data['closedAt'] = $object->getClosedAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

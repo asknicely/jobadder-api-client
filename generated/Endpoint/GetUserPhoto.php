@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetUserPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetUserPhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $userId;
     /**
@@ -14,7 +14,7 @@ class GetUserPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
     {
         $this->userId = $userId;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -34,13 +34,19 @@ class GetUserPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return null;
+            return json_decode($body);
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetUserPhotoNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetUserPhotoNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

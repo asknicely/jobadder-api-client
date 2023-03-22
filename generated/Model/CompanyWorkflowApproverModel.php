@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyWorkflowApproverModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -100,6 +108,7 @@ class CompanyWorkflowApproverModel
      */
     public function setStageIndex(int $stageIndex) : self
     {
+        $this->initialized['stageIndex'] = true;
         $this->stageIndex = $stageIndex;
         return $this;
     }
@@ -121,6 +130,7 @@ class CompanyWorkflowApproverModel
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -142,6 +152,7 @@ class CompanyWorkflowApproverModel
      */
     public function setFirstName(string $firstName) : self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -163,6 +174,7 @@ class CompanyWorkflowApproverModel
      */
     public function setLastName(string $lastName) : self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -184,6 +196,7 @@ class CompanyWorkflowApproverModel
      */
     public function setPosition(string $position) : self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -205,6 +218,7 @@ class CompanyWorkflowApproverModel
      */
     public function setSalutation(string $salutation) : self
     {
+        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -226,6 +240,7 @@ class CompanyWorkflowApproverModel
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
+        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -247,6 +262,7 @@ class CompanyWorkflowApproverModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -268,6 +284,7 @@ class CompanyWorkflowApproverModel
      */
     public function setPhone(string $phone) : self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -289,6 +306,7 @@ class CompanyWorkflowApproverModel
      */
     public function setMobile(string $mobile) : self
     {
+        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -310,6 +328,7 @@ class CompanyWorkflowApproverModel
      */
     public function setInactive(bool $inactive) : self
     {
+        $this->initialized['inactive'] = true;
         $this->inactive = $inactive;
         return $this;
     }
@@ -331,6 +350,7 @@ class CompanyWorkflowApproverModel
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -352,6 +372,7 @@ class CompanyWorkflowApproverModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class RequisitionLinks
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class RequisitionLinks
      */
     public function setSelf(string $self) : self
     {
+        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -73,6 +82,7 @@ class RequisitionLinks
      */
     public function setWorkflow(string $workflow) : self
     {
+        $this->initialized['workflow'] = true;
         $this->workflow = $workflow;
         return $this;
     }
@@ -94,6 +104,7 @@ class RequisitionLinks
      */
     public function setJob(string $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -115,6 +126,7 @@ class RequisitionLinks
      */
     public function setHistory(string $history) : self
     {
+        $this->initialized['history'] = true;
         $this->history = $history;
         return $this;
     }
@@ -136,6 +148,7 @@ class RequisitionLinks
      */
     public function setNotes(string $notes) : self
     {
+        $this->initialized['notes'] = true;
         $this->notes = $notes;
         return $this;
     }

@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,84 +16,92 @@ class CandidateMatchedByEmailModelNormalizer implements DenormalizerInterface, N
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\CandidateMatchedByEmailModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\CandidateMatchedByEmailModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\CandidateMatchedByEmailModel();
-        if (property_exists($data, 'match')) {
-            $object->setMatch($this->denormalizer->denormalize($data->{'match'}, 'Varspool\\JobAdder\\V2\\Model\\MatchedEmailAddressModel', 'json', $context));
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'candidateId')) {
-            $object->setCandidateId($data->{'candidateId'});
+        if (\array_key_exists('match', $data)) {
+            $object->setMatch($this->denormalizer->denormalize($data['match'], 'Varspool\\JobAdder\\V2\\Model\\MatchedEmailAddressModel', 'json', $context));
         }
-        if (property_exists($data, 'firstName')) {
-            $object->setFirstName($data->{'firstName'});
+        if (\array_key_exists('candidateId', $data)) {
+            $object->setCandidateId($data['candidateId']);
         }
-        if (property_exists($data, 'lastName')) {
-            $object->setLastName($data->{'lastName'});
+        if (\array_key_exists('firstName', $data)) {
+            $object->setFirstName($data['firstName']);
         }
-        if (property_exists($data, 'email')) {
-            $object->setEmail($data->{'email'});
+        if (\array_key_exists('lastName', $data)) {
+            $object->setLastName($data['lastName']);
         }
-        if (property_exists($data, 'phone')) {
-            $object->setPhone($data->{'phone'});
+        if (\array_key_exists('email', $data)) {
+            $object->setEmail($data['email']);
         }
-        if (property_exists($data, 'mobile')) {
-            $object->setMobile($data->{'mobile'});
+        if (\array_key_exists('phone', $data)) {
+            $object->setPhone($data['phone']);
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('mobile', $data)) {
+            $object->setMobile($data['mobile']);
         }
-        if (property_exists($data, 'lastNoteAt')) {
-            $object->setLastNoteAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'lastNoteAt'}));
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
+        }
+        if (\array_key_exists('lastNoteAt', $data)) {
+            $object->setLastNoteAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['lastNoteAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getMatch()) {
-            $data->{'match'} = $this->normalizer->normalize($object->getMatch(), 'json', $context);
+        $data = array();
+        if ($object->isInitialized('match') && null !== $object->getMatch()) {
+            $data['match'] = $this->normalizer->normalize($object->getMatch(), 'json', $context);
         }
-        if (null !== $object->getCandidateId()) {
-            $data->{'candidateId'} = $object->getCandidateId();
+        if ($object->isInitialized('candidateId') && null !== $object->getCandidateId()) {
+            $data['candidateId'] = $object->getCandidateId();
         }
-        if (null !== $object->getFirstName()) {
-            $data->{'firstName'} = $object->getFirstName();
+        if ($object->isInitialized('firstName') && null !== $object->getFirstName()) {
+            $data['firstName'] = $object->getFirstName();
         }
-        if (null !== $object->getLastName()) {
-            $data->{'lastName'} = $object->getLastName();
+        if ($object->isInitialized('lastName') && null !== $object->getLastName()) {
+            $data['lastName'] = $object->getLastName();
         }
-        if (null !== $object->getEmail()) {
-            $data->{'email'} = $object->getEmail();
+        if ($object->isInitialized('email') && null !== $object->getEmail()) {
+            $data['email'] = $object->getEmail();
         }
-        if (null !== $object->getPhone()) {
-            $data->{'phone'} = $object->getPhone();
+        if ($object->isInitialized('phone') && null !== $object->getPhone()) {
+            $data['phone'] = $object->getPhone();
         }
-        if (null !== $object->getMobile()) {
-            $data->{'mobile'} = $object->getMobile();
+        if ($object->isInitialized('mobile') && null !== $object->getMobile()) {
+            $data['mobile'] = $object->getMobile();
         }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getLastNoteAt()) {
-            $data->{'lastNoteAt'} = $object->getLastNoteAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('lastNoteAt') && null !== $object->getLastNoteAt()) {
+            $data['lastNoteAt'] = $object->getLastNoteAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

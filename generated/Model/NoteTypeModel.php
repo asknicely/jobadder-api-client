@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteTypeModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -34,6 +42,7 @@ class NoteTypeModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -55,6 +64,7 @@ class NoteTypeModel
      */
     public function setDefault(NoteTypeDefaultModel $default) : self
     {
+        $this->initialized['default'] = true;
         $this->default = $default;
         return $this;
     }

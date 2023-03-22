@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindRequisitions extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindRequisitions extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -42,7 +42,7 @@ class FindRequisitions extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -65,24 +65,24 @@ class FindRequisitions extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
         $optionsResolver->setDefined(array('requisitionId', 'companyId', 'status', 'hiringManager.contactId', 'hiringManager.name', 'approver.contactId', 'approver.name', 'approver.pending', 'userId', 'ownerUserId', 'recruiterUserId', 'createdAt', 'updatedAt', 'sort', 'fields', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('requisitionId', array('array'));
-        $optionsResolver->setAllowedTypes('companyId', array('array'));
-        $optionsResolver->setAllowedTypes('status', array('array'));
-        $optionsResolver->setAllowedTypes('hiringManager.contactId', array('array'));
-        $optionsResolver->setAllowedTypes('hiringManager.name', array('string'));
-        $optionsResolver->setAllowedTypes('approver.contactId', array('array'));
-        $optionsResolver->setAllowedTypes('approver.name', array('string'));
-        $optionsResolver->setAllowedTypes('approver.pending', array('bool'));
-        $optionsResolver->setAllowedTypes('userId', array('array'));
-        $optionsResolver->setAllowedTypes('ownerUserId', array('array'));
-        $optionsResolver->setAllowedTypes('recruiterUserId', array('array'));
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->setAllowedTypes('sort', array('array'));
-        $optionsResolver->setAllowedTypes('fields', array('array'));
-        $optionsResolver->setAllowedTypes('embed', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('requisitionId', array('array'));
+        $optionsResolver->addAllowedTypes('companyId', array('array'));
+        $optionsResolver->addAllowedTypes('status', array('array'));
+        $optionsResolver->addAllowedTypes('hiringManager.contactId', array('array'));
+        $optionsResolver->addAllowedTypes('hiringManager.name', array('string'));
+        $optionsResolver->addAllowedTypes('approver.contactId', array('array'));
+        $optionsResolver->addAllowedTypes('approver.name', array('string'));
+        $optionsResolver->addAllowedTypes('approver.pending', array('bool'));
+        $optionsResolver->addAllowedTypes('userId', array('array'));
+        $optionsResolver->addAllowedTypes('ownerUserId', array('array'));
+        $optionsResolver->addAllowedTypes('recruiterUserId', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('sort', array('array'));
+        $optionsResolver->addAllowedTypes('fields', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -91,10 +91,16 @@ class FindRequisitions extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
      *
      * @return null|\Varspool\JobAdder\V2\Model\RequisitionListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\RequisitionListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

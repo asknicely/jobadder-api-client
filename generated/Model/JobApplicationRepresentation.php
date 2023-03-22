@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -148,6 +156,7 @@ class JobApplicationRepresentation
      */
     public function setApplicationId(int $applicationId) : self
     {
+        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -169,6 +178,7 @@ class JobApplicationRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -190,6 +200,7 @@ class JobApplicationRepresentation
      */
     public function setJobReference(string $jobReference) : self
     {
+        $this->initialized['jobReference'] = true;
         $this->jobReference = $jobReference;
         return $this;
     }
@@ -211,6 +222,7 @@ class JobApplicationRepresentation
      */
     public function setManual(bool $manual) : self
     {
+        $this->initialized['manual'] = true;
         $this->manual = $manual;
         return $this;
     }
@@ -232,6 +244,7 @@ class JobApplicationRepresentation
      */
     public function setSource(string $source) : self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -253,6 +266,7 @@ class JobApplicationRepresentation
      */
     public function setRating(int $rating) : self
     {
+        $this->initialized['rating'] = true;
         $this->rating = $rating;
         return $this;
     }
@@ -274,6 +288,7 @@ class JobApplicationRepresentation
      */
     public function setStatus(JobApplicationStatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -295,6 +310,7 @@ class JobApplicationRepresentation
      */
     public function setReview(JobApplicationReviewModel $review) : self
     {
+        $this->initialized['review'] = true;
         $this->review = $review;
         return $this;
     }
@@ -316,6 +332,7 @@ class JobApplicationRepresentation
      */
     public function setCandidate(CandidateNameModel $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -337,6 +354,7 @@ class JobApplicationRepresentation
      */
     public function setJob(JobOrderTitleModel $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -358,6 +376,7 @@ class JobApplicationRepresentation
      */
     public function setJobAd(JobAdSummaryModel $jobAd) : self
     {
+        $this->initialized['jobAd'] = true;
         $this->jobAd = $jobAd;
         return $this;
     }
@@ -379,6 +398,7 @@ class JobApplicationRepresentation
      */
     public function setSubmittedDetails(JobApplicationSubmittedDetailsModel $submittedDetails) : self
     {
+        $this->initialized['submittedDetails'] = true;
         $this->submittedDetails = $submittedDetails;
         return $this;
     }
@@ -400,6 +420,7 @@ class JobApplicationRepresentation
      */
     public function setScreening(JobApplicationScreeningModel $screening) : self
     {
+        $this->initialized['screening'] = true;
         $this->screening = $screening;
         return $this;
     }
@@ -421,6 +442,7 @@ class JobApplicationRepresentation
      */
     public function setCustom(array $custom) : self
     {
+        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -442,6 +464,7 @@ class JobApplicationRepresentation
      */
     public function setPartnerActions(array $partnerActions) : self
     {
+        $this->initialized['partnerActions'] = true;
         $this->partnerActions = $partnerActions;
         return $this;
     }
@@ -463,6 +486,7 @@ class JobApplicationRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -484,6 +508,7 @@ class JobApplicationRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -505,6 +530,7 @@ class JobApplicationRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -526,6 +552,7 @@ class JobApplicationRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -547,6 +574,7 @@ class JobApplicationRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -568,6 +596,7 @@ class JobApplicationRepresentation
      */
     public function setLinks(JobApplicationLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

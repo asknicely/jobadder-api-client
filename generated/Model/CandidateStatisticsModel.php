@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateStatisticsModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var CandidateJobApplicationStatisticsSummaryModel
@@ -34,6 +42,7 @@ class CandidateStatisticsModel
      */
     public function setApplications(CandidateJobApplicationStatisticsSummaryModel $applications) : self
     {
+        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }
@@ -55,6 +64,7 @@ class CandidateStatisticsModel
      */
     public function setPlacements(CandidatePlacementStatisticsSummaryModel $placements) : self
     {
+        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }

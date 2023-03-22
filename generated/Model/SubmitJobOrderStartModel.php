@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitJobOrderStartModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var bool
@@ -40,6 +48,7 @@ class SubmitJobOrderStartModel
      */
     public function setImmediate(bool $immediate) : self
     {
+        $this->initialized['immediate'] = true;
         $this->immediate = $immediate;
         return $this;
     }
@@ -61,6 +70,7 @@ class SubmitJobOrderStartModel
      */
     public function setRelative(SubmitRelativeStartModel $relative) : self
     {
+        $this->initialized['relative'] = true;
         $this->relative = $relative;
         return $this;
     }
@@ -82,6 +92,7 @@ class SubmitJobOrderStartModel
      */
     public function setDate(\DateTime $date) : self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
         return $this;
     }

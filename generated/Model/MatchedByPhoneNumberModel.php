@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class MatchedByPhoneNumberModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Top 5 most recently updated matching candidates
      *
      * @var CandidateMatchedByPhoneModel[]
@@ -52,6 +60,7 @@ class MatchedByPhoneNumberModel
      */
     public function setCandidates(array $candidates) : self
     {
+        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -73,6 +82,7 @@ class MatchedByPhoneNumberModel
      */
     public function setContacts(array $contacts) : self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -94,6 +104,7 @@ class MatchedByPhoneNumberModel
      */
     public function setCompanies(array $companies) : self
     {
+        $this->initialized['companies'] = true;
         $this->companies = $companies;
         return $this;
     }
@@ -115,6 +126,7 @@ class MatchedByPhoneNumberModel
      */
     public function setUsers(array $users) : self
     {
+        $this->initialized['users'] = true;
         $this->users = $users;
         return $this;
     }
@@ -136,6 +148,7 @@ class MatchedByPhoneNumberModel
      */
     public function setQuality(string $quality) : self
     {
+        $this->initialized['quality'] = true;
         $this->quality = $quality;
         return $this;
     }

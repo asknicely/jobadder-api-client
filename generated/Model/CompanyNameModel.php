@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyNameModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique identifier for the company
      *
      * @var int
@@ -46,6 +54,7 @@ class CompanyNameModel
      */
     public function setCompanyId(int $companyId) : self
     {
+        $this->initialized['companyId'] = true;
         $this->companyId = $companyId;
         return $this;
     }
@@ -67,6 +76,7 @@ class CompanyNameModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -88,6 +98,7 @@ class CompanyNameModel
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -109,6 +120,7 @@ class CompanyNameModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }

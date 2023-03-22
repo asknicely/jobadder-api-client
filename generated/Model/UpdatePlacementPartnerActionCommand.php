@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdatePlacementPartnerActionCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Optional partner defined action status/progress
      *
      * @var string
@@ -34,6 +42,7 @@ class UpdatePlacementPartnerActionCommand
      */
     public function setStatus(string $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -55,6 +64,7 @@ class UpdatePlacementPartnerActionCommand
      */
     public function setResult(PartnerActionResultCommandModel $result) : self
     {
+        $this->initialized['result'] = true;
         $this->result = $result;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobBoardPortalFieldModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -52,6 +60,7 @@ class JobBoardPortalFieldModel
      */
     public function setFieldId(int $fieldId) : self
     {
+        $this->initialized['fieldId'] = true;
         $this->fieldId = $fieldId;
         return $this;
     }
@@ -73,6 +82,7 @@ class JobBoardPortalFieldModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -94,6 +104,7 @@ class JobBoardPortalFieldModel
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -115,6 +126,7 @@ class JobBoardPortalFieldModel
      */
     public function setListValues(array $listValues) : self
     {
+        $this->initialized['listValues'] = true;
         $this->listValues = $listValues;
         return $this;
     }
@@ -136,6 +148,7 @@ class JobBoardPortalFieldModel
      */
     public function setFields(array $fields) : self
     {
+        $this->initialized['fields'] = true;
         $this->fields = $fields;
         return $this;
     }

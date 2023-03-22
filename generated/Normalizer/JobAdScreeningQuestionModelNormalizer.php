@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,74 +16,82 @@ class JobAdScreeningQuestionModelNormalizer implements DenormalizerInterface, No
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobAdScreeningQuestionModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobAdScreeningQuestionModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobAdScreeningQuestionModel();
-        if (property_exists($data, 'question')) {
-            $object->setQuestion($data->{'question'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'answerType')) {
-            $object->setAnswerType($data->{'answerType'});
+        if (\array_key_exists('question', $data)) {
+            $object->setQuestion($data['question']);
         }
-        if (property_exists($data, 'mandatory')) {
-            $object->setMandatory($data->{'mandatory'});
+        if (\array_key_exists('answerType', $data)) {
+            $object->setAnswerType($data['answerType']);
         }
-        if (property_exists($data, 'maxLength')) {
-            $object->setMaxLength($data->{'maxLength'});
+        if (\array_key_exists('mandatory', $data)) {
+            $object->setMandatory($data['mandatory']);
         }
-        if (property_exists($data, 'multiSelect')) {
-            $object->setMultiSelect($data->{'multiSelect'});
+        if (\array_key_exists('maxLength', $data)) {
+            $object->setMaxLength($data['maxLength']);
         }
-        if (property_exists($data, 'values')) {
+        if (\array_key_exists('multiSelect', $data)) {
+            $object->setMultiSelect($data['multiSelect']);
+        }
+        if (\array_key_exists('values', $data)) {
             $values = array();
-            foreach ($data->{'values'} as $value) {
+            foreach ($data['values'] as $value) {
                 $values[] = $value;
             }
             $object->setValues($values);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getQuestion()) {
-            $data->{'question'} = $object->getQuestion();
+        $data = array();
+        if ($object->isInitialized('question') && null !== $object->getQuestion()) {
+            $data['question'] = $object->getQuestion();
         }
-        if (null !== $object->getAnswerType()) {
-            $data->{'answerType'} = $object->getAnswerType();
+        if ($object->isInitialized('answerType') && null !== $object->getAnswerType()) {
+            $data['answerType'] = $object->getAnswerType();
         }
-        if (null !== $object->getMandatory()) {
-            $data->{'mandatory'} = $object->getMandatory();
+        if ($object->isInitialized('mandatory') && null !== $object->getMandatory()) {
+            $data['mandatory'] = $object->getMandatory();
         }
-        if (null !== $object->getMaxLength()) {
-            $data->{'maxLength'} = $object->getMaxLength();
+        if ($object->isInitialized('maxLength') && null !== $object->getMaxLength()) {
+            $data['maxLength'] = $object->getMaxLength();
         }
-        if (null !== $object->getMultiSelect()) {
-            $data->{'multiSelect'} = $object->getMultiSelect();
+        if ($object->isInitialized('multiSelect') && null !== $object->getMultiSelect()) {
+            $data['multiSelect'] = $object->getMultiSelect();
         }
-        if (null !== $object->getValues()) {
+        if ($object->isInitialized('values') && null !== $object->getValues()) {
             $values = array();
             foreach ($object->getValues() as $value) {
                 $values[] = $value;
             }
-            $data->{'values'} = $values;
+            $data['values'] = $values;
         }
         return $data;
     }

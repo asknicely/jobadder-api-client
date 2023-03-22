@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class RequisitionLogModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var ContactNameModel
@@ -52,6 +60,7 @@ class RequisitionLogModel
      */
     public function setContact(ContactNameModel $contact) : self
     {
+        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -73,6 +82,7 @@ class RequisitionLogModel
      */
     public function setOldStatus(string $oldStatus) : self
     {
+        $this->initialized['oldStatus'] = true;
         $this->oldStatus = $oldStatus;
         return $this;
     }
@@ -94,6 +104,7 @@ class RequisitionLogModel
      */
     public function setNewStatus(string $newStatus) : self
     {
+        $this->initialized['newStatus'] = true;
         $this->newStatus = $newStatus;
         return $this;
     }
@@ -115,6 +126,7 @@ class RequisitionLogModel
      */
     public function setMessage(string $message) : self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }
@@ -136,6 +148,7 @@ class RequisitionLogModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

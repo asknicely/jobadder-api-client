@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,54 +16,62 @@ class JobApplicationLinksNormalizer implements DenormalizerInterface, Normalizer
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobApplicationLinks';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobApplicationLinks';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobApplicationLinks();
-        if (property_exists($data, 'self')) {
-            $object->setSelf($data->{'self'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'attachments')) {
-            $object->setAttachments($data->{'attachments'});
+        if (\array_key_exists('self', $data)) {
+            $object->setSelf($data['self']);
         }
-        if (property_exists($data, 'resume')) {
-            $object->setResume($data->{'resume'});
+        if (\array_key_exists('attachments', $data)) {
+            $object->setAttachments($data['attachments']);
         }
-        if (property_exists($data, 'coverLetter')) {
-            $object->setCoverLetter($data->{'coverLetter'});
+        if (\array_key_exists('resume', $data)) {
+            $object->setResume($data['resume']);
+        }
+        if (\array_key_exists('coverLetter', $data)) {
+            $object->setCoverLetter($data['coverLetter']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getSelf()) {
-            $data->{'self'} = $object->getSelf();
+        $data = array();
+        if ($object->isInitialized('self') && null !== $object->getSelf()) {
+            $data['self'] = $object->getSelf();
         }
-        if (null !== $object->getAttachments()) {
-            $data->{'attachments'} = $object->getAttachments();
+        if ($object->isInitialized('attachments') && null !== $object->getAttachments()) {
+            $data['attachments'] = $object->getAttachments();
         }
-        if (null !== $object->getResume()) {
-            $data->{'resume'} = $object->getResume();
+        if ($object->isInitialized('resume') && null !== $object->getResume()) {
+            $data['resume'] = $object->getResume();
         }
-        if (null !== $object->getCoverLetter()) {
-            $data->{'coverLetter'} = $object->getCoverLetter();
+        if ($object->isInitialized('coverLetter') && null !== $object->getCoverLetter()) {
+            $data['coverLetter'] = $object->getCoverLetter();
         }
         return $data;
     }

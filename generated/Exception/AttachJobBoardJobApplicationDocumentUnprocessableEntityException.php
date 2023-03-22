@@ -2,16 +2,28 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class AttachJobBoardJobApplicationDocumentUnprocessableEntityException extends \RuntimeException implements ClientException
+class AttachJobBoardJobApplicationDocumentUnprocessableEntityException extends UnprocessableEntityException
 {
+    /**
+     * @var \Varspool\JobAdder\V2\Model\ErrorModel
+     */
     private $errorModel;
-    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel)
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Varspool\JobAdder\V2\Model\ErrorModel $errorModel, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Validation error', 422);
+        parent::__construct('Validation error');
         $this->errorModel = $errorModel;
+        $this->response = $response;
     }
-    public function getErrorModel()
+    public function getErrorModel() : \Varspool\JobAdder\V2\Model\ErrorModel
     {
         return $this->errorModel;
+    }
+    public function getResponse() : \Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

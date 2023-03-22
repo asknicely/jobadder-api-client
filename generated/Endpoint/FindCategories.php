@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindCategories extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindCategories extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -19,7 +19,7 @@ class FindCategories extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -42,10 +42,10 @@ class FindCategories extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
         $optionsResolver->setDefined(array('categoryId', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('categoryId', array('array'));
-        $optionsResolver->setAllowedTypes('embed', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('categoryId', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -54,10 +54,16 @@ class FindCategories extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
      *
      * @return null|\Varspool\JobAdder\V2\Model\CategoryListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CategoryListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

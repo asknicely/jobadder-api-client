@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitPlacementBillingModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -64,6 +72,7 @@ class SubmitPlacementBillingModel
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -85,6 +94,7 @@ class SubmitPlacementBillingModel
      */
     public function setAddressId(string $addressId) : self
     {
+        $this->initialized['addressId'] = true;
         $this->addressId = $addressId;
         return $this;
     }
@@ -106,6 +116,7 @@ class SubmitPlacementBillingModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -127,6 +138,7 @@ class SubmitPlacementBillingModel
      */
     public function setOrderRef(string $orderRef) : self
     {
+        $this->initialized['orderRef'] = true;
         $this->orderRef = $orderRef;
         return $this;
     }
@@ -148,6 +160,7 @@ class SubmitPlacementBillingModel
      */
     public function setInvoiceRef(string $invoiceRef) : self
     {
+        $this->initialized['invoiceRef'] = true;
         $this->invoiceRef = $invoiceRef;
         return $this;
     }
@@ -169,6 +182,7 @@ class SubmitPlacementBillingModel
      */
     public function setTerms(string $terms) : self
     {
+        $this->initialized['terms'] = true;
         $this->terms = $terms;
         return $this;
     }
@@ -190,6 +204,7 @@ class SubmitPlacementBillingModel
      */
     public function setDueDate(\DateTime $dueDate) : self
     {
+        $this->initialized['dueDate'] = true;
         $this->dueDate = $dueDate;
         return $this;
     }

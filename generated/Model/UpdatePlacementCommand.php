@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class UpdatePlacementCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -112,6 +120,7 @@ class UpdatePlacementCommand
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -133,6 +142,7 @@ class UpdatePlacementCommand
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -154,6 +164,7 @@ class UpdatePlacementCommand
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -175,6 +186,7 @@ class UpdatePlacementCommand
      */
     public function setStatusId(int $statusId) : self
     {
+        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -196,6 +208,7 @@ class UpdatePlacementCommand
      */
     public function setPaymentType(string $paymentType) : self
     {
+        $this->initialized['paymentType'] = true;
         $this->paymentType = $paymentType;
         return $this;
     }
@@ -217,6 +230,7 @@ class UpdatePlacementCommand
      */
     public function setStartDate(\DateTime $startDate) : self
     {
+        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }
@@ -238,6 +252,7 @@ class UpdatePlacementCommand
      */
     public function setEndDate(\DateTime $endDate) : self
     {
+        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }
@@ -259,6 +274,7 @@ class UpdatePlacementCommand
      */
     public function setSalary(SubmitPlacementSalaryModel $salary) : self
     {
+        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }
@@ -280,6 +296,7 @@ class UpdatePlacementCommand
      */
     public function setContractRate(SubmitPlacementContractRateModel $contractRate) : self
     {
+        $this->initialized['contractRate'] = true;
         $this->contractRate = $contractRate;
         return $this;
     }
@@ -301,6 +318,7 @@ class UpdatePlacementCommand
      */
     public function setAward(string $award) : self
     {
+        $this->initialized['award'] = true;
         $this->award = $award;
         return $this;
     }
@@ -322,6 +340,7 @@ class UpdatePlacementCommand
      */
     public function setIndustryCode(string $industryCode) : self
     {
+        $this->initialized['industryCode'] = true;
         $this->industryCode = $industryCode;
         return $this;
     }
@@ -343,6 +362,7 @@ class UpdatePlacementCommand
      */
     public function setBilling(SubmitPlacementBillingModel $billing) : self
     {
+        $this->initialized['billing'] = true;
         $this->billing = $billing;
         return $this;
     }
@@ -364,6 +384,7 @@ class UpdatePlacementCommand
      */
     public function setFeeSplit(string $feeSplit) : self
     {
+        $this->initialized['feeSplit'] = true;
         $this->feeSplit = $feeSplit;
         return $this;
     }
@@ -385,6 +406,7 @@ class UpdatePlacementCommand
      */
     public function setRecruiters(array $recruiters) : self
     {
+        $this->initialized['recruiters'] = true;
         $this->recruiters = $recruiters;
         return $this;
     }
@@ -406,6 +428,7 @@ class UpdatePlacementCommand
      */
     public function setCustom(array $custom) : self
     {
+        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }

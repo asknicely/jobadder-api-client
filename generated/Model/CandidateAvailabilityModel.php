@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateAvailabilityModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Date available ([ISO full-date](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#rfc.section.5.6))
      *
      * @var \DateTime
@@ -52,6 +60,7 @@ class CandidateAvailabilityModel
      */
     public function setDate(\DateTime $date) : self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
         return $this;
     }
@@ -73,6 +82,7 @@ class CandidateAvailabilityModel
      */
     public function setDay(string $day) : self
     {
+        $this->initialized['day'] = true;
         $this->day = $day;
         return $this;
     }
@@ -94,6 +104,7 @@ class CandidateAvailabilityModel
      */
     public function setShifts(array $shifts) : self
     {
+        $this->initialized['shifts'] = true;
         $this->shifts = $shifts;
         return $this;
     }
@@ -115,6 +126,7 @@ class CandidateAvailabilityModel
      */
     public function setRecurring(bool $recurring) : self
     {
+        $this->initialized['recurring'] = true;
         $this->recurring = $recurring;
         return $this;
     }
@@ -136,6 +148,7 @@ class CandidateAvailabilityModel
      */
     public function setUntil(\DateTime $until) : self
     {
+        $this->initialized['until'] = true;
         $this->until = $until;
         return $this;
     }

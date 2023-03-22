@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetFloat extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetFloat extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $floatId;
     /**
@@ -14,7 +14,7 @@ class GetFloat extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane
     {
         $this->floatId = $floatId;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,13 +38,19 @@ class GetFloat extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane
      *
      * @return null|\Varspool\JobAdder\V2\Model\FloatRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\FloatRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetFloatNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetFloatNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

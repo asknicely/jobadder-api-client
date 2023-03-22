@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -142,6 +150,7 @@ class NoteRepresentation
      */
     public function setNoteId(string $noteId) : self
     {
+        $this->initialized['noteId'] = true;
         $this->noteId = $noteId;
         return $this;
     }
@@ -163,6 +172,7 @@ class NoteRepresentation
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -184,6 +194,7 @@ class NoteRepresentation
      */
     public function setSource(string $source) : self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
         return $this;
     }
@@ -205,6 +216,7 @@ class NoteRepresentation
      */
     public function setText(string $text) : self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -226,6 +238,7 @@ class NoteRepresentation
      */
     public function setSubject(string $subject) : self
     {
+        $this->initialized['subject'] = true;
         $this->subject = $subject;
         return $this;
     }
@@ -247,6 +260,7 @@ class NoteRepresentation
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -268,6 +282,7 @@ class NoteRepresentation
      */
     public function setReadonly(bool $readonly) : self
     {
+        $this->initialized['readonly'] = true;
         $this->readonly = $readonly;
         return $this;
     }
@@ -289,6 +304,7 @@ class NoteRepresentation
      */
     public function setAttachments(array $attachments) : self
     {
+        $this->initialized['attachments'] = true;
         $this->attachments = $attachments;
         return $this;
     }
@@ -310,6 +326,7 @@ class NoteRepresentation
      */
     public function setJobs(array $jobs) : self
     {
+        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -331,6 +348,7 @@ class NoteRepresentation
      */
     public function setRequisitions(array $requisitions) : self
     {
+        $this->initialized['requisitions'] = true;
         $this->requisitions = $requisitions;
         return $this;
     }
@@ -352,6 +370,7 @@ class NoteRepresentation
      */
     public function setCandidates(array $candidates) : self
     {
+        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -373,6 +392,7 @@ class NoteRepresentation
      */
     public function setApplications(array $applications) : self
     {
+        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }
@@ -394,6 +414,7 @@ class NoteRepresentation
      */
     public function setPlacements(array $placements) : self
     {
+        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -415,6 +436,7 @@ class NoteRepresentation
      */
     public function setCompanies(array $companies) : self
     {
+        $this->initialized['companies'] = true;
         $this->companies = $companies;
         return $this;
     }
@@ -436,6 +458,7 @@ class NoteRepresentation
      */
     public function setContacts(array $contacts) : self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -457,6 +480,7 @@ class NoteRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -478,6 +502,7 @@ class NoteRepresentation
      */
     public function setLinks(NoteLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }
@@ -499,6 +524,7 @@ class NoteRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -520,6 +546,7 @@ class NoteRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -541,6 +568,7 @@ class NoteRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

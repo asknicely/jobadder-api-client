@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderInvoicePlacementModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -40,6 +48,7 @@ class JobOrderInvoicePlacementModel
      */
     public function setCandidateId(int $candidateId) : self
     {
+        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -61,6 +70,7 @@ class JobOrderInvoicePlacementModel
      */
     public function setPlacementId(int $placementId) : self
     {
+        $this->initialized['placementId'] = true;
         $this->placementId = $placementId;
         return $this;
     }
@@ -82,6 +92,7 @@ class JobOrderInvoicePlacementModel
      */
     public function setStartDate(\DateTime $startDate) : self
     {
+        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }

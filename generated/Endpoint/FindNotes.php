@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindNotes extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -44,7 +44,7 @@ class FindNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -67,24 +67,24 @@ class FindNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
         $optionsResolver->setDefined(array('noteId', 'type', 'reference', 'createdAt', 'updatedAt', 'candidateId', 'companyId', 'contactId', 'jobId', 'requisitionId', 'applicationId', 'placementId', 'entityType', 'embed', 'offset', 'limit', 'sort', 'fields'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('noteId', array('array'));
-        $optionsResolver->setAllowedTypes('type', array('array'));
-        $optionsResolver->setAllowedTypes('reference', array('array'));
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->setAllowedTypes('candidateId', array('array'));
-        $optionsResolver->setAllowedTypes('companyId', array('array'));
-        $optionsResolver->setAllowedTypes('contactId', array('array'));
-        $optionsResolver->setAllowedTypes('jobId', array('array'));
-        $optionsResolver->setAllowedTypes('requisitionId', array('array'));
-        $optionsResolver->setAllowedTypes('applicationId', array('array'));
-        $optionsResolver->setAllowedTypes('placementId', array('array'));
-        $optionsResolver->setAllowedTypes('entityType', array('string'));
-        $optionsResolver->setAllowedTypes('embed', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
-        $optionsResolver->setAllowedTypes('sort', array('array'));
-        $optionsResolver->setAllowedTypes('fields', array('array'));
+        $optionsResolver->addAllowedTypes('noteId', array('array'));
+        $optionsResolver->addAllowedTypes('type', array('array'));
+        $optionsResolver->addAllowedTypes('reference', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('candidateId', array('array'));
+        $optionsResolver->addAllowedTypes('companyId', array('array'));
+        $optionsResolver->addAllowedTypes('contactId', array('array'));
+        $optionsResolver->addAllowedTypes('jobId', array('array'));
+        $optionsResolver->addAllowedTypes('requisitionId', array('array'));
+        $optionsResolver->addAllowedTypes('applicationId', array('array'));
+        $optionsResolver->addAllowedTypes('placementId', array('array'));
+        $optionsResolver->addAllowedTypes('entityType', array('string'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('sort', array('array'));
+        $optionsResolver->addAllowedTypes('fields', array('array'));
         return $optionsResolver;
     }
     /**
@@ -93,10 +93,16 @@ class FindNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
      *
      * @return null|\Varspool\JobAdder\V2\Model\NoteListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\NoteListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

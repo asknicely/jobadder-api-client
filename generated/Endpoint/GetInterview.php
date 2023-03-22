@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetInterview extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetInterview extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $interviewId;
     protected $applicationId;
@@ -22,7 +22,7 @@ class GetInterview extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
         $this->applicationId = $applicationId;
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -45,7 +45,7 @@ class GetInterview extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
         $optionsResolver->setDefined(array('embed'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
         return $optionsResolver;
     }
     /**
@@ -55,13 +55,19 @@ class GetInterview extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
      *
      * @return null|\Varspool\JobAdder\V2\Model\InterviewRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\InterviewRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetInterviewNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetInterviewNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

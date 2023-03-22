@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobBoardSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -40,6 +48,7 @@ class JobBoardSummaryModel
      */
     public function setBoardId(int $boardId) : self
     {
+        $this->initialized['boardId'] = true;
         $this->boardId = $boardId;
         return $this;
     }
@@ -61,6 +70,7 @@ class JobBoardSummaryModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -82,6 +92,7 @@ class JobBoardSummaryModel
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }

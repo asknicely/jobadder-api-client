@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmissionRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -106,6 +114,7 @@ class SubmissionRepresentation
      */
     public function setSubmissionId(int $submissionId) : self
     {
+        $this->initialized['submissionId'] = true;
         $this->submissionId = $submissionId;
         return $this;
     }
@@ -127,6 +136,7 @@ class SubmissionRepresentation
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -148,6 +158,7 @@ class SubmissionRepresentation
      */
     public function setCandidate(CandidateSummaryModel $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -169,6 +180,7 @@ class SubmissionRepresentation
      */
     public function setCompany(CompanyNameModel $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -190,6 +202,7 @@ class SubmissionRepresentation
      */
     public function setJob(JobOrderSummaryModel $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -211,6 +224,7 @@ class SubmissionRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -232,6 +246,7 @@ class SubmissionRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -253,6 +268,7 @@ class SubmissionRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -274,6 +290,7 @@ class SubmissionRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -295,6 +312,7 @@ class SubmissionRepresentation
      */
     public function setCandidateSummary(string $candidateSummary) : self
     {
+        $this->initialized['candidateSummary'] = true;
         $this->candidateSummary = $candidateSummary;
         return $this;
     }
@@ -316,6 +334,7 @@ class SubmissionRepresentation
      */
     public function setApplication(JobApplicationSummaryModel $application) : self
     {
+        $this->initialized['application'] = true;
         $this->application = $application;
         return $this;
     }
@@ -337,6 +356,7 @@ class SubmissionRepresentation
      */
     public function setContacts(array $contacts) : self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -358,6 +378,7 @@ class SubmissionRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -379,6 +400,7 @@ class SubmissionRepresentation
      */
     public function setLinks(SubmissionLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

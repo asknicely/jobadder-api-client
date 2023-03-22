@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindCandidateActivities extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindCandidateActivities extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -26,7 +26,7 @@ class FindCandidateActivities extends \Jane\OpenApiRuntime\Client\BaseEndpoint i
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -49,11 +49,11 @@ class FindCandidateActivities extends \Jane\OpenApiRuntime\Client\BaseEndpoint i
         $optionsResolver->setDefined(array('createdAt', 'updatedAt', 'includeDetails', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->setAllowedTypes('includeDetails', array('bool'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('includeDetails', array('bool'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -62,10 +62,16 @@ class FindCandidateActivities extends \Jane\OpenApiRuntime\Client\BaseEndpoint i
      *
      * @return null|\Varspool\JobAdder\V2\Model\CandidateActivityListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CandidateActivityListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

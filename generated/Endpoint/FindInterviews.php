@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindInterviews extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindInterviews extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -40,7 +40,7 @@ class FindInterviews extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -63,21 +63,21 @@ class FindInterviews extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
         $optionsResolver->setDefined(array('interviewId', 'jobId', 'userId', 'contactId', 'candidateId', 'applicationId', 'type', 'startAt', 'endAt', 'location', 'createdBy', 'createdAt', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('interviewId', array('array'));
-        $optionsResolver->setAllowedTypes('jobId', array('array'));
-        $optionsResolver->setAllowedTypes('userId', array('array'));
-        $optionsResolver->setAllowedTypes('contactId', array('array'));
-        $optionsResolver->setAllowedTypes('candidateId', array('array'));
-        $optionsResolver->setAllowedTypes('applicationId', array('array'));
-        $optionsResolver->setAllowedTypes('type', array('array'));
-        $optionsResolver->setAllowedTypes('startAt', array('array'));
-        $optionsResolver->setAllowedTypes('endAt', array('array'));
-        $optionsResolver->setAllowedTypes('location', array('string'));
-        $optionsResolver->setAllowedTypes('createdBy', array('array'));
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('embed', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('interviewId', array('array'));
+        $optionsResolver->addAllowedTypes('jobId', array('array'));
+        $optionsResolver->addAllowedTypes('userId', array('array'));
+        $optionsResolver->addAllowedTypes('contactId', array('array'));
+        $optionsResolver->addAllowedTypes('candidateId', array('array'));
+        $optionsResolver->addAllowedTypes('applicationId', array('array'));
+        $optionsResolver->addAllowedTypes('type', array('array'));
+        $optionsResolver->addAllowedTypes('startAt', array('array'));
+        $optionsResolver->addAllowedTypes('endAt', array('array'));
+        $optionsResolver->addAllowedTypes('location', array('string'));
+        $optionsResolver->addAllowedTypes('createdBy', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -86,10 +86,16 @@ class FindInterviews extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
      *
      * @return null|\Varspool\JobAdder\V2\Model\InterviewListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\InterviewListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

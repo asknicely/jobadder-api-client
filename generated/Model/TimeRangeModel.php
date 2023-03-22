@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class TimeRangeModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Start time of day interval ([ISO partial-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#rfc.section.5.6))
      *
      * @var string
@@ -34,6 +42,7 @@ class TimeRangeModel
      */
     public function setStart(string $start) : self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
         return $this;
     }
@@ -55,6 +64,7 @@ class TimeRangeModel
      */
     public function setEnd(string $end) : self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
         return $this;
     }

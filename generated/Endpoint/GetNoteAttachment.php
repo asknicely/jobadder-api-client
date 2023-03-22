@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetNoteAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetNoteAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $noteId;
     protected $attachmentId;
@@ -17,7 +17,7 @@ class GetNoteAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
         $this->noteId = $noteId;
         $this->attachmentId = $attachmentId;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -37,13 +37,19 @@ class GetNoteAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return null;
+            return json_decode($body);
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetNoteAttachmentNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetNoteAttachmentNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

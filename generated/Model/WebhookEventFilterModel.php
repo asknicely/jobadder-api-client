@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class WebhookEventFilterModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var WebhookEventStatusChangeFilterModel
@@ -28,6 +36,7 @@ class WebhookEventFilterModel
      */
     public function setJobapplicationStatusChanged(WebhookEventStatusChangeFilterModel $jobapplicationStatusChanged) : self
     {
+        $this->initialized['jobapplicationStatusChanged'] = true;
         $this->jobapplicationStatusChanged = $jobapplicationStatusChanged;
         return $this;
     }

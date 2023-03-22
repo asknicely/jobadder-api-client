@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmittedJobApplicationModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -34,6 +42,7 @@ class SubmittedJobApplicationModel
      */
     public function setApplicationId(int $applicationId) : self
     {
+        $this->initialized['applicationId'] = true;
         $this->applicationId = $applicationId;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmittedJobApplicationModel
      */
     public function setLinks(SubmittedJobApplicationLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

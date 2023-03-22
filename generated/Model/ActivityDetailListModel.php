@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityDetailListModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var ActivitySingleValueDetailModel[]
@@ -46,6 +54,7 @@ class ActivityDetailListModel
      */
     public function setTextAnswers(array $textAnswers) : self
     {
+        $this->initialized['textAnswers'] = true;
         $this->textAnswers = $textAnswers;
         return $this;
     }
@@ -67,6 +76,7 @@ class ActivityDetailListModel
      */
     public function setListValueAnswers(array $listValueAnswers) : self
     {
+        $this->initialized['listValueAnswers'] = true;
         $this->listValueAnswers = $listValueAnswers;
         return $this;
     }
@@ -88,6 +98,7 @@ class ActivityDetailListModel
      */
     public function setDateValueAnswers(array $dateValueAnswers) : self
     {
+        $this->initialized['dateValueAnswers'] = true;
         $this->dateValueAnswers = $dateValueAnswers;
         return $this;
     }
@@ -109,6 +120,7 @@ class ActivityDetailListModel
      */
     public function setRatingValueAnswers(array $ratingValueAnswers) : self
     {
+        $this->initialized['ratingValueAnswers'] = true;
         $this->ratingValueAnswers = $ratingValueAnswers;
         return $this;
     }

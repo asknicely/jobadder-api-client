@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class UpdateCompanyUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class UpdateCompanyUserTask extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $companyId;
     protected $taskId;
@@ -19,7 +19,7 @@ class UpdateCompanyUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
         $this->taskId = $taskId;
         $this->body = $command;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'PUT';
@@ -44,8 +44,10 @@ class UpdateCompanyUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
      *
      * @return null|\Varspool\JobAdder\V2\Model\CompanyUserTaskModel
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return null;
         }
@@ -53,10 +55,14 @@ class UpdateCompanyUserTask extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CompanyUserTaskModel', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\UpdateCompanyUserTaskNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\UpdateCompanyUserTaskNotFoundException($response);
         }
         if (422 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\UpdateCompanyUserTaskUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'));
+            throw new \Varspool\JobAdder\V2\Exception\UpdateCompanyUserTaskUnprocessableEntityException($serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json'), $response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindCountries extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindCountries extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
      * 
@@ -15,7 +15,7 @@ class FindCountries extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,7 +38,7 @@ class FindCountries extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
         $optionsResolver->setDefined(array('code'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('code', array('array'));
+        $optionsResolver->addAllowedTypes('code', array('array'));
         return $optionsResolver;
     }
     /**
@@ -47,10 +47,16 @@ class FindCountries extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
      *
      * @return null|\Varspool\JobAdder\V2\Model\CountryListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CountryListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

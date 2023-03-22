@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SetJobApplicationCustomFieldListValuesCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Available values for a list custom field
      *
      * @var string[]
@@ -28,6 +36,7 @@ class SetJobApplicationCustomFieldListValuesCommand
      */
     public function setValues(array $values) : self
     {
+        $this->initialized['values'] = true;
         $this->values = $values;
         return $this;
     }

@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,48 +16,56 @@ class JobOrderInvoicePlacementModelNormalizer implements DenormalizerInterface, 
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoicePlacementModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoicePlacementModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderInvoicePlacementModel();
-        if (property_exists($data, 'candidateId')) {
-            $object->setCandidateId($data->{'candidateId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'placementId')) {
-            $object->setPlacementId($data->{'placementId'});
+        if (\array_key_exists('candidateId', $data)) {
+            $object->setCandidateId($data['candidateId']);
         }
-        if (property_exists($data, 'startDate')) {
-            $object->setStartDate(\DateTime::createFromFormat('Y-m-d', $data->{'startDate'})->setTime(0, 0, 0));
+        if (\array_key_exists('placementId', $data)) {
+            $object->setPlacementId($data['placementId']);
+        }
+        if (\array_key_exists('startDate', $data)) {
+            $object->setStartDate(\DateTime::createFromFormat('Y-m-d', $data['startDate'])->setTime(0, 0, 0));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getCandidateId()) {
-            $data->{'candidateId'} = $object->getCandidateId();
+        $data = array();
+        if ($object->isInitialized('candidateId') && null !== $object->getCandidateId()) {
+            $data['candidateId'] = $object->getCandidateId();
         }
-        if (null !== $object->getPlacementId()) {
-            $data->{'placementId'} = $object->getPlacementId();
+        if ($object->isInitialized('placementId') && null !== $object->getPlacementId()) {
+            $data['placementId'] = $object->getPlacementId();
         }
-        if (null !== $object->getStartDate()) {
-            $data->{'startDate'} = $object->getStartDate()->format('Y-m-d');
+        if ($object->isInitialized('startDate') && null !== $object->getStartDate()) {
+            $data['startDate'] = $object->getStartDate()->format('Y-m-d');
         }
         return $data;
     }

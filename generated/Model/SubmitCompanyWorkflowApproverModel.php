@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitCompanyWorkflowApproverModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -34,6 +42,7 @@ class SubmitCompanyWorkflowApproverModel
      */
     public function setStageIndex(int $stageIndex) : self
     {
+        $this->initialized['stageIndex'] = true;
         $this->stageIndex = $stageIndex;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmitCompanyWorkflowApproverModel
      */
     public function setContactId(array $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }

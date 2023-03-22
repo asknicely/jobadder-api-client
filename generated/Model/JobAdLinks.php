@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdLinks
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class JobAdLinks
      */
     public function setSelf(string $self) : self
     {
+        $this->initialized['self'] = true;
         $this->self = $self;
         return $this;
     }
@@ -73,6 +82,7 @@ class JobAdLinks
      */
     public function setJob(string $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -94,6 +104,7 @@ class JobAdLinks
      */
     public function setCompany(string $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -115,6 +126,7 @@ class JobAdLinks
      */
     public function setContact(string $contact) : self
     {
+        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -136,6 +148,7 @@ class JobAdLinks
      */
     public function setApplications(string $applications) : self
     {
+        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }

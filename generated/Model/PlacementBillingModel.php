@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementBillingModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var ContactNameModel
@@ -64,6 +72,7 @@ class PlacementBillingModel
      */
     public function setContact(ContactNameModel $contact) : self
     {
+        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -85,6 +94,7 @@ class PlacementBillingModel
      */
     public function setAddress(CompanyAddressModel $address) : self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
         return $this;
     }
@@ -106,6 +116,7 @@ class PlacementBillingModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -127,6 +138,7 @@ class PlacementBillingModel
      */
     public function setOrderRef(string $orderRef) : self
     {
+        $this->initialized['orderRef'] = true;
         $this->orderRef = $orderRef;
         return $this;
     }
@@ -148,6 +160,7 @@ class PlacementBillingModel
      */
     public function setInvoiceRef(string $invoiceRef) : self
     {
+        $this->initialized['invoiceRef'] = true;
         $this->invoiceRef = $invoiceRef;
         return $this;
     }
@@ -169,6 +182,7 @@ class PlacementBillingModel
      */
     public function setTerms(string $terms) : self
     {
+        $this->initialized['terms'] = true;
         $this->terms = $terms;
         return $this;
     }
@@ -190,6 +204,7 @@ class PlacementBillingModel
      */
     public function setDueDate(\DateTime $dueDate) : self
     {
+        $this->initialized['dueDate'] = true;
         $this->dueDate = $dueDate;
         return $this;
     }

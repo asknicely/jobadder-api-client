@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitCategoriesModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
     * Category to add or update in the skill coding.<br />
     Specify a categoryId without subCategories for a broad classification.
     This will remove all previously linked sub-categories associated with the category.
@@ -40,6 +48,7 @@ class SubmitCategoriesModel
     */
     public function setCategoryId(int $categoryId) : self
     {
+        $this->initialized['categoryId'] = true;
         $this->categoryId = $categoryId;
         return $this;
     }
@@ -61,6 +70,7 @@ class SubmitCategoriesModel
      */
     public function setSubCategories(array $subCategories) : self
     {
+        $this->initialized['subCategories'] = true;
         $this->subCategories = $subCategories;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteAttachmentModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class NoteAttachmentModel
      */
     public function setAttachmentId(string $attachmentId) : self
     {
+        $this->initialized['attachmentId'] = true;
         $this->attachmentId = $attachmentId;
         return $this;
     }
@@ -73,6 +82,7 @@ class NoteAttachmentModel
      */
     public function setFileName(string $fileName) : self
     {
+        $this->initialized['fileName'] = true;
         $this->fileName = $fileName;
         return $this;
     }
@@ -94,6 +104,7 @@ class NoteAttachmentModel
      */
     public function setFileType(string $fileType) : self
     {
+        $this->initialized['fileType'] = true;
         $this->fileType = $fileType;
         return $this;
     }
@@ -115,6 +126,7 @@ class NoteAttachmentModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -136,6 +148,7 @@ class NoteAttachmentModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateAttachmentRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -88,6 +96,7 @@ class CandidateAttachmentRepresentation
      */
     public function setAttachmentId(int $attachmentId) : self
     {
+        $this->initialized['attachmentId'] = true;
         $this->attachmentId = $attachmentId;
         return $this;
     }
@@ -109,6 +118,7 @@ class CandidateAttachmentRepresentation
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -130,6 +140,7 @@ class CandidateAttachmentRepresentation
      */
     public function setCategory(string $category) : self
     {
+        $this->initialized['category'] = true;
         $this->category = $category;
         return $this;
     }
@@ -151,6 +162,7 @@ class CandidateAttachmentRepresentation
      */
     public function setFileName(string $fileName) : self
     {
+        $this->initialized['fileName'] = true;
         $this->fileName = $fileName;
         return $this;
     }
@@ -172,6 +184,7 @@ class CandidateAttachmentRepresentation
      */
     public function setFileType(string $fileType) : self
     {
+        $this->initialized['fileType'] = true;
         $this->fileType = $fileType;
         return $this;
     }
@@ -193,6 +206,7 @@ class CandidateAttachmentRepresentation
      */
     public function setExpiry(\DateTime $expiry) : self
     {
+        $this->initialized['expiry'] = true;
         $this->expiry = $expiry;
         return $this;
     }
@@ -214,6 +228,7 @@ class CandidateAttachmentRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -235,6 +250,7 @@ class CandidateAttachmentRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -256,6 +272,7 @@ class CandidateAttachmentRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -277,6 +294,7 @@ class CandidateAttachmentRepresentation
      */
     public function setCandidateId(int $candidateId) : self
     {
+        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -298,6 +316,7 @@ class CandidateAttachmentRepresentation
      */
     public function setLinks(CandidateAttachmentLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

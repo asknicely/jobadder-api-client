@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class AddJobApplicationVideoCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Video URL
      *
      * @var string
@@ -35,6 +43,7 @@ class AddJobApplicationVideoCommand
      */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -58,6 +67,7 @@ class AddJobApplicationVideoCommand
     */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }

@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetContactPhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $contactId;
     /**
@@ -19,7 +19,7 @@ class GetContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implement
         $this->contactId = $contactId;
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,8 +38,8 @@ class GetContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(array('w', 'h'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('w', array('int'));
-        $optionsResolver->setAllowedTypes('h', array('int'));
+        $optionsResolver->addAllowedTypes('w', array('int'));
+        $optionsResolver->addAllowedTypes('h', array('int'));
         return $optionsResolver;
     }
     /**
@@ -49,13 +49,19 @@ class GetContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implement
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return null;
+            return json_decode($body);
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\GetContactPhotoNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\GetContactPhotoNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

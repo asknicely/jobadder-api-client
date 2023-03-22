@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class AddJobApplicationInternalInterviewCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Interview start time. The allowed minutes for the time are 0, 15, 30 and 45.
      *
      * @var \DateTime
@@ -46,6 +54,7 @@ class AddJobApplicationInternalInterviewCommand
      */
     public function setStartAt(\DateTime $startAt) : self
     {
+        $this->initialized['startAt'] = true;
         $this->startAt = $startAt;
         return $this;
     }
@@ -67,6 +76,7 @@ class AddJobApplicationInternalInterviewCommand
      */
     public function setEndAt(\DateTime $endAt) : self
     {
+        $this->initialized['endAt'] = true;
         $this->endAt = $endAt;
         return $this;
     }
@@ -88,6 +98,7 @@ class AddJobApplicationInternalInterviewCommand
      */
     public function setLocation(string $location) : self
     {
+        $this->initialized['location'] = true;
         $this->location = $location;
         return $this;
     }
@@ -109,6 +120,7 @@ class AddJobApplicationInternalInterviewCommand
      */
     public function setInterviewersUserIds(array $interviewersUserIds) : self
     {
+        $this->initialized['interviewersUserIds'] = true;
         $this->interviewersUserIds = $interviewersUserIds;
         return $this;
     }

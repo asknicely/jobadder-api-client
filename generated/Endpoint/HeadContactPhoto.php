@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class HeadContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class HeadContactPhoto extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $contactId;
     /**
@@ -19,7 +19,7 @@ class HeadContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
         $this->contactId = $contactId;
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'HEAD';
@@ -42,8 +42,8 @@ class HeadContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
         $optionsResolver->setDefined(array('w', 'h'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('w', array('int'));
-        $optionsResolver->setAllowedTypes('h', array('int'));
+        $optionsResolver->addAllowedTypes('w', array('int'));
+        $optionsResolver->addAllowedTypes('h', array('int'));
         return $optionsResolver;
     }
     /**
@@ -53,13 +53,19 @@ class HeadContactPhoto extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\HeadContactPhotoNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\HeadContactPhotoNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

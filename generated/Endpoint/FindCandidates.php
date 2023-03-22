@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindCandidates extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindCandidates extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -51,7 +51,7 @@ class FindCandidates extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -74,29 +74,29 @@ class FindCandidates extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
         $optionsResolver->setDefined(array('candidateId', 'name', 'email', 'phone', 'currentPosition', 'city', 'state', 'location', 'keywords', 'partnerAction.actionId', 'partnerAction.reference', 'partnerAction.stage', 'partnerAction.submittedAt', 'statusId', 'recruiterUserId', 'folderId', 'createdAt', 'updatedAt', 'sort', 'fields', 'embed', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('candidateId', array('array'));
-        $optionsResolver->setAllowedTypes('name', array('string'));
-        $optionsResolver->setAllowedTypes('email', array('string'));
-        $optionsResolver->setAllowedTypes('phone', array('string'));
-        $optionsResolver->setAllowedTypes('currentPosition', array('string'));
-        $optionsResolver->setAllowedTypes('city', array('string'));
-        $optionsResolver->setAllowedTypes('state', array('string'));
-        $optionsResolver->setAllowedTypes('location', array('string'));
-        $optionsResolver->setAllowedTypes('keywords', array('string'));
-        $optionsResolver->setAllowedTypes('partnerAction.actionId', array('array'));
-        $optionsResolver->setAllowedTypes('partnerAction.reference', array('array'));
-        $optionsResolver->setAllowedTypes('partnerAction.stage', array('array'));
-        $optionsResolver->setAllowedTypes('partnerAction.submittedAt', array('array'));
-        $optionsResolver->setAllowedTypes('statusId', array('array'));
-        $optionsResolver->setAllowedTypes('recruiterUserId', array('array'));
-        $optionsResolver->setAllowedTypes('folderId', array('array'));
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->setAllowedTypes('sort', array('array'));
-        $optionsResolver->setAllowedTypes('fields', array('array'));
-        $optionsResolver->setAllowedTypes('embed', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('candidateId', array('array'));
+        $optionsResolver->addAllowedTypes('name', array('string'));
+        $optionsResolver->addAllowedTypes('email', array('string'));
+        $optionsResolver->addAllowedTypes('phone', array('string'));
+        $optionsResolver->addAllowedTypes('currentPosition', array('string'));
+        $optionsResolver->addAllowedTypes('city', array('string'));
+        $optionsResolver->addAllowedTypes('state', array('string'));
+        $optionsResolver->addAllowedTypes('location', array('string'));
+        $optionsResolver->addAllowedTypes('keywords', array('string'));
+        $optionsResolver->addAllowedTypes('partnerAction.actionId', array('array'));
+        $optionsResolver->addAllowedTypes('partnerAction.reference', array('array'));
+        $optionsResolver->addAllowedTypes('partnerAction.stage', array('array'));
+        $optionsResolver->addAllowedTypes('partnerAction.submittedAt', array('array'));
+        $optionsResolver->addAllowedTypes('statusId', array('array'));
+        $optionsResolver->addAllowedTypes('recruiterUserId', array('array'));
+        $optionsResolver->addAllowedTypes('folderId', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('sort', array('array'));
+        $optionsResolver->addAllowedTypes('fields', array('array'));
+        $optionsResolver->addAllowedTypes('embed', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -105,10 +105,16 @@ class FindCandidates extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements
      *
      * @return null|\Varspool\JobAdder\V2\Model\CandidateListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CandidateListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

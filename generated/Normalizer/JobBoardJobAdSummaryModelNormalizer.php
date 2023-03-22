@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,92 +16,100 @@ class JobBoardJobAdSummaryModelNormalizer implements DenormalizerInterface, Norm
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdSummaryModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobBoardJobAdSummaryModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobBoardJobAdSummaryModel();
-        if (property_exists($data, 'adId')) {
-            $object->setAdId($data->{'adId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'title')) {
-            $object->setTitle($data->{'title'});
+        if (\array_key_exists('adId', $data)) {
+            $object->setAdId($data['adId']);
         }
-        if (property_exists($data, 'reference')) {
-            $object->setReference($data->{'reference'});
+        if (\array_key_exists('title', $data)) {
+            $object->setTitle($data['title']);
         }
-        if (property_exists($data, 'summary')) {
-            $object->setSummary($data->{'summary'});
+        if (\array_key_exists('reference', $data)) {
+            $object->setReference($data['reference']);
         }
-        if (property_exists($data, 'bulletPoints')) {
+        if (\array_key_exists('summary', $data)) {
+            $object->setSummary($data['summary']);
+        }
+        if (\array_key_exists('bulletPoints', $data)) {
             $values = array();
-            foreach ($data->{'bulletPoints'} as $value) {
+            foreach ($data['bulletPoints'] as $value) {
                 $values[] = $value;
             }
             $object->setBulletPoints($values);
         }
-        if (property_exists($data, 'portal')) {
-            $object->setPortal($this->denormalizer->denormalize($data->{'portal'}, 'Varspool\\JobAdder\\V2\\Model\\JobAdPortalSummaryModel', 'json', $context));
+        if (\array_key_exists('portal', $data)) {
+            $object->setPortal($this->denormalizer->denormalize($data['portal'], 'Varspool\\JobAdder\\V2\\Model\\JobAdPortalSummaryModel', 'json', $context));
         }
-        if (property_exists($data, 'postedAt')) {
-            $object->setPostedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'postedAt'}));
+        if (\array_key_exists('postedAt', $data)) {
+            $object->setPostedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['postedAt']));
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
         }
-        if (property_exists($data, 'expiresAt')) {
-            $object->setExpiresAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'expiresAt'}));
+        if (\array_key_exists('expiresAt', $data)) {
+            $object->setExpiresAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['expiresAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getAdId()) {
-            $data->{'adId'} = $object->getAdId();
+        $data = array();
+        if ($object->isInitialized('adId') && null !== $object->getAdId()) {
+            $data['adId'] = $object->getAdId();
         }
-        if (null !== $object->getTitle()) {
-            $data->{'title'} = $object->getTitle();
+        if ($object->isInitialized('title') && null !== $object->getTitle()) {
+            $data['title'] = $object->getTitle();
         }
-        if (null !== $object->getReference()) {
-            $data->{'reference'} = $object->getReference();
+        if ($object->isInitialized('reference') && null !== $object->getReference()) {
+            $data['reference'] = $object->getReference();
         }
-        if (null !== $object->getSummary()) {
-            $data->{'summary'} = $object->getSummary();
+        if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+            $data['summary'] = $object->getSummary();
         }
-        if (null !== $object->getBulletPoints()) {
+        if ($object->isInitialized('bulletPoints') && null !== $object->getBulletPoints()) {
             $values = array();
             foreach ($object->getBulletPoints() as $value) {
                 $values[] = $value;
             }
-            $data->{'bulletPoints'} = $values;
+            $data['bulletPoints'] = $values;
         }
-        if (null !== $object->getPortal()) {
-            $data->{'portal'} = $this->normalizer->normalize($object->getPortal(), 'json', $context);
+        if ($object->isInitialized('portal') && null !== $object->getPortal()) {
+            $data['portal'] = $this->normalizer->normalize($object->getPortal(), 'json', $context);
         }
-        if (null !== $object->getPostedAt()) {
-            $data->{'postedAt'} = $object->getPostedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('postedAt') && null !== $object->getPostedAt()) {
+            $data['postedAt'] = $object->getPostedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getExpiresAt()) {
-            $data->{'expiresAt'} = $object->getExpiresAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('expiresAt') && null !== $object->getExpiresAt()) {
+            $data['expiresAt'] = $object->getExpiresAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

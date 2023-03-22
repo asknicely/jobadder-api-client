@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderInvoiceStageModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -34,6 +42,7 @@ class JobOrderInvoiceStageModel
      */
     public function setStageId(int $stageId) : self
     {
+        $this->initialized['stageId'] = true;
         $this->stageId = $stageId;
         return $this;
     }
@@ -55,6 +64,7 @@ class JobOrderInvoiceStageModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }

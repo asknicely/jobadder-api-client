@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PageLinks
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -46,6 +54,7 @@ class PageLinks
      */
     public function setFirst(string $first) : self
     {
+        $this->initialized['first'] = true;
         $this->first = $first;
         return $this;
     }
@@ -67,6 +76,7 @@ class PageLinks
      */
     public function setPrev(string $prev) : self
     {
+        $this->initialized['prev'] = true;
         $this->prev = $prev;
         return $this;
     }
@@ -88,6 +98,7 @@ class PageLinks
      */
     public function setNext(string $next) : self
     {
+        $this->initialized['next'] = true;
         $this->next = $next;
         return $this;
     }
@@ -109,6 +120,7 @@ class PageLinks
      */
     public function setLast(string $last) : self
     {
+        $this->initialized['last'] = true;
         $this->last = $last;
         return $this;
     }

@@ -2,10 +2,19 @@
 
 namespace Varspool\JobAdder\V2\Exception;
 
-class PutJobApplicationInternalInterviewBadRequestException extends \RuntimeException implements ClientException
+class PutJobApplicationInternalInterviewBadRequestException extends BadRequestException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('BadRequest', 400);
+        parent::__construct('BadRequest');
+        $this->response = $response;
+    }
+    public function getResponse() : ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

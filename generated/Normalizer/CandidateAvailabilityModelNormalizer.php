@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,61 +16,69 @@ class CandidateAvailabilityModelNormalizer implements DenormalizerInterface, Nor
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\CandidateAvailabilityModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\CandidateAvailabilityModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\CandidateAvailabilityModel();
-        if (property_exists($data, 'date')) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d', $data->{'date'})->setTime(0, 0, 0));
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'day')) {
-            $object->setDay($data->{'day'});
+        if (\array_key_exists('date', $data)) {
+            $object->setDate(\DateTime::createFromFormat('Y-m-d', $data['date'])->setTime(0, 0, 0));
         }
-        if (property_exists($data, 'shifts')) {
+        if (\array_key_exists('day', $data)) {
+            $object->setDay($data['day']);
+        }
+        if (\array_key_exists('shifts', $data)) {
             $values = array();
-            foreach ($data->{'shifts'} as $value) {
+            foreach ($data['shifts'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\TimeRangeModel', 'json', $context);
             }
             $object->setShifts($values);
         }
-        if (property_exists($data, 'recurring')) {
-            $object->setRecurring($data->{'recurring'});
+        if (\array_key_exists('recurring', $data)) {
+            $object->setRecurring($data['recurring']);
         }
-        if (property_exists($data, 'until')) {
-            $object->setUntil(\DateTime::createFromFormat('Y-m-d', $data->{'until'})->setTime(0, 0, 0));
+        if (\array_key_exists('until', $data)) {
+            $object->setUntil(\DateTime::createFromFormat('Y-m-d', $data['until'])->setTime(0, 0, 0));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getDate()) {
-            $data->{'date'} = $object->getDate()->format('Y-m-d');
+        $data = array();
+        if ($object->isInitialized('date') && null !== $object->getDate()) {
+            $data['date'] = $object->getDate()->format('Y-m-d');
         }
-        if (null !== $object->getDay()) {
-            $data->{'day'} = $object->getDay();
+        if ($object->isInitialized('day') && null !== $object->getDay()) {
+            $data['day'] = $object->getDay();
         }
-        if (null !== $object->getRecurring()) {
-            $data->{'recurring'} = $object->getRecurring();
+        if ($object->isInitialized('recurring') && null !== $object->getRecurring()) {
+            $data['recurring'] = $object->getRecurring();
         }
-        if (null !== $object->getUntil()) {
-            $data->{'until'} = $object->getUntil()->format('Y-m-d');
+        if ($object->isInitialized('until') && null !== $object->getUntil()) {
+            $data['until'] = $object->getUntil()->format('Y-m-d');
         }
         return $data;
     }

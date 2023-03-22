@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CurrentEmploymentModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -46,6 +54,7 @@ class CurrentEmploymentModel
      */
     public function setEmployer(string $employer) : self
     {
+        $this->initialized['employer'] = true;
         $this->employer = $employer;
         return $this;
     }
@@ -67,6 +76,7 @@ class CurrentEmploymentModel
      */
     public function setPosition(string $position) : self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -88,6 +98,7 @@ class CurrentEmploymentModel
      */
     public function setWorkType(WorkTypeModel $workType) : self
     {
+        $this->initialized['workType'] = true;
         $this->workType = $workType;
         return $this;
     }
@@ -109,6 +120,7 @@ class CurrentEmploymentModel
      */
     public function setSalary(SalaryModel $salary) : self
     {
+        $this->initialized['salary'] = true;
         $this->salary = $salary;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyActivitySettingSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -40,6 +48,7 @@ class CompanyActivitySettingSummaryModel
      */
     public function setSettingId(int $settingId) : self
     {
+        $this->initialized['settingId'] = true;
         $this->settingId = $settingId;
         return $this;
     }
@@ -61,6 +70,7 @@ class CompanyActivitySettingSummaryModel
      */
     public function setActivityType(string $activityType) : self
     {
+        $this->initialized['activityType'] = true;
         $this->activityType = $activityType;
         return $this;
     }
@@ -82,6 +92,7 @@ class CompanyActivitySettingSummaryModel
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }

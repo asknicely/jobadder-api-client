@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderRetainedModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -64,6 +72,7 @@ class JobOrderRetainedModel
      */
     public function setJobId(int $jobId) : self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -85,6 +94,7 @@ class JobOrderRetainedModel
      */
     public function setJobType(string $jobType) : self
     {
+        $this->initialized['jobType'] = true;
         $this->jobType = $jobType;
         return $this;
     }
@@ -106,6 +116,7 @@ class JobOrderRetainedModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -127,6 +138,7 @@ class JobOrderRetainedModel
      */
     public function setCompany(CompanyNameModel $company) : self
     {
+        $this->initialized['company'] = true;
         $this->company = $company;
         return $this;
     }
@@ -148,6 +160,7 @@ class JobOrderRetainedModel
      */
     public function setContact(ContactNameModel $contact) : self
     {
+        $this->initialized['contact'] = true;
         $this->contact = $contact;
         return $this;
     }
@@ -169,6 +182,7 @@ class JobOrderRetainedModel
      */
     public function setFeeCurrencyCode(string $feeCurrencyCode) : self
     {
+        $this->initialized['feeCurrencyCode'] = true;
         $this->feeCurrencyCode = $feeCurrencyCode;
         return $this;
     }
@@ -190,6 +204,7 @@ class JobOrderRetainedModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }

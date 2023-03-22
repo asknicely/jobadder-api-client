@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,102 +16,110 @@ class PartnerActionRepresentationNormalizer implements DenormalizerInterface, No
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PartnerActionRepresentation';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PartnerActionRepresentation';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PartnerActionRepresentation();
-        if (property_exists($data, 'actionId')) {
-            $object->setActionId($data->{'actionId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'actionType')) {
-            $object->setActionType($data->{'actionType'});
+        if (\array_key_exists('actionId', $data)) {
+            $object->setActionId($data['actionId']);
         }
-        if (property_exists($data, 'actionName')) {
-            $object->setActionName($data->{'actionName'});
+        if (\array_key_exists('actionType', $data)) {
+            $object->setActionType($data['actionType']);
         }
-        if (property_exists($data, 'reference')) {
-            $object->setReference($data->{'reference'});
+        if (\array_key_exists('actionName', $data)) {
+            $object->setActionName($data['actionName']);
         }
-        if (property_exists($data, 'url')) {
-            $object->setUrl($data->{'url'});
+        if (\array_key_exists('reference', $data)) {
+            $object->setReference($data['reference']);
         }
-        if (property_exists($data, 'urlType')) {
-            $object->setUrlType($data->{'urlType'});
+        if (\array_key_exists('url', $data)) {
+            $object->setUrl($data['url']);
         }
-        if (property_exists($data, 'allowResubmit')) {
-            $object->setAllowResubmit($data->{'allowResubmit'});
+        if (\array_key_exists('urlType', $data)) {
+            $object->setUrlType($data['urlType']);
         }
-        if (property_exists($data, 'actionFilter')) {
-            $object->setActionFilter($this->denormalizer->denormalize($data->{'actionFilter'}, 'Varspool\\JobAdder\\V2\\Model\\PartnerActionFilterModel', 'json', $context));
+        if (\array_key_exists('allowResubmit', $data)) {
+            $object->setAllowResubmit($data['allowResubmit']);
         }
-        if (property_exists($data, 'webhookData')) {
-            $object->setWebhookData($data->{'webhookData'});
+        if (\array_key_exists('actionFilter', $data)) {
+            $object->setActionFilter($this->denormalizer->denormalize($data['actionFilter'], 'Varspool\\JobAdder\\V2\\Model\\PartnerActionFilterModel', 'json', $context));
         }
-        if (property_exists($data, 'createdAt')) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'createdAt'}));
+        if (\array_key_exists('webhookData', $data)) {
+            $object->setWebhookData($data['webhookData']);
         }
-        if (property_exists($data, 'updatedAt')) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'updatedAt'}));
+        if (\array_key_exists('createdAt', $data)) {
+            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['createdAt']));
         }
-        if (property_exists($data, 'links')) {
-            $object->setLinks($this->denormalizer->denormalize($data->{'links'}, 'Varspool\\JobAdder\\V2\\Model\\ModelLinks', 'json', $context));
+        if (\array_key_exists('updatedAt', $data)) {
+            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['updatedAt']));
+        }
+        if (\array_key_exists('links', $data)) {
+            $object->setLinks($this->denormalizer->denormalize($data['links'], 'Varspool\\JobAdder\\V2\\Model\\ModelLinks', 'json', $context));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getActionId()) {
-            $data->{'actionId'} = $object->getActionId();
+        $data = array();
+        if ($object->isInitialized('actionId') && null !== $object->getActionId()) {
+            $data['actionId'] = $object->getActionId();
         }
-        if (null !== $object->getActionType()) {
-            $data->{'actionType'} = $object->getActionType();
+        if ($object->isInitialized('actionType') && null !== $object->getActionType()) {
+            $data['actionType'] = $object->getActionType();
         }
-        if (null !== $object->getActionName()) {
-            $data->{'actionName'} = $object->getActionName();
+        if ($object->isInitialized('actionName') && null !== $object->getActionName()) {
+            $data['actionName'] = $object->getActionName();
         }
-        if (null !== $object->getReference()) {
-            $data->{'reference'} = $object->getReference();
+        if ($object->isInitialized('reference') && null !== $object->getReference()) {
+            $data['reference'] = $object->getReference();
         }
-        if (null !== $object->getUrl()) {
-            $data->{'url'} = $object->getUrl();
+        if ($object->isInitialized('url') && null !== $object->getUrl()) {
+            $data['url'] = $object->getUrl();
         }
-        if (null !== $object->getUrlType()) {
-            $data->{'urlType'} = $object->getUrlType();
+        if ($object->isInitialized('urlType') && null !== $object->getUrlType()) {
+            $data['urlType'] = $object->getUrlType();
         }
-        if (null !== $object->getAllowResubmit()) {
-            $data->{'allowResubmit'} = $object->getAllowResubmit();
+        if ($object->isInitialized('allowResubmit') && null !== $object->getAllowResubmit()) {
+            $data['allowResubmit'] = $object->getAllowResubmit();
         }
-        if (null !== $object->getActionFilter()) {
-            $data->{'actionFilter'} = $this->normalizer->normalize($object->getActionFilter(), 'json', $context);
+        if ($object->isInitialized('actionFilter') && null !== $object->getActionFilter()) {
+            $data['actionFilter'] = $this->normalizer->normalize($object->getActionFilter(), 'json', $context);
         }
-        if (null !== $object->getWebhookData()) {
-            $data->{'webhookData'} = $object->getWebhookData();
+        if ($object->isInitialized('webhookData') && null !== $object->getWebhookData()) {
+            $data['webhookData'] = $object->getWebhookData();
         }
-        if (null !== $object->getCreatedAt()) {
-            $data->{'createdAt'} = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('createdAt') && null !== $object->getCreatedAt()) {
+            $data['createdAt'] = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getUpdatedAt()) {
-            $data->{'updatedAt'} = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('updatedAt') && null !== $object->getUpdatedAt()) {
+            $data['updatedAt'] = $object->getUpdatedAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getLinks()) {
-            $data->{'links'} = $this->normalizer->normalize($object->getLinks(), 'json', $context);
+        if ($object->isInitialized('links') && null !== $object->getLinks()) {
+            $data['links'] = $this->normalizer->normalize($object->getLinks(), 'json', $context);
         }
         return $data;
     }

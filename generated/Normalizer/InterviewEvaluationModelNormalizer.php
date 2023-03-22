@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,74 +16,82 @@ class InterviewEvaluationModelNormalizer implements DenormalizerInterface, Norma
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\InterviewEvaluationModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\InterviewEvaluationModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\InterviewEvaluationModel();
-        if (property_exists($data, 'user')) {
-            $object->setUser($this->denormalizer->denormalize($data->{'user'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'contact')) {
-            $object->setContact($this->denormalizer->denormalize($data->{'contact'}, 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
+        if (\array_key_exists('user', $data)) {
+            $object->setUser($this->denormalizer->denormalize($data['user'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
         }
-        if (property_exists($data, 'expiresAt')) {
-            $object->setExpiresAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'expiresAt'}));
+        if (\array_key_exists('contact', $data)) {
+            $object->setContact($this->denormalizer->denormalize($data['contact'], 'Varspool\\JobAdder\\V2\\Model\\ContactNameModel', 'json', $context));
         }
-        if (property_exists($data, 'hasReplied')) {
-            $object->setHasReplied($data->{'hasReplied'});
+        if (\array_key_exists('expiresAt', $data)) {
+            $object->setExpiresAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['expiresAt']));
         }
-        if (property_exists($data, 'comments')) {
-            $object->setComments($data->{'comments'});
+        if (\array_key_exists('hasReplied', $data)) {
+            $object->setHasReplied($data['hasReplied']);
         }
-        if (property_exists($data, 'rating')) {
+        if (\array_key_exists('comments', $data)) {
+            $object->setComments($data['comments']);
+        }
+        if (\array_key_exists('rating', $data)) {
             $values = array();
-            foreach ($data->{'rating'} as $value) {
+            foreach ($data['rating'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Varspool\\JobAdder\\V2\\Model\\InterviewEvaluationRatingModel', 'json', $context);
             }
             $object->setRating($values);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getUser()) {
-            $data->{'user'} = $this->normalizer->normalize($object->getUser(), 'json', $context);
+        $data = array();
+        if ($object->isInitialized('user') && null !== $object->getUser()) {
+            $data['user'] = $this->normalizer->normalize($object->getUser(), 'json', $context);
         }
-        if (null !== $object->getContact()) {
-            $data->{'contact'} = $this->normalizer->normalize($object->getContact(), 'json', $context);
+        if ($object->isInitialized('contact') && null !== $object->getContact()) {
+            $data['contact'] = $this->normalizer->normalize($object->getContact(), 'json', $context);
         }
-        if (null !== $object->getExpiresAt()) {
-            $data->{'expiresAt'} = $object->getExpiresAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('expiresAt') && null !== $object->getExpiresAt()) {
+            $data['expiresAt'] = $object->getExpiresAt()->format('Y-m-d\\TH:i:s');
         }
-        if (null !== $object->getHasReplied()) {
-            $data->{'hasReplied'} = $object->getHasReplied();
+        if ($object->isInitialized('hasReplied') && null !== $object->getHasReplied()) {
+            $data['hasReplied'] = $object->getHasReplied();
         }
-        if (null !== $object->getComments()) {
-            $data->{'comments'} = $object->getComments();
+        if ($object->isInitialized('comments') && null !== $object->getComments()) {
+            $data['comments'] = $object->getComments();
         }
-        if (null !== $object->getRating()) {
+        if ($object->isInitialized('rating') && null !== $object->getRating()) {
             $values = array();
             foreach ($object->getRating() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'rating'} = $values;
+            $data['rating'] = $values;
         }
         return $data;
     }

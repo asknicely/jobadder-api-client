@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitCustomFieldValueModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -34,6 +42,7 @@ class SubmitCustomFieldValueModel
      */
     public function setFieldId(int $fieldId) : self
     {
+        $this->initialized['fieldId'] = true;
         $this->fieldId = $fieldId;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmitCustomFieldValueModel
      */
     public function setValue($value) : self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
         return $this;
     }

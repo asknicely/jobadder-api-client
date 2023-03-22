@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobApplicationReviewModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -52,6 +60,7 @@ class JobApplicationReviewModel
      */
     public function setStage(string $stage) : self
     {
+        $this->initialized['stage'] = true;
         $this->stage = $stage;
         return $this;
     }
@@ -73,6 +82,7 @@ class JobApplicationReviewModel
      */
     public function setSubmittedAt(\DateTime $submittedAt) : self
     {
+        $this->initialized['submittedAt'] = true;
         $this->submittedAt = $submittedAt;
         return $this;
     }
@@ -94,6 +104,7 @@ class JobApplicationReviewModel
      */
     public function setSubmittedBy(UserNameModel $submittedBy) : self
     {
+        $this->initialized['submittedBy'] = true;
         $this->submittedBy = $submittedBy;
         return $this;
     }
@@ -115,6 +126,7 @@ class JobApplicationReviewModel
      */
     public function setReviewedAt(\DateTime $reviewedAt) : self
     {
+        $this->initialized['reviewedAt'] = true;
         $this->reviewedAt = $reviewedAt;
         return $this;
     }
@@ -136,6 +148,7 @@ class JobApplicationReviewModel
      */
     public function setReviewedBy(ContactNameModel $reviewedBy) : self
     {
+        $this->initialized['reviewedBy'] = true;
         $this->reviewedBy = $reviewedBy;
         return $this;
     }

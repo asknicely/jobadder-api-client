@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ContactUserTaskRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -160,6 +168,7 @@ class ContactUserTaskRepresentation
      */
     public function setTaskId(int $taskId) : self
     {
+        $this->initialized['taskId'] = true;
         $this->taskId = $taskId;
         return $this;
     }
@@ -181,6 +190,7 @@ class ContactUserTaskRepresentation
      */
     public function setText(string $text) : self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -202,6 +212,7 @@ class ContactUserTaskRepresentation
      */
     public function setStartAt(\DateTime $startAt) : self
     {
+        $this->initialized['startAt'] = true;
         $this->startAt = $startAt;
         return $this;
     }
@@ -223,6 +234,7 @@ class ContactUserTaskRepresentation
      */
     public function setEndAt(\DateTime $endAt) : self
     {
+        $this->initialized['endAt'] = true;
         $this->endAt = $endAt;
         return $this;
     }
@@ -244,6 +256,7 @@ class ContactUserTaskRepresentation
      */
     public function setAllDay(bool $allDay) : self
     {
+        $this->initialized['allDay'] = true;
         $this->allDay = $allDay;
         return $this;
     }
@@ -265,6 +278,7 @@ class ContactUserTaskRepresentation
      */
     public function setReminderMinutes(int $reminderMinutes) : self
     {
+        $this->initialized['reminderMinutes'] = true;
         $this->reminderMinutes = $reminderMinutes;
         return $this;
     }
@@ -286,6 +300,7 @@ class ContactUserTaskRepresentation
      */
     public function setComplete(bool $complete) : self
     {
+        $this->initialized['complete'] = true;
         $this->complete = $complete;
         return $this;
     }
@@ -307,6 +322,7 @@ class ContactUserTaskRepresentation
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -328,6 +344,7 @@ class ContactUserTaskRepresentation
      */
     public function setAssignedTo(UserNameModel $assignedTo) : self
     {
+        $this->initialized['assignedTo'] = true;
         $this->assignedTo = $assignedTo;
         return $this;
     }
@@ -349,6 +366,7 @@ class ContactUserTaskRepresentation
      */
     public function setAssignees(array $assignees) : self
     {
+        $this->initialized['assignees'] = true;
         $this->assignees = $assignees;
         return $this;
     }
@@ -370,6 +388,7 @@ class ContactUserTaskRepresentation
      */
     public function setJobs(array $jobs) : self
     {
+        $this->initialized['jobs'] = true;
         $this->jobs = $jobs;
         return $this;
     }
@@ -391,6 +410,7 @@ class ContactUserTaskRepresentation
      */
     public function setRequisitions(array $requisitions) : self
     {
+        $this->initialized['requisitions'] = true;
         $this->requisitions = $requisitions;
         return $this;
     }
@@ -412,6 +432,7 @@ class ContactUserTaskRepresentation
      */
     public function setCandidates(array $candidates) : self
     {
+        $this->initialized['candidates'] = true;
         $this->candidates = $candidates;
         return $this;
     }
@@ -433,6 +454,7 @@ class ContactUserTaskRepresentation
      */
     public function setApplications(array $applications) : self
     {
+        $this->initialized['applications'] = true;
         $this->applications = $applications;
         return $this;
     }
@@ -454,6 +476,7 @@ class ContactUserTaskRepresentation
      */
     public function setPlacements(array $placements) : self
     {
+        $this->initialized['placements'] = true;
         $this->placements = $placements;
         return $this;
     }
@@ -475,6 +498,7 @@ class ContactUserTaskRepresentation
      */
     public function setCompanies(array $companies) : self
     {
+        $this->initialized['companies'] = true;
         $this->companies = $companies;
         return $this;
     }
@@ -496,6 +520,7 @@ class ContactUserTaskRepresentation
      */
     public function setContacts(array $contacts) : self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
         return $this;
     }
@@ -517,6 +542,7 @@ class ContactUserTaskRepresentation
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -538,6 +564,7 @@ class ContactUserTaskRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -559,6 +586,7 @@ class ContactUserTaskRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -580,6 +608,7 @@ class ContactUserTaskRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -601,6 +630,7 @@ class ContactUserTaskRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -622,6 +652,7 @@ class ContactUserTaskRepresentation
      */
     public function setLinks(UserTaskLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

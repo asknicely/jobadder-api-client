@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,60 +16,71 @@ class JobOrderInvoiceSummaryModelNormalizer implements DenormalizerInterface, No
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoiceSummaryModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoiceSummaryModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\JobOrderInvoiceSummaryModel();
-        if (property_exists($data, 'jobId')) {
-            $object->setJobId($data->{'jobId'});
+        if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+            $data['amount'] = (double) $data['amount'];
         }
-        if (property_exists($data, 'invoiceId')) {
-            $object->setInvoiceId($data->{'invoiceId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'invoiceNumber')) {
-            $object->setInvoiceNumber($data->{'invoiceNumber'});
+        if (\array_key_exists('jobId', $data)) {
+            $object->setJobId($data['jobId']);
         }
-        if (property_exists($data, 'stage')) {
-            $object->setStage($this->denormalizer->denormalize($data->{'stage'}, 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoiceStageModel', 'json', $context));
+        if (\array_key_exists('invoiceId', $data)) {
+            $object->setInvoiceId($data['invoiceId']);
         }
-        if (property_exists($data, 'amount')) {
-            $object->setAmount($data->{'amount'});
+        if (\array_key_exists('invoiceNumber', $data)) {
+            $object->setInvoiceNumber($data['invoiceNumber']);
+        }
+        if (\array_key_exists('stage', $data)) {
+            $object->setStage($this->denormalizer->denormalize($data['stage'], 'Varspool\\JobAdder\\V2\\Model\\JobOrderInvoiceStageModel', 'json', $context));
+        }
+        if (\array_key_exists('amount', $data)) {
+            $object->setAmount($data['amount']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getJobId()) {
-            $data->{'jobId'} = $object->getJobId();
+        $data = array();
+        if ($object->isInitialized('jobId') && null !== $object->getJobId()) {
+            $data['jobId'] = $object->getJobId();
         }
-        if (null !== $object->getInvoiceId()) {
-            $data->{'invoiceId'} = $object->getInvoiceId();
+        if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+            $data['invoiceId'] = $object->getInvoiceId();
         }
-        if (null !== $object->getInvoiceNumber()) {
-            $data->{'invoiceNumber'} = $object->getInvoiceNumber();
+        if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
+            $data['invoiceNumber'] = $object->getInvoiceNumber();
         }
-        if (null !== $object->getStage()) {
-            $data->{'stage'} = $this->normalizer->normalize($object->getStage(), 'json', $context);
+        if ($object->isInitialized('stage') && null !== $object->getStage()) {
+            $data['stage'] = $this->normalizer->normalize($object->getStage(), 'json', $context);
         }
-        if (null !== $object->getAmount()) {
-            $data->{'amount'} = $object->getAmount();
+        if ($object->isInitialized('amount') && null !== $object->getAmount()) {
+            $data['amount'] = $object->getAmount();
         }
         return $data;
     }

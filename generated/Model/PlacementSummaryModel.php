@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -106,6 +114,7 @@ class PlacementSummaryModel
      */
     public function setPlacementId(int $placementId) : self
     {
+        $this->initialized['placementId'] = true;
         $this->placementId = $placementId;
         return $this;
     }
@@ -127,6 +136,7 @@ class PlacementSummaryModel
      */
     public function setJobTitle(string $jobTitle) : self
     {
+        $this->initialized['jobTitle'] = true;
         $this->jobTitle = $jobTitle;
         return $this;
     }
@@ -148,6 +158,7 @@ class PlacementSummaryModel
      */
     public function setJob(JobOrderTitleModel $job) : self
     {
+        $this->initialized['job'] = true;
         $this->job = $job;
         return $this;
     }
@@ -169,6 +180,7 @@ class PlacementSummaryModel
      */
     public function setCandidate(CandidatePlacementModel $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }
@@ -190,6 +202,7 @@ class PlacementSummaryModel
      */
     public function setApproved(bool $approved) : self
     {
+        $this->initialized['approved'] = true;
         $this->approved = $approved;
         return $this;
     }
@@ -211,6 +224,7 @@ class PlacementSummaryModel
      */
     public function setApprovedAt(\DateTime $approvedAt) : self
     {
+        $this->initialized['approvedAt'] = true;
         $this->approvedAt = $approvedAt;
         return $this;
     }
@@ -232,6 +246,7 @@ class PlacementSummaryModel
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -253,6 +268,7 @@ class PlacementSummaryModel
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -274,6 +290,7 @@ class PlacementSummaryModel
      */
     public function setStartDate(\DateTime $startDate) : self
     {
+        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
         return $this;
     }
@@ -295,6 +312,7 @@ class PlacementSummaryModel
      */
     public function setEndDate(\DateTime $endDate) : self
     {
+        $this->initialized['endDate'] = true;
         $this->endDate = $endDate;
         return $this;
     }
@@ -316,6 +334,7 @@ class PlacementSummaryModel
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -337,6 +356,7 @@ class PlacementSummaryModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -358,6 +378,7 @@ class PlacementSummaryModel
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -379,6 +400,7 @@ class PlacementSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }

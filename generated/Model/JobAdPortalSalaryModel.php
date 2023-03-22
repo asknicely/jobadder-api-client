@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdPortalSalaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -46,6 +54,7 @@ class JobAdPortalSalaryModel
      */
     public function setRatePer(string $ratePer) : self
     {
+        $this->initialized['ratePer'] = true;
         $this->ratePer = $ratePer;
         return $this;
     }
@@ -67,6 +76,7 @@ class JobAdPortalSalaryModel
      */
     public function setRateLow(float $rateLow) : self
     {
+        $this->initialized['rateLow'] = true;
         $this->rateLow = $rateLow;
         return $this;
     }
@@ -88,6 +98,7 @@ class JobAdPortalSalaryModel
      */
     public function setRateHigh(float $rateHigh) : self
     {
+        $this->initialized['rateHigh'] = true;
         $this->rateHigh = $rateHigh;
         return $this;
     }
@@ -109,6 +120,7 @@ class JobAdPortalSalaryModel
      */
     public function setDetails(string $details) : self
     {
+        $this->initialized['details'] = true;
         $this->details = $details;
         return $this;
     }

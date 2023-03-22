@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ContactNameModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique identifier for the contact
      *
      * @var int
@@ -94,6 +102,7 @@ class ContactNameModel
      */
     public function setContactId(int $contactId) : self
     {
+        $this->initialized['contactId'] = true;
         $this->contactId = $contactId;
         return $this;
     }
@@ -115,6 +124,7 @@ class ContactNameModel
      */
     public function setFirstName(string $firstName) : self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -136,6 +146,7 @@ class ContactNameModel
      */
     public function setLastName(string $lastName) : self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -157,6 +168,7 @@ class ContactNameModel
      */
     public function setPosition(string $position) : self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
         return $this;
     }
@@ -178,6 +190,7 @@ class ContactNameModel
      */
     public function setSalutation(string $salutation) : self
     {
+        $this->initialized['salutation'] = true;
         $this->salutation = $salutation;
         return $this;
     }
@@ -199,6 +212,7 @@ class ContactNameModel
      */
     public function setUnsubscribed(bool $unsubscribed) : self
     {
+        $this->initialized['unsubscribed'] = true;
         $this->unsubscribed = $unsubscribed;
         return $this;
     }
@@ -220,6 +234,7 @@ class ContactNameModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -241,6 +256,7 @@ class ContactNameModel
      */
     public function setPhone(string $phone) : self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -262,6 +278,7 @@ class ContactNameModel
      */
     public function setMobile(string $mobile) : self
     {
+        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -283,6 +300,7 @@ class ContactNameModel
      */
     public function setInactive(bool $inactive) : self
     {
+        $this->initialized['inactive'] = true;
         $this->inactive = $inactive;
         return $this;
     }
@@ -304,6 +322,7 @@ class ContactNameModel
      */
     public function setStatus(StatusModel $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -325,6 +344,7 @@ class ContactNameModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }

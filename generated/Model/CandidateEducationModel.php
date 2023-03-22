@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateEducationModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -43,6 +51,7 @@ class CandidateEducationModel
      */
     public function setInstitution(string $institution) : self
     {
+        $this->initialized['institution'] = true;
         $this->institution = $institution;
         return $this;
     }
@@ -64,6 +73,7 @@ class CandidateEducationModel
      */
     public function setCourse(string $course) : self
     {
+        $this->initialized['course'] = true;
         $this->course = $course;
         return $this;
     }
@@ -91,6 +101,7 @@ class CandidateEducationModel
     */
     public function setDate(string $date) : self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
         return $this;
     }

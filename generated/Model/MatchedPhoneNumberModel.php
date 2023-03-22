@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class MatchedPhoneNumberModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -40,6 +48,7 @@ class MatchedPhoneNumberModel
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -61,6 +70,7 @@ class MatchedPhoneNumberModel
      */
     public function setNumber(string $number) : self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
         return $this;
     }
@@ -82,6 +92,7 @@ class MatchedPhoneNumberModel
      */
     public function setNormalized(string $normalized) : self
     {
+        $this->initialized['normalized'] = true;
         $this->normalized = $normalized;
         return $this;
     }

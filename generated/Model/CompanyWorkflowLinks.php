@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CompanyWorkflowLinks
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -28,6 +36,7 @@ class CompanyWorkflowLinks
      */
     public function setRequisition(string $requisition) : self
     {
+        $this->initialized['requisition'] = true;
         $this->requisition = $requisition;
         return $this;
     }

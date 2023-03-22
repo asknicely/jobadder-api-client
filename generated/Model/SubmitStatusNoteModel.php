@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitStatusNoteModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Optional note type
      *
      * @var string
@@ -34,6 +42,7 @@ class SubmitStatusNoteModel
      */
     public function setType(string $type) : self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
         return $this;
     }
@@ -55,6 +64,7 @@ class SubmitStatusNoteModel
      */
     public function setText(string $text) : self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }

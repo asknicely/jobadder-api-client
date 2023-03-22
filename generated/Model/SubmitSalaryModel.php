@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitSalaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -40,6 +48,7 @@ class SubmitSalaryModel
      */
     public function setRatePer(string $ratePer) : self
     {
+        $this->initialized['ratePer'] = true;
         $this->ratePer = $ratePer;
         return $this;
     }
@@ -61,6 +70,7 @@ class SubmitSalaryModel
      */
     public function setRate(float $rate) : self
     {
+        $this->initialized['rate'] = true;
         $this->rate = $rate;
         return $this;
     }
@@ -82,6 +92,7 @@ class SubmitSalaryModel
      */
     public function setCurrency(string $currency) : self
     {
+        $this->initialized['currency'] = true;
         $this->currency = $currency;
         return $this;
     }

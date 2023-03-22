@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class NoteTypeListRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var NoteTypeModel[]
@@ -28,6 +36,7 @@ class NoteTypeListRepresentation
      */
     public function setItems(array $items) : self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
         return $this;
     }

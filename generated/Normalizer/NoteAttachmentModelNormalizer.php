@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,60 +16,66 @@ class NoteAttachmentModelNormalizer implements DenormalizerInterface, Normalizer
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\NoteAttachmentModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\NoteAttachmentModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\NoteAttachmentModel();
-        if (property_exists($data, 'attachmentId')) {
-            $object->setAttachmentId($data->{'attachmentId'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'fileName')) {
-            $object->setFileName($data->{'fileName'});
+        if (\array_key_exists('attachmentId', $data)) {
+            $object->setAttachmentId($data['attachmentId']);
         }
-        if (property_exists($data, 'fileType')) {
-            $object->setFileType($data->{'fileType'});
+        if (\array_key_exists('fileName', $data)) {
+            $object->setFileName($data['fileName']);
         }
-        if (property_exists($data, 'createdBy')) {
-            $object->setCreatedBy($this->denormalizer->denormalize($data->{'createdBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        if (\array_key_exists('fileType', $data)) {
+            $object->setFileType($data['fileType']);
         }
-        if (property_exists($data, 'createdAt')) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'createdAt'}));
+        if (\array_key_exists('createdBy', $data)) {
+            $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], 'Varspool\\JobAdder\\V2\\Model\\UserNameModel', 'json', $context));
+        }
+        if (\array_key_exists('createdAt', $data)) {
+            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['createdAt']));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getAttachmentId()) {
-            $data->{'attachmentId'} = $object->getAttachmentId();
+        $data = array();
+        $data['attachmentId'] = $object->getAttachmentId();
+        if ($object->isInitialized('fileName') && null !== $object->getFileName()) {
+            $data['fileName'] = $object->getFileName();
         }
-        if (null !== $object->getFileName()) {
-            $data->{'fileName'} = $object->getFileName();
+        if ($object->isInitialized('fileType') && null !== $object->getFileType()) {
+            $data['fileType'] = $object->getFileType();
         }
-        if (null !== $object->getFileType()) {
-            $data->{'fileType'} = $object->getFileType();
+        if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+            $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
         }
-        if (null !== $object->getCreatedBy()) {
-            $data->{'createdBy'} = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
-        }
-        if (null !== $object->getCreatedAt()) {
-            $data->{'createdAt'} = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
+        if ($object->isInitialized('createdAt') && null !== $object->getCreatedAt()) {
+            $data['createdAt'] = $object->getCreatedAt()->format('Y-m-d\\TH:i:s');
         }
         return $data;
     }

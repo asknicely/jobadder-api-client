@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class AddPartnerActionCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Menu item label that will appear to the end-user
      *
      * @var string
@@ -66,6 +74,7 @@ class AddPartnerActionCommand
      */
     public function setActionName(string $actionName) : self
     {
+        $this->initialized['actionName'] = true;
         $this->actionName = $actionName;
         return $this;
     }
@@ -87,6 +96,7 @@ class AddPartnerActionCommand
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -112,6 +122,7 @@ class AddPartnerActionCommand
     */
     public function setUrl(string $url) : self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
         return $this;
     }
@@ -133,6 +144,7 @@ class AddPartnerActionCommand
      */
     public function setUrlType(string $urlType) : self
     {
+        $this->initialized['urlType'] = true;
         $this->urlType = $urlType;
         return $this;
     }
@@ -154,6 +166,7 @@ class AddPartnerActionCommand
      */
     public function setAllowResubmit(bool $allowResubmit) : self
     {
+        $this->initialized['allowResubmit'] = true;
         $this->allowResubmit = $allowResubmit;
         return $this;
     }
@@ -175,6 +188,7 @@ class AddPartnerActionCommand
      */
     public function setActionFilter(PartnerActionFilterModel $actionFilter) : self
     {
+        $this->initialized['actionFilter'] = true;
         $this->actionFilter = $actionFilter;
         return $this;
     }
@@ -196,6 +210,7 @@ class AddPartnerActionCommand
      */
     public function setWebhookData($webhookData) : self
     {
+        $this->initialized['webhookData'] = true;
         $this->webhookData = $webhookData;
         return $this;
     }

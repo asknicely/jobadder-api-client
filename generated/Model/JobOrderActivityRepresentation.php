@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobOrderActivityRepresentation
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -94,6 +102,7 @@ class JobOrderActivityRepresentation
      */
     public function setActivityId(int $activityId) : self
     {
+        $this->initialized['activityId'] = true;
         $this->activityId = $activityId;
         return $this;
     }
@@ -115,6 +124,7 @@ class JobOrderActivityRepresentation
      */
     public function setActivityName(string $activityName) : self
     {
+        $this->initialized['activityName'] = true;
         $this->activityName = $activityName;
         return $this;
     }
@@ -136,6 +146,7 @@ class JobOrderActivityRepresentation
      */
     public function setActivityType(string $activityType) : self
     {
+        $this->initialized['activityType'] = true;
         $this->activityType = $activityType;
         return $this;
     }
@@ -157,6 +168,7 @@ class JobOrderActivityRepresentation
      */
     public function setStatus(string $status) : self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
         return $this;
     }
@@ -178,6 +190,7 @@ class JobOrderActivityRepresentation
      */
     public function setCreatedBy(UserNameModel $createdBy) : self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
         return $this;
     }
@@ -199,6 +212,7 @@ class JobOrderActivityRepresentation
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -220,6 +234,7 @@ class JobOrderActivityRepresentation
      */
     public function setUpdatedBy(UserNameModel $updatedBy) : self
     {
+        $this->initialized['updatedBy'] = true;
         $this->updatedBy = $updatedBy;
         return $this;
     }
@@ -241,6 +256,7 @@ class JobOrderActivityRepresentation
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -262,6 +278,7 @@ class JobOrderActivityRepresentation
      */
     public function setDetails(ActivityDetailListModel $details) : self
     {
+        $this->initialized['details'] = true;
         $this->details = $details;
         return $this;
     }
@@ -283,6 +300,7 @@ class JobOrderActivityRepresentation
      */
     public function setJobId(int $jobId) : self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
         return $this;
     }
@@ -304,6 +322,7 @@ class JobOrderActivityRepresentation
      */
     public function setInvoiceId(int $invoiceId) : self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
         return $this;
     }
@@ -325,6 +344,7 @@ class JobOrderActivityRepresentation
      */
     public function setLinks(ModelLinks $links) : self
     {
+        $this->initialized['links'] = true;
         $this->links = $links;
         return $this;
     }

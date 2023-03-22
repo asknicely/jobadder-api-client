@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class GetCandidateStatusList extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetCandidateStatusList extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
      * 
@@ -18,7 +18,7 @@ class GetCandidateStatusList extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -41,10 +41,10 @@ class GetCandidateStatusList extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
         $optionsResolver->setDefined(array('statusId', 'name', 'active', 'default'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('statusId', array('array'));
-        $optionsResolver->setAllowedTypes('name', array('string'));
-        $optionsResolver->setAllowedTypes('active', array('bool'));
-        $optionsResolver->setAllowedTypes('default', array('bool'));
+        $optionsResolver->addAllowedTypes('statusId', array('array'));
+        $optionsResolver->addAllowedTypes('name', array('string'));
+        $optionsResolver->addAllowedTypes('active', array('bool'));
+        $optionsResolver->addAllowedTypes('default', array('bool'));
         return $optionsResolver;
     }
     /**
@@ -53,10 +53,16 @@ class GetCandidateStatusList extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
      *
      * @return null|\Varspool\JobAdder\V2\Model\StatusListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\StatusListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

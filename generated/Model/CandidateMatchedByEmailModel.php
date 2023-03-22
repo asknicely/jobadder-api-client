@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class CandidateMatchedByEmailModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var MatchedEmailAddressModel
@@ -76,6 +84,7 @@ class CandidateMatchedByEmailModel
      */
     public function setMatch(MatchedEmailAddressModel $match) : self
     {
+        $this->initialized['match'] = true;
         $this->match = $match;
         return $this;
     }
@@ -97,6 +106,7 @@ class CandidateMatchedByEmailModel
      */
     public function setCandidateId(int $candidateId) : self
     {
+        $this->initialized['candidateId'] = true;
         $this->candidateId = $candidateId;
         return $this;
     }
@@ -118,6 +128,7 @@ class CandidateMatchedByEmailModel
      */
     public function setFirstName(string $firstName) : self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
         return $this;
     }
@@ -139,6 +150,7 @@ class CandidateMatchedByEmailModel
      */
     public function setLastName(string $lastName) : self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
         return $this;
     }
@@ -160,6 +172,7 @@ class CandidateMatchedByEmailModel
      */
     public function setEmail(string $email) : self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
         return $this;
     }
@@ -181,6 +194,7 @@ class CandidateMatchedByEmailModel
      */
     public function setPhone(string $phone) : self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
         return $this;
     }
@@ -202,6 +216,7 @@ class CandidateMatchedByEmailModel
      */
     public function setMobile(string $mobile) : self
     {
+        $this->initialized['mobile'] = true;
         $this->mobile = $mobile;
         return $this;
     }
@@ -223,6 +238,7 @@ class CandidateMatchedByEmailModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -244,6 +260,7 @@ class CandidateMatchedByEmailModel
      */
     public function setLastNoteAt(\DateTime $lastNoteAt) : self
     {
+        $this->initialized['lastNoteAt'] = true;
         $this->lastNoteAt = $lastNoteAt;
         return $this;
     }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobAdSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -76,6 +84,7 @@ class JobAdSummaryModel
      */
     public function setAdId(int $adId) : self
     {
+        $this->initialized['adId'] = true;
         $this->adId = $adId;
         return $this;
     }
@@ -97,6 +106,7 @@ class JobAdSummaryModel
      */
     public function setState(string $state) : self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
         return $this;
     }
@@ -118,6 +128,7 @@ class JobAdSummaryModel
      */
     public function setTitle(string $title) : self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -139,6 +150,7 @@ class JobAdSummaryModel
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -160,6 +172,7 @@ class JobAdSummaryModel
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -181,6 +194,7 @@ class JobAdSummaryModel
      */
     public function setBulletPoints(array $bulletPoints) : self
     {
+        $this->initialized['bulletPoints'] = true;
         $this->bulletPoints = $bulletPoints;
         return $this;
     }
@@ -202,6 +216,7 @@ class JobAdSummaryModel
      */
     public function setOwner(UserNameModel $owner) : self
     {
+        $this->initialized['owner'] = true;
         $this->owner = $owner;
         return $this;
     }
@@ -223,6 +238,7 @@ class JobAdSummaryModel
      */
     public function setPostAt(\DateTime $postAt) : self
     {
+        $this->initialized['postAt'] = true;
         $this->postAt = $postAt;
         return $this;
     }
@@ -244,6 +260,7 @@ class JobAdSummaryModel
      */
     public function setExpireAt(\DateTime $expireAt) : self
     {
+        $this->initialized['expireAt'] = true;
         $this->expireAt = $expireAt;
         return $this;
     }

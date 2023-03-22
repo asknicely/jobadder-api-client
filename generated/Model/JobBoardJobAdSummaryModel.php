@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class JobBoardJobAdSummaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -76,6 +84,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setAdId(int $adId) : self
     {
+        $this->initialized['adId'] = true;
         $this->adId = $adId;
         return $this;
     }
@@ -97,6 +106,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setTitle(string $title) : self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
         return $this;
     }
@@ -118,6 +128,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setReference(string $reference) : self
     {
+        $this->initialized['reference'] = true;
         $this->reference = $reference;
         return $this;
     }
@@ -139,6 +150,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -160,6 +172,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setBulletPoints(array $bulletPoints) : self
     {
+        $this->initialized['bulletPoints'] = true;
         $this->bulletPoints = $bulletPoints;
         return $this;
     }
@@ -181,6 +194,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setPortal(JobAdPortalSummaryModel $portal) : self
     {
+        $this->initialized['portal'] = true;
         $this->portal = $portal;
         return $this;
     }
@@ -202,6 +216,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setPostedAt(\DateTime $postedAt) : self
     {
+        $this->initialized['postedAt'] = true;
         $this->postedAt = $postedAt;
         return $this;
     }
@@ -223,6 +238,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setUpdatedAt(\DateTime $updatedAt) : self
     {
+        $this->initialized['updatedAt'] = true;
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -244,6 +260,7 @@ class JobBoardJobAdSummaryModel
      */
     public function setExpiresAt(\DateTime $expiresAt) : self
     {
+        $this->initialized['expiresAt'] = true;
         $this->expiresAt = $expiresAt;
         return $this;
     }

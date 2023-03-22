@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class ActivityQuestionModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var int
@@ -76,6 +84,7 @@ class ActivityQuestionModel
      */
     public function setQuestionId(int $questionId) : self
     {
+        $this->initialized['questionId'] = true;
         $this->questionId = $questionId;
         return $this;
     }
@@ -97,6 +106,7 @@ class ActivityQuestionModel
      */
     public function setText(string $text) : self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
         return $this;
     }
@@ -118,6 +128,7 @@ class ActivityQuestionModel
      */
     public function setMandatory(bool $mandatory) : self
     {
+        $this->initialized['mandatory'] = true;
         $this->mandatory = $mandatory;
         return $this;
     }
@@ -139,6 +150,7 @@ class ActivityQuestionModel
      */
     public function setPossibleValues(array $possibleValues) : self
     {
+        $this->initialized['possibleValues'] = true;
         $this->possibleValues = $possibleValues;
         return $this;
     }
@@ -160,6 +172,7 @@ class ActivityQuestionModel
      */
     public function setQuestionAnswerType(string $questionAnswerType) : self
     {
+        $this->initialized['questionAnswerType'] = true;
         $this->questionAnswerType = $questionAnswerType;
         return $this;
     }
@@ -181,6 +194,7 @@ class ActivityQuestionModel
      */
     public function setMinimumRating(int $minimumRating) : self
     {
+        $this->initialized['minimumRating'] = true;
         $this->minimumRating = $minimumRating;
         return $this;
     }
@@ -202,6 +216,7 @@ class ActivityQuestionModel
      */
     public function setMaximumRating(int $maximumRating) : self
     {
+        $this->initialized['maximumRating'] = true;
         $this->maximumRating = $maximumRating;
         return $this;
     }
@@ -223,6 +238,7 @@ class ActivityQuestionModel
      */
     public function setConditionalAnswer(string $conditionalAnswer) : self
     {
+        $this->initialized['conditionalAnswer'] = true;
         $this->conditionalAnswer = $conditionalAnswer;
         return $this;
     }
@@ -244,6 +260,7 @@ class ActivityQuestionModel
      */
     public function setConditionalQuestions(array $conditionalQuestions) : self
     {
+        $this->initialized['conditionalQuestions'] = true;
         $this->conditionalQuestions = $conditionalQuestions;
         return $this;
     }

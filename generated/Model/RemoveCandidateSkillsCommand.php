@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class RemoveCandidateSkillsCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Skill categories to remove from this candidate.
      *
      * @var RemoveCategoriesModel[]
@@ -28,6 +36,7 @@ class RemoveCandidateSkillsCommand
      */
     public function setCategories(array $categories) : self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
         return $this;
     }

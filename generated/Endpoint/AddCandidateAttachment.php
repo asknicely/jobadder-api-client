@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddCandidateAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class AddCandidateAttachment extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $candidateId;
     protected $attach;
@@ -21,7 +21,7 @@ class AddCandidateAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
         $this->attach = $attach;
         $this->formParameters = $formParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -44,7 +44,7 @@ class AddCandidateAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
         $optionsResolver->setDefined(array('fileData'));
         $optionsResolver->setRequired(array('fileData'));
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('fileData', array('string', 'resource', '\\Psr\\Http\\Message\\StreamInterface'));
+        $optionsResolver->addAllowedTypes('fileData', array('string', 'resource', '\\Psr\\Http\\Message\\StreamInterface'));
         return $optionsResolver;
     }
     /**
@@ -54,13 +54,19 @@ class AddCandidateAttachment extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
      *
      * @return null|\Varspool\JobAdder\V2\Model\CandidateAttachmentRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (201 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CandidateAttachmentRepresentation', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddCandidateAttachmentNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\AddCandidateAttachmentNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,48 +16,56 @@ class PartnerActionFilterModelNormalizer implements DenormalizerInterface, Norma
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PartnerActionFilterModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PartnerActionFilterModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PartnerActionFilterModel();
-        if (property_exists($data, 'adminOnly')) {
-            $object->setAdminOnly($data->{'adminOnly'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'approvedOnly')) {
-            $object->setApprovedOnly($data->{'approvedOnly'});
+        if (\array_key_exists('adminOnly', $data)) {
+            $object->setAdminOnly($data['adminOnly']);
         }
-        if (property_exists($data, 'status')) {
-            $object->setStatus($this->denormalizer->denormalize($data->{'status'}, 'Varspool\\JobAdder\\V2\\Model\\PartnerActionStatusFilterModel', 'json', $context));
+        if (\array_key_exists('approvedOnly', $data)) {
+            $object->setApprovedOnly($data['approvedOnly']);
+        }
+        if (\array_key_exists('status', $data)) {
+            $object->setStatus($this->denormalizer->denormalize($data['status'], 'Varspool\\JobAdder\\V2\\Model\\PartnerActionStatusFilterModel', 'json', $context));
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getAdminOnly()) {
-            $data->{'adminOnly'} = $object->getAdminOnly();
+        $data = array();
+        if ($object->isInitialized('adminOnly') && null !== $object->getAdminOnly()) {
+            $data['adminOnly'] = $object->getAdminOnly();
         }
-        if (null !== $object->getApprovedOnly()) {
-            $data->{'approvedOnly'} = $object->getApprovedOnly();
+        if ($object->isInitialized('approvedOnly') && null !== $object->getApprovedOnly()) {
+            $data['approvedOnly'] = $object->getApprovedOnly();
         }
-        if (null !== $object->getStatus()) {
-            $data->{'status'} = $this->normalizer->normalize($object->getStatus(), 'json', $context);
+        if ($object->isInitialized('status') && null !== $object->getStatus()) {
+            $data['status'] = $this->normalizer->normalize($object->getStatus(), 'json', $context);
         }
         return $data;
     }

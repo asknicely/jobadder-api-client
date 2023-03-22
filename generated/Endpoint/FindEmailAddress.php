@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindEmailAddress extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindEmailAddress extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
      * Find candidates, contacts or users by email address.
@@ -15,7 +15,7 @@ class FindEmailAddress extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -38,7 +38,7 @@ class FindEmailAddress extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
         $optionsResolver->setDefined(array('email'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('email', array('string'));
+        $optionsResolver->addAllowedTypes('email', array('string'));
         return $optionsResolver;
     }
     /**
@@ -47,10 +47,16 @@ class FindEmailAddress extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
      *
      * @return null|\Varspool\JobAdder\V2\Model\MatchedByEmailAddressModel
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\MatchedByEmailAddressModel', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

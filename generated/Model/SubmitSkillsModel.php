@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SubmitSkillsModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Skill for detailed skill classification.
      *
      * @var int
@@ -28,6 +36,7 @@ class SubmitSkillsModel
      */
     public function setSkillId(int $skillId) : self
     {
+        $this->initialized['skillId'] = true;
         $this->skillId = $skillId;
         return $this;
     }

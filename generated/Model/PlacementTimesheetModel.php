@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementTimesheetModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var DateRangeModel
@@ -58,6 +66,7 @@ class PlacementTimesheetModel
      */
     public function setPeriod(DateRangeModel $period) : self
     {
+        $this->initialized['period'] = true;
         $this->period = $period;
         return $this;
     }
@@ -79,6 +88,7 @@ class PlacementTimesheetModel
      */
     public function setCreatedAt(\DateTime $createdAt) : self
     {
+        $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
         return $this;
     }
@@ -100,6 +110,7 @@ class PlacementTimesheetModel
      */
     public function setSubmittedAt(\DateTime $submittedAt) : self
     {
+        $this->initialized['submittedAt'] = true;
         $this->submittedAt = $submittedAt;
         return $this;
     }
@@ -121,6 +132,7 @@ class PlacementTimesheetModel
      */
     public function setApprovedAt(\DateTime $approvedAt) : self
     {
+        $this->initialized['approvedAt'] = true;
         $this->approvedAt = $approvedAt;
         return $this;
     }
@@ -142,6 +154,7 @@ class PlacementTimesheetModel
      */
     public function setApprovedBy(PlacementTimesheetApproverModel $approvedBy) : self
     {
+        $this->initialized['approvedBy'] = true;
         $this->approvedBy = $approvedBy;
         return $this;
     }
@@ -163,6 +176,7 @@ class PlacementTimesheetModel
      */
     public function setEntries(array $entries) : self
     {
+        $this->initialized['entries'] = true;
         $this->entries = $entries;
         return $this;
     }

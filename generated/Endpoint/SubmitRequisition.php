@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class SubmitRequisition extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class SubmitRequisition extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $requisitionId;
     /**
@@ -16,7 +16,7 @@ class SubmitRequisition extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
         $this->requisitionId = $requisitionId;
         $this->body = $body;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'PUT';
@@ -40,13 +40,19 @@ class SubmitRequisition extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (202 === $status) {
             return null;
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\SubmitRequisitionNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\SubmitRequisitionNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

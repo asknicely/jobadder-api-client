@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class SetJobOrderStatusCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Status Id
      *
      * @var int
@@ -34,6 +42,7 @@ class SetJobOrderStatusCommand
      */
     public function setStatusId(int $statusId) : self
     {
+        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -55,6 +64,7 @@ class SetJobOrderStatusCommand
      */
     public function setNote(SubmitStatusNoteModel $note) : self
     {
+        $this->initialized['note'] = true;
         $this->note = $note;
         return $this;
     }

@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class AddCandidateVideo extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class AddCandidateVideo extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     protected $candidateId;
     protected $videoType;
@@ -19,7 +19,7 @@ class AddCandidateVideo extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
         $this->videoType = $videoType;
         $this->body = $body;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'POST';
@@ -43,13 +43,19 @@ class AddCandidateVideo extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *
      * @return null|\Varspool\JobAdder\V2\Model\CandidateVideoModel
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\CandidateVideoModel', 'json');
         }
         if (404 === $status) {
-            throw new \Varspool\JobAdder\V2\Exception\AddCandidateVideoNotFoundException();
+            throw new \Varspool\JobAdder\V2\Exception\AddCandidateVideoNotFoundException($response);
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }

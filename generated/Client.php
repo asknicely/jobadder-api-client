@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2;
 
-class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
+class Client extends \Varspool\JobAdder\V2\Runtime\Client\Client
 {
     /**
      * 
@@ -16,7 +16,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findJobBoards(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobBoards($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobBoards($queryParameters), $fetch);
     }
     /**
      * 
@@ -29,7 +29,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobBoard(int $boardId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobBoard($boardId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobBoard($boardId), $fetch);
     }
     /**
     * 
@@ -66,7 +66,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobBoardJobAds(int $boardId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobBoardJobAds($boardId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobBoardJobAds($boardId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -80,7 +80,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobBoardJobAd(int $boardId, int $adId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobBoardJobAd($boardId, $adId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobBoardJobAd($boardId, $adId), $fetch);
     }
     /**
      * 
@@ -95,7 +95,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function submitJobBoardJobApplication(int $boardId, int $adId, \Varspool\JobAdder\V2\Model\SubmitJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitJobBoardJobApplication($boardId, $adId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitJobBoardJobApplication($boardId, $adId, $body), $fetch);
     }
     /**
     * Add a resume, cover letter or related document to a previously submitted job application.<br />
@@ -115,7 +115,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function attachJobBoardJobApplicationDocument(int $boardId, int $adId, int $applicationId, string $attachmentType, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AttachJobBoardJobApplicationDocument($boardId, $adId, $applicationId, $attachmentType, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AttachJobBoardJobApplicationDocument($boardId, $adId, $applicationId, $attachmentType, $formParameters), $fetch);
     }
     /**
     * 
@@ -172,7 +172,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobOrders(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrders($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrders($queryParameters), $fetch);
     }
     /**
      * 
@@ -184,7 +184,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrder(\Varspool\JobAdder\V2\Model\AddJobOrderCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrder($body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrder($body), $fetch);
     }
     /**
     * 
@@ -201,7 +201,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobOrder(int $jobId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrder($jobId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrder($jobId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -216,7 +216,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobOrder(int $jobId, \Varspool\JobAdder\V2\Model\UpdateJobOrderCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrder($jobId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrder($jobId, $body), $fetch);
     }
     /**
      * 
@@ -232,7 +232,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderJobApplications(int $jobId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderJobApplications($jobId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderJobApplications($jobId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -246,7 +246,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderCandidates(int $jobId, \Varspool\JobAdder\V2\Model\AddJobOrderCandidateCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderCandidates($jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderCandidates($jobId, $command), $fetch);
     }
     /**
      * 
@@ -262,7 +262,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderActiveJobApplications(int $jobId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActiveJobApplications($jobId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActiveJobApplications($jobId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -276,7 +276,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function submitJobOrderCandidate(int $jobId, \Varspool\JobAdder\V2\Model\SubmitJobOrderCandidateCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitJobOrderCandidate($jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitJobOrderCandidate($jobId, $command), $fetch);
     }
     /**
     * 
@@ -295,7 +295,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobOrderAttachments(int $jobId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderAttachments($jobId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderAttachments($jobId, $queryParameters), $fetch);
     }
     /**
      * Get a job attachment.<br />Setting the Accept header will attempt a file conversion.
@@ -309,7 +309,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderAttachment(int $jobId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderAttachment($jobId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderAttachment($jobId, $attach), $fetch);
     }
     /**
      * 
@@ -326,7 +326,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderAttachment(int $jobId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderAttachment($jobId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderAttachment($jobId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -341,7 +341,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobOrderAttachment(int $jobId, int $attach, \Varspool\JobAdder\V2\Model\UpdateJobOrderAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderAttachment($jobId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderAttachment($jobId, $attach, $command), $fetch);
     }
     /**
      * 
@@ -353,7 +353,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderSubmissions(int $jobId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderSubmissions($jobId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderSubmissions($jobId), $fetch);
     }
     /**
      * 
@@ -365,7 +365,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderPlacements(int $jobId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderPlacements($jobId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderPlacements($jobId), $fetch);
     }
     /**
      * 
@@ -377,7 +377,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderApprovedPlacements(int $jobId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderApprovedPlacements($jobId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderApprovedPlacements($jobId), $fetch);
     }
     /**
      * Change the job status and add an optional note
@@ -392,7 +392,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobOrderStatus(int $jobId, \Varspool\JobAdder\V2\Model\SetJobOrderStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobOrderStatus($jobId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobOrderStatus($jobId, $body), $fetch);
     }
     /**
     * 
@@ -424,7 +424,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobOrderNotes(int $jobId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderNotes($jobId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderNotes($jobId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -438,7 +438,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderNote(int $jobId, \Varspool\JobAdder\V2\Model\AddJobOrderNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderNote($jobId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderNote($jobId, $body), $fetch);
     }
     /**
      * 
@@ -450,7 +450,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderActivityByJobId(int $jobId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivityByJobId($jobId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivityByJobId($jobId), $fetch);
     }
     /**
      * 
@@ -464,7 +464,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderActivity(int $jobId, \Varspool\JobAdder\V2\Model\AddJobOrderActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderActivity($jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderActivity($jobId, $command), $fetch);
     }
     /**
      * 
@@ -478,7 +478,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderActivity(int $jobId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivity($jobId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivity($jobId, $activityId), $fetch);
     }
     /**
      * 
@@ -491,7 +491,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function invoices(int $jobId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\Invoices($jobId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\Invoices($jobId), $fetch);
     }
     /**
      * 
@@ -505,7 +505,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderInvoice(int $jobId, int $invoiceId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderInvoice($jobId, $invoiceId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderInvoice($jobId, $invoiceId), $fetch);
     }
     /**
      * 
@@ -519,7 +519,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderUserTask(int $jobId, \Varspool\JobAdder\V2\Model\AddJobOrderUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderUserTask($jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderUserTask($jobId, $command), $fetch);
     }
     /**
      * 
@@ -533,7 +533,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderUserTask(int $jobId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderUserTask($jobId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderUserTask($jobId, $taskId), $fetch);
     }
     /**
      * 
@@ -549,7 +549,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobOrderUserTask(int $jobId, int $taskId, \Varspool\JobAdder\V2\Model\UpdateJobOrderUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderUserTask($jobId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderUserTask($jobId, $taskId, $command), $fetch);
     }
     /**
      * Applicable to RateCalc generated RateCardID for Astute Payroll
@@ -562,7 +562,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteJobOrderPayrollBilling(int $jobOrderId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteJobOrderPayrollBilling($jobOrderId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteJobOrderPayrollBilling($jobOrderId), $fetch);
     }
     /**
      * Applicable to RateCalc generated RateCardID for Astute Payroll
@@ -575,7 +575,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderPayrollBilling(int $jobOrderId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderPayrollBilling($jobOrderId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderPayrollBilling($jobOrderId), $fetch);
     }
     /**
      * Applicable to RateCalc generated RateCardID for Astute Payroll
@@ -589,7 +589,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobOrderPayrollBilling(int $jobOrderId, int $rateCardId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderPayrollBilling($jobOrderId, $rateCardId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobOrderPayrollBilling($jobOrderId, $rateCardId), $fetch);
     }
     /**
      * Applicable to RateCalc generated RateCardID for Astute Payroll
@@ -603,7 +603,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobOrderPayrollBilling(int $jobOrderId, int $rateCardId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderPayrollBilling($jobOrderId, $rateCardId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobOrderPayrollBilling($jobOrderId, $rateCardId), $fetch);
     }
     /**
     * 
@@ -628,7 +628,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobOrderActivity(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderActivity($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderActivity($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -637,7 +637,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findJobOrderActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobOrderActivitySettings(), $fetch);
     }
     /**
      * 
@@ -650,7 +650,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -659,7 +659,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedJobOrders(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedJobOrders(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedJobOrders(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -668,7 +668,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -681,7 +681,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderCustomFieldItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderCustomFieldItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderCustomFieldItem($fieldId), $fetch);
     }
     /**
      * 
@@ -695,7 +695,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobOrderCustomFieldList(int $fieldId, \Varspool\JobAdder\V2\Model\SetJobOrderCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobOrderCustomFieldList($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobOrderCustomFieldList($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -709,7 +709,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderAttachmentCategoryList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderAttachmentCategoryList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderAttachmentCategoryList($queryParameters), $fetch);
     }
     /**
      * 
@@ -723,7 +723,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderNoteTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderNoteTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderNoteTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -737,7 +737,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderSourceList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderSourceList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderSourceList($queryParameters), $fetch);
     }
     /**
      * 
@@ -754,7 +754,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -767,7 +767,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobOrderStatusItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderStatusItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobOrderStatusItem($statusId), $fetch);
     }
     /**
     * 
@@ -808,7 +808,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findRequisitions(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindRequisitions($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindRequisitions($queryParameters), $fetch);
     }
     /**
      * 
@@ -820,7 +820,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addRequisition(\Varspool\JobAdder\V2\Model\AddRequisitionCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisition($body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisition($body), $fetch);
     }
     /**
      * 
@@ -832,7 +832,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteRequisition(int $requisitionId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteRequisition($requisitionId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteRequisition($requisitionId), $fetch);
     }
     /**
     * 
@@ -849,7 +849,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getRequisition(int $requisitionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisition($requisitionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisition($requisitionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -862,7 +862,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateRequisition(int $requisitionId, \Varspool\JobAdder\V2\Model\UpdateRequisitionCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateRequisition($requisitionId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateRequisition($requisitionId, $body), $fetch);
     }
     /**
      * 
@@ -874,7 +874,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionAttachmentList(int $requisitionId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionAttachmentList($requisitionId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionAttachmentList($requisitionId), $fetch);
     }
     /**
      * 
@@ -888,7 +888,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteRequisitionAttachment(int $requisitionId, string $attachmentId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteRequisitionAttachment($requisitionId, $attachmentId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteRequisitionAttachment($requisitionId, $attachmentId), $fetch);
     }
     /**
      * 
@@ -902,7 +902,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionAttachment(int $requisitionId, string $attachmentId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionAttachment($requisitionId, $attachmentId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionAttachment($requisitionId, $attachmentId), $fetch);
     }
     /**
      * 
@@ -919,7 +919,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addRequisitionAttachment(int $requisitionId, string $attachmentType, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisitionAttachment($requisitionId, $attachmentType, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisitionAttachment($requisitionId, $attachmentType, $formParameters), $fetch);
     }
     /**
      * 
@@ -933,7 +933,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function approveRequisition(int $requisitionId, \Varspool\JobAdder\V2\Model\ApproveRequisitionCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ApproveRequisition($requisitionId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ApproveRequisition($requisitionId, $body), $fetch);
     }
     /**
      * 
@@ -949,7 +949,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionApprovalHistory(int $requisitionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionApprovalHistory($requisitionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionApprovalHistory($requisitionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -963,7 +963,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectRequisition(int $requisitionId, \Varspool\JobAdder\V2\Model\RejectRequisitionCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectRequisition($requisitionId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectRequisition($requisitionId, $body), $fetch);
     }
     /**
      * 
@@ -977,7 +977,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function submitRequisition(int $requisitionId, \Varspool\JobAdder\V2\Model\SubmitRequisitionCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitRequisition($requisitionId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\SubmitRequisition($requisitionId, $body), $fetch);
     }
     /**
     * 
@@ -1009,7 +1009,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getRequisitionNotes(int $requisitionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionNotes($requisitionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionNotes($requisitionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1023,7 +1023,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addRequisitionNote(int $requisitionId, \Varspool\JobAdder\V2\Model\AddRequisitionNoteCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisitionNote($requisitionId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddRequisitionNote($requisitionId, $command), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -1032,7 +1032,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionForms(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionForms(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionForms(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -1041,7 +1041,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -1054,7 +1054,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getRequisitionCustomFieldItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionCustomFieldItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetRequisitionCustomFieldItem($fieldId), $fetch);
     }
     /**
     * 
@@ -1081,7 +1081,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobAds(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAds($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAds($queryParameters), $fetch);
     }
     /**
      * 
@@ -1093,7 +1093,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobAdDraft(\Varspool\JobAdder\V2\Model\AddJobAdDraftCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobAdDraft($body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobAdDraft($body), $fetch);
     }
     /**
     * 
@@ -1110,7 +1110,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobAd(int $adId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAd($adId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAd($adId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1123,7 +1123,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobAdDraft(int $adId, \Varspool\JobAdder\V2\Model\UpdateJobAdDraftCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobAdDraft($adId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobAdDraft($adId, $body), $fetch);
     }
     /**
     * 
@@ -1140,7 +1140,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobAdJobApplications(int $adId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAdJobApplications($adId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAdJobApplications($adId, $queryParameters), $fetch);
     }
     /**
     * 
@@ -1157,7 +1157,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobAdActiveJobApplications(int $adId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAdActiveJobApplications($adId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobAdActiveJobApplications($adId, $queryParameters), $fetch);
     }
     /**
     * 
@@ -1207,7 +1207,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCandidates(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidates($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidates($queryParameters), $fetch);
     }
     /**
      * 
@@ -1224,7 +1224,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidate(\Varspool\JobAdder\V2\Model\AddCandidateCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidate($body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidate($body, $headerParameters), $fetch);
     }
     /**
     * 
@@ -1241,7 +1241,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getCandidate(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidate($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidate($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1260,7 +1260,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCandidate(int $candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidateCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidate($candidateId, $body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidate($candidateId, $body, $headerParameters), $fetch);
     }
     /**
      * 
@@ -1273,7 +1273,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteCandidatePhoto(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidatePhoto($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidatePhoto($candidateId), $fetch);
     }
     /**
      * 
@@ -1290,7 +1290,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidatePhoto(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePhoto($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePhoto($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1307,7 +1307,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function headCandidatePhoto(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\HeadCandidatePhoto($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\HeadCandidatePhoto($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1323,7 +1323,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCandidatePhoto(int $candidateId, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidatePhoto($candidateId, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidatePhoto($candidateId, $formParameters), $fetch);
     }
     /**
      * 
@@ -1335,7 +1335,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateAvailability(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAvailability($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAvailability($candidateId), $fetch);
     }
     /**
      * Remove the candidates availability schedule for a single week
@@ -1353,7 +1353,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteCandidateAvailabilityWeek(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateAvailabilityWeek($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateAvailabilityWeek($candidateId, $queryParameters), $fetch);
     }
     /**
      * Set the candidates availability schedule for a single week
@@ -1367,7 +1367,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCandidateAvailabilityWeek(int $candidateId, \Varspool\JobAdder\V2\Model\SetCandidateAvailabilityByWeekCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateAvailabilityWeek($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateAvailabilityWeek($candidateId, $command), $fetch);
     }
     /**
      * 
@@ -1379,7 +1379,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateVideos(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateVideos($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateVideos($candidateId), $fetch);
     }
     /**
      * 
@@ -1393,7 +1393,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getLatestCandidateVideo(int $candidateId, string $videoType, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetLatestCandidateVideo($candidateId, $videoType), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetLatestCandidateVideo($candidateId, $videoType), $fetch);
     }
     /**
      * 
@@ -1408,7 +1408,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateVideo(int $candidateId, string $videoType, \Varspool\JobAdder\V2\Model\AddCandidateVideoCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateVideo($candidateId, $videoType, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateVideo($candidateId, $videoType, $body), $fetch);
     }
     /**
      * 
@@ -1420,7 +1420,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateSkills(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSkills($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSkills($candidateId), $fetch);
     }
     /**
      * 
@@ -1433,7 +1433,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteCandidateSkills(int $candidateId, \Varspool\JobAdder\V2\Model\RemoveCandidateSkillsCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateSkills($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateSkills($candidateId, $command), $fetch);
     }
     /**
      * 
@@ -1446,7 +1446,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putCandidateSkills(int $candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidateSkillsCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateSkills($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateSkills($candidateId, $command), $fetch);
     }
     /**
      * Remove a single category and all associated sub-categories and skills
@@ -1459,7 +1459,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteCandidateCategory(int $candidateId, int $categoryId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateCategory($candidateId, $categoryId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCandidateCategory($candidateId, $categoryId), $fetch);
     }
     /**
     * 
@@ -1479,7 +1479,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCandidateAttachments(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateAttachments($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateAttachments($candidateId, $queryParameters), $fetch);
     }
     /**
      * Get a candidate attachment.<br />Setting the Accept header will attempt a file conversion.
@@ -1493,7 +1493,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateAttachment(int $candidateId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAttachment($candidateId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAttachment($candidateId, $attach), $fetch);
     }
     /**
      * 
@@ -1510,7 +1510,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateAttachment(int $candidateId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateAttachment($candidateId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateAttachment($candidateId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -1525,7 +1525,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCandidateAttachment(int $candidateId, int $attach, \Varspool\JobAdder\V2\Model\UpdateCandidateAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateAttachment($candidateId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateAttachment($candidateId, $attach, $command), $fetch);
     }
     /**
     * 
@@ -1558,7 +1558,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findAllCandidateAttachments(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindAllCandidateAttachments($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindAllCandidateAttachments($queryParameters), $fetch);
     }
     /**
      * 
@@ -1570,7 +1570,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateFloats(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateFloats($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateFloats($candidateId), $fetch);
     }
     /**
      * This will include both active and complete/closed job applications
@@ -1586,7 +1586,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateJobApplications(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateJobApplications($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateJobApplications($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1600,7 +1600,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateJobOrders(int $candidateId, \Varspool\JobAdder\V2\Model\AddCandidateJobOrderCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateJobOrders($candidateId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateJobOrders($candidateId, $body), $fetch);
     }
     /**
      * 
@@ -1616,7 +1616,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getActiveCandidateJobApplications(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetActiveCandidateJobApplications($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetActiveCandidateJobApplications($candidateId, $queryParameters), $fetch);
     }
     /**
     * 
@@ -1633,7 +1633,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getCandidateInterviews(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateInterviews($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateInterviews($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1645,7 +1645,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateSubmissions(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSubmissions($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSubmissions($candidateId), $fetch);
     }
     /**
      * 
@@ -1657,7 +1657,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidatePlacements(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePlacements($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePlacements($candidateId), $fetch);
     }
     /**
      * 
@@ -1669,7 +1669,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateApprovedPlacements(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateApprovedPlacements($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateApprovedPlacements($candidateId), $fetch);
     }
     /**
      * Change the candidate status and add an optional note
@@ -1684,7 +1684,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putCandidateStatus(int $candidateId, \Varspool\JobAdder\V2\Model\SetCandidateStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateStatus($candidateId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateStatus($candidateId, $body), $fetch);
     }
     /**
     * 
@@ -1716,7 +1716,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getCandidateNotes(int $candidateId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateNotes($candidateId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateNotes($candidateId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -1730,7 +1730,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateNote(int $candidateId, \Varspool\JobAdder\V2\Model\AddCandidateNoteCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateNote($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateNote($candidateId, $command), $fetch);
     }
     /**
      * 
@@ -1743,7 +1743,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function privacyDeleteCandidate(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PrivacyDeleteCandidate($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PrivacyDeleteCandidate($candidateId), $fetch);
     }
     /**
      * 
@@ -1755,7 +1755,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateActivityByCandidateId(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivityByCandidateId($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivityByCandidateId($candidateId), $fetch);
     }
     /**
      * 
@@ -1769,7 +1769,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateActivity(int $candidateId, \Varspool\JobAdder\V2\Model\AddCandidateActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateActivity($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateActivity($candidateId, $command), $fetch);
     }
     /**
      * 
@@ -1783,7 +1783,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateActivity(int $candidateId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivity($candidateId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivity($candidateId, $activityId), $fetch);
     }
     /**
      * Applicable to FT360 enabled accounts only
@@ -1796,7 +1796,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidatePayrollBilling(int $candidateId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePayrollBilling($candidateId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidatePayrollBilling($candidateId), $fetch);
     }
     /**
      * 
@@ -1810,7 +1810,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCandidateUserTask(int $candidateId, \Varspool\JobAdder\V2\Model\AddCandidateUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateUserTask($candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCandidateUserTask($candidateId, $command), $fetch);
     }
     /**
      * 
@@ -1824,7 +1824,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateUserTask(int $candidateId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateUserTask($candidateId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateUserTask($candidateId, $taskId), $fetch);
     }
     /**
      * 
@@ -1840,7 +1840,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCandidateUserTask(int $candidateId, int $taskId, \Varspool\JobAdder\V2\Model\UpdateCandidateUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateUserTask($candidateId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCandidateUserTask($candidateId, $taskId, $command), $fetch);
     }
     /**
     * 
@@ -1865,7 +1865,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCandidateActivities(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateActivities($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateActivities($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -1874,7 +1874,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findCandidateActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidateActivitySettings(), $fetch);
     }
     /**
      * 
@@ -1887,7 +1887,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -1896,7 +1896,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedCandidates(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedCandidates(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedCandidates(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -1905,7 +1905,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -1918,7 +1918,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateCustomFieldListItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateCustomFieldListItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateCustomFieldListItem($fieldId), $fetch);
     }
     /**
      * 
@@ -1932,7 +1932,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putCandidateCustomFieldListItem(int $fieldId, \Varspool\JobAdder\V2\Model\SetCandidateCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateCustomFieldListItem($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutCandidateCustomFieldListItem($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -1946,7 +1946,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateAttachmentCategoryList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAttachmentCategoryList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateAttachmentCategoryList($queryParameters), $fetch);
     }
     /**
      * 
@@ -1960,7 +1960,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateNoteTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateNoteTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateNoteTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -1974,7 +1974,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateRatingList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateRatingList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateRatingList($queryParameters), $fetch);
     }
     /**
      * 
@@ -1988,7 +1988,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateSalutationList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSalutationList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSalutationList($queryParameters), $fetch);
     }
     /**
      * 
@@ -2002,7 +2002,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateSourceList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSourceList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateSourceList($queryParameters), $fetch);
     }
     /**
      * 
@@ -2019,7 +2019,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -2032,7 +2032,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCandidateStatusListItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateStatusListItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCandidateStatusListItem($statusId), $fetch);
     }
     /**
      * Applicable to FT360 enabled accounts only
@@ -2047,7 +2047,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findCandidatesPayrollBillings(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidatesPayrollBillings($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCandidatesPayrollBillings($queryParameters), $fetch);
     }
     /**
     * 
@@ -2076,7 +2076,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getFloats(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetFloats($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetFloats($queryParameters), $fetch);
     }
     /**
      * 
@@ -2089,7 +2089,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getFloat(int $floatId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetFloat($floatId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetFloat($floatId), $fetch);
     }
     /**
     * 
@@ -2119,7 +2119,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findSubmissions(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindSubmissions($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindSubmissions($queryParameters), $fetch);
     }
     /**
      * 
@@ -2132,7 +2132,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getSubmission(int $submissionId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetSubmission($submissionId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetSubmission($submissionId), $fetch);
     }
     /**
     * 
@@ -2191,7 +2191,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobApplications(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplications($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplications($queryParameters), $fetch);
     }
     /**
      * 
@@ -2204,7 +2204,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplication(int $applicationId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplication($applicationId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplication($applicationId), $fetch);
     }
     /**
      * Update job application status and custom fields
@@ -2219,7 +2219,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobApplication(int $applicationId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplication($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplication($applicationId, $body), $fetch);
     }
     /**
      * 
@@ -2231,7 +2231,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationVideos(int $applicationId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationVideos($applicationId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationVideos($applicationId), $fetch);
     }
     /**
      * 
@@ -2245,7 +2245,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getLatestJobApplicationVideo(int $applicationId, string $videoType, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetLatestJobApplicationVideo($applicationId, $videoType), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetLatestJobApplicationVideo($applicationId, $videoType), $fetch);
     }
     /**
      * 
@@ -2260,7 +2260,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobApplicationVideo(int $applicationId, string $videoType, \Varspool\JobAdder\V2\Model\AddJobApplicationVideoCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationVideo($applicationId, $videoType, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationVideo($applicationId, $videoType, $command), $fetch);
     }
     /**
     * 
@@ -2279,7 +2279,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobApplicationAttachments(int $applicationId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationAttachments($applicationId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationAttachments($applicationId, $queryParameters), $fetch);
     }
     /**
      * Get a job application attachment.<br />Setting the Accept header will attempt a file conversion.
@@ -2293,7 +2293,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationAttachment(int $applicationId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationAttachment($applicationId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationAttachment($applicationId, $attach), $fetch);
     }
     /**
      * 
@@ -2310,7 +2310,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobApplicationAttachment(int $applicationId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationAttachment($applicationId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationAttachment($applicationId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -2325,7 +2325,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobApplicationAttachment(int $applicationId, int $attach, \Varspool\JobAdder\V2\Model\UpdateJobApplicationAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplicationAttachment($applicationId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplicationAttachment($applicationId, $attach, $command), $fetch);
     }
     /**
      * 
@@ -2339,7 +2339,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function reviewSubmitJobApplication(int $applicationId, \Varspool\JobAdder\V2\Model\ReviewSubmitJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewSubmitJobApplication($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewSubmitJobApplication($applicationId, $body), $fetch);
     }
     /**
      * 
@@ -2353,7 +2353,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function reviewViewJobApplication(int $applicationId, \Varspool\JobAdder\V2\Model\ReviewViewJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewViewJobApplication($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewViewJobApplication($applicationId, $body), $fetch);
     }
     /**
      * 
@@ -2367,7 +2367,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function reviewAcceptJobApplication(int $applicationId, \Varspool\JobAdder\V2\Model\ReviewAcceptJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewAcceptJobApplication($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewAcceptJobApplication($applicationId, $body), $fetch);
     }
     /**
      * 
@@ -2381,7 +2381,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function reviewRejectJobApplication(int $applicationId, \Varspool\JobAdder\V2\Model\ReviewRejectJobApplicationCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewRejectJobApplication($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ReviewRejectJobApplication($applicationId, $body), $fetch);
     }
     /**
     * 
@@ -2398,7 +2398,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobApplicationInterviews(int $applicationId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationInterviews($applicationId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationInterviews($applicationId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -2413,7 +2413,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function postJobApplicationExternalInterview(int $applicationId, \Varspool\JobAdder\V2\Model\AddJobApplicationExternalInterviewCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PostJobApplicationExternalInterview($applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PostJobApplicationExternalInterview($applicationId, $command), $fetch);
     }
     /**
      * 
@@ -2429,7 +2429,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobApplicationExternalInterview(int $applicationId, int $interviewId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationInterviewCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationExternalInterview($applicationId, $interviewId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationExternalInterview($applicationId, $interviewId, $command), $fetch);
     }
     /**
      * 
@@ -2444,7 +2444,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function postJobApplicationInternalInterview(int $applicationId, \Varspool\JobAdder\V2\Model\AddJobApplicationInternalInterviewCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PostJobApplicationInternalInterview($applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PostJobApplicationInternalInterview($applicationId, $command), $fetch);
     }
     /**
      * 
@@ -2460,7 +2460,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobApplicationInternalInterview(int $applicationId, int $interviewId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationInterviewCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationInternalInterview($applicationId, $interviewId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationInternalInterview($applicationId, $interviewId, $command), $fetch);
     }
     /**
      * Change the job application status and add an optional note
@@ -2475,7 +2475,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobApplicationStatus(int $applicationId, \Varspool\JobAdder\V2\Model\SetJobApplicationStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationStatus($applicationId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationStatus($applicationId, $body), $fetch);
     }
     /**
     * 
@@ -2507,7 +2507,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getJobApplicationNotes(int $applicationId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationNotes($applicationId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationNotes($applicationId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -2521,7 +2521,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobApplicationNote(int $applicationId, \Varspool\JobAdder\V2\Model\AddJobApplicationNoteCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationNote($applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationNote($applicationId, $command), $fetch);
     }
     /**
      * 
@@ -2533,7 +2533,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationActivityByApplicationId(int $applicationId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivityByApplicationId($applicationId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivityByApplicationId($applicationId), $fetch);
     }
     /**
      * 
@@ -2547,7 +2547,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobApplicationActivity(int $applicationId, \Varspool\JobAdder\V2\Model\AddJobApplicationActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationActivity($applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationActivity($applicationId, $command), $fetch);
     }
     /**
      * 
@@ -2561,7 +2561,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationActivity(int $applicationId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivity($applicationId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivity($applicationId, $activityId), $fetch);
     }
     /**
      * 
@@ -2575,7 +2575,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addJobApplicationUserTask(int $applicationId, \Varspool\JobAdder\V2\Model\AddJobApplicationUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationUserTask($applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddJobApplicationUserTask($applicationId, $command), $fetch);
     }
     /**
      * 
@@ -2589,7 +2589,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationUserTask(int $applicationId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationUserTask($applicationId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationUserTask($applicationId, $taskId), $fetch);
     }
     /**
      * 
@@ -2605,7 +2605,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateJobApplicationUserTask(int $applicationId, int $taskId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplicationUserTask($applicationId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateJobApplicationUserTask($applicationId, $taskId, $command), $fetch);
     }
     /**
     * 
@@ -2630,7 +2630,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findJobApplicationActivity(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationActivity($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationActivity($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -2639,7 +2639,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findJobApplicationActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindJobApplicationActivitySettings(), $fetch);
     }
     /**
      * 
@@ -2652,7 +2652,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -2661,7 +2661,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedJobApplications(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedJobApplications(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedJobApplications(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -2670,7 +2670,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -2683,7 +2683,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationCustomFieldListItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationCustomFieldListItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationCustomFieldListItem($fieldId), $fetch);
     }
     /**
      * 
@@ -2697,7 +2697,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putJobApplicationCustomFieldList(int $fieldId, \Varspool\JobAdder\V2\Model\SetJobApplicationCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationCustomFieldList($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutJobApplicationCustomFieldList($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -2715,7 +2715,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -2728,7 +2728,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationStatusListItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationStatusListItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationStatusListItem($statusId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -2737,7 +2737,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getJobApplicationWorkflowList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationWorkflowList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetJobApplicationWorkflowList(), $fetch);
     }
     /**
     * 
@@ -2808,7 +2808,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findPlacements(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacements($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacements($queryParameters), $fetch);
     }
     /**
     * 
@@ -2825,7 +2825,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPlacement(int $placementId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacement($placementId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacement($placementId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -2840,7 +2840,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updatePlacement(int $placementId, \Varspool\JobAdder\V2\Model\UpdatePlacementCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacement($placementId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacement($placementId, $body), $fetch);
     }
     /**
     * 
@@ -2859,7 +2859,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findPlacementAttachments(int $placementId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementAttachments($placementId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementAttachments($placementId, $queryParameters), $fetch);
     }
     /**
      * Get a placement attachment.<br />Setting the Accept header will attempt a file conversion.
@@ -2873,7 +2873,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementAttachment(int $placementId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAttachment($placementId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAttachment($placementId, $attach), $fetch);
     }
     /**
      * 
@@ -2890,7 +2890,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addPlacementAttachment(int $placementId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementAttachment($placementId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementAttachment($placementId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -2905,7 +2905,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updatePlacementAttachment(int $placementId, int $attach, \Varspool\JobAdder\V2\Model\UpdatePlacementAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacementAttachment($placementId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacementAttachment($placementId, $attach, $command), $fetch);
     }
     /**
      * Change the placement status and add an optional note
@@ -2920,7 +2920,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putPlacementStatus(int $placementId, \Varspool\JobAdder\V2\Model\SetPlacementStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutPlacementStatus($placementId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutPlacementStatus($placementId, $body), $fetch);
     }
     /**
     * 
@@ -2938,7 +2938,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPlacementTimesheets(int $placementId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementTimesheets($placementId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementTimesheets($placementId, $queryParameters), $fetch);
     }
     /**
     * 
@@ -2970,7 +2970,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPlacementNotes(int $placementId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementNotes($placementId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementNotes($placementId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -2984,7 +2984,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addPlacementNote(int $placementId, \Varspool\JobAdder\V2\Model\AddPlacementNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementNote($placementId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementNote($placementId, $body), $fetch);
     }
     /**
      * 
@@ -2996,7 +2996,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementActivityByPlacementId(int $placementId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivityByPlacementId($placementId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivityByPlacementId($placementId), $fetch);
     }
     /**
      * 
@@ -3010,7 +3010,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addPlacementActivity(int $placementId, \Varspool\JobAdder\V2\Model\AddPlacementActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementActivity($placementId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementActivity($placementId, $command), $fetch);
     }
     /**
      * 
@@ -3024,7 +3024,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementActivity(int $placementId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivity($placementId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivity($placementId, $activityId), $fetch);
     }
     /**
      * 
@@ -3038,7 +3038,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addPlacementUserTask(int $placementId, \Varspool\JobAdder\V2\Model\AddPlacementUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementUserTask($placementId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddPlacementUserTask($placementId, $command), $fetch);
     }
     /**
      * 
@@ -3052,7 +3052,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementUserTask(int $placementId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementUserTask($placementId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementUserTask($placementId, $taskId), $fetch);
     }
     /**
      * 
@@ -3068,7 +3068,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updatePlacementUserTask(int $placementId, int $taskId, \Varspool\JobAdder\V2\Model\UpdatePlacementUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacementUserTask($placementId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePlacementUserTask($placementId, $taskId, $command), $fetch);
     }
     /**
     * 
@@ -3093,7 +3093,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findPlacementActivity(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementActivity($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementActivity($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3102,7 +3102,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findPlacementActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPlacementActivitySettings(), $fetch);
     }
     /**
      * 
@@ -3115,7 +3115,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3124,7 +3124,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedPlacements(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedPlacements(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedPlacements(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3133,7 +3133,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -3146,7 +3146,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementCustomFieldItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementCustomFieldItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementCustomFieldItem($fieldId), $fetch);
     }
     /**
      * 
@@ -3160,7 +3160,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putPlacementCustomFieldList(int $fieldId, \Varspool\JobAdder\V2\Model\SetPlacementCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutPlacementCustomFieldList($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutPlacementCustomFieldList($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -3174,7 +3174,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementAttachmentCategoryList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAttachmentCategoryList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAttachmentCategoryList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3188,7 +3188,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementAwardList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAwardList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementAwardList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3202,7 +3202,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementBillingTermsList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementBillingTermsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementBillingTermsList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3216,7 +3216,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementIndustryCodeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementIndustryCodeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementIndustryCodeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3230,7 +3230,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementNoteTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementNoteTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementNoteTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3244,7 +3244,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementPaymentTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementPaymentTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementPaymentTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3261,7 +3261,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -3274,7 +3274,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPlacementStatusItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementStatusItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPlacementStatusItem($statusId), $fetch);
     }
     /**
     * 
@@ -3317,7 +3317,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCompanies(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanies($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanies($queryParameters), $fetch);
     }
     /**
      * 
@@ -3334,7 +3334,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompany(\Varspool\JobAdder\V2\Model\AddCompanyCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompany($body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompany($body, $headerParameters), $fetch);
     }
     /**
     * 
@@ -3351,7 +3351,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getCompany(int $companyId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompany($companyId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompany($companyId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3370,7 +3370,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompany(int $companyId, \Varspool\JobAdder\V2\Model\UpdateCompanyCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompany($companyId, $body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompany($companyId, $body, $headerParameters), $fetch);
     }
     /**
      * 
@@ -3383,7 +3383,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteCompanyLogo(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCompanyLogo($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteCompanyLogo($companyId), $fetch);
     }
     /**
      * 
@@ -3400,7 +3400,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyLogo(int $companyId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyLogo($companyId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyLogo($companyId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3417,7 +3417,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function headCompanyLogo(int $companyId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\HeadCompanyLogo($companyId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\HeadCompanyLogo($companyId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3433,7 +3433,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompanyLogo(int $companyId, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyLogo($companyId, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyLogo($companyId, $formParameters), $fetch);
     }
     /**
      * 
@@ -3445,7 +3445,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyAddresses(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAddresses($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAddresses($companyId), $fetch);
     }
     /**
      * 
@@ -3459,7 +3459,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyAddress(int $companyId, \Varspool\JobAdder\V2\Model\AddCompanyAddressCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyAddress($companyId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyAddress($companyId, $body), $fetch);
     }
     /**
      * 
@@ -3473,7 +3473,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function removeCompanyAddress(int $companyId, string $addressId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RemoveCompanyAddress($companyId, $addressId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RemoveCompanyAddress($companyId, $addressId), $fetch);
     }
     /**
      * 
@@ -3487,7 +3487,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyAddress(int $companyId, string $addressId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAddress($companyId, $addressId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAddress($companyId, $addressId), $fetch);
     }
     /**
      * 
@@ -3502,7 +3502,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompanyAddress(int $companyId, string $addressId, \Varspool\JobAdder\V2\Model\UpdateCompanyAddressCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyAddress($companyId, $addressId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyAddress($companyId, $addressId, $body), $fetch);
     }
     /**
      * 
@@ -3514,7 +3514,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanySkills(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySkills($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySkills($companyId), $fetch);
     }
     /**
      * 
@@ -3526,7 +3526,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanySubsidiaries(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySubsidiaries($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySubsidiaries($companyId), $fetch);
     }
     /**
      * 
@@ -3538,7 +3538,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyContacts(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyContacts($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyContacts($companyId), $fetch);
     }
     /**
     * 
@@ -3557,7 +3557,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCompanyAttachments(int $companyId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyAttachments($companyId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyAttachments($companyId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3571,7 +3571,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyAttachment(int $companyId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAttachment($companyId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAttachment($companyId, $attach), $fetch);
     }
     /**
      * 
@@ -3588,7 +3588,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyAttachment(int $companyId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyAttachment($companyId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyAttachment($companyId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -3603,7 +3603,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompanyAttachment(int $companyId, int $attach, \Varspool\JobAdder\V2\Model\UpdateCompanyAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyAttachment($companyId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyAttachment($companyId, $attach, $command), $fetch);
     }
     /**
      * 
@@ -3615,7 +3615,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyJobOrders(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyJobOrders($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyJobOrders($companyId), $fetch);
     }
     /**
      * 
@@ -3627,7 +3627,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyActiveJobOrders(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActiveJobOrders($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActiveJobOrders($companyId), $fetch);
     }
     /**
      * Change the company status and add an optional note
@@ -3642,7 +3642,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putCompanyStatus(int $companyId, \Varspool\JobAdder\V2\Model\SetCompanyStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutCompanyStatus($companyId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutCompanyStatus($companyId, $body), $fetch);
     }
     /**
      * 
@@ -3654,7 +3654,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyRequisitions(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyRequisitions($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyRequisitions($companyId), $fetch);
     }
     /**
      * 
@@ -3666,7 +3666,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyFloats(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyFloats($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyFloats($companyId), $fetch);
     }
     /**
      * 
@@ -3678,7 +3678,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanySubmissions(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySubmissions($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanySubmissions($companyId), $fetch);
     }
     /**
      * 
@@ -3690,7 +3690,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyPlacements(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyPlacements($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyPlacements($companyId), $fetch);
     }
     /**
      * 
@@ -3702,7 +3702,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyApprovedPlacements(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyApprovedPlacements($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyApprovedPlacements($companyId), $fetch);
     }
     /**
      * 
@@ -3720,7 +3720,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function listCompanyWorkflows(int $companyId, string $workflowType, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ListCompanyWorkflows($companyId, $workflowType, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ListCompanyWorkflows($companyId, $workflowType, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3734,7 +3734,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyWorkflow(int $companyId, string $workflowType, \Varspool\JobAdder\V2\Model\AddCompanyWorkflowCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyWorkflow($companyId, $workflowType, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyWorkflow($companyId, $workflowType, $body), $fetch);
     }
     /**
      * 
@@ -3748,7 +3748,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyWorkflow(int $companyId, string $workflowType, int $workflowId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyWorkflow($companyId, $workflowType, $workflowId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyWorkflow($companyId, $workflowType, $workflowId), $fetch);
     }
     /**
      * 
@@ -3763,7 +3763,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompanyWorkflow(int $companyId, string $workflowType, int $workflowId, \Varspool\JobAdder\V2\Model\UpdateCompanyWorkflowCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyWorkflow($companyId, $workflowType, $workflowId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyWorkflow($companyId, $workflowType, $workflowId, $body), $fetch);
     }
     /**
     * 
@@ -3795,7 +3795,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getCompanyNotes(int $companyId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyNotes($companyId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyNotes($companyId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -3809,7 +3809,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyNote(int $companyId, \Varspool\JobAdder\V2\Model\AddCompanyNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyNote($companyId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyNote($companyId, $body), $fetch);
     }
     /**
      * 
@@ -3821,7 +3821,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyActivityByCompanyId(int $companyId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivityByCompanyId($companyId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivityByCompanyId($companyId), $fetch);
     }
     /**
      * 
@@ -3835,7 +3835,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyActivity(int $companyId, \Varspool\JobAdder\V2\Model\AddCompanyActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyActivity($companyId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyActivity($companyId, $command), $fetch);
     }
     /**
      * 
@@ -3849,7 +3849,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyActivity(int $companyId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivity($companyId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivity($companyId, $activityId), $fetch);
     }
     /**
      * 
@@ -3863,7 +3863,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addCompanyUserTask(int $companyId, \Varspool\JobAdder\V2\Model\AddCompanyUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyUserTask($companyId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddCompanyUserTask($companyId, $command), $fetch);
     }
     /**
      * 
@@ -3877,7 +3877,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyUserTask(int $companyId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyUserTask($companyId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyUserTask($companyId, $taskId), $fetch);
     }
     /**
      * 
@@ -3893,7 +3893,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateCompanyUserTask(int $companyId, int $taskId, \Varspool\JobAdder\V2\Model\UpdateCompanyUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyUserTask($companyId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateCompanyUserTask($companyId, $taskId, $command), $fetch);
     }
     /**
     * 
@@ -3918,7 +3918,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCompanyActivity(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyActivity($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyActivity($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3927,7 +3927,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findCompanyActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCompanyActivitySettings(), $fetch);
     }
     /**
      * 
@@ -3940,7 +3940,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3949,7 +3949,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedCompanies(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedCompanies(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedCompanies(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -3958,7 +3958,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -3971,7 +3971,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyCustomFieldListItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyCustomFieldListItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyCustomFieldListItem($fieldId), $fetch);
     }
     /**
      * 
@@ -3985,7 +3985,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putCompanyCustomFieldList(int $fieldId, \Varspool\JobAdder\V2\Model\SetCompanyCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutCompanyCustomFieldList($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutCompanyCustomFieldList($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -3999,7 +3999,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyAttachmentCategoryList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAttachmentCategoryList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyAttachmentCategoryList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4013,7 +4013,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyNoteTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyNoteTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyNoteTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4030,7 +4030,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4043,7 +4043,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCompanyStatusListItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyStatusListItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCompanyStatusListItem($statusId), $fetch);
     }
     /**
     * 
@@ -4088,7 +4088,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findContacts(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindContacts($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindContacts($queryParameters), $fetch);
     }
     /**
      * 
@@ -4105,7 +4105,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addContact(\Varspool\JobAdder\V2\Model\AddContactCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddContact($body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddContact($body, $headerParameters), $fetch);
     }
     /**
     * 
@@ -4122,7 +4122,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getContact(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContact($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContact($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4141,7 +4141,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateContact(int $contactId, \Varspool\JobAdder\V2\Model\UpdateContactCommand $body, array $headerParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContact($contactId, $body, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContact($contactId, $body, $headerParameters), $fetch);
     }
     /**
      * 
@@ -4154,7 +4154,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletteContactPhoto(int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletteContactPhoto($contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletteContactPhoto($contactId), $fetch);
     }
     /**
      * 
@@ -4171,7 +4171,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactPhoto(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactPhoto($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactPhoto($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4188,7 +4188,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function headContactPhoto(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\HeadContactPhoto($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\HeadContactPhoto($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4204,7 +4204,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateContactPhoto(int $contactId, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactPhoto($contactId, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactPhoto($contactId, $formParameters), $fetch);
     }
     /**
      * 
@@ -4216,7 +4216,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactJobOrders(int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactJobOrders($contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactJobOrders($contactId), $fetch);
     }
     /**
      * 
@@ -4228,7 +4228,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactActiveJobOrders(int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActiveJobOrders($contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActiveJobOrders($contactId), $fetch);
     }
     /**
     * 
@@ -4245,7 +4245,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getContactInterviews(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactInterviews($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactInterviews($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4257,7 +4257,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactSkills(int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactSkills($contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactSkills($contactId), $fetch);
     }
     /**
     * 
@@ -4276,7 +4276,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findContactAttachments(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactAttachments($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactAttachments($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4290,7 +4290,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactAttachment(int $contactId, int $attach, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactAttachment($contactId, $attach), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactAttachment($contactId, $attach), $fetch);
     }
     /**
      * 
@@ -4307,7 +4307,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addContactAttachment(int $contactId, string $attach, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactAttachment($contactId, $attach, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactAttachment($contactId, $attach, $formParameters), $fetch);
     }
     /**
      * 
@@ -4322,7 +4322,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateContactAttachment(int $contactId, int $attach, \Varspool\JobAdder\V2\Model\UpdateContactAttachmentCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactAttachment($contactId, $attach, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactAttachment($contactId, $attach, $command), $fetch);
     }
     /**
      * Change the contact status and add an optional note
@@ -4337,7 +4337,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putContactStatus(int $contactId, \Varspool\JobAdder\V2\Model\SetContactStatusCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutContactStatus($contactId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutContactStatus($contactId, $body), $fetch);
     }
     /**
     * 
@@ -4369,7 +4369,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getContactNotes(int $contactId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactNotes($contactId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactNotes($contactId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4383,7 +4383,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addContactNote(int $contactId, \Varspool\JobAdder\V2\Model\AddContactNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactNote($contactId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactNote($contactId, $body), $fetch);
     }
     /**
      * 
@@ -4395,7 +4395,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactActivityByContactId(int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivityByContactId($contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivityByContactId($contactId), $fetch);
     }
     /**
      * 
@@ -4409,7 +4409,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addContactActivity(int $contactId, \Varspool\JobAdder\V2\Model\AddContactActivityCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactActivity($contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactActivity($contactId, $command), $fetch);
     }
     /**
      * 
@@ -4423,7 +4423,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactActivity(int $contactId, int $activityId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivity($contactId, $activityId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivity($contactId, $activityId), $fetch);
     }
     /**
      * 
@@ -4437,7 +4437,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addContactUserTask(int $contactId, \Varspool\JobAdder\V2\Model\AddContactUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactUserTask($contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddContactUserTask($contactId, $command), $fetch);
     }
     /**
      * 
@@ -4451,7 +4451,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactUserTask(int $contactId, int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactUserTask($contactId, $taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactUserTask($contactId, $taskId), $fetch);
     }
     /**
      * 
@@ -4467,7 +4467,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateContactUserTask(int $contactId, int $taskId, \Varspool\JobAdder\V2\Model\UpdateContactUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactUserTask($contactId, $taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateContactUserTask($contactId, $taskId, $command), $fetch);
     }
     /**
     * 
@@ -4492,7 +4492,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findContactActivity(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactActivity($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactActivity($queryParameters), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -4501,7 +4501,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findContactActivitySettings(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactActivitySettings(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindContactActivitySettings(), $fetch);
     }
     /**
      * 
@@ -4514,7 +4514,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactActivitySetting(int $settingId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivitySetting($settingId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactActivitySetting($settingId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -4523,7 +4523,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletedContacts(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedContacts(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletedContacts(), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -4532,7 +4532,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactCustomFieldList(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactCustomFieldList(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactCustomFieldList(), $fetch);
     }
     /**
      * 
@@ -4545,7 +4545,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactCustomFieldListItem(int $fieldId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactCustomFieldListItem($fieldId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactCustomFieldListItem($fieldId), $fetch);
     }
     /**
      * 
@@ -4559,7 +4559,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putContactCustomFieldList(int $fieldId, \Varspool\JobAdder\V2\Model\SetContactCustomFieldListValuesCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutContactCustomFieldList($fieldId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutContactCustomFieldList($fieldId, $command), $fetch);
     }
     /**
      * 
@@ -4573,7 +4573,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactAttachmentCategoryList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactAttachmentCategoryList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactAttachmentCategoryList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4587,7 +4587,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactNoteTypeList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactNoteTypeList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactNoteTypeList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4601,7 +4601,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactSalutationList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactSalutationList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactSalutationList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4618,7 +4618,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactStatusList(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactStatusList($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactStatusList($queryParameters), $fetch);
     }
     /**
      * 
@@ -4631,7 +4631,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getContactStatusListItem(int $statusId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactStatusListItem($statusId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetContactStatusListItem($statusId), $fetch);
     }
     /**
     * 
@@ -4674,7 +4674,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findNotes(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindNotes($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindNotes($queryParameters), $fetch);
     }
     /**
      * 
@@ -4686,7 +4686,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addNote(\Varspool\JobAdder\V2\Model\AddNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddNote($body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddNote($body), $fetch);
     }
     /**
      * 
@@ -4699,7 +4699,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getNote(string $noteId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetNote($noteId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetNote($noteId), $fetch);
     }
     /**
      * 
@@ -4713,7 +4713,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateNote(string $noteId, \Varspool\JobAdder\V2\Model\UpdateNoteCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateNote($noteId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateNote($noteId, $body), $fetch);
     }
     /**
      * The file can be submitted either as multipart/form-data with a single part containing only the file, or as binary data
@@ -4729,7 +4729,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addNoteAttachment(string $noteId, array $formParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddNoteAttachment($noteId, $formParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddNoteAttachment($noteId, $formParameters), $fetch);
     }
     /**
      * 
@@ -4743,7 +4743,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getNoteAttachment(string $noteId, string $attachmentId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetNoteAttachment($noteId, $attachmentId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetNoteAttachment($noteId, $attachmentId), $fetch);
     }
     /**
     * 
@@ -4784,7 +4784,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findFolders(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindFolders($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindFolders($queryParameters), $fetch);
     }
     /**
     * 
@@ -4801,7 +4801,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getFolder(int $folderId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetFolder($folderId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetFolder($folderId, $queryParameters), $fetch);
     }
     /**
      * Allows bulk adding or removing of entities (jobs, candidates, applications, placements, companies and contacts) for a specific folder
@@ -4816,7 +4816,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function patchFolder(int $folderId, array $operations, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PatchFolder($folderId, $operations), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PatchFolder($folderId, $operations), $fetch);
     }
     /**
     * 
@@ -4845,7 +4845,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findUsers(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindUsers($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindUsers($queryParameters), $fetch);
     }
     /**
      * 
@@ -4858,7 +4858,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUser(int $userId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUser($userId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUser($userId), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -4868,7 +4868,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getCurrentUser(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetCurrentUser(), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetCurrentUser(), $fetch);
     }
     /**
      * 
@@ -4881,7 +4881,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUserPhoto(int $userId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserPhoto($userId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserPhoto($userId), $fetch);
     }
     /**
     * 
@@ -4903,7 +4903,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findUserUserTasks(int $userId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserUserTasks($userId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserUserTasks($userId, $queryParameters), $fetch);
     }
     /**
     * 
@@ -4920,7 +4920,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getUserInterviews(int $userId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserInterviews($userId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserInterviews($userId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -4932,7 +4932,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUserUserGroups(int $userId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserUserGroups($userId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserUserGroups($userId), $fetch);
     }
     /**
     * 
@@ -4950,7 +4950,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findUserGroups(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserGroups($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserGroups($queryParameters), $fetch);
     }
     /**
      * 
@@ -4963,7 +4963,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUserGroup(int $groupId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserGroup($groupId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserGroup($groupId), $fetch);
     }
     /**
      * 
@@ -4975,7 +4975,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getGroupUsers(int $groupId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetGroupUsers($groupId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetGroupUsers($groupId), $fetch);
     }
     /**
     * 
@@ -4993,7 +4993,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findUserOffices(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserOffices($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserOffices($queryParameters), $fetch);
     }
     /**
      * 
@@ -5006,7 +5006,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUserOffice(int $officeId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserOffice($officeId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserOffice($officeId), $fetch);
     }
     /**
      * 
@@ -5018,7 +5018,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getOfficeUsers(int $officeId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetOfficeUsers($officeId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetOfficeUsers($officeId), $fetch);
     }
     /**
     * 
@@ -5050,7 +5050,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findUserTasks(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserTasks($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindUserTasks($queryParameters), $fetch);
     }
     /**
      * 
@@ -5062,7 +5062,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addUserTask(\Varspool\JobAdder\V2\Model\AddUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddUserTask($command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddUserTask($command), $fetch);
     }
     /**
      * 
@@ -5075,7 +5075,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteUserTask(int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteUserTask($taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteUserTask($taskId), $fetch);
     }
     /**
      * 
@@ -5087,7 +5087,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getUserTask(int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserTask($taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetUserTask($taskId), $fetch);
     }
     /**
      * 
@@ -5102,7 +5102,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateUserTask(int $taskId, \Varspool\JobAdder\V2\Model\UpdateUserTaskCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateUserTask($taskId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateUserTask($taskId, $command), $fetch);
     }
     /**
      * 
@@ -5115,7 +5115,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function markCompleteUserTask(int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\MarkCompleteUserTask($taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\MarkCompleteUserTask($taskId), $fetch);
     }
     /**
      * 
@@ -5128,7 +5128,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function markIncompleteUserTask(int $taskId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\MarkIncompleteUserTask($taskId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\MarkIncompleteUserTask($taskId), $fetch);
     }
     /**
     * 
@@ -5167,7 +5167,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findInterviews(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindInterviews($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindInterviews($queryParameters), $fetch);
     }
     /**
      * 
@@ -5180,7 +5180,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteInterview(int $interviewId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteInterview($interviewId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteInterview($interviewId), $fetch);
     }
     /**
     * 
@@ -5198,7 +5198,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getInterview(int $interviewId, int $applicationId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetInterview($interviewId, $applicationId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetInterview($interviewId, $applicationId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5211,7 +5211,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getInterviewEvaluations(int $interviewId, int $applicationId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetInterviewEvaluations($interviewId, $applicationId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetInterviewEvaluations($interviewId, $applicationId), $fetch);
     }
     /**
      * 
@@ -5225,7 +5225,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getExternalInterviewEvaluation(int $interviewId, int $applicationId, int $contactId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetExternalInterviewEvaluation($interviewId, $applicationId, $contactId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetExternalInterviewEvaluation($interviewId, $applicationId, $contactId), $fetch);
     }
     /**
      * 
@@ -5240,7 +5240,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putExternalInterviewEvaluation(int $interviewId, int $applicationId, int $contactId, \Varspool\JobAdder\V2\Model\SubmitInterviewEvaluationCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutExternalInterviewEvaluation($interviewId, $applicationId, $contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutExternalInterviewEvaluation($interviewId, $applicationId, $contactId, $command), $fetch);
     }
     /**
      * 
@@ -5254,7 +5254,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getInternalInterviewEvaluation(int $interviewId, int $applicationId, int $userId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetInternalInterviewEvaluation($interviewId, $applicationId, $userId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetInternalInterviewEvaluation($interviewId, $applicationId, $userId), $fetch);
     }
     /**
      * 
@@ -5269,7 +5269,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function putInternalInterviewEvaluation(int $interviewId, int $applicationId, int $userId, \Varspool\JobAdder\V2\Model\SubmitInterviewEvaluationCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\PutInternalInterviewEvaluation($interviewId, $applicationId, $userId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\PutInternalInterviewEvaluation($interviewId, $applicationId, $userId, $command), $fetch);
     }
     /**
     * 
@@ -5287,7 +5287,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function findCategories(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCategories($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCategories($queryParameters), $fetch);
     }
     /**
      * 
@@ -5301,7 +5301,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findCountries(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindCountries($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindCountries($queryParameters), $fetch);
     }
     /**
      * 
@@ -5316,7 +5316,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findLocations(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindLocations($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindLocations($queryParameters), $fetch);
     }
     /**
      * 
@@ -5330,7 +5330,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findWorkTypes(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindWorkTypes($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindWorkTypes($queryParameters), $fetch);
     }
     /**
      * Find candidates, contacts or users by email address.
@@ -5344,7 +5344,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findEmailAddress(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindEmailAddress($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindEmailAddress($queryParameters), $fetch);
     }
     /**
      * Find candidates, contacts, companies or users by phone number.
@@ -5358,7 +5358,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findPhoneNumber(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPhoneNumber($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPhoneNumber($queryParameters), $fetch);
     }
     /**
      * 
@@ -5374,7 +5374,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findPartnerActions(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindPartnerActions($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindPartnerActions($queryParameters), $fetch);
     }
     /**
      * 
@@ -5387,7 +5387,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deletePartnerAction(string $act, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeletePartnerAction($act), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeletePartnerAction($act), $fetch);
     }
     /**
      * 
@@ -5400,7 +5400,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getPartnerAction(string $act, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerAction($act), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerAction($act), $fetch);
     }
     /**
      * 
@@ -5413,7 +5413,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addPartnerAction(string $act, \Varspool\JobAdder\V2\Model\AddPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddPartnerAction($act, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddPartnerAction($act, $command), $fetch);
     }
     /**
      * 
@@ -5427,7 +5427,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updatePartnerAction(string $act, \Varspool\JobAdder\V2\Model\UpdatePartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePartnerAction($act, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdatePartnerAction($act, $command), $fetch);
     }
     /**
     * 
@@ -5449,7 +5449,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionJobApplications(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobApplications($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobApplications($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5463,7 +5463,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeJobApplicationPartnerAction(string $actionId, int $applicationId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
     }
     /**
      * 
@@ -5477,7 +5477,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressJobApplicationPartnerAction(string $actionId, int $applicationId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
     }
     /**
      * 
@@ -5491,7 +5491,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectJobApplicationPartnerAction(string $actionId, int $applicationId, \Varspool\JobAdder\V2\Model\UpdateJobApplicationPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobApplicationPartnerAction($actionId, $applicationId, $command), $fetch);
     }
     /**
     * 
@@ -5513,7 +5513,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionCandidates(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionCandidates($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionCandidates($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5527,7 +5527,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeCandidatePartnerAction(string $actionId, int $candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidatePartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
     }
     /**
      * 
@@ -5541,7 +5541,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressCandidatePartnerAction(string $actionId, int $candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidatePartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
     }
     /**
      * 
@@ -5555,7 +5555,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectCandidatePartnerAction(string $actionId, int $candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidatePartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectCandidatePartnerAction($actionId, $candidateId, $command), $fetch);
     }
     /**
     * 
@@ -5577,7 +5577,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionCompanies(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionCompanies($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionCompanies($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5591,7 +5591,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeCompanyPartnerAction(string $actionId, int $companyId, \Varspool\JobAdder\V2\Model\UpdateCompanyPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteCompanyPartnerAction($actionId, $companyId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteCompanyPartnerAction($actionId, $companyId, $command), $fetch);
     }
     /**
      * 
@@ -5605,7 +5605,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressCompanyPartnerAction(string $actionId, int $companyId, \Varspool\JobAdder\V2\Model\UpdateCompanyPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressCompanyPartnerAction($actionId, $companyId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressCompanyPartnerAction($actionId, $companyId, $command), $fetch);
     }
     /**
      * 
@@ -5619,7 +5619,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectCompanyPartnerAction(string $actionId, int $companyId, \Varspool\JobAdder\V2\Model\UpdateCompanyPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectCompanyPartnerAction($actionId, $companyId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectCompanyPartnerAction($actionId, $companyId, $command), $fetch);
     }
     /**
     * 
@@ -5641,7 +5641,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionContacts(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionContacts($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionContacts($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5655,7 +5655,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeContactPartnerAction(string $actionId, int $contactId, \Varspool\JobAdder\V2\Model\UpdateContactPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteContactPartnerAction($actionId, $contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteContactPartnerAction($actionId, $contactId, $command), $fetch);
     }
     /**
      * 
@@ -5669,7 +5669,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressContactPartnerAction(string $actionId, int $contactId, \Varspool\JobAdder\V2\Model\UpdateContactPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressContactPartnerAction($actionId, $contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressContactPartnerAction($actionId, $contactId, $command), $fetch);
     }
     /**
      * 
@@ -5683,7 +5683,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectContactPartnerAction(string $actionId, int $contactId, \Varspool\JobAdder\V2\Model\UpdateContactPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectContactPartnerAction($actionId, $contactId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectContactPartnerAction($actionId, $contactId, $command), $fetch);
     }
     /**
     * 
@@ -5705,7 +5705,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionJobAds(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobAds($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobAds($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5719,7 +5719,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeJobAdPartnerAction(string $actionId, int $adId, \Varspool\JobAdder\V2\Model\UpdateJobAdPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobAdPartnerAction($actionId, $adId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobAdPartnerAction($actionId, $adId, $command), $fetch);
     }
     /**
      * 
@@ -5733,7 +5733,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressJobAdPartnerAction(string $actionId, int $adId, \Varspool\JobAdder\V2\Model\UpdateJobAdPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobAdPartnerAction($actionId, $adId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobAdPartnerAction($actionId, $adId, $command), $fetch);
     }
     /**
      * 
@@ -5747,7 +5747,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectJobAdPartnerAction(string $actionId, int $adId, \Varspool\JobAdder\V2\Model\UpdateJobAdPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobAdPartnerAction($actionId, $adId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobAdPartnerAction($actionId, $adId, $command), $fetch);
     }
     /**
     * 
@@ -5769,7 +5769,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionJobOrders(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobOrders($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionJobOrders($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5783,7 +5783,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completeJobOrderPartnerAction(string $actionId, int $jobId, \Varspool\JobAdder\V2\Model\UpdateJobOrderPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompleteJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
     }
     /**
      * 
@@ -5797,7 +5797,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressJobOrderPartnerAction(string $actionId, int $jobId, \Varspool\JobAdder\V2\Model\UpdateJobOrderPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
     }
     /**
      * 
@@ -5811,7 +5811,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectJobOrderPartnerAction(string $actionId, int $jobId, \Varspool\JobAdder\V2\Model\UpdateJobOrderPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectJobOrderPartnerAction($actionId, $jobId, $command), $fetch);
     }
     /**
     * 
@@ -5833,7 +5833,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     */
     public function getPartnerActionPlacements(string $actionId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionPlacements($actionId, $queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetPartnerActionPlacements($actionId, $queryParameters), $fetch);
     }
     /**
      * 
@@ -5847,7 +5847,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function completePlacementPartnerAction(string $actionId, int $placementId, \Varspool\JobAdder\V2\Model\UpdatePlacementPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\CompletePlacementPartnerAction($actionId, $placementId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\CompletePlacementPartnerAction($actionId, $placementId, $command), $fetch);
     }
     /**
      * 
@@ -5861,7 +5861,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function progressPlacementPartnerAction(string $actionId, int $placementId, \Varspool\JobAdder\V2\Model\UpdatePlacementPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressPlacementPartnerAction($actionId, $placementId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\ProgressPlacementPartnerAction($actionId, $placementId, $command), $fetch);
     }
     /**
      * 
@@ -5875,7 +5875,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function rejectPlacementPartnerAction(string $actionId, int $placementId, \Varspool\JobAdder\V2\Model\UpdatePlacementPartnerActionCommand $command, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\RejectPlacementPartnerAction($actionId, $placementId, $command), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\RejectPlacementPartnerAction($actionId, $placementId, $command), $fetch);
     }
     /**
      * 
@@ -5890,7 +5890,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function findWebhooks(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\FindWebhooks($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\FindWebhooks($queryParameters), $fetch);
     }
     /**
      * 
@@ -5903,7 +5903,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function addWebhook(\Varspool\JobAdder\V2\Model\AddWebhookCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\AddWebhook($body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\AddWebhook($body), $fetch);
     }
     /**
      * 
@@ -5916,7 +5916,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function deleteWebhook(string $webhookId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteWebhook($webhookId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\DeleteWebhook($webhookId), $fetch);
     }
     /**
      * 
@@ -5928,7 +5928,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function getWebhook(string $webhookId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\GetWebhook($webhookId), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\GetWebhook($webhookId), $fetch);
     }
     /**
      * 
@@ -5943,21 +5943,28 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
      */
     public function updateWebhook(string $webhookId, \Varspool\JobAdder\V2\Model\UpdateWebhookCommand $body, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateWebhook($webhookId, $body), $fetch);
+        return $this->executeEndpoint(new \Varspool\JobAdder\V2\Endpoint\UpdateWebhook($webhookId, $body), $fetch);
     }
-    public static function create($httpClient = null)
+    public static function create($httpClient = null, array $additionalPlugins = array(), array $additionalNormalizers = array())
     {
         if (null === $httpClient) {
-            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
+            $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri('https://api.jobadder.com/v2');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.jobadder.com/v2');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
+            if (count($additionalPlugins) > 0) {
+                $plugins = array_merge($plugins, $additionalPlugins);
+            }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
-        $messageFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
-        $serializer = new \Symfony\Component\Serializer\Serializer(array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Varspool\JobAdder\V2\Normalizer\JaneObjectNormalizer()), array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode())));
-        return new static($httpClient, $messageFactory, $serializer, $streamFactory);
+        $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
+        $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $normalizers = array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Varspool\JobAdder\V2\Normalizer\JaneObjectNormalizer());
+        if (count($additionalNormalizers) > 0) {
+            $normalizers = array_merge($normalizers, $additionalNormalizers);
+        }
+        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => true)))));
+        return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }

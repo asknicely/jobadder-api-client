@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementSourceModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The source of candidate that lead to this placement
      *
      * @var string
@@ -34,6 +42,7 @@ class PlacementSourceModel
      */
     public function setPlacement(string $placement) : self
     {
+        $this->initialized['placement'] = true;
         $this->placement = $placement;
         return $this;
     }
@@ -55,6 +64,7 @@ class PlacementSourceModel
      */
     public function setCandidate(string $candidate) : self
     {
+        $this->initialized['candidate'] = true;
         $this->candidate = $candidate;
         return $this;
     }

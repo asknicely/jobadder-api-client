@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,72 +16,86 @@ class PlacementRateModelNormalizer implements DenormalizerInterface, NormalizerI
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\PlacementRateModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\PlacementRateModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\PlacementRateModel();
-        if (property_exists($data, 'name')) {
-            $object->setName($data->{'name'});
+        if (\array_key_exists('payRate', $data) && \is_int($data['payRate'])) {
+            $data['payRate'] = (double) $data['payRate'];
         }
-        if (property_exists($data, 'type')) {
-            $object->setType($data->{'type'});
+        if (\array_key_exists('chargeRate', $data) && \is_int($data['chargeRate'])) {
+            $data['chargeRate'] = (double) $data['chargeRate'];
         }
-        if (property_exists($data, 'default')) {
-            $object->setDefault($data->{'default'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'displayIndex')) {
-            $object->setDisplayIndex($data->{'displayIndex'});
+        if (\array_key_exists('name', $data)) {
+            $object->setName($data['name']);
         }
-        if (property_exists($data, 'payRate')) {
-            $object->setPayRate($data->{'payRate'});
+        if (\array_key_exists('type', $data)) {
+            $object->setType($data['type']);
         }
-        if (property_exists($data, 'chargeRate')) {
-            $object->setChargeRate($data->{'chargeRate'});
+        if (\array_key_exists('default', $data)) {
+            $object->setDefault($data['default']);
         }
-        if (property_exists($data, 'chargeCurrency')) {
-            $object->setChargeCurrency($data->{'chargeCurrency'});
+        if (\array_key_exists('displayIndex', $data)) {
+            $object->setDisplayIndex($data['displayIndex']);
+        }
+        if (\array_key_exists('payRate', $data)) {
+            $object->setPayRate($data['payRate']);
+        }
+        if (\array_key_exists('chargeRate', $data)) {
+            $object->setChargeRate($data['chargeRate']);
+        }
+        if (\array_key_exists('chargeCurrency', $data)) {
+            $object->setChargeCurrency($data['chargeCurrency']);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getName()) {
-            $data->{'name'} = $object->getName();
+        $data = array();
+        if ($object->isInitialized('name') && null !== $object->getName()) {
+            $data['name'] = $object->getName();
         }
-        if (null !== $object->getType()) {
-            $data->{'type'} = $object->getType();
+        if ($object->isInitialized('type') && null !== $object->getType()) {
+            $data['type'] = $object->getType();
         }
-        if (null !== $object->getDefault()) {
-            $data->{'default'} = $object->getDefault();
+        if ($object->isInitialized('default') && null !== $object->getDefault()) {
+            $data['default'] = $object->getDefault();
         }
-        if (null !== $object->getDisplayIndex()) {
-            $data->{'displayIndex'} = $object->getDisplayIndex();
+        if ($object->isInitialized('displayIndex') && null !== $object->getDisplayIndex()) {
+            $data['displayIndex'] = $object->getDisplayIndex();
         }
-        if (null !== $object->getPayRate()) {
-            $data->{'payRate'} = $object->getPayRate();
+        if ($object->isInitialized('payRate') && null !== $object->getPayRate()) {
+            $data['payRate'] = $object->getPayRate();
         }
-        if (null !== $object->getChargeRate()) {
-            $data->{'chargeRate'} = $object->getChargeRate();
+        if ($object->isInitialized('chargeRate') && null !== $object->getChargeRate()) {
+            $data['chargeRate'] = $object->getChargeRate();
         }
-        if (null !== $object->getChargeCurrency()) {
-            $data->{'chargeCurrency'} = $object->getChargeCurrency();
+        if ($object->isInitialized('chargeCurrency') && null !== $object->getChargeCurrency()) {
+            $data['chargeCurrency'] = $object->getChargeCurrency();
         }
         return $data;
     }

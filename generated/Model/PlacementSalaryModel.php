@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class PlacementSalaryModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var float
@@ -52,6 +60,7 @@ class PlacementSalaryModel
      */
     public function setBase(float $base) : self
     {
+        $this->initialized['base'] = true;
         $this->base = $base;
         return $this;
     }
@@ -73,6 +82,7 @@ class PlacementSalaryModel
      */
     public function setSuperannuation(float $superannuation) : self
     {
+        $this->initialized['superannuation'] = true;
         $this->superannuation = $superannuation;
         return $this;
     }
@@ -94,6 +104,7 @@ class PlacementSalaryModel
      */
     public function setBenefits(float $benefits) : self
     {
+        $this->initialized['benefits'] = true;
         $this->benefits = $benefits;
         return $this;
     }
@@ -115,6 +126,7 @@ class PlacementSalaryModel
      */
     public function setTotal(float $total) : self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
         return $this;
     }
@@ -136,6 +148,7 @@ class PlacementSalaryModel
      */
     public function setFee(float $fee) : self
     {
+        $this->initialized['fee'] = true;
         $this->fee = $fee;
         return $this;
     }

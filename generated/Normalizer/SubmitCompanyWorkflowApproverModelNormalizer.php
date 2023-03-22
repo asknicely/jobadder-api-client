@@ -2,7 +2,9 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
+use Varspool\JobAdder\V2\Runtime\Normalizer\CheckArray;
+use Varspool\JobAdder\V2\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -14,51 +16,55 @@ class SubmitCompanyWorkflowApproverModelNormalizer implements DenormalizerInterf
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
-    public function supportsDenormalization($data, $type, $format = null)
+    use CheckArray;
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Varspool\\JobAdder\\V2\\Model\\SubmitCompanyWorkflowApproverModel';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Varspool\\JobAdder\\V2\\Model\\SubmitCompanyWorkflowApproverModel';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException(sprintf('Given $data is not an object (%s given). We need an object in order to continue denormalize method.', gettype($data)));
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['document-origin']);
-        }
-        if (isset($data->{'$recursiveRef'})) {
-            return new Reference($data->{'$recursiveRef'}, $context['document-origin']);
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Varspool\JobAdder\V2\Model\SubmitCompanyWorkflowApproverModel();
-        if (property_exists($data, 'stageIndex')) {
-            $object->setStageIndex($data->{'stageIndex'});
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
-        if (property_exists($data, 'contactId')) {
+        if (\array_key_exists('stageIndex', $data)) {
+            $object->setStageIndex($data['stageIndex']);
+        }
+        if (\array_key_exists('contactId', $data)) {
             $values = array();
-            foreach ($data->{'contactId'} as $value) {
+            foreach ($data['contactId'] as $value) {
                 $values[] = $value;
             }
             $object->setContactId($values);
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
-        if (null !== $object->getStageIndex()) {
-            $data->{'stageIndex'} = $object->getStageIndex();
+        $data = array();
+        $data['stageIndex'] = $object->getStageIndex();
+        $values = array();
+        foreach ($object->getContactId() as $value) {
+            $values[] = $value;
         }
-        if (null !== $object->getContactId()) {
-            $values = array();
-            foreach ($object->getContactId() as $value) {
-                $values[] = $value;
-            }
-            $data->{'contactId'} = $values;
-        }
+        $data['contactId'] = $values;
         return $data;
     }
 }

@@ -5,6 +5,14 @@ namespace Varspool\JobAdder\V2\Model;
 class AddCompanyCommand
 {
     /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * 
      *
      * @var string
@@ -76,6 +84,7 @@ class AddCompanyCommand
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -97,6 +106,7 @@ class AddCompanyCommand
      */
     public function setParentCompanyId(int $parentCompanyId) : self
     {
+        $this->initialized['parentCompanyId'] = true;
         $this->parentCompanyId = $parentCompanyId;
         return $this;
     }
@@ -118,6 +128,7 @@ class AddCompanyCommand
      */
     public function setSummary(string $summary) : self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
         return $this;
     }
@@ -139,6 +150,7 @@ class AddCompanyCommand
      */
     public function setLegalName(string $legalName) : self
     {
+        $this->initialized['legalName'] = true;
         $this->legalName = $legalName;
         return $this;
     }
@@ -147,7 +159,7 @@ class AddCompanyCommand
      *
      * @return string[]
      */
-    public function getSocial() : \ArrayObject
+    public function getSocial() : iterable
     {
         return $this->social;
     }
@@ -158,8 +170,9 @@ class AddCompanyCommand
      *
      * @return self
      */
-    public function setSocial(\ArrayObject $social) : self
+    public function setSocial(iterable $social) : self
     {
+        $this->initialized['social'] = true;
         $this->social = $social;
         return $this;
     }
@@ -181,6 +194,7 @@ class AddCompanyCommand
      */
     public function setStatusId(int $statusId) : self
     {
+        $this->initialized['statusId'] = true;
         $this->statusId = $statusId;
         return $this;
     }
@@ -202,6 +216,7 @@ class AddCompanyCommand
      */
     public function setCustom(array $custom) : self
     {
+        $this->initialized['custom'] = true;
         $this->custom = $custom;
         return $this;
     }
@@ -223,6 +238,7 @@ class AddCompanyCommand
      */
     public function setOwnerUserId(int $ownerUserId) : self
     {
+        $this->initialized['ownerUserId'] = true;
         $this->ownerUserId = $ownerUserId;
         return $this;
     }
@@ -244,6 +260,7 @@ class AddCompanyCommand
      */
     public function setRecruiterUserId(array $recruiterUserId) : self
     {
+        $this->initialized['recruiterUserId'] = true;
         $this->recruiterUserId = $recruiterUserId;
         return $this;
     }

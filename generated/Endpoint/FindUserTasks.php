@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Endpoint;
 
-class FindUserTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class FindUserTasks extends \Varspool\JobAdder\V2\Runtime\Client\BaseEndpoint implements \Varspool\JobAdder\V2\Runtime\Client\Endpoint
 {
     /**
     * 
@@ -33,7 +33,7 @@ class FindUserTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Varspool\JobAdder\V2\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
         return 'GET';
@@ -56,15 +56,15 @@ class FindUserTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
         $optionsResolver->setDefined(array('userId', 'startAt', 'createdBy', 'createdAt', 'updatedBy', 'updatedAt', 'include', 'offset', 'limit'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('userId', array('array'));
-        $optionsResolver->setAllowedTypes('startAt', array('array'));
-        $optionsResolver->setAllowedTypes('createdBy', array('array'));
-        $optionsResolver->setAllowedTypes('createdAt', array('array'));
-        $optionsResolver->setAllowedTypes('updatedBy', array('array'));
-        $optionsResolver->setAllowedTypes('updatedAt', array('array'));
-        $optionsResolver->setAllowedTypes('include', array('array'));
-        $optionsResolver->setAllowedTypes('offset', array('int'));
-        $optionsResolver->setAllowedTypes('limit', array('int'));
+        $optionsResolver->addAllowedTypes('userId', array('array'));
+        $optionsResolver->addAllowedTypes('startAt', array('array'));
+        $optionsResolver->addAllowedTypes('createdBy', array('array'));
+        $optionsResolver->addAllowedTypes('createdAt', array('array'));
+        $optionsResolver->addAllowedTypes('updatedBy', array('array'));
+        $optionsResolver->addAllowedTypes('updatedAt', array('array'));
+        $optionsResolver->addAllowedTypes('include', array('array'));
+        $optionsResolver->addAllowedTypes('offset', array('int'));
+        $optionsResolver->addAllowedTypes('limit', array('int'));
         return $optionsResolver;
     }
     /**
@@ -73,10 +73,16 @@ class FindUserTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
      *
      * @return null|\Varspool\JobAdder\V2\Model\UserTaskListRepresentation
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'Varspool\\JobAdder\\V2\\Model\\UserTaskListRepresentation', 'json');
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array('jobadder_identity');
     }
 }
