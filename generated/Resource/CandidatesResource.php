@@ -2,8 +2,8 @@
 
 namespace Varspool\JobAdder\V2\Resource;
 
-use Joli\Jane\OpenApi\Runtime\Client\QueryParam;
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\Resource;
 
 class CandidatesResource extends Resource
 {

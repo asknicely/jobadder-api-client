@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Varspool\\JobAdder\\ClientTest::testConstructor":4,"Varspool\\JobAdder\\ClientTest::testRealClient":5},"times":{"Varspool\\JobAdder\\ClientTest::testConstructor":0.029,"Varspool\\JobAdder\\ClientTest::testRealClient":0.297}}

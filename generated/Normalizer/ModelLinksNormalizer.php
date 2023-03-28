@@ -2,7 +2,7 @@
 
 namespace Varspool\JobAdder\V2\Normalizer;
 
-use Joli\Jane\Runtime\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
