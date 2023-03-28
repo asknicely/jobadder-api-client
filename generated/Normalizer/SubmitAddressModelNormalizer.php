@@ -5,10 +5,12 @@ namespace Varspool\JobAdder\V2\Normalizer;
 use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class SubmitAddressModelNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
+class SubmitAddressModelNormalizer implements SerializerAwareInterface, DenormalizerInterface, NormalizerInterface
 {
+    use SerializerAwareTrait;
     public function supportsDenormalization($data, $type, $format = null)
     {
         if ($type !== 'Varspool\\JobAdder\\V2\\Model\\SubmitAddressModel') {
