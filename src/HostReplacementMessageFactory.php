@@ -1,6 +1,6 @@
 <?php
 
-namespace Varspool\JobAdder;
+namespace AskNicely\JobAdder;
 
 use Http\Message\MessageFactory;
 

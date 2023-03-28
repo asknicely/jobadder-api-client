@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class ErrorModelNormalizer extends SerializerAwareNormalizer implements Denormal
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\ErrorModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class ErrorModelNormalizer extends SerializerAwareNormalizer implements Denormal
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\ErrorModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\ErrorModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class ErrorModelNormalizer extends SerializerAwareNormalizer implements Denormal
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\ErrorModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\ErrorModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -42,7 +42,7 @@ class ErrorModelNormalizer extends SerializerAwareNormalizer implements Denormal
         if (property_exists($data, 'errors')) {
             $values = [];
             foreach ($data->{'errors'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\ErrorItemModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\ErrorItemModel', 'raw', $context);
             }
             $object->setErrors($values);
         }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace AskNicely\JobAdder\Generated\Resource;
 
-use Varspool\JobAdder\V2\QueryParam;
-use Varspool\JobAdder\V2\Resource;
+use AskNicely\JobAdder\Generated\QueryParam;
+use AskNicely\JobAdder\Generated\Resource;
 
 class IndexResource extends Resource
 {
@@ -11,7 +11,7 @@ class IndexResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\ResourcesRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\ResourcesRepresentation
      */
     public function resources($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -28,7 +28,7 @@ class IndexResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ResourcesRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ResourcesRepresentation', 'json');
             }
         }
 

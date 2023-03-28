@@ -1,6 +1,6 @@
 <?php
 
-namespace Varspool\JobAdder\V2;
+namespace AskNicely\JobAdder\Runtime;
 
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;

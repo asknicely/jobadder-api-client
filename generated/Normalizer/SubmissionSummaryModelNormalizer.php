@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class SubmissionSummaryModelNormalizer extends SerializerAwareNormalizer impleme
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\SubmissionSummaryModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\SubmissionSummaryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class SubmissionSummaryModelNormalizer extends SerializerAwareNormalizer impleme
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\SubmissionSummaryModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\SubmissionSummaryModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class SubmissionSummaryModelNormalizer extends SerializerAwareNormalizer impleme
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\SubmissionSummaryModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\SubmissionSummaryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -43,22 +43,22 @@ class SubmissionSummaryModelNormalizer extends SerializerAwareNormalizer impleme
             $object->setJobTitle($data->{'jobTitle'});
         }
         if (property_exists($data, 'candidate')) {
-            $object->setCandidate($this->serializer->deserialize($data->{'candidate'}, 'Varspool\\JobAdder\\V2\\Model\\CandidateSummaryModel', 'raw', $context));
+            $object->setCandidate($this->serializer->deserialize($data->{'candidate'}, 'AskNicely\\JobAdder\\Generated\\Model\\CandidateSummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'company')) {
-            $object->setCompany($this->serializer->deserialize($data->{'company'}, 'Varspool\\JobAdder\\V2\\Model\\CompanySummaryModel', 'raw', $context));
+            $object->setCompany($this->serializer->deserialize($data->{'company'}, 'AskNicely\\JobAdder\\Generated\\Model\\CompanySummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'job')) {
-            $object->setJob($this->serializer->deserialize($data->{'job'}, 'Varspool\\JobAdder\\V2\\Model\\JobOrderSummaryModel', 'raw', $context));
+            $object->setJob($this->serializer->deserialize($data->{'job'}, 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderSummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'createdBy')) {
-            $object->setCreatedBy($this->serializer->deserialize($data->{'createdBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserSummaryModel', 'raw', $context));
+            $object->setCreatedBy($this->serializer->deserialize($data->{'createdBy'}, 'AskNicely\\JobAdder\\Generated\\Model\\UserSummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'createdAt')) {
             $object->setCreatedAt(\DateTime::createFromFormat("Y-m-d\TH:i:sP", $data->{'createdAt'}));
         }
         if (property_exists($data, 'updatedBy')) {
-            $object->setUpdatedBy($this->serializer->deserialize($data->{'updatedBy'}, 'Varspool\\JobAdder\\V2\\Model\\UserSummaryModel', 'raw', $context));
+            $object->setUpdatedBy($this->serializer->deserialize($data->{'updatedBy'}, 'AskNicely\\JobAdder\\Generated\\Model\\UserSummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'updatedAt')) {
             $object->setUpdatedAt(\DateTime::createFromFormat("Y-m-d\TH:i:sP", $data->{'updatedAt'}));

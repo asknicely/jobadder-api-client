@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class AddContactCommandNormalizer extends SerializerAwareNormalizer implements D
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\AddContactCommand') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\AddContactCommand') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class AddContactCommandNormalizer extends SerializerAwareNormalizer implements D
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\AddContactCommand) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\AddContactCommand) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class AddContactCommandNormalizer extends SerializerAwareNormalizer implements D
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\AddContactCommand();
+        $object = new \AskNicely\JobAdder\Generated\Model\AddContactCommand();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -63,7 +63,7 @@ class AddContactCommandNormalizer extends SerializerAwareNormalizer implements D
         if (property_exists($data, 'customFields')) {
             $values = [];
             foreach ($data->{'customFields'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\SubmitCustomFieldValueModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\SubmitCustomFieldValueModel', 'raw', $context);
             }
             $object->setCustomFields($values);
         }

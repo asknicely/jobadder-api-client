@@ -1,6 +1,6 @@
 <?php
 
-namespace Varspool\JobAdder\V2;
+namespace AskNicely\JobAdder\Runtime;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;

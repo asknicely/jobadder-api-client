@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class AddRequisitionCommandNormalizer extends SerializerAwareNormalizer implemen
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\AddRequisitionCommand') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\AddRequisitionCommand') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class AddRequisitionCommandNormalizer extends SerializerAwareNormalizer implemen
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\AddRequisitionCommand) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\AddRequisitionCommand) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class AddRequisitionCommandNormalizer extends SerializerAwareNormalizer implemen
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\AddRequisitionCommand();
+        $object = new \AskNicely\JobAdder\Generated\Model\AddRequisitionCommand();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -46,25 +46,25 @@ class AddRequisitionCommandNormalizer extends SerializerAwareNormalizer implemen
             $object->setJobDescription($data->{'jobDescription'});
         }
         if (property_exists($data, 'category')) {
-            $object->setCategory($this->serializer->deserialize($data->{'category'}, 'Varspool\\JobAdder\\V2\\Model\\SubmitCategoryModel', 'raw', $context));
+            $object->setCategory($this->serializer->deserialize($data->{'category'}, 'AskNicely\\JobAdder\\Generated\\Model\\SubmitCategoryModel', 'raw', $context));
         }
         if (property_exists($data, 'location')) {
-            $object->setLocation($this->serializer->deserialize($data->{'location'}, 'Varspool\\JobAdder\\V2\\Model\\SubmitLocationModel', 'raw', $context));
+            $object->setLocation($this->serializer->deserialize($data->{'location'}, 'AskNicely\\JobAdder\\Generated\\Model\\SubmitLocationModel', 'raw', $context));
         }
         if (property_exists($data, 'workplaceAddressId')) {
             $object->setWorkplaceAddressId($data->{'workplaceAddressId'});
         }
         if (property_exists($data, 'start')) {
-            $object->setStart($this->serializer->deserialize($data->{'start'}, 'Varspool\\JobAdder\\V2\\Model\\StartModel', 'raw', $context));
+            $object->setStart($this->serializer->deserialize($data->{'start'}, 'AskNicely\\JobAdder\\Generated\\Model\\StartModel', 'raw', $context));
         }
         if (property_exists($data, 'duration')) {
-            $object->setDuration($this->serializer->deserialize($data->{'duration'}, 'Varspool\\JobAdder\\V2\\Model\\DurationModel', 'raw', $context));
+            $object->setDuration($this->serializer->deserialize($data->{'duration'}, 'AskNicely\\JobAdder\\Generated\\Model\\DurationModel', 'raw', $context));
         }
         if (property_exists($data, 'workTypeId')) {
             $object->setWorkTypeId($data->{'workTypeId'});
         }
         if (property_exists($data, 'salary')) {
-            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'Varspool\\JobAdder\\V2\\Model\\JobOrderSalaryRangeModel', 'raw', $context));
+            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderSalaryRangeModel', 'raw', $context));
         }
         if (property_exists($data, 'numberOfJobs')) {
             $object->setNumberOfJobs($data->{'numberOfJobs'});
@@ -75,7 +75,7 @@ class AddRequisitionCommandNormalizer extends SerializerAwareNormalizer implemen
         if (property_exists($data, 'customFields')) {
             $values = [];
             foreach ($data->{'customFields'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\SubmitCustomFieldValueModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\SubmitCustomFieldValueModel', 'raw', $context);
             }
             $object->setCustomFields($values);
         }

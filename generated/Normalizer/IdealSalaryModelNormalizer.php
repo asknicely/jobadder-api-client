@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class IdealSalaryModelNormalizer extends SerializerAwareNormalizer implements De
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\IdealSalaryModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\IdealSalaryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class IdealSalaryModelNormalizer extends SerializerAwareNormalizer implements De
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\IdealSalaryModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\IdealSalaryModel) {
             return true;
         }
 
@@ -32,15 +32,15 @@ class IdealSalaryModelNormalizer extends SerializerAwareNormalizer implements De
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\IdealSalaryModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\IdealSalaryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'workType')) {
-            $object->setWorkType($this->serializer->deserialize($data->{'workType'}, 'Varspool\\JobAdder\\V2\\Model\\WorkTypeModel', 'raw', $context));
+            $object->setWorkType($this->serializer->deserialize($data->{'workType'}, 'AskNicely\\JobAdder\\Generated\\Model\\WorkTypeModel', 'raw', $context));
         }
         if (property_exists($data, 'salary')) {
-            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'Varspool\\JobAdder\\V2\\Model\\SalaryRangeModel', 'raw', $context));
+            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'AskNicely\\JobAdder\\Generated\\Model\\SalaryRangeModel', 'raw', $context));
         }
 
         return $object;

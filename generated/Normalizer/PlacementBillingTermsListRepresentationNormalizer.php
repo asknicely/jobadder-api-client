@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class PlacementBillingTermsListRepresentationNormalizer extends SerializerAwareN
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\PlacementBillingTermsListRepresentation') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\PlacementBillingTermsListRepresentation') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class PlacementBillingTermsListRepresentationNormalizer extends SerializerAwareN
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\PlacementBillingTermsListRepresentation) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\PlacementBillingTermsListRepresentation) {
             return true;
         }
 
@@ -32,14 +32,14 @@ class PlacementBillingTermsListRepresentationNormalizer extends SerializerAwareN
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\PlacementBillingTermsListRepresentation();
+        $object = new \AskNicely\JobAdder\Generated\Model\PlacementBillingTermsListRepresentation();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'items')) {
             $values = [];
             foreach ($data->{'items'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\NameModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\NameModel', 'raw', $context);
             }
             $object->setItems($values);
         }

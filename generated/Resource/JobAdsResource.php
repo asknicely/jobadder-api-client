@@ -1,9 +1,9 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace AskNicely\JobAdder\Generated\Resource;
 
-use Varspool\JobAdder\V2\QueryParam;
-use Varspool\JobAdder\V2\Resource;
+use AskNicely\JobAdder\Generated\QueryParam;
+use AskNicely\JobAdder\Generated\Resource;
 
 class JobAdsResource extends Resource
 {
@@ -17,7 +17,7 @@ class JobAdsResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobAdListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\JobAdListRepresentation
      */
     public function getJobAds($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -36,7 +36,7 @@ class JobAdsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobAdListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\JobAdListRepresentation', 'json');
             }
         }
 
@@ -48,7 +48,7 @@ class JobAdsResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobAdRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\JobAdRepresentation
      */
     public function getJobAd($adId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -66,7 +66,7 @@ class JobAdsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobAdRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\JobAdRepresentation', 'json');
             }
         }
 

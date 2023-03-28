@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class StartModelNormalizer extends SerializerAwareNormalizer implements Denormal
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\StartModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\StartModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class StartModelNormalizer extends SerializerAwareNormalizer implements Denormal
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\StartModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\StartModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class StartModelNormalizer extends SerializerAwareNormalizer implements Denormal
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\StartModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\StartModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -40,7 +40,7 @@ class StartModelNormalizer extends SerializerAwareNormalizer implements Denormal
             $object->setImmediate($data->{'immediate'});
         }
         if (property_exists($data, 'relative')) {
-            $object->setRelative($this->serializer->deserialize($data->{'relative'}, 'Varspool\\JobAdder\\V2\\Model\\RelativeStartModel', 'raw', $context));
+            $object->setRelative($this->serializer->deserialize($data->{'relative'}, 'AskNicely\\JobAdder\\Generated\\Model\\RelativeStartModel', 'raw', $context));
         }
         if (property_exists($data, 'date')) {
             $object->setDate($data->{'date'});

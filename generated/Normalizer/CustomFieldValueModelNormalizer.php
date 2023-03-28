@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class CustomFieldValueModelNormalizer extends SerializerAwareNormalizer implemen
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\CustomFieldValueModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\CustomFieldValueModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class CustomFieldValueModelNormalizer extends SerializerAwareNormalizer implemen
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\CustomFieldValueModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\CustomFieldValueModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class CustomFieldValueModelNormalizer extends SerializerAwareNormalizer implemen
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\CustomFieldValueModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\CustomFieldValueModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }

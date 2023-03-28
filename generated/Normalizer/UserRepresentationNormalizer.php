@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class UserRepresentationNormalizer extends SerializerAwareNormalizer implements 
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\UserRepresentation') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\UserRepresentation') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class UserRepresentationNormalizer extends SerializerAwareNormalizer implements 
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\UserRepresentation) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\UserRepresentation) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class UserRepresentationNormalizer extends SerializerAwareNormalizer implements 
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\UserRepresentation();
+        $object = new \AskNicely\JobAdder\Generated\Model\UserRepresentation();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -66,12 +66,12 @@ class UserRepresentationNormalizer extends SerializerAwareNormalizer implements 
         if (property_exists($data, 'userGroups')) {
             $values = [];
             foreach ($data->{'userGroups'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\UserGroupSummaryModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\UserGroupSummaryModel', 'raw', $context);
             }
             $object->setUserGroups($values);
         }
         if (property_exists($data, 'links')) {
-            $object->setLinks($this->serializer->deserialize($data->{'links'}, 'Varspool\\JobAdder\\V2\\Model\\UserLinks', 'raw', $context));
+            $object->setLinks($this->serializer->deserialize($data->{'links'}, 'AskNicely\\JobAdder\\Generated\\Model\\UserLinks', 'raw', $context));
         }
 
         return $object;

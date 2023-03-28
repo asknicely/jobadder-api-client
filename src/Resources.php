@@ -1,21 +1,21 @@
 <?php
 
-namespace Varspool\JobAdder\V2;
+namespace AskNicely\JobAdder;
 
-use Varspool\JobAdder\V2\Resource\CandidateFloatsResource;
-use Varspool\JobAdder\V2\Resource\CandidatesResource;
-use Varspool\JobAdder\V2\Resource\CandidateSubmissionsResource;
-use Varspool\JobAdder\V2\Resource\CategoriesResource;
-use Varspool\JobAdder\V2\Resource\ContactsResource;
-use Varspool\JobAdder\V2\Resource\IndexResource;
-use Varspool\JobAdder\V2\Resource\JobAdsResource;
-use Varspool\JobAdder\V2\Resource\JobApplicationsResource;
-use Varspool\JobAdder\V2\Resource\JobsResource;
-use Varspool\JobAdder\V2\Resource\NotesResource;
-use Varspool\JobAdder\V2\Resource\PlacementsResource;
-use Varspool\JobAdder\V2\Resource\RequisitionsResource;
-use Varspool\JobAdder\V2\Resource\UserGroupsResource;
-use Varspool\JobAdder\V2\Resource\UsersResource;
+use AskNicely\JobAdder\Generated\Resource\CandidateFloatsResource;
+use AskNicely\JobAdder\Generated\Resource\CandidatesResource;
+use AskNicely\JobAdder\Generated\Resource\CandidateSubmissionsResource;
+use AskNicely\JobAdder\Generated\Resource\CategoriesResource;
+use AskNicely\JobAdder\Generated\Resource\ContactsResource;
+use AskNicely\JobAdder\Generated\Resource\IndexResource;
+use AskNicely\JobAdder\Generated\Resource\JobAdsResource;
+use AskNicely\JobAdder\Generated\Resource\JobApplicationsResource;
+use AskNicely\JobAdder\Generated\Resource\JobsResource;
+use AskNicely\JobAdder\Generated\Resource\NotesResource;
+use AskNicely\JobAdder\Generated\Resource\PlacementsResource;
+use AskNicely\JobAdder\Generated\Resource\RequisitionsResource;
+use AskNicely\JobAdder\Generated\Resource\UserGroupsResource;
+use AskNicely\JobAdder\Generated\Resource\UsersResource;
 
 abstract class Resources extends Resource
 {

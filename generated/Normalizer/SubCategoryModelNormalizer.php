@@ -1,8 +1,8 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Normalizer;
+namespace AskNicely\JobAdder\Generated\Normalizer;
 
-use Varspool\JobAdder\V2\Reference;
+use AskNicely\JobAdder\Generated\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class SubCategoryModelNormalizer extends SerializerAwareNormalizer implements De
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\SubCategoryModel') {
+        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\SubCategoryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class SubCategoryModelNormalizer extends SerializerAwareNormalizer implements De
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Varspool\JobAdder\V2\Model\SubCategoryModel) {
+        if ($data instanceof \AskNicely\JobAdder\Generated\Model\SubCategoryModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class SubCategoryModelNormalizer extends SerializerAwareNormalizer implements De
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Varspool\JobAdder\V2\Model\SubCategoryModel();
+        $object = new \AskNicely\JobAdder\Generated\Model\SubCategoryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -45,7 +45,7 @@ class SubCategoryModelNormalizer extends SerializerAwareNormalizer implements De
         if (property_exists($data, 'skills')) {
             $values = [];
             foreach ($data->{'skills'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\SkillCategoryModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\SkillCategoryModel', 'raw', $context);
             }
             $object->setSkills($values);
         }

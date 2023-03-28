@@ -1,6 +1,6 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Model;
+namespace AskNicely\JobAdder\Generated\Model;
 
 class JobOrderSummaryModel
 {
