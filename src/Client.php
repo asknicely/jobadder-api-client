@@ -10,7 +10,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Varspool\JobAdder\V2\Normalizer\NormalizerFactory;
 use Varspool\JobAdder\V2\Resources;
-use Varspool\JobAdder\V2\RawEncoder;
 
 class Client extends Resources
 {
