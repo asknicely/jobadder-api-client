@@ -3,13 +3,16 @@
 namespace Varspool\JobAdder\V2;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
 
 /**
  * Allow to denormalize value of type "MyClass[]" if it's possible to denormalize value of type "MyClass"
  */
-class ArrayDenormalizer extends SerializerAwareNormalizer implements DenormalizerInterface
+class ArrayDenormalizer implements SerializerAwareInterface, DenormalizerInterface
 {
+    use SerializerAwareTrait;
+
     /**
      * {@inheritdoc}
      */
