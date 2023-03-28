@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class RequisitionListRepresentationNormalizer extends SerializerAwareNormalizer 
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\RequisitionListRepresentation') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\RequisitionListRepresentation') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class RequisitionListRepresentationNormalizer extends SerializerAwareNormalizer 
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\RequisitionListRepresentation) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\RequisitionListRepresentation) {
             return true;
         }
 
@@ -32,14 +32,14 @@ class RequisitionListRepresentationNormalizer extends SerializerAwareNormalizer 
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\RequisitionListRepresentation();
+        $object = new \Varspool\JobAdder\V2\Model\RequisitionListRepresentation();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'items')) {
             $values = [];
             foreach ($data->{'items'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\RequisitionSummaryModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\RequisitionSummaryModel', 'raw', $context);
             }
             $object->setItems($values);
         }
@@ -47,7 +47,7 @@ class RequisitionListRepresentationNormalizer extends SerializerAwareNormalizer 
             $object->setTotalCount($data->{'totalCount'});
         }
         if (property_exists($data, 'links')) {
-            $object->setLinks($this->serializer->deserialize($data->{'links'}, 'AskNicely\\JobAdder\\Generated\\Model\\PageLinks', 'raw', $context));
+            $object->setLinks($this->serializer->deserialize($data->{'links'}, 'Varspool\\JobAdder\\V2\\Model\\PageLinks', 'raw', $context));
         }
 
         return $object;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AskNicely\JobAdder\Runtime;
+namespace Varspool\JobAdder\V2;
 
 use Http\Client\Common\FlexibleHttpClient;
 use Http\Client\HttpAsyncClient;

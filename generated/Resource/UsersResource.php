@@ -1,9 +1,9 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Resource;
+namespace Varspool\JobAdder\V2\Resource;
 
-use AskNicely\JobAdder\Generated\QueryParam;
-use AskNicely\JobAdder\Generated\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\Resource;
 
 class UsersResource extends Resource
 {
@@ -19,7 +19,7 @@ class UsersResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\UserListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserListRepresentation
      */
     public function findUsers($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -41,7 +41,7 @@ class UsersResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\UserListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserListRepresentation', 'json');
             }
         }
 
@@ -53,7 +53,7 @@ class UsersResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\UserRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserRepresentation
      */
     public function getUser($userId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -71,7 +71,7 @@ class UsersResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\UserRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserRepresentation', 'json');
             }
         }
 
@@ -83,7 +83,7 @@ class UsersResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\UserGroupListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserGroupListRepresentation
      */
     public function getUserGroups($userId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -101,7 +101,7 @@ class UsersResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\UserGroupListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserGroupListRepresentation', 'json');
             }
         }
 
@@ -112,7 +112,7 @@ class UsersResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\UserRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserRepresentation
      */
     public function getCurrentUser($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -129,7 +129,7 @@ class UsersResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\UserRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserRepresentation', 'json');
             }
         }
 

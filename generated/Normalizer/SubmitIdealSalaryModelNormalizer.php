@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class SubmitIdealSalaryModelNormalizer extends SerializerAwareNormalizer impleme
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\SubmitIdealSalaryModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\SubmitIdealSalaryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class SubmitIdealSalaryModelNormalizer extends SerializerAwareNormalizer impleme
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\SubmitIdealSalaryModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\SubmitIdealSalaryModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class SubmitIdealSalaryModelNormalizer extends SerializerAwareNormalizer impleme
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\SubmitIdealSalaryModel();
+        $object = new \Varspool\JobAdder\V2\Model\SubmitIdealSalaryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -40,7 +40,7 @@ class SubmitIdealSalaryModelNormalizer extends SerializerAwareNormalizer impleme
             $object->setWorkTypeId($data->{'workTypeId'});
         }
         if (property_exists($data, 'salary')) {
-            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'AskNicely\\JobAdder\\Generated\\Model\\SalaryRangeModel', 'raw', $context));
+            $object->setSalary($this->serializer->deserialize($data->{'salary'}, 'Varspool\\JobAdder\\V2\\Model\\SalaryRangeModel', 'raw', $context));
         }
 
         return $object;

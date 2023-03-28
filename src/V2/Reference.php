@@ -1,6 +1,6 @@
 <?php
 
-namespace AskNicely\JobAdder\Runtime;
+namespace Varspool\JobAdder\V2;
 
 /**
  * Deal with a Json Reference

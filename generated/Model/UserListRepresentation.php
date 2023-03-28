@@ -1,6 +1,6 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Model;
+namespace Varspool\JobAdder\V2\Model;
 
 class UserListRepresentation
 {

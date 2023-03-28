@@ -16,16 +16,12 @@
         {
             "name": "Dominic Scheirlinck",
             "email": "dominic@asknice.ly"
-        },
-        {
-            "name": "Aaron Cooper",
-            "email": "aaron.cooper@asknice.ly"
         }
     ],
     "autoload": {
         "psr-4": {
-            "AskNicely\\JobAdder\\": "src/",
-            "AskNicely\\JobAdder\\Generated\\": "generated/"
+            "Varspool\\JobAdder\\": "src/",
+            "Varspool\\JobAdder\\V2\\": "generated/"
         }
     },
     "autoload-dev": {

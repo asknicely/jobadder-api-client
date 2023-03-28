@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class JobApplicationStatusListRepresentationNormalizer extends SerializerAwareNo
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\JobApplicationStatusListRepresentation') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\JobApplicationStatusListRepresentation') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class JobApplicationStatusListRepresentationNormalizer extends SerializerAwareNo
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\JobApplicationStatusListRepresentation) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\JobApplicationStatusListRepresentation) {
             return true;
         }
 
@@ -32,14 +32,14 @@ class JobApplicationStatusListRepresentationNormalizer extends SerializerAwareNo
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\JobApplicationStatusListRepresentation();
+        $object = new \Varspool\JobAdder\V2\Model\JobApplicationStatusListRepresentation();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'items')) {
             $values = [];
             foreach ($data->{'items'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\JobApplicationStatusModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\JobApplicationStatusModel', 'raw', $context);
             }
             $object->setItems($values);
         }

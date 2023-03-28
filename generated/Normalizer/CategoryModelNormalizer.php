@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class CategoryModelNormalizer extends SerializerAwareNormalizer implements Denor
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\CategoryModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\CategoryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class CategoryModelNormalizer extends SerializerAwareNormalizer implements Denor
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\CategoryModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\CategoryModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class CategoryModelNormalizer extends SerializerAwareNormalizer implements Denor
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\CategoryModel();
+        $object = new \Varspool\JobAdder\V2\Model\CategoryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -45,7 +45,7 @@ class CategoryModelNormalizer extends SerializerAwareNormalizer implements Denor
         if (property_exists($data, 'subCategories')) {
             $values = [];
             foreach ($data->{'subCategories'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'AskNicely\\JobAdder\\Generated\\Model\\SubCategoryModel', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'Varspool\\JobAdder\\V2\\Model\\SubCategoryModel', 'raw', $context);
             }
             $object->setSubCategories($values);
         }

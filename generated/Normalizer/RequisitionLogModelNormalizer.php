@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class RequisitionLogModelNormalizer extends SerializerAwareNormalizer implements
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\RequisitionLogModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\RequisitionLogModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class RequisitionLogModelNormalizer extends SerializerAwareNormalizer implements
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\RequisitionLogModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\RequisitionLogModel) {
             return true;
         }
 
@@ -32,12 +32,12 @@ class RequisitionLogModelNormalizer extends SerializerAwareNormalizer implements
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\RequisitionLogModel();
+        $object = new \Varspool\JobAdder\V2\Model\RequisitionLogModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'contact')) {
-            $object->setContact($this->serializer->deserialize($data->{'contact'}, 'AskNicely\\JobAdder\\Generated\\Model\\ContactSummaryModel', 'raw', $context));
+            $object->setContact($this->serializer->deserialize($data->{'contact'}, 'Varspool\\JobAdder\\V2\\Model\\ContactSummaryModel', 'raw', $context));
         }
         if (property_exists($data, 'oldStatus')) {
             $object->setOldStatus($data->{'oldStatus'});

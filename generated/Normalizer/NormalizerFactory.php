@@ -1,9 +1,9 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\ArrayDenormalizer;
-use AskNicely\JobAdder\Generated\ReferenceNormalizer;
+use Varspool\JobAdder\V2\ArrayDenormalizer;
+use Varspool\JobAdder\V2\ReferenceNormalizer;
 
 class NormalizerFactory
 {

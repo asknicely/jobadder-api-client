@@ -1,9 +1,9 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Resource;
+namespace Varspool\JobAdder\V2\Resource;
 
-use AskNicely\JobAdder\Generated\QueryParam;
-use AskNicely\JobAdder\Generated\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\Resource;
 
 class CategoriesResource extends Resource
 {
@@ -16,7 +16,7 @@ class CategoriesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CategoryListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CategoryListRepresentation
      */
     public function findCategories($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -35,7 +35,7 @@ class CategoriesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CategoryListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CategoryListRepresentation', 'json');
             }
         }
 
@@ -51,7 +51,7 @@ class CategoriesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\LocationListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\LocationListRepresentation
      */
     public function findLocations($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -70,7 +70,7 @@ class CategoriesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\LocationListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\LocationListRepresentation', 'json');
             }
         }
 
@@ -85,7 +85,7 @@ class CategoriesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\WorkTypeListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\WorkTypeListRepresentation
      */
     public function findWorkTypes($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -103,7 +103,7 @@ class CategoriesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\WorkTypeListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\WorkTypeListRepresentation', 'json');
             }
         }
 

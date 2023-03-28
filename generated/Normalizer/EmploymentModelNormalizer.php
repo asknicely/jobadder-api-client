@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class EmploymentModelNormalizer extends SerializerAwareNormalizer implements Den
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\EmploymentModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\EmploymentModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class EmploymentModelNormalizer extends SerializerAwareNormalizer implements Den
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\EmploymentModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\EmploymentModel) {
             return true;
         }
 
@@ -32,15 +32,15 @@ class EmploymentModelNormalizer extends SerializerAwareNormalizer implements Den
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\EmploymentModel();
+        $object = new \Varspool\JobAdder\V2\Model\EmploymentModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
         if (property_exists($data, 'current')) {
-            $object->setCurrent($this->serializer->deserialize($data->{'current'}, 'AskNicely\\JobAdder\\Generated\\Model\\CurrentEmploymentModel', 'raw', $context));
+            $object->setCurrent($this->serializer->deserialize($data->{'current'}, 'Varspool\\JobAdder\\V2\\Model\\CurrentEmploymentModel', 'raw', $context));
         }
         if (property_exists($data, 'ideal')) {
-            $object->setIdeal($this->serializer->deserialize($data->{'ideal'}, 'AskNicely\\JobAdder\\Generated\\Model\\IdealEmploymentModel', 'raw', $context));
+            $object->setIdeal($this->serializer->deserialize($data->{'ideal'}, 'Varspool\\JobAdder\\V2\\Model\\IdealEmploymentModel', 'raw', $context));
         }
 
         return $object;

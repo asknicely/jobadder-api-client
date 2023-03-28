@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class JobOrderLocationModelNormalizer extends SerializerAwareNormalizer implemen
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderLocationModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\JobOrderLocationModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class JobOrderLocationModelNormalizer extends SerializerAwareNormalizer implemen
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\JobOrderLocationModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\JobOrderLocationModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class JobOrderLocationModelNormalizer extends SerializerAwareNormalizer implemen
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\JobOrderLocationModel();
+        $object = new \Varspool\JobAdder\V2\Model\JobOrderLocationModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -43,7 +43,7 @@ class JobOrderLocationModelNormalizer extends SerializerAwareNormalizer implemen
             $object->setName($data->{'name'});
         }
         if (property_exists($data, 'area')) {
-            $object->setArea($this->serializer->deserialize($data->{'area'}, 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderLocationAreaModel', 'raw', $context));
+            $object->setArea($this->serializer->deserialize($data->{'area'}, 'Varspool\\JobAdder\\V2\\Model\\JobOrderLocationAreaModel', 'raw', $context));
         }
 
         return $object;

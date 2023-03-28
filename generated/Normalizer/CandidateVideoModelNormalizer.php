@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class CandidateVideoModelNormalizer extends SerializerAwareNormalizer implements
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\CandidateVideoModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\CandidateVideoModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class CandidateVideoModelNormalizer extends SerializerAwareNormalizer implements
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\CandidateVideoModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\CandidateVideoModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class CandidateVideoModelNormalizer extends SerializerAwareNormalizer implements
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\CandidateVideoModel();
+        $object = new \Varspool\JobAdder\V2\Model\CandidateVideoModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }

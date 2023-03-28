@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class UserGroupLinksNormalizer extends SerializerAwareNormalizer implements Deno
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\UserGroupLinks') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\UserGroupLinks') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class UserGroupLinksNormalizer extends SerializerAwareNormalizer implements Deno
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\UserGroupLinks) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\UserGroupLinks) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class UserGroupLinksNormalizer extends SerializerAwareNormalizer implements Deno
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\UserGroupLinks();
+        $object = new \Varspool\JobAdder\V2\Model\UserGroupLinks();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }

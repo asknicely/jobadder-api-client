@@ -1,9 +1,9 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Resource;
+namespace Varspool\JobAdder\V2\Resource;
 
-use AskNicely\JobAdder\Generated\QueryParam;
-use AskNicely\JobAdder\Generated\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\Resource;
 
 class CandidatesResource extends Resource
 {
@@ -23,7 +23,7 @@ class CandidatesResource extends Resource
      * }
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateListRepresentation
      */
     public function findCandidates($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -50,7 +50,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateListRepresentation', 'json');
             }
         }
 
@@ -58,13 +58,13 @@ class CandidatesResource extends Resource
     }
 
     /**
-     * @param \AskNicely\JobAdder\Generated\Model\AddCandidateCommand $body
+     * @param \Varspool\JobAdder\V2\Model\AddCandidateCommand $body
      * @param array                                           $parameters List of parameters
      * @param string                                          $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateRepresentation|\AskNicely\JobAdder\Generated\Model\ErrorModel
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateRepresentation|\Varspool\JobAdder\V2\Model\ErrorModel
      */
-    public function addCandidate(\AskNicely\JobAdder\Generated\Model\AddCandidateCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function addCandidate(\Varspool\JobAdder\V2\Model\AddCandidateCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $url        = '/v2/candidates';
@@ -79,13 +79,13 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('201' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateRepresentation', 'json');
             }
             if ('409' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json');
             }
             if ('422' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json');
             }
         }
 
@@ -97,7 +97,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateRepresentation|\AskNicely\JobAdder\Generated\Model\ErrorModel
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateRepresentation|\Varspool\JobAdder\V2\Model\ErrorModel
      */
     public function getCandidate($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -115,10 +115,10 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateRepresentation', 'json');
             }
             if ('404' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json');
             }
         }
 
@@ -127,13 +127,13 @@ class CandidatesResource extends Resource
 
     /**
      * @param int                                                $candidateId
-     * @param \AskNicely\JobAdder\Generated\Model\UpdateCandidateCommand $body
+     * @param \Varspool\JobAdder\V2\Model\UpdateCandidateCommand $body
      * @param array                                              $parameters  List of parameters
      * @param string                                             $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\ErrorModel
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\ErrorModel
      */
-    public function updateCandidate($candidateId, \AskNicely\JobAdder\Generated\Model\UpdateCandidateCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function updateCandidate($candidateId, \Varspool\JobAdder\V2\Model\UpdateCandidateCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $url        = '/v2/candidates/{candidateId}';
@@ -149,10 +149,10 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('409' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json');
             }
             if ('422' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\ErrorModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\ErrorModel', 'json');
             }
         }
 
@@ -166,7 +166,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\JobApplicationListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobApplicationListRepresentation
      */
     public function getCandidateJobApplications($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -184,7 +184,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\JobApplicationListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobApplicationListRepresentation', 'json');
             }
         }
 
@@ -196,7 +196,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\JobApplicationListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobApplicationListRepresentation
      */
     public function getActiveCandidateJobApplications($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -214,7 +214,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\JobApplicationListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobApplicationListRepresentation', 'json');
             }
         }
 
@@ -234,7 +234,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateAttachmentListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateAttachmentListRepresentation
      */
     public function findCandidateAttachments($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -257,7 +257,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateAttachmentListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateAttachmentListRepresentation', 'json');
             }
         }
 
@@ -414,7 +414,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\FloatListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\FloatListRepresentation
      */
     public function getCandidateFloats($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -432,7 +432,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\FloatListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\FloatListRepresentation', 'json');
             }
         }
 
@@ -448,7 +448,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\NoteListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteListRepresentation
      */
     public function getCandidateNotes($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -467,7 +467,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\NoteListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\NoteListRepresentation', 'json');
             }
         }
 
@@ -476,13 +476,13 @@ class CandidatesResource extends Resource
 
     /**
      * @param int                                                 $candidateId
-     * @param \AskNicely\JobAdder\Generated\Model\AddCandidateNoteCommand $body
+     * @param \Varspool\JobAdder\V2\Model\AddCandidateNoteCommand $body
      * @param array                                               $parameters  List of parameters
      * @param string                                              $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\NoteModel
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteModel
      */
-    public function addCandidateNote($candidateId, \AskNicely\JobAdder\Generated\Model\AddCandidateNoteCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function addCandidateNote($candidateId, \Varspool\JobAdder\V2\Model\AddCandidateNoteCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $url        = '/v2/candidates/{candidateId}/notes';
@@ -498,7 +498,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('201' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\NoteModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\NoteModel', 'json');
             }
         }
 
@@ -591,7 +591,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\PlacementListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementListRepresentation
      */
     public function getCandidatePlacements($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -609,7 +609,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\PlacementListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementListRepresentation', 'json');
             }
         }
 
@@ -621,7 +621,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\PlacementListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementListRepresentation
      */
     public function getCandidateApprovedPlacements($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -639,7 +639,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\PlacementListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementListRepresentation', 'json');
             }
         }
 
@@ -651,7 +651,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CategoryListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CategoryListRepresentation
      */
     public function getCandidateSkills($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -669,7 +669,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CategoryListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CategoryListRepresentation', 'json');
             }
         }
 
@@ -681,7 +681,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\SubmissionListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\SubmissionListRepresentation
      */
     public function getCandidateSubmissions($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -699,7 +699,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\SubmissionListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\SubmissionListRepresentation', 'json');
             }
         }
 
@@ -711,7 +711,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateVideoListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateVideoListRepresentation
      */
     public function getCandidateVideos($candidateId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -729,7 +729,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateVideoListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateVideoListRepresentation', 'json');
             }
         }
 
@@ -742,7 +742,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters  List of parameters
      * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateVideoRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateVideoRepresentation
      */
     public function getLatestCandidateVideo($candidateId, $videoType, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -761,7 +761,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateVideoRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateVideoRepresentation', 'json');
             }
         }
 
@@ -771,13 +771,13 @@ class CandidatesResource extends Resource
     /**
      * @param int                                                  $candidateId Candidate Id
      * @param string                                               $videoType
-     * @param \AskNicely\JobAdder\Generated\Model\AddCandidateVideoCommand $body
+     * @param \Varspool\JobAdder\V2\Model\AddCandidateVideoCommand $body
      * @param array                                                $parameters  List of parameters
      * @param string                                               $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateVideoModel
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateVideoModel
      */
-    public function addCandidateVideo($candidateId, $videoType, \AskNicely\JobAdder\Generated\Model\AddCandidateVideoCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function addCandidateVideo($candidateId, $videoType, \Varspool\JobAdder\V2\Model\AddCandidateVideoCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $url        = '/v2/candidates/{candidateId}/videos/{videoType}';
@@ -794,7 +794,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateVideoModel', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateVideoModel', 'json');
             }
         }
 
@@ -805,7 +805,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CustomFieldListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CustomFieldListRepresentation
      */
     public function getCandidateCustomFieldList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -822,7 +822,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CustomFieldListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CustomFieldListRepresentation', 'json');
             }
         }
 
@@ -834,7 +834,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CustomFieldRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CustomFieldRepresentation
      */
     public function getCandidateCustomFieldListItem($fieldId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -852,7 +852,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CustomFieldRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CustomFieldRepresentation', 'json');
             }
         }
 
@@ -867,7 +867,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\NoteTypeListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteTypeListRepresentation
      */
     public function getCandidateNoteTypeList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -885,7 +885,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\NoteTypeListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\NoteTypeListRepresentation', 'json');
             }
         }
 
@@ -900,7 +900,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateRatingListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateRatingListRepresentation
      */
     public function getCandidateRatingList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -918,7 +918,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateRatingListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateRatingListRepresentation', 'json');
             }
         }
 
@@ -933,7 +933,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\SalutationListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\SalutationListRepresentation
      */
     public function getCandidateSalutationList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -951,7 +951,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\SalutationListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\SalutationListRepresentation', 'json');
             }
         }
 
@@ -966,7 +966,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\CandidateSourceListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CandidateSourceListRepresentation
      */
     public function getCandidateSourceList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -984,7 +984,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\CandidateSourceListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\CandidateSourceListRepresentation', 'json');
             }
         }
 
@@ -1002,7 +1002,7 @@ class CandidatesResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\StatusListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\StatusListRepresentation
      */
     public function getCandidateStatusList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -1023,7 +1023,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\StatusListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\StatusListRepresentation', 'json');
             }
         }
 
@@ -1035,7 +1035,7 @@ class CandidatesResource extends Resource
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\AskNicely\JobAdder\Generated\Model\StatusRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\StatusRepresentation
      */
     public function getCandidateStatusListItem($statusId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
@@ -1053,7 +1053,7 @@ class CandidatesResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'AskNicely\\JobAdder\\Generated\\Model\\StatusRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\StatusRepresentation', 'json');
             }
         }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace AskNicely\JobAdder\Generated\Normalizer;
+namespace Varspool\JobAdder\V2\Normalizer;
 
-use AskNicely\JobAdder\Generated\Reference;
+use Varspool\JobAdder\V2\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
@@ -11,7 +11,7 @@ class JobOrderCategoryModelNormalizer extends SerializerAwareNormalizer implemen
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderCategoryModel') {
+        if ($type !== 'Varspool\\JobAdder\\V2\\Model\\JobOrderCategoryModel') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class JobOrderCategoryModelNormalizer extends SerializerAwareNormalizer implemen
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \AskNicely\JobAdder\Generated\Model\JobOrderCategoryModel) {
+        if ($data instanceof \Varspool\JobAdder\V2\Model\JobOrderCategoryModel) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class JobOrderCategoryModelNormalizer extends SerializerAwareNormalizer implemen
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \AskNicely\JobAdder\Generated\Model\JobOrderCategoryModel();
+        $object = new \Varspool\JobAdder\V2\Model\JobOrderCategoryModel();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
@@ -43,7 +43,7 @@ class JobOrderCategoryModelNormalizer extends SerializerAwareNormalizer implemen
             $object->setName($data->{'name'});
         }
         if (property_exists($data, 'subCategory')) {
-            $object->setSubCategory($this->serializer->deserialize($data->{'subCategory'}, 'AskNicely\\JobAdder\\Generated\\Model\\JobOrderSubCategoryModel', 'raw', $context));
+            $object->setSubCategory($this->serializer->deserialize($data->{'subCategory'}, 'Varspool\\JobAdder\\V2\\Model\\JobOrderSubCategoryModel', 'raw', $context));
         }
 
         return $object;
