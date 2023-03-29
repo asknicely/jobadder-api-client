@@ -263,7 +263,7 @@ abstract class EntityResources extends EntityResource
      * @param string $type
      * @return Resource
      */
-    protected function createResourceInstance(string $type): Resource
+    protected function createResourceInstance(string $type): EntityResource
     {
         return new $type($this->httpClient, $this->messageFactory, $this->serializer);
     }
