@@ -1,11 +1,12 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
 use Varspool\JobAdder\V2\QueryParam;
-use Varspool\JobAdder\V2\Resource;
+use Varspool\JobAdder\V2\EntityResource;
 
-class JobApplicationsResource extends Resource
+class JobApplicationsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {

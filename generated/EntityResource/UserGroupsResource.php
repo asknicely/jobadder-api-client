@@ -1,100 +1,39 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
 use Varspool\JobAdder\V2\QueryParam;
-use Varspool\JobAdder\V2\Resource;
+use Varspool\JobAdder\V2\EntityResource;
 
-class UsersResource extends Resource
+class UserGroupsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {
      *
      *     @var int $offset The index of the first entry to return from the resource collection
      *     @var int $limit The maximum number of entries to return. <br />
-     *     @var array $userId
      *     @var array $groupId
-     *     @var array $include
+     *     @var array $userId
      * }
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserGroupListRepresentation
      */
-    public function findUsers($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function findUserGroups($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('offset', null);
         $queryParam->setDefault('limit', null);
-        $queryParam->setDefault('userId', null);
         $queryParam->setDefault('groupId', null);
-        $queryParam->setDefault('include', null);
-        $url     = '/v2/users';
+        $queryParam->setDefault('userId', null);
+        $url     = '/v2/usergroups';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
         $request = $this->messageFactory->createRequest('GET', $url, $headers, $body);
         $promise = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $userId
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserRepresentation
-     */
-    public function getUser($userId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/users/{userId}';
-        $url        = str_replace('{userId}', urlencode($userId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $userId     User Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserGroupListRepresentation
-     */
-    public function getUserGroups($userId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/users/{userId}/usergroups';
-        $url        = str_replace('{userId}', urlencode($userId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
         if (self::FETCH_PROMISE === $fetch) {
             return $promise;
         }
@@ -109,15 +48,17 @@ class UsersResource extends Resource
     }
 
     /**
+     * @param int    $groupId    Group Id
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserGroupRepresentation
      */
-    public function getCurrentUser($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getUserGroup($groupId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/users/current';
+        $url        = '/v2/usergroups/{groupId}';
+        $url        = str_replace('{groupId}', urlencode($groupId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -129,7 +70,37 @@ class UsersResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserGroupRepresentation', 'json');
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param int    $groupId    Group Id
+     * @param array  $parameters List of parameters
+     * @param string $fetch      Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\UserListRepresentation
+     */
+    public function getGroupUsers($groupId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    {
+        $queryParam = new QueryParam();
+        $url        = '/v2/usergroups/{groupId}/users';
+        $url        = str_replace('{groupId}', urlencode($groupId), $url);
+        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
+        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
+        $body       = $queryParam->buildFormDataString($parameters);
+        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
+        $promise    = $this->httpClient->sendAsyncRequest($request);
+        if (self::FETCH_PROMISE === $fetch) {
+            return $promise;
+        }
+        $response = $promise->wait();
+        if (self::FETCH_OBJECT == $fetch) {
+            if ('200' == $response->getStatusCode()) {
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\UserListRepresentation', 'json');
             }
         }
 

@@ -1,44 +1,54 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
 use Varspool\JobAdder\V2\QueryParam;
-use Varspool\JobAdder\V2\Resource;
+use Varspool\JobAdder\V2\EntityResource;
 
-class JobsResource extends Resource
+class PlacementsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {
      *
      *     @var int $offset The index of the first entry to return from the resource collection
      *     @var int $limit The maximum number of entries to return. <br />
-     *     @var array $jobId Job Id
+     *     @var array $placementId Placement Id
+     *     @var array $type Placement Type
+     *     @var array $statusId Placement status
+     *     @var array $candidateId Candidate Id
      *     @var array $companyId Company Id
-     *     @var array $contactId Contact Id
-     *     @var array $statusId Job status
-     *     @var bool $active Search for active/open jobs
-     *     @var array $userId User Id - search for jobs by owner or associated recruiter
-     *     @var array $ownerUserId User Id - search for jobs by owner
-     *     @var array $recruiterUserId User Id - search jobs by associated recruiters
-     *     @var array $createdBy User Id - search for jobs created by the specified user(s)
-     *     @var array $createdAt Search for jobs created at a specific date and time
-     *     @var array $updatedBy User Id - search for jobs last updated by the specified user(s)
-     *     @var array $updatedAt Search for jobs updated at a specific date and time
+     *     @var array $jobId Job Id
+     *     @var array $applicationId Job Application Id
+     *     @var array $userId User Id - search for placements by owner or associated recruiter
+     *     @var array $ownerUserId User Id - search for placements by owner
+     *     @var array $recruiterUserId User Id - search placements by associated recruiters
+     *     @var array $createdBy User Id - search for placements created by the specified user(s)
+     *     @var array $createdAt Search for placements created at a specific date and time
+     *     @var array $updatedBy User Id - search for placements last updated by the specified user(s)
+     *     @var array $updatedAt Search for placements updated at a specific date and time
+     *     @var bool $approved Search for approved placements
+     *     @var array $approvedBy User Id - search for placements approved by the specified user(s)
+     *     @var array $approvedAt Search for placements approved at a specific date and time
+     *     @var array $export Search for placements that have been flagged by the user for export to integration partners.
      * }
+     *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobOrderListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementListRepresentation
      */
-    public function findJobOrders($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function findPlacements($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('offset', null);
         $queryParam->setDefault('limit', null);
-        $queryParam->setDefault('jobId', null);
-        $queryParam->setDefault('companyId', null);
-        $queryParam->setDefault('contactId', null);
+        $queryParam->setDefault('placementId', null);
+        $queryParam->setDefault('type', null);
         $queryParam->setDefault('statusId', null);
-        $queryParam->setDefault('active', null);
+        $queryParam->setDefault('candidateId', null);
+        $queryParam->setDefault('companyId', null);
+        $queryParam->setDefault('jobId', null);
+        $queryParam->setDefault('applicationId', null);
         $queryParam->setDefault('userId', null);
         $queryParam->setDefault('ownerUserId', null);
         $queryParam->setDefault('recruiterUserId', null);
@@ -46,7 +56,11 @@ class JobsResource extends Resource
         $queryParam->setDefault('createdAt', null);
         $queryParam->setDefault('updatedBy', null);
         $queryParam->setDefault('updatedAt', null);
-        $url     = '/v2/jobs';
+        $queryParam->setDefault('approved', null);
+        $queryParam->setDefault('approvedBy', null);
+        $queryParam->setDefault('approvedAt', null);
+        $queryParam->setDefault('export', null);
+        $url     = '/v2/placements';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -58,7 +72,7 @@ class JobsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobOrderListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementListRepresentation', 'json');
             }
         }
 
@@ -66,17 +80,17 @@ class JobsResource extends Resource
     }
 
     /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
+     * @param int    $placementId Placement Id
+     * @param array  $parameters  List of parameters
+     * @param string $fetch       Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobOrderRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementRepresentation
      */
-    public function getJobOrder($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacement($placementId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
+        $url        = '/v2/placements/{placementId}';
+        $url        = str_replace('{placementId}', urlencode($placementId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -88,7 +102,7 @@ class JobsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobOrderRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementRepresentation', 'json');
             }
         }
 
@@ -96,77 +110,17 @@ class JobsResource extends Resource
     }
 
     /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobApplicationListRepresentation
-     */
-    public function getJobOrderJobApplications($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/applications';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobApplicationListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobApplicationListRepresentation
-     */
-    public function getJobOrderActiveJobApplications($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/applications/active';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobApplicationListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
+     * @param int    $placementId Placement Id
+     * @param array  $parameters  List of parameters
+     * @param string $fetch       Fetch mode (object or response)
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteListRepresentation
      */
-    public function getJobOrderNotes($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementNotes($placementId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/notes';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
+        $url        = '/v2/placements/{placementId}/notes';
+        $url        = str_replace('{placementId}', urlencode($placementId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -186,18 +140,18 @@ class JobsResource extends Resource
     }
 
     /**
-     * @param int                                                $jobId
-     * @param \Varspool\JobAdder\V2\Model\AddJobOrderNoteCommand $body
-     * @param array                                              $parameters List of parameters
-     * @param string                                             $fetch      Fetch mode (object or response)
+     * @param int                                                 $placementId
+     * @param \Varspool\JobAdder\V2\Model\AddPlacementNoteCommand $body
+     * @param array                                               $parameters  List of parameters
+     * @param string                                              $fetch       Fetch mode (object or response)
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteModel
      */
-    public function addJobOrderNote($jobId, \Varspool\JobAdder\V2\Model\AddJobOrderNoteCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function addPlacementNote($placementId, \Varspool\JobAdder\V2\Model\AddPlacementNoteCommand $body, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/notes';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
+        $url        = '/v2/placements/{placementId}/notes';
+        $url        = str_replace('{placementId}', urlencode($placementId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json'], 'Content-Type' => 'application/json'], $queryParam->buildHeaders($parameters));
         $body       = $this->serializer->serialize($body, 'json');
@@ -217,105 +171,15 @@ class JobsResource extends Resource
     }
 
     /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementListRepresentation
-     */
-    public function getJobOrderPlacements($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/placements';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementListRepresentation
-     */
-    public function getJobOrderApprovedPlacements($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/placements/approved';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * @param int    $jobId      Job Id
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\SubmissionListRepresentation
-     */
-    public function getJobOrderSubmissions($jobId, $parameters = [], $fetch = self::FETCH_OBJECT)
-    {
-        $queryParam = new QueryParam();
-        $url        = '/v2/jobs/{jobId}/submissions';
-        $url        = str_replace('{jobId}', urlencode($jobId), $url);
-        $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
-        $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
-        $body       = $queryParam->buildFormDataString($parameters);
-        $request    = $this->messageFactory->createRequest('GET', $url, $headers, $body);
-        $promise    = $this->httpClient->sendAsyncRequest($request);
-        if (self::FETCH_PROMISE === $fetch) {
-            return $promise;
-        }
-        $response = $promise->wait();
-        if (self::FETCH_OBJECT == $fetch) {
-            if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\SubmissionListRepresentation', 'json');
-            }
-        }
-
-        return $response;
-    }
-
-    /**
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CustomFieldListRepresentation
      */
-    public function getJobOrderCustomFieldList($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementCustomFieldList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/fields/custom';
+        $url        = '/v2/placements/fields/custom';
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -341,10 +205,10 @@ class JobsResource extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\CustomFieldRepresentation
      */
-    public function getJobOrderCustomFieldItem($fieldId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementCustomFieldItem($fieldId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/fields/custom/{fieldId}';
+        $url        = '/v2/placements/fields/custom/{fieldId}';
         $url        = str_replace('{fieldId}', urlencode($fieldId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
@@ -372,13 +236,112 @@ class JobsResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteTypeListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementAwardListRepresentation
      */
-    public function getJobOrderNoteTypeList($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementAwardList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('name', null);
-        $url     = '/v2/jobs/lists/notetype';
+        $url     = '/v2/placements/lists/awards';
+        $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
+        $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
+        $body    = $queryParam->buildFormDataString($parameters);
+        $request = $this->messageFactory->createRequest('GET', $url, $headers, $body);
+        $promise = $this->httpClient->sendAsyncRequest($request);
+        if (self::FETCH_PROMISE === $fetch) {
+            return $promise;
+        }
+        $response = $promise->wait();
+        if (self::FETCH_OBJECT == $fetch) {
+            if ('200' == $response->getStatusCode()) {
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementAwardListRepresentation', 'json');
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param array $parameters {
+     *
+     *     @var string $name
+     * }
+     *
+     * @param string $fetch Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementBillingTermsListRepresentation
+     */
+    public function getPlacementBillingTermsList($parameters = [], $fetch = self::FETCH_OBJECT)
+    {
+        $queryParam = new QueryParam();
+        $queryParam->setDefault('name', null);
+        $url     = '/v2/placements/lists/billingterms';
+        $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
+        $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
+        $body    = $queryParam->buildFormDataString($parameters);
+        $request = $this->messageFactory->createRequest('GET', $url, $headers, $body);
+        $promise = $this->httpClient->sendAsyncRequest($request);
+        if (self::FETCH_PROMISE === $fetch) {
+            return $promise;
+        }
+        $response = $promise->wait();
+        if (self::FETCH_OBJECT == $fetch) {
+            if ('200' == $response->getStatusCode()) {
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementBillingTermsListRepresentation', 'json');
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param array $parameters {
+     *
+     *     @var string $name
+     * }
+     *
+     * @param string $fetch Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementIndustryCodeListRepresentation
+     */
+    public function getPlacementIndustryCodeList($parameters = [], $fetch = self::FETCH_OBJECT)
+    {
+        $queryParam = new QueryParam();
+        $queryParam->setDefault('name', null);
+        $url     = '/v2/placements/lists/industrycodes';
+        $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
+        $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
+        $body    = $queryParam->buildFormDataString($parameters);
+        $request = $this->messageFactory->createRequest('GET', $url, $headers, $body);
+        $promise = $this->httpClient->sendAsyncRequest($request);
+        if (self::FETCH_PROMISE === $fetch) {
+            return $promise;
+        }
+        $response = $promise->wait();
+        if (self::FETCH_OBJECT == $fetch) {
+            if ('200' == $response->getStatusCode()) {
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementIndustryCodeListRepresentation', 'json');
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param array $parameters {
+     *
+     *     @var string $name
+     * }
+     *
+     * @param string $fetch Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\NoteTypeListRepresentation
+     */
+    public function getPlacementNoteTypeList($parameters = [], $fetch = self::FETCH_OBJECT)
+    {
+        $queryParam = new QueryParam();
+        $queryParam->setDefault('name', null);
+        $url     = '/v2/placements/lists/notetype';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -405,13 +368,13 @@ class JobsResource extends Resource
      *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobOrderSourceListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\PlacementPaymentTypeListRepresentation
      */
-    public function getJobOrderSourceList($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementPaymentTypeList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('name', null);
-        $url     = '/v2/jobs/lists/source';
+        $url     = '/v2/placements/lists/paymenttypes';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -423,7 +386,7 @@ class JobsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobOrderSourceListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\PlacementPaymentTypeListRepresentation', 'json');
             }
         }
 
@@ -443,14 +406,14 @@ class JobsResource extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\StatusListRepresentation
      */
-    public function getJobOrderStatusList($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementStatusList($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('statusId', null);
         $queryParam->setDefault('name', null);
         $queryParam->setDefault('active', null);
         $queryParam->setDefault('default', null);
-        $url     = '/v2/jobs/lists/status';
+        $url     = '/v2/placements/lists/status';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -476,10 +439,10 @@ class JobsResource extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\StatusRepresentation
      */
-    public function getJobOrderStatusItem($statusId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getPlacementStatusItem($statusId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobs/lists/status/{statusId}';
+        $url        = '/v2/placements/lists/status/{statusId}';
         $url        = str_replace('{statusId}', urlencode($statusId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
@@ -492,9 +455,6 @@ class JobsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\StatusRepresentation', 'json');
-            }
-            if ('404' == $response->getStatusCode()) {
                 return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\StatusRepresentation', 'json');
             }
         }
