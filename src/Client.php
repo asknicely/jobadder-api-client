@@ -10,9 +10,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Varspool\JobAdder\V2\Normalizer\NormalizerFactory;
 use Varspool\JobAdder\V2\RawEncoder;
-use Varspool\JobAdder\V2\Resources;
+use Varspool\JobAdder\V2\EntityResources;
 
-class Client extends Resources
+class Client extends EntityResources
 {
     public function __construct($httpClient, MessageFactory $messageFactory = null, Serializer $serializer = null)
     {

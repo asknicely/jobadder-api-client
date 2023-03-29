@@ -8,7 +8,7 @@ use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Symfony\Component\Serializer\SerializerInterface;
 
-abstract class Resource
+abstract class EntityResource
 {
     const FETCH_RESPONSE = 'response';
     const FETCH_OBJECT = 'object';

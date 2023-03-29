@@ -17,7 +17,7 @@ use Varspool\JobAdder\V2\Resource\RequisitionsResource;
 use Varspool\JobAdder\V2\Resource\UserGroupsResource;
 use Varspool\JobAdder\V2\Resource\UsersResource;
 
-abstract class Resources extends Resource
+abstract class EntityResources extends EntityResource
 {
     /**
      * @var CandidatesResource
