@@ -1,38 +1,41 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
-use Joli\Jane\OpenApi\Runtime\Client\QueryParam;
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\EntityResource;
 
-class CandidateFloatsResource extends Resource
+class CandidateSubmissionsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {
      *
      *     @var int $offset The index of the first entry to return from the resource collection
      *     @var int $limit The maximum number of entries to return. <br />
-     *     @var array $floatId Float Id
-     *     @var array $candidateId Candidate Id
-     *     @var array $companyId Company Id
-     *     @var array $createdAt Search for floats created at a specific date and time
-     *     @var array $updatedAt Search for floats updated at a specific date and time
+     *     @var array $submissionId
+     *     @var array $candidateId
+     *     @var array $companyId
+     *     @var array $jobId
+     *     @var array $createdAt Search for submissions created at a specific date and time
+     *     @var array $updatedAt Search for submissions updated at a specific date and time
      * }
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\FloatListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\SubmissionListRepresentation
      */
-    public function getFloats($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function findSubmissions($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('offset', null);
         $queryParam->setDefault('limit', null);
-        $queryParam->setDefault('floatId', null);
+        $queryParam->setDefault('submissionId', null);
         $queryParam->setDefault('candidateId', null);
         $queryParam->setDefault('companyId', null);
+        $queryParam->setDefault('jobId', null);
         $queryParam->setDefault('createdAt', null);
         $queryParam->setDefault('updatedAt', null);
-        $url     = '/v2/floats';
+        $url     = '/v2/submissions';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -44,7 +47,7 @@ class CandidateFloatsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\FloatListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\SubmissionListRepresentation', 'json');
             }
         }
 
@@ -52,17 +55,17 @@ class CandidateFloatsResource extends Resource
     }
 
     /**
-     * @param int    $floatId
-     * @param array  $parameters List of parameters
-     * @param string $fetch      Fetch mode (object or response)
+     * @param int    $submissionId Submission Id
+     * @param array  $parameters   List of parameters
+     * @param string $fetch        Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\FloatRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\SubmissionRepresentation
      */
-    public function getFloat($floatId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getSubmission($submissionId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/floats/{floatId}';
-        $url        = str_replace('{floatId}', urlencode($floatId), $url);
+        $url        = '/v2/submissions/{submissionId}';
+        $url        = str_replace('{submissionId}', urlencode($submissionId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -74,7 +77,7 @@ class CandidateFloatsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\FloatRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\SubmissionRepresentation', 'json');
             }
         }
 

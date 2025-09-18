@@ -2,23 +2,22 @@
 
 namespace Varspool\JobAdder\V2;
 
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
-use Varspool\JobAdder\V2\Resource\CandidateFloatsResource;
-use Varspool\JobAdder\V2\Resource\CandidatesResource;
-use Varspool\JobAdder\V2\Resource\CandidateSubmissionsResource;
-use Varspool\JobAdder\V2\Resource\CategoriesResource;
-use Varspool\JobAdder\V2\Resource\ContactsResource;
-use Varspool\JobAdder\V2\Resource\IndexResource;
-use Varspool\JobAdder\V2\Resource\JobAdsResource;
-use Varspool\JobAdder\V2\Resource\JobApplicationsResource;
-use Varspool\JobAdder\V2\Resource\JobsResource;
-use Varspool\JobAdder\V2\Resource\NotesResource;
-use Varspool\JobAdder\V2\Resource\PlacementsResource;
-use Varspool\JobAdder\V2\Resource\RequisitionsResource;
-use Varspool\JobAdder\V2\Resource\UserGroupsResource;
-use Varspool\JobAdder\V2\Resource\UsersResource;
+use Varspool\JobAdder\V2\EntityResource\CandidateFloatsResource;
+use Varspool\JobAdder\V2\EntityResource\CandidatesResource;
+use Varspool\JobAdder\V2\EntityResource\CandidateSubmissionsResource;
+use Varspool\JobAdder\V2\EntityResource\CategoriesResource;
+use Varspool\JobAdder\V2\EntityResource\ContactsResource;
+use Varspool\JobAdder\V2\EntityResource\IndexResource;
+use Varspool\JobAdder\V2\EntityResource\JobAdsResource;
+use Varspool\JobAdder\V2\EntityResource\JobApplicationsResource;
+use Varspool\JobAdder\V2\EntityResource\JobsResource;
+use Varspool\JobAdder\V2\EntityResource\NotesResource;
+use Varspool\JobAdder\V2\EntityResource\PlacementsResource;
+use Varspool\JobAdder\V2\EntityResource\RequisitionsResource;
+use Varspool\JobAdder\V2\EntityResource\UserGroupsResource;
+use Varspool\JobAdder\V2\EntityResource\UsersResource;
 
-abstract class Resources extends Resource
+abstract class EntityResources extends EntityResource
 {
     /**
      * @var CandidatesResource
@@ -264,7 +263,7 @@ abstract class Resources extends Resource
      * @param string $type
      * @return Resource
      */
-    protected function createResourceInstance(string $type): Resource
+    protected function createResourceInstance(string $type): EntityResource
     {
         return new $type($this->httpClient, $this->messageFactory, $this->serializer);
     }

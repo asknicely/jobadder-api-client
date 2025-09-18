@@ -1,11 +1,12 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
-use Joli\Jane\OpenApi\Runtime\Client\QueryParam;
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\EntityResource;
 
-class UserGroupsResource extends Resource
+class UserGroupsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {

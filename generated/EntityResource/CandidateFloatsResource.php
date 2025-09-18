@@ -1,30 +1,39 @@
 <?php
 
-namespace Varspool\JobAdder\V2\Resource;
+namespace Varspool\JobAdder\V2\EntityResource;
 
-use Joli\Jane\OpenApi\Runtime\Client\QueryParam;
-use Joli\Jane\OpenApi\Runtime\Client\Resource;
+use Varspool\JobAdder\V2\QueryParam;
+use Varspool\JobAdder\V2\EntityResource;
 
-class JobAdsResource extends Resource
+class CandidateFloatsResource extends EntityResource
+
 {
     /**
      * @param array $parameters {
      *
      *     @var int $offset The index of the first entry to return from the resource collection
      *     @var int $limit The maximum number of entries to return. <br />
-     Setting to 0 will return only the total count of matching resources.
+     *     @var array $floatId Float Id
+     *     @var array $candidateId Candidate Id
+     *     @var array $companyId Company Id
+     *     @var array $createdAt Search for floats created at a specific date and time
+     *     @var array $updatedAt Search for floats updated at a specific date and time
      * }
-     *
      * @param string $fetch Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobAdListRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\FloatListRepresentation
      */
-    public function getJobAds($parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getFloats($parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
         $queryParam->setDefault('offset', null);
         $queryParam->setDefault('limit', null);
-        $url     = '/v2/jobads';
+        $queryParam->setDefault('floatId', null);
+        $queryParam->setDefault('candidateId', null);
+        $queryParam->setDefault('companyId', null);
+        $queryParam->setDefault('createdAt', null);
+        $queryParam->setDefault('updatedAt', null);
+        $url     = '/v2/floats';
         $url     = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body    = $queryParam->buildFormDataString($parameters);
@@ -36,7 +45,7 @@ class JobAdsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobAdListRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\FloatListRepresentation', 'json');
             }
         }
 
@@ -44,17 +53,17 @@ class JobAdsResource extends Resource
     }
 
     /**
-     * @param int    $adId       Job Ad Id
+     * @param int    $floatId
      * @param array  $parameters List of parameters
      * @param string $fetch      Fetch mode (object or response)
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\JobAdRepresentation
+     * @return \Psr\Http\Message\ResponseInterface|\Varspool\JobAdder\V2\Model\FloatRepresentation
      */
-    public function getJobAd($adId, $parameters = [], $fetch = self::FETCH_OBJECT)
+    public function getFloat($floatId, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
-        $url        = '/v2/jobads/{adId}';
-        $url        = str_replace('{adId}', urlencode($adId), $url);
+        $url        = '/v2/floats/{floatId}';
+        $url        = str_replace('{floatId}', urlencode($floatId), $url);
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'api.jobadder.com', 'Accept' => ['application/json']], $queryParam->buildHeaders($parameters));
         $body       = $queryParam->buildFormDataString($parameters);
@@ -66,7 +75,7 @@ class JobAdsResource extends Resource
         $response = $promise->wait();
         if (self::FETCH_OBJECT == $fetch) {
             if ('200' == $response->getStatusCode()) {
-                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\JobAdRepresentation', 'json');
+                return $this->serializer->deserialize((string) $response->getBody(), 'Varspool\\JobAdder\\V2\\Model\\FloatRepresentation', 'json');
             }
         }
 
